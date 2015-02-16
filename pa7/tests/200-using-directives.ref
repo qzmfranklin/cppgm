@@ -1,0 +1,12 @@
+1 translation units
+start translation unit tests/200-using-directives.t
+start unnamed namespace
+variable x char
+start namespace A
+end namespace
+start namespace B
+end namespace
+start namespace C
+end namespace
+end namespace
+end translation unit

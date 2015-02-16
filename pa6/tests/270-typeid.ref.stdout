@@ -1,0 +1,74 @@
+
+    00: 
+        simple-declaration: 
+            decl-specifier-seq: 
+                00: 
+                    type-specifier: 
+                        class-specifier: 
+                            class-head: 
+                                class-head-name: 
+                                    class-name: 
+                                        TT_IDENTIFIER: TT_IDENTIFIER:C
+                                class-key: KW_CLASS
+                            member-specification-seq: 
+                                00: 
+                                    member-declaration: 
+                                        decl-specifier-seq: 
+                                            00: 
+                                                function-specifier: KW_VIRTUAL
+                                            01: 
+                                                type-specifier: KW_INT
+                                        member-declarator-list: 
+                                            00: 
+                                                declarator: 
+                                                    noptr-declarator: 
+                                                        noptr-declarator-root: 
+                                                            declarator-id: 
+                                                                id-expression: 
+                                                                    unqualified-id: 
+                                                                        TT_IDENTIFIER: TT_IDENTIFIER:foo
+                                                        noptr-declartor-suffix-seq: 
+                                                            00: 
+                                                                parameters-and-qualifiers: 
+                                                                    cv-qualifer-seq: empty
+                                                                    parameter-declaration-clause: 
+                                                                        parameter-declaration-list: 
+                                                                            00: 
+                                                                                decl-specifier-seq: 
+                                                                                    00: 
+                                                                                        type-specifier: KW_INT
+                                                                                declarator: 
+                                                                                    noptr-declarator: 
+                                                                                        noptr-declarator-root: 
+                                                                                            declarator-id: 
+                                                                                                id-expression: 
+                                                                                                    unqualified-id: 
+                                                                                                        TT_IDENTIFIER: TT_IDENTIFIER:x
+                                                                                        noptr-declartor-suffix-seq: empty
+                                                                                    ptr-operator-seq: empty
+                                                                            01: 
+                                                                                decl-specifier-seq: 
+                                                                                    00: 
+                                                                                        type-specifier: 
+                                                                                            cv-qualifier: KW_CONST
+                                                                                    01: 
+                                                                                        type-specifier: 
+                                                                                            type-name: 
+                                                                                                class-name: 
+                                                                                                    TT_IDENTIFIER: TT_IDENTIFIER:C
+                                                                                declarator: 
+                                                                                    noptr-declarator: 
+                                                                                        noptr-declarator-root: 
+                                                                                            declarator-id: 
+                                                                                                id-expression: 
+                                                                                                    unqualified-id: 
+                                                                                                        TT_IDENTIFIER: TT_IDENTIFIER:y
+                                                                                        noptr-declartor-suffix-seq: empty
+                                                                                    ptr-operator-seq: 
+                                                                                        00: 
+                                                                                            op: OP_LAND
+                                                    ptr-operator-seq: 
+                                                        00: 
+                                                            cv-qualifier-seq: empty
+                                                            op: OP_STAR
+                                                pure-specifier: empty

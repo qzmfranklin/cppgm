@@ -1,0 +1,123 @@
+identifier f
+simple ( OP_LPAREN
+literal 2 int 02000000
+simple * OP_STAR
+simple ( OP_LPAREN
+identifier y
+simple + OP_PLUS
+literal 1 int 01000000
+simple ) OP_RPAREN
+simple ) OP_RPAREN
+simple + OP_PLUS
+identifier f
+simple ( OP_LPAREN
+literal 2 int 02000000
+simple * OP_STAR
+simple ( OP_LPAREN
+identifier f
+simple ( OP_LPAREN
+literal 2 int 02000000
+simple * OP_STAR
+simple ( OP_LPAREN
+identifier z
+simple [ OP_LSQUARE
+literal 0 int 00000000
+simple ] OP_RSQUARE
+simple ) OP_RPAREN
+simple ) OP_RPAREN
+simple ) OP_RPAREN
+simple ) OP_RPAREN
+simple % OP_MOD
+identifier f
+simple ( OP_LPAREN
+literal 2 int 02000000
+simple * OP_STAR
+simple ( OP_LPAREN
+literal 0 int 00000000
+simple ) OP_RPAREN
+simple ) OP_RPAREN
+simple + OP_PLUS
+identifier t
+simple ( OP_LPAREN
+literal 1 int 01000000
+simple ) OP_RPAREN
+simple ; OP_SEMICOLON
+identifier f
+simple ( OP_LPAREN
+literal 2 int 02000000
+simple * OP_STAR
+simple ( OP_LPAREN
+literal 2 int 02000000
+simple + OP_PLUS
+simple ( OP_LPAREN
+literal 3 int 03000000
+simple , OP_COMMA
+literal 4 int 04000000
+simple ) OP_RPAREN
+simple - OP_MINUS
+literal 0 int 00000000
+simple , OP_COMMA
+literal 1 int 01000000
+simple ) OP_RPAREN
+simple ) OP_RPAREN
+simple | OP_BOR
+identifier f
+simple ( OP_LPAREN
+literal 2 int 02000000
+simple * OP_STAR
+simple ( OP_LPAREN
+simple ~ OP_COMPL
+literal 5 int 05000000
+simple ) OP_RPAREN
+simple ) OP_RPAREN
+simple & OP_AMP
+identifier f
+simple ( OP_LPAREN
+literal 2 int 02000000
+simple * OP_STAR
+simple ( OP_LPAREN
+literal 0 int 00000000
+simple , OP_COMMA
+literal 1 int 01000000
+simple ) OP_RPAREN
+simple ) OP_RPAREN
+simple ^ OP_XOR
+identifier m
+simple ( OP_LPAREN
+literal 0 int 00000000
+simple , OP_COMMA
+literal 1 int 01000000
+simple ) OP_RPAREN
+simple ; OP_SEMICOLON
+simple int KW_INT
+identifier i
+simple [ OP_LSQUARE
+simple ] OP_RSQUARE
+simple = OP_ASS
+simple { OP_LBRACE
+literal 1 int 01000000
+simple , OP_COMMA
+literal 23 int 17000000
+simple , OP_COMMA
+literal 4 int 04000000
+simple , OP_COMMA
+literal 5 int 05000000
+simple , OP_COMMA
+simple } OP_RBRACE
+simple ; OP_SEMICOLON
+simple char KW_CHAR
+identifier c
+simple [ OP_LSQUARE
+literal 2 int 02000000
+simple ] OP_RSQUARE
+simple [ OP_LSQUARE
+literal 6 int 06000000
+simple ] OP_RSQUARE
+simple = OP_ASS
+simple { OP_LBRACE
+literal "hello" array of 6 char 68656C6C6F00
+simple , OP_COMMA
+literal "" array of 1 char 00
+simple } OP_RBRACE
+simple ; OP_SEMICOLON
+eof

@@ -1,0 +1,211 @@
+#include "debug.inl"
+
+// from-float80 input/output format
+//
+// from-float80 input/output the inverse of to-float80 input/output
+//
+// That is, the input format of from-float80 is the output format of to-float80
+//
+// the output format of from-float80 is the input format of to-float80
+//
+// If the input cannot exactly represent the output value, behaviour is undefined
+
+hd: '0'; '1'; '2'; '3'; '4'; '5'; '6'; '7'; '8'; '9'; 'a'; 'b'; 'c'; 'd'; 'e'; 'f'; 
+
+num_test_inputs: data64 0;
+
+in: data64 0;
+out: data64 0;
+T: data8 0;
+S: data8 0;
+res: data64 0;
+opbyte: data64 0;
+op: 0.0l;
+outz: data64 0;
+
+start:
+	call iobegin;
+
+	move64 [in] [inbuf_begin];
+	move64 [out] [outbuf_end];
+
+read_num_test_inputs_loop:
+	move64 x64 0;
+	move64 y64 [in];
+	move8 x8 [y64];
+	move64 y64 [out];
+	move8 [y64] x8;
+	iadd64 [out] [out] 1;
+
+	move64 y64 x64;
+	iadd64 [in] [in] 1;
+
+	ieq8 z8 x8 '\n';
+	jumpif z8 do_test_input;
+
+	isub8 x8 x8 '0';
+	umul64 [num_test_inputs] [num_test_inputs] 10;
+	iadd64 [num_test_inputs] [num_test_inputs] x64;
+
+	jump read_num_test_inputs_loop;
+
+do_test_input:
+	ieq64 z8 [num_test_inputs] 0;
+	jumpif z8 done;
+
+	move64 x64 [in];
+	move8 [T] [x64];
+	move64 x64 [out];
+	move8 [x64] [T];
+	iadd64 [out] [out] 1;
+
+	iadd64 [in] [in] 1;
+	move64 x64 [in];
+	move8 [S] [x64];
+	move64 x64 [out];
+	move8 [x64] [S];
+	move8 [x64+1] ' ';
+	iadd64 [out] [out] 2;
+	iadd64 [in] [in] 2;
+
+	move64 [op] 0;
+	move16 [op+8] 0;
+
+	move64 [opbyte] 0;
+
+readop_loop:
+	move64 x64 [in];
+	move8 x8 [x64];
+	iadd64 [in] [in] 1;
+
+	ieq8 z8 x8 '\n';
+	jumpif z8 process_test_input;
+
+	slt8 z8 x8 'a';
+	jumpif z8 op1_digit;
+	isub8 x8 x8 'a';
+	iadd8 x8 x8 10;
+	jump op1_continue;
+op1_digit:
+	isub8 x8 x8 '0';
+op1_continue:
+	lshift8 y8 x8 4;
+
+	move64 x64 [in];
+	move8 x8 [x64];
+	iadd64 [in] [in] 1;
+
+	slt8 z8 x8 'a';
+	jumpif z8 op2_digit;
+	isub8 x8 x8 'a';
+	iadd8 x8 x8 10;
+	jump op2_continue;
+op2_digit:
+	isub8 x8 x8 '0';
+op2_continue:
+	and8 y8 y8 0xF0;
+	and8 x8 x8 0x0F;
+	or8 y8 y8 x8;
+	
+	move64 x64 op;
+	iadd64 x64 x64 [opbyte];
+	move8 [x64] y8;
+
+	iadd64 [opbyte] [opbyte] 1;
+	jump readop_loop;
+
+process_test_input:
+	ieq8 z8 [T] 's';
+	jumpif z8 on_s;
+	ieq8 z8 [T] 'u';
+	jumpif z8 on_u;
+	ieq8 z8 [T] 'f';
+	jumpif z8 on_f;
+	call ioerror;
+
+on_s:
+	ieq8 z8 [S] '1';
+	jumpif z8 on_s1;
+	ieq8 z8 [S] '2';
+	jumpif z8 on_s2;
+	ieq8 z8 [S] '4';
+	jumpif z8 on_s4;
+	ieq8 z8 [S] '8';
+	jumpif z8 on_s8;
+	call ioerror;
+
+on_u:
+	ieq8 z8 [S] '1';
+	jumpif z8 on_u1;
+	ieq8 z8 [S] '2';
+	jumpif z8 on_u2;
+	ieq8 z8 [S] '4';
+	jumpif z8 on_u4;
+	ieq8 z8 [S] '8';
+	jumpif z8 on_u8;
+	call ioerror;
+
+on_f:
+	ieq8 z8 [S] '4';
+	jumpif z8 on_f4;
+	ieq8 z8 [S] '8';
+	jumpif z8 on_f8;
+	call ioerror;
+
+on_s1: f80convs8 [res] [op]; jump output_retval;
+on_s2: f80convs16 [res] [op]; jump output_retval;
+on_s4: f80convs32 [res] [op]; jump output_retval;
+on_s8: f80convs64 [res] [op]; jump output_retval;
+on_u1: f80convu8 [res] [op]; jump output_retval;
+on_u2: f80convu16 [res] [op]; jump output_retval;
+on_u4: f80convu32 [res] [op]; jump output_retval;
+on_u8: f80convu64 [res] [op]; jump output_retval;
+on_f4: f80convf32 [res] [op]; jump output_retval;
+on_f8: f80convf64 [res] [op]; jump output_retval;
+
+output_retval:
+	move64 [outz] 0;
+	move8 [outz] [S];
+	isub8 [outz] [outz] '0';
+
+	move64 y64 0;
+
+output_retval_loop:
+	ieq64 z8 y64 [outz];
+	jumpif z8 continue_test_input;
+
+	iadd64 x64 y64 res;
+	move8 x8 [x64];
+	move64 t64 0;
+	urshift8 t8 x8 4;
+	iadd64 t64 t64 hd;
+	move64 x64 [out];
+	move8 [x64] [t64];
+	iadd64 [out] [out] 1;
+
+	iadd64 x64 y64 res;
+	move8 x8 [x64];
+	move64 t64 0;
+	and8 t8 x8 0xF;
+	iadd64 t64 t64 hd;
+	move64 x64 [out];
+	move8 [x64] [t64];
+	iadd64 [out] [out] 1;
+
+	iadd64 y64 y64 1;
+	jump output_retval_loop;
+
+continue_test_input:
+	move64 x64 [out];
+	move8 [x64] '\n';
+	iadd64 [out] [out] 1;
+
+	isub64 [num_test_inputs] [num_test_inputs] 1;
+	jump do_test_input;
+
+done:
+	move64 [outbuf_end] [out];
+	isub64 [outbuf_len] [outbuf_end] [outbuf_begin];
+	call ioend;
+
+

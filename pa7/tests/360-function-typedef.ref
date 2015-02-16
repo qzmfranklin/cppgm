@@ -1,0 +1,6 @@
+1 translation units
+start translation unit tests/360-function-typedef.t
+start unnamed namespace
+function g function of (...) returning pointer to function of () returning void
+end namespace
+end translation unit

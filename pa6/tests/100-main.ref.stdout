@@ -1,0 +1,22 @@
+
+    00: 
+        function-definition: 
+            decl-specifier-seq: 
+                00: 
+                    type-specifier: KW_INT
+            declarator: 
+                noptr-declarator: 
+                    noptr-declarator-root: 
+                        declarator-id: 
+                            id-expression: 
+                                unqualified-id: 
+                                    TT_IDENTIFIER: TT_IDENTIFIER:main
+                    noptr-declartor-suffix-seq: 
+                        00: 
+                            parameters-and-qualifiers: 
+                                cv-qualifer-seq: empty
+                                parameter-declaration-clause: empty
+                ptr-operator-seq: empty
+            function-body: 
+                compound-statement: empty
+            virt-specifier-seq: empty

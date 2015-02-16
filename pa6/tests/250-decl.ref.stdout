@@ -1,0 +1,100 @@
+
+    00: 
+        simple-declaration: 
+            decl-specifier-seq: 
+                00: 
+                    type-specifier: 
+                        type-name: 
+                            class-name: 
+                                TT_IDENTIFIER: TT_IDENTIFIER:C
+            init-declarator-list: 
+                00: 
+                    declarator: 
+                        noptr-declarator: 
+                            noptr-declarator-root: 
+                                declarator-id: 
+                                    id-expression: 
+                                        unqualified-id: 
+                                            TT_IDENTIFIER: TT_IDENTIFIER:c
+                            noptr-declartor-suffix-seq: empty
+                        ptr-operator-seq: empty
+    01: 
+        asm-definition: 
+            TT_LITERAL: TT_LITERAL:"foo"
+    02: 
+        alias-declaration: 
+            identifier: TT_IDENTIFIER:foo
+            type-id: 
+                type-specifier-seq: 
+                    00: KW_INT
+    03: 
+        namespace-definition: 
+            TT_IDENTIFIER: TT_IDENTIFIER:N
+            namespace-body: 
+                00: 
+                    simple-declaration: 
+                        decl-specifier-seq: 
+                            00: 
+                                type-specifier: 
+                                    type-name: 
+                                        class-name: 
+                                            TT_IDENTIFIER: TT_IDENTIFIER:C
+                        init-declarator-list: 
+                            00: 
+                                declarator: 
+                                    noptr-declarator: 
+                                        noptr-declarator-root: 
+                                            declarator-id: 
+                                                id-expression: 
+                                                    unqualified-id: 
+                                                        TT_IDENTIFIER: TT_IDENTIFIER:c
+                                        noptr-declartor-suffix-seq: empty
+                                    ptr-operator-seq: empty
+    04: 
+        namespace-alias-definition: 
+            TT_IDENTIFIER: TT_IDENTIFIER:N3
+            qualified-namespace-specifier: 
+                namespace-name: TT_IDENTIFIER:N2
+                nested-name-specifier: 
+                    nested-name-specifier-root: 
+                        OP_COLON2: OP_COLON2
+                        namespace-name: TT_IDENTIFIER:N1
+                    nested-name-specififier-suffix-seq: empty
+    05: 
+        template-declaration: 
+            declaration: 
+                simple-declaration: 
+                    decl-specifier-seq: 
+                        00: 
+                            type-specifier: 
+                                class-specifier: 
+                                    class-head: 
+                                        class-head-name: 
+                                            class-name: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:TC
+                                        class-key: KW_CLASS
+                                    member-specification-seq: 
+                                        00: 
+                                            member-declaration: 
+                                                decl-specifier-seq: 
+                                                    00: 
+                                                        type-specifier: 
+                                                            type-name: 
+                                                                class-name: 
+                                                                    TT_IDENTIFIER: TT_IDENTIFIER:C
+                                                member-declarator-list: 
+                                                    00: 
+                                                        declarator: 
+                                                            noptr-declarator: 
+                                                                noptr-declarator-root: 
+                                                                    declarator-id: 
+                                                                        id-expression: 
+                                                                            unqualified-id: 
+                                                                                TT_IDENTIFIER: TT_IDENTIFIER:c
+                                                                noptr-declartor-suffix-seq: empty
+                                                            ptr-operator-seq: empty
+            template-parameter-list: 
+                00: 
+                    type-parameter: 
+                        identifier: TT_IDENTIFIER:C
+                        kw: KW_TYPENAME

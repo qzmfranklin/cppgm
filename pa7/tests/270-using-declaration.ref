@@ -1,0 +1,11 @@
+1 translation units
+start translation unit tests/270-using-declaration.t
+start unnamed namespace
+variable ci pointer to const int
+variable i int
+start namespace A
+end namespace
+start namespace X
+end namespace
+end namespace
+end translation unit

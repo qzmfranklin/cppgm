@@ -1,0 +1,23 @@
+preprocessing-op-or-punc 1 #
+whitespace-sequence 0 
+non-whitespace-character 1 \
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 ^
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 [
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 ]
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 |
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 {
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 }
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 ~
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 ?
+preprocessing-op-or-punc 1 ?
+preprocessing-op-or-punc 1 ?
+new-line 0 
+eof

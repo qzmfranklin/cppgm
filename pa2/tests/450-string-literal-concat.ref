@@ -1,0 +1,13 @@
+literal "abc" "def" array of 7 char 61626364656600
+simple ; OP_SEMICOLON
+literal "abc" array of 4 char 61626300
+identifier no
+literal "def" array of 4 char 64656600
+simple ; OP_SEMICOLON
+literal u8"abc" "def" array of 7 char 61626364656600
+simple ; OP_SEMICOLON
+literal "abc" u8"def" array of 7 char 61626364656600
+simple ; OP_SEMICOLON
+literal u8"abc" u8"def" array of 7 char 61626364656600
+simple ; OP_SEMICOLON
+eof

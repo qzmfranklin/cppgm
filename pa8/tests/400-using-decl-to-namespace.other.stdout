@@ -1,0 +1,4 @@
+tests/400-using-decl-to-namespace.t.1:6:16: error: using declaration can not refer to namespace
+    using ::A::B;
+          ~~~~~^
+1 error generated.

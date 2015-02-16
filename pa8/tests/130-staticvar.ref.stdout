@@ -1,0 +1,5 @@
+LINKING: variable x SP_STATIC|SP_INT LK_INTERNAL int initializer=(CopyInitializer (LiteralExpression (TT_LITERAL:1))) initializer_expression=(Immediate (VC_PRVALUE int 01000000)) is_constant = 0
+LINKING: variable y SP_INT LK_INTERNAL int initializer=(CopyInitializer (LiteralExpression (TT_LITERAL:2))) initializer_expression=(Immediate (VC_PRVALUE int 02000000)) is_constant = 0
+LINKING: function main SP_INT function of () returning int defined=1
+LINKING: variable x SP_STATIC|SP_INT LK_INTERNAL int initializer=(CopyInitializer (LiteralExpression (TT_LITERAL:3))) initializer_expression=(Immediate (VC_PRVALUE int 03000000)) is_constant = 0
+LINKING: variable y SP_INT LK_INTERNAL int initializer=(CopyInitializer (LiteralExpression (TT_LITERAL:4))) initializer_expression=(Immediate (VC_PRVALUE int 04000000)) is_constant = 0

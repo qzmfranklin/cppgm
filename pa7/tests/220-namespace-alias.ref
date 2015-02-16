@@ -1,0 +1,13 @@
+1 translation units
+start translation unit tests/220-namespace-alias.t
+start unnamed namespace
+variable x int
+variable y char
+start namespace A
+end namespace
+start namespace B
+end namespace
+start namespace C
+end namespace
+end namespace
+end translation unit

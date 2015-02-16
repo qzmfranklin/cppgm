@@ -1,0 +1,23 @@
+preproc 1
+sof tests/700-strlit-a2.t
+identifier printf
+simple ( OP_LPAREN
+literal "x1= %d, x2= %s" array of 15 char 78313D2025642C2078323D20257300
+simple , OP_COMMA
+identifier x1
+simple , OP_COMMA
+identifier x2
+simple ) OP_RPAREN
+simple ; OP_SEMICOLON
+identifier fputs
+simple ( OP_LPAREN
+literal "strncmp(\"abc\\0d\", \"abc\", '\\4') == 0: @\n" array of 40 char 7374726E636D7028226162635C3064222C2022616263222C20275C342729203D3D20303A20400A00
+simple , OP_COMMA
+identifier s
+simple ) OP_RPAREN
+simple ; OP_SEMICOLON
+identifier include
+literal "vers2.h" "hello" array of 13 char 76657273322E6868656C6C6F00
+simple ; OP_SEMICOLON
+literal "hello, world" array of 13 char 68656C6C6F2C20776F726C6400
+eof

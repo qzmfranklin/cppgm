@@ -1,0 +1,1 @@
+tests/400-double-func-def.t.1:4:1: error: function f already defined

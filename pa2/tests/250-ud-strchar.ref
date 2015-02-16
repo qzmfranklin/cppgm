@@ -1,0 +1,6 @@
+user-defined-literal 'u'_da _da character char 75
+invalid 'u'da
+user-defined-literal "fsaf"_da _da string array of 5 char 6673616600
+simple ; OP_SEMICOLON
+invalid "dafa"da
+eof

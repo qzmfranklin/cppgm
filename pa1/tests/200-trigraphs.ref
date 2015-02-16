@@ -1,0 +1,42 @@
+preprocessing-op-or-punc 1 #
+whitespace-sequence 0 
+non-whitespace-character 1 \
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 ^
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 [
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 ]
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 |
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 {
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 }
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 ~
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 ?
+preprocessing-op-or-punc 1 ?
+preprocessing-op-or-punc 1 ?
+new-line 0 
+new-line 0 
+preprocessing-op-or-punc 1 ?
+preprocessing-op-or-punc 1 #
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 ?
+preprocessing-op-or-punc 1 ?
+non-whitespace-character 1 \
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 ?
+preprocessing-op-or-punc 1 ^
+new-line 0 
+new-line 0 
+string-literal 3 "#"
+whitespace-sequence 0 
+string-literal 8 R"(??=)"
+whitespace-sequence 0 
+string-literal 10 R"?(??=)?"
+new-line 0 
+new-line 0 
+eof

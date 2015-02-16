@@ -1,0 +1,11 @@
+preproc 1
+sof tests/501-pragma-op-ignore.t
+identifier The
+identifier quick
+identifier brown
+identifier fox
+identifier The
+identifier quick
+identifier brown
+identifier fox
+eof

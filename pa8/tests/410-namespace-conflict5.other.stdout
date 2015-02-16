@@ -1,0 +1,7 @@
+tests/410-namespace-conflict5.t.1:3:11: error: redefinition of 'x' as different kind of symbol
+namespace x {}
+          ^
+tests/410-namespace-conflict5.t.1:2:13: note: previous definition is here
+using ::uv::x;
+            ^
+1 error generated.

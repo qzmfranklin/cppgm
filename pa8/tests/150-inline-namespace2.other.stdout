@@ -1,0 +1,8 @@
+tests/150-inline-namespace2.t.1:2:11: warning: inline namespace cannot be reopened as a non-inline namespace
+namespace A {}
+          ^
+inline 
+tests/150-inline-namespace2.t.1:1:18: note: previous definition is here
+inline namespace A {}
+                 ^
+1 warning generated.

@@ -1,0 +1,144 @@
+preprocessing-op-or-punc 1 {
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 }
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 [
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 ]
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 #
+whitespace-sequence 0 
+preprocessing-op-or-punc 2 ##
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 (
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 )
+whitespace-sequence 0 
+preprocessing-op-or-punc 2 <:
+whitespace-sequence 0 
+preprocessing-op-or-punc 2 :>
+whitespace-sequence 0 
+preprocessing-op-or-punc 2 <%
+whitespace-sequence 0 
+preprocessing-op-or-punc 2 %>
+whitespace-sequence 0 
+preprocessing-op-or-punc 2 %:
+whitespace-sequence 0 
+preprocessing-op-or-punc 4 %:%:
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 ;
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 :
+whitespace-sequence 0 
+preprocessing-op-or-punc 3 ...
+whitespace-sequence 0 
+preprocessing-op-or-punc 3 new
+whitespace-sequence 0 
+preprocessing-op-or-punc 6 delete
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 ?
+whitespace-sequence 0 
+preprocessing-op-or-punc 2 ::
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 .
+whitespace-sequence 0 
+preprocessing-op-or-punc 2 .*
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 +
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 -
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 *
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 /
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 %
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 ^
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 &
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 |
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 ~
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 !
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 =
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 <
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 >
+whitespace-sequence 0 
+preprocessing-op-or-punc 2 +=
+whitespace-sequence 0 
+preprocessing-op-or-punc 2 -=
+whitespace-sequence 0 
+preprocessing-op-or-punc 2 *=
+whitespace-sequence 0 
+preprocessing-op-or-punc 2 /=
+whitespace-sequence 0 
+preprocessing-op-or-punc 2 %=
+whitespace-sequence 0 
+preprocessing-op-or-punc 2 ^=
+whitespace-sequence 0 
+preprocessing-op-or-punc 2 &=
+whitespace-sequence 0 
+preprocessing-op-or-punc 2 |=
+whitespace-sequence 0 
+preprocessing-op-or-punc 2 <<
+whitespace-sequence 0 
+preprocessing-op-or-punc 2 >>
+whitespace-sequence 0 
+preprocessing-op-or-punc 3 >>=
+whitespace-sequence 0 
+preprocessing-op-or-punc 3 <<=
+whitespace-sequence 0 
+preprocessing-op-or-punc 2 ==
+whitespace-sequence 0 
+preprocessing-op-or-punc 2 !=
+whitespace-sequence 0 
+preprocessing-op-or-punc 2 <=
+whitespace-sequence 0 
+preprocessing-op-or-punc 2 >=
+whitespace-sequence 0 
+preprocessing-op-or-punc 2 &&
+whitespace-sequence 0 
+preprocessing-op-or-punc 2 ||
+whitespace-sequence 0 
+preprocessing-op-or-punc 2 ++
+whitespace-sequence 0 
+preprocessing-op-or-punc 2 --
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 ,
+whitespace-sequence 0 
+preprocessing-op-or-punc 3 ->*
+whitespace-sequence 0 
+preprocessing-op-or-punc 2 ->
+whitespace-sequence 0 
+preprocessing-op-or-punc 3 and
+whitespace-sequence 0 
+preprocessing-op-or-punc 6 and_eq
+whitespace-sequence 0 
+preprocessing-op-or-punc 6 bitand
+whitespace-sequence 0 
+preprocessing-op-or-punc 5 bitor
+whitespace-sequence 0 
+preprocessing-op-or-punc 5 compl
+whitespace-sequence 0 
+preprocessing-op-or-punc 3 not
+whitespace-sequence 0 
+preprocessing-op-or-punc 6 not_eq
+whitespace-sequence 0 
+preprocessing-op-or-punc 2 or
+whitespace-sequence 0 
+preprocessing-op-or-punc 5 or_eq
+whitespace-sequence 0 
+preprocessing-op-or-punc 3 xor
+whitespace-sequence 0 
+preprocessing-op-or-punc 6 xor_eq
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 <
+preprocessing-op-or-punc 2 ::
+new-line 0 
+eof

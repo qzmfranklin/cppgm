@@ -1,0 +1,1 @@
+tests/500-static-assert.t.1:5:1: error: static_assert on non-constant expression

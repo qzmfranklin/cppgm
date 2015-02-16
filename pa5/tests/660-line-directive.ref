@@ -1,0 +1,8 @@
+preproc 1
+sof tests/660-line-directive.t
+literal "tests/660-line-directive.t" array of 27 char 74657374732F3636302D6C696E652D6469726563746976652E7400
+literal 2 int 02000000
+literal 100 int 64000000
+literal "foo" array of 4 char 666F6F00
+literal 201 int C9000000
+eof

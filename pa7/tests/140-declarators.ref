@@ -1,0 +1,14 @@
+1 translation units
+start translation unit tests/140-declarators.t
+start unnamed namespace
+variable pc pointer to const int
+variable ppc pointer to pointer to const int
+variable i int
+variable p pointer to int
+variable pi pointer to int
+variable pif pointer to function of (pointer to const char, pointer to const char) returning int
+function f function of () returning int
+function fpi function of (int) returning pointer to int
+function fpif function of (int) returning pointer to function of (int) returning int
+end namespace
+end translation unit

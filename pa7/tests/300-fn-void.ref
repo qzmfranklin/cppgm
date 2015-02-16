@@ -1,0 +1,6 @@
+1 translation units
+start translation unit tests/300-fn-void.t
+start unnamed namespace
+function f function of () returning void
+end namespace
+end translation unit

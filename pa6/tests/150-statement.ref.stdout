@@ -1,0 +1,343 @@
+
+    00: 
+        function-definition: 
+            decl-specifier-seq: 
+                00: 
+                    type-specifier: KW_INT
+            declarator: 
+                noptr-declarator: 
+                    noptr-declarator-root: 
+                        declarator-id: 
+                            id-expression: 
+                                unqualified-id: 
+                                    TT_IDENTIFIER: TT_IDENTIFIER:main
+                    noptr-declartor-suffix-seq: 
+                        00: 
+                            parameters-and-qualifiers: 
+                                cv-qualifer-seq: empty
+                                parameter-declaration-clause: empty
+                ptr-operator-seq: empty
+            function-body: 
+                compound-statement: 
+                    00: 
+                        compound-statement: 
+                            00: 
+                                expression-statement: 
+                                    OP_SEMICOLON: OP_SEMICOLON
+                                    expression: 
+                                        additive-operator: OP_PLUS
+                                        lhs: 
+                                            primary-expression: TT_LITERAL:2
+                                        rhs: 
+                                            primary-expression: TT_LITERAL:3
+                    01: 
+                        selection-statement: 
+                            KW_IF: KW_IF
+                            condition: 
+                                primary-expression: 
+                                    id_expression: 
+                                        unqualified-id: 
+                                            TT_IDENTIFIER: TT_IDENTIFIER:x
+                            ontrue: 
+                                expression-statement: 
+                                    OP_SEMICOLON: OP_SEMICOLON
+                                    expression: 
+                                        postfix-root: 
+                                            primary-expression: 
+                                                id_expression: 
+                                                    unqualified-id: 
+                                                        TT_IDENTIFIER: TT_IDENTIFIER:y
+                                        postfix-suffix: 
+                                            00: 
+                                                op: OP_LPAREN
+                    02: 
+                        selection-statement: 
+                            KW_IF: KW_IF
+                            condition: 
+                                primary-expression: 
+                                    id_expression: 
+                                        unqualified-id: 
+                                            TT_IDENTIFIER: TT_IDENTIFIER:x
+                            onfalse: 
+                                expression-statement: 
+                                    OP_SEMICOLON: OP_SEMICOLON
+                                    expression: 
+                                        postfix-root: 
+                                            primary-expression: 
+                                                id_expression: 
+                                                    unqualified-id: 
+                                                        TT_IDENTIFIER: TT_IDENTIFIER:z
+                                        postfix-suffix: 
+                                            00: 
+                                                op: OP_LPAREN
+                            ontrue: 
+                                expression-statement: 
+                                    OP_SEMICOLON: OP_SEMICOLON
+                                    expression: 
+                                        postfix-root: 
+                                            primary-expression: 
+                                                id_expression: 
+                                                    unqualified-id: 
+                                                        TT_IDENTIFIER: TT_IDENTIFIER:y
+                                        postfix-suffix: 
+                                            00: 
+                                                op: OP_LPAREN
+                    03: 
+                        selection-statement: 
+                            KW_IF: KW_IF
+                            condition: 
+                                primary-expression: 
+                                    id_expression: 
+                                        unqualified-id: 
+                                            TT_IDENTIFIER: TT_IDENTIFIER:x
+                            ontrue: 
+                                selection-statement: 
+                                    KW_IF: KW_IF
+                                    condition: 
+                                        primary-expression: 
+                                            id_expression: 
+                                                unqualified-id: 
+                                                    TT_IDENTIFIER: TT_IDENTIFIER:y
+                                    onfalse: 
+                                        expression-statement: 
+                                            OP_SEMICOLON: OP_SEMICOLON
+                                            expression: 
+                                                postfix-root: 
+                                                    primary-expression: 
+                                                        id_expression: 
+                                                            unqualified-id: 
+                                                                TT_IDENTIFIER: TT_IDENTIFIER:w
+                                                postfix-suffix: 
+                                                    00: 
+                                                        op: OP_LPAREN
+                                    ontrue: 
+                                        expression-statement: 
+                                            OP_SEMICOLON: OP_SEMICOLON
+                                            expression: 
+                                                postfix-root: 
+                                                    primary-expression: 
+                                                        id_expression: 
+                                                            unqualified-id: 
+                                                                TT_IDENTIFIER: TT_IDENTIFIER:z
+                                                postfix-suffix: 
+                                                    00: 
+                                                        op: OP_LPAREN
+                    04: 
+                        selection-statement: 
+                            KW_SWITCH: KW_SWITCH
+                            condition: 
+                                primary-expression: 
+                                    id_expression: 
+                                        unqualified-id: 
+                                            TT_IDENTIFIER: TT_IDENTIFIER:x
+                            statement: 
+                                compound-statement: 
+                                    00: 
+                                        labeled-statement: 
+                                            KW_CASE: KW_CASE
+                                            constant-expression: 
+                                                primary-expression: TT_LITERAL:1
+                                            statement: 
+                                                expression-statement: 
+                                                    OP_SEMICOLON: OP_SEMICOLON
+                                                    expression: 
+                                                        postfix-root: 
+                                                            primary-expression: 
+                                                                id_expression: 
+                                                                    unqualified-id: 
+                                                                        TT_IDENTIFIER: TT_IDENTIFIER:f1
+                                                        postfix-suffix: 
+                                                            00: 
+                                                                op: OP_LPAREN
+                                    01: 
+                                        jump-statement: 
+                                            jump: KW_BREAK
+                                    02: 
+                                        labeled-statement: 
+                                            KW_CASE: KW_CASE
+                                            constant-expression: 
+                                                primary-expression: TT_LITERAL:2
+                                            statement: 
+                                                expression-statement: 
+                                                    OP_SEMICOLON: OP_SEMICOLON
+                                                    expression: 
+                                                        postfix-root: 
+                                                            primary-expression: 
+                                                                id_expression: 
+                                                                    unqualified-id: 
+                                                                        TT_IDENTIFIER: TT_IDENTIFIER:f2
+                                                        postfix-suffix: 
+                                                            00: 
+                                                                op: OP_LPAREN
+                                    03: 
+                                        jump-statement: 
+                                            jump: KW_BREAK
+                                    04: 
+                                        labeled-statement: 
+                                            KW_CASE: KW_CASE
+                                            constant-expression: 
+                                                primary-expression: TT_LITERAL:3
+                                            statement: 
+                                                expression-statement: 
+                                                    OP_SEMICOLON: OP_SEMICOLON
+                                                    expression: 
+                                                        postfix-root: 
+                                                            primary-expression: 
+                                                                id_expression: 
+                                                                    unqualified-id: 
+                                                                        TT_IDENTIFIER: TT_IDENTIFIER:f3
+                                                        postfix-suffix: 
+                                                            00: 
+                                                                op: OP_LPAREN
+                                    05: 
+                                        jump-statement: 
+                                            jump: KW_BREAK
+                                    06: 
+                                        labeled-statement: 
+                                            KW_DEFAULT: KW_DEFAULT
+                                            statement: 
+                                                expression-statement: 
+                                                    OP_SEMICOLON: OP_SEMICOLON
+                                                    expression: 
+                                                        postfix-root: 
+                                                            primary-expression: 
+                                                                id_expression: 
+                                                                    unqualified-id: 
+                                                                        TT_IDENTIFIER: TT_IDENTIFIER:g
+                                                        postfix-suffix: 
+                                                            00: 
+                                                                op: OP_LPAREN
+                    05: 
+                        iteration-statement: 
+                            condition: 
+                                primary-expression: 
+                                    id_expression: 
+                                        unqualified-id: 
+                                            TT_IDENTIFIER: TT_IDENTIFIER:x
+                            statement: 
+                                expression-statement: 
+                                    OP_SEMICOLON: OP_SEMICOLON
+                                    expression: 
+                                        postfix-root: 
+                                            primary-expression: 
+                                                id_expression: 
+                                                    unqualified-id: 
+                                                        TT_IDENTIFIER: TT_IDENTIFIER:f
+                                        postfix-suffix: 
+                                            00: 
+                                                op: OP_LPAREN
+                            while: KW_WHILE
+                    06: 
+                        iteration-statement: 
+                            condition: 
+                                primary-expression: 
+                                    id_expression: 
+                                        unqualified-id: 
+                                            TT_IDENTIFIER: TT_IDENTIFIER:x
+                            do: KW_DO
+                            statement: 
+                                expression-statement: 
+                                    OP_SEMICOLON: OP_SEMICOLON
+                                    expression: 
+                                        postfix-root: 
+                                            primary-expression: 
+                                                id_expression: 
+                                                    unqualified-id: 
+                                                        TT_IDENTIFIER: TT_IDENTIFIER:f
+                                        postfix-suffix: 
+                                            00: 
+                                                op: OP_LPAREN
+                    07: 
+                        iteration-statement: 
+                            condition: 
+                                lhs: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:i
+                                relational-operator: OP_LT
+                                rhs: 
+                                    primary-expression: TT_LITERAL:10
+                            expression: 
+                                postfix-root: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:i
+                                postfix-suffix: 
+                                    00: 
+                                        op: OP_INC
+                            for: KW_FOR
+                            for-init-statement: 
+                                decl-specifier-seq: 
+                                    00: 
+                                        type-specifier: KW_INT
+                                init-declarator-list: 
+                                    00: 
+                                        declarator: 
+                                            noptr-declarator: 
+                                                noptr-declarator-root: 
+                                                    declarator-id: 
+                                                        id-expression: 
+                                                            unqualified-id: 
+                                                                TT_IDENTIFIER: TT_IDENTIFIER:i
+                                                noptr-declartor-suffix-seq: empty
+                                            ptr-operator-seq: empty
+                                        initializer: 
+                                            initializer-clause: 
+                                                assignment-expression: 
+                                                    primary-expression: TT_LITERAL:0
+                            statement: 
+                                expression-statement: 
+                                    OP_SEMICOLON: OP_SEMICOLON
+                                    expression: 
+                                        postfix-root: 
+                                            primary-expression: 
+                                                id_expression: 
+                                                    unqualified-id: 
+                                                        TT_IDENTIFIER: TT_IDENTIFIER:f
+                                        postfix-suffix: 
+                                            00: 
+                                                op: OP_LPAREN
+                    08: 
+                        iteration-statement: 
+                            for: KW_FOR
+                            for-range-declaration: 
+                                decl-specififer-seq: 
+                                    00: 
+                                        type-specifier: KW_AUTO
+                                declarator: 
+                                    noptr-declarator: 
+                                        noptr-declarator-root: 
+                                            declarator-id: 
+                                                id-expression: 
+                                                    unqualified-id: 
+                                                        TT_IDENTIFIER: TT_IDENTIFIER:x
+                                        noptr-declartor-suffix-seq: empty
+                                    ptr-operator-seq: empty
+                            for-range-initializer: 
+                                primary-expression: 
+                                    id_expression: 
+                                        unqualified-id: 
+                                            TT_IDENTIFIER: TT_IDENTIFIER:y
+                            statement: 
+                                expression-statement: 
+                                    OP_SEMICOLON: OP_SEMICOLON
+                                    expression: 
+                                        postfix-root: 
+                                            primary-expression: 
+                                                id_expression: 
+                                                    unqualified-id: 
+                                                        TT_IDENTIFIER: TT_IDENTIFIER:z
+                                        postfix-suffix: 
+                                            00: 
+                                                op: OP_LPAREN
+                    09: 
+                        jump-statement: 
+                            expression: 
+                                primary-expression: 
+                                    id_expression: 
+                                        unqualified-id: 
+                                            TT_IDENTIFIER: TT_IDENTIFIER:x
+                            jump: KW_RETURN
+            virt-specifier-seq: empty

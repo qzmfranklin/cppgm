@@ -1,0 +1,1 @@
+tests/300-uninit-ref.t.1:1:1: error: type cannot be default initialized

@@ -1,0 +1,28 @@
+#include "io.inl"
+
+start:
+	call iobegin;
+
+	move64 x64 0;
+loop:
+	uge64 z8 x64 [inbuf_len];
+	jumpif z8 done;
+
+	move64 y64 x64;
+	iadd64 y64 y64 [inbuf_begin];
+
+	move64 z64 x64;
+	isub64 z64 [inbuf_len] z64;
+	isub64 z64 z64 1;
+	iadd64 z64 z64 [outbuf_begin];
+
+	move8 [z64] [y64];
+
+	iadd64 x64 x64 1;
+	jump loop;
+
+done:
+	move64 [outbuf_len] [inbuf_len];
+	iadd64 [outbuf_end] [outbuf_begin] [outbuf_len];
+
+	call ioend;

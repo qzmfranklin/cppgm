@@ -1,0 +1,11 @@
+1 translation units
+start translation unit tests/230-outer-inner.t
+start unnamed namespace
+start namespace Outer
+start namespace Inner
+variable i int
+variable j double
+end namespace
+end namespace
+end namespace
+end translation unit

@@ -1,0 +1,38 @@
+1 translation units
+start translation unit tests/130-simple-type-specifiers.t
+start unnamed namespace
+variable c char
+variable uc unsigned char
+variable sc signed char
+variable c16 char16_t
+variable c32 char32_t
+variable b bool
+variable u unsigned int
+variable ui unsigned int
+variable s int
+variable si int
+variable i int
+variable usi unsigned short int
+variable us unsigned short int
+variable uli unsigned long int
+variable ul unsigned long int
+variable ulli unsigned long long int
+variable ull unsigned long long int
+variable sli long int
+variable sl long int
+variable slli long long int
+variable sll long long int
+variable lli long long int
+variable li long int
+variable l long int
+variable shi short int
+variable sh short int
+variable hi short int
+variable h short int
+variable w wchar_t
+variable f float
+variable d double
+variable ld long double
+variable pv pointer to void
+end namespace
+end translation unit

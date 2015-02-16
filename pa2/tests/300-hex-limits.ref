@@ -1,0 +1,481 @@
+literal 0x7FFFFFFF int FFFFFF7F
+literal 0x7FFFFFFF int FFFFFF7F
+literal 0x7FFFFFFFl long int FFFFFF7F00000000
+literal 0x7FFFFFFFl long int FFFFFF7F00000000
+literal 0x7FFFFFFFL long int FFFFFF7F00000000
+literal 0x7FFFFFFFL long int FFFFFF7F00000000
+literal 0x7FFFFFFFll long long int FFFFFF7F00000000
+literal 0x7FFFFFFFll long long int FFFFFF7F00000000
+literal 0x7FFFFFFFLL long long int FFFFFF7F00000000
+literal 0x7FFFFFFFLL long long int FFFFFF7F00000000
+literal 0x7FFFFFFFu unsigned int FFFFFF7F
+literal 0x7FFFFFFFu unsigned int FFFFFF7F
+literal 0x7FFFFFFFul unsigned long int FFFFFF7F00000000
+literal 0x7FFFFFFFlu unsigned long int FFFFFF7F00000000
+literal 0x7FFFFFFFuL unsigned long int FFFFFF7F00000000
+literal 0x7FFFFFFFLu unsigned long int FFFFFF7F00000000
+literal 0x7FFFFFFFull unsigned long long int FFFFFF7F00000000
+literal 0x7FFFFFFFllu unsigned long long int FFFFFF7F00000000
+literal 0x7FFFFFFFuLL unsigned long long int FFFFFF7F00000000
+literal 0x7FFFFFFFLLu unsigned long long int FFFFFF7F00000000
+literal 0x7FFFFFFFU unsigned int FFFFFF7F
+literal 0x7FFFFFFFU unsigned int FFFFFF7F
+literal 0x7FFFFFFFUl unsigned long int FFFFFF7F00000000
+literal 0x7FFFFFFFlU unsigned long int FFFFFF7F00000000
+literal 0x7FFFFFFFUL unsigned long int FFFFFF7F00000000
+literal 0x7FFFFFFFLU unsigned long int FFFFFF7F00000000
+literal 0x7FFFFFFFUll unsigned long long int FFFFFF7F00000000
+literal 0x7FFFFFFFllU unsigned long long int FFFFFF7F00000000
+literal 0x7FFFFFFFULL unsigned long long int FFFFFF7F00000000
+literal 0x7FFFFFFFLLU unsigned long long int FFFFFF7F00000000
+user-defined-literal 0x7FFFFFFF_ud1 _ud1 integer 0x7FFFFFFF
+user-defined-literal 0x7FFFFFFF_ud1 _ud1 integer 0x7FFFFFFF
+user-defined-literal 0x7FFFFFFF_ud1l _ud1l integer 0x7FFFFFFF
+invalid 0x7FFFFFFFl_ud1
+user-defined-literal 0x7FFFFFFF_ud1L _ud1L integer 0x7FFFFFFF
+invalid 0x7FFFFFFFL_ud1
+user-defined-literal 0x7FFFFFFF_ud1ll _ud1ll integer 0x7FFFFFFF
+invalid 0x7FFFFFFFll_ud1
+user-defined-literal 0x7FFFFFFF_ud1LL _ud1LL integer 0x7FFFFFFF
+invalid 0x7FFFFFFFLL_ud1
+literal 0x7FFFFFFE int FEFFFF7F
+literal 0x7FFFFFFE int FEFFFF7F
+literal 0x7FFFFFFEl long int FEFFFF7F00000000
+literal 0x7FFFFFFEl long int FEFFFF7F00000000
+literal 0x7FFFFFFEL long int FEFFFF7F00000000
+literal 0x7FFFFFFEL long int FEFFFF7F00000000
+literal 0x7FFFFFFEll long long int FEFFFF7F00000000
+literal 0x7FFFFFFEll long long int FEFFFF7F00000000
+literal 0x7FFFFFFELL long long int FEFFFF7F00000000
+literal 0x7FFFFFFELL long long int FEFFFF7F00000000
+literal 0x7FFFFFFEu unsigned int FEFFFF7F
+literal 0x7FFFFFFEu unsigned int FEFFFF7F
+literal 0x7FFFFFFEul unsigned long int FEFFFF7F00000000
+literal 0x7FFFFFFElu unsigned long int FEFFFF7F00000000
+literal 0x7FFFFFFEuL unsigned long int FEFFFF7F00000000
+literal 0x7FFFFFFELu unsigned long int FEFFFF7F00000000
+literal 0x7FFFFFFEull unsigned long long int FEFFFF7F00000000
+literal 0x7FFFFFFEllu unsigned long long int FEFFFF7F00000000
+literal 0x7FFFFFFEuLL unsigned long long int FEFFFF7F00000000
+literal 0x7FFFFFFELLu unsigned long long int FEFFFF7F00000000
+literal 0x7FFFFFFEU unsigned int FEFFFF7F
+literal 0x7FFFFFFEU unsigned int FEFFFF7F
+literal 0x7FFFFFFEUl unsigned long int FEFFFF7F00000000
+literal 0x7FFFFFFElU unsigned long int FEFFFF7F00000000
+literal 0x7FFFFFFEUL unsigned long int FEFFFF7F00000000
+literal 0x7FFFFFFELU unsigned long int FEFFFF7F00000000
+literal 0x7FFFFFFEUll unsigned long long int FEFFFF7F00000000
+literal 0x7FFFFFFEllU unsigned long long int FEFFFF7F00000000
+literal 0x7FFFFFFEULL unsigned long long int FEFFFF7F00000000
+literal 0x7FFFFFFELLU unsigned long long int FEFFFF7F00000000
+user-defined-literal 0x7FFFFFFE_ud1 _ud1 integer 0x7FFFFFFE
+user-defined-literal 0x7FFFFFFE_ud1 _ud1 integer 0x7FFFFFFE
+user-defined-literal 0x7FFFFFFE_ud1l _ud1l integer 0x7FFFFFFE
+invalid 0x7FFFFFFEl_ud1
+user-defined-literal 0x7FFFFFFE_ud1L _ud1L integer 0x7FFFFFFE
+invalid 0x7FFFFFFEL_ud1
+user-defined-literal 0x7FFFFFFE_ud1ll _ud1ll integer 0x7FFFFFFE
+invalid 0x7FFFFFFEll_ud1
+user-defined-literal 0x7FFFFFFE_ud1LL _ud1LL integer 0x7FFFFFFE
+invalid 0x7FFFFFFELL_ud1
+literal 0x80000000 unsigned int 00000080
+literal 0x80000000 unsigned int 00000080
+literal 0x80000000l long int 0000008000000000
+literal 0x80000000l long int 0000008000000000
+literal 0x80000000L long int 0000008000000000
+literal 0x80000000L long int 0000008000000000
+literal 0x80000000ll long long int 0000008000000000
+literal 0x80000000ll long long int 0000008000000000
+literal 0x80000000LL long long int 0000008000000000
+literal 0x80000000LL long long int 0000008000000000
+literal 0x80000000u unsigned int 00000080
+literal 0x80000000u unsigned int 00000080
+literal 0x80000000ul unsigned long int 0000008000000000
+literal 0x80000000lu unsigned long int 0000008000000000
+literal 0x80000000uL unsigned long int 0000008000000000
+literal 0x80000000Lu unsigned long int 0000008000000000
+literal 0x80000000ull unsigned long long int 0000008000000000
+literal 0x80000000llu unsigned long long int 0000008000000000
+literal 0x80000000uLL unsigned long long int 0000008000000000
+literal 0x80000000LLu unsigned long long int 0000008000000000
+literal 0x80000000U unsigned int 00000080
+literal 0x80000000U unsigned int 00000080
+literal 0x80000000Ul unsigned long int 0000008000000000
+literal 0x80000000lU unsigned long int 0000008000000000
+literal 0x80000000UL unsigned long int 0000008000000000
+literal 0x80000000LU unsigned long int 0000008000000000
+literal 0x80000000Ull unsigned long long int 0000008000000000
+literal 0x80000000llU unsigned long long int 0000008000000000
+literal 0x80000000ULL unsigned long long int 0000008000000000
+literal 0x80000000LLU unsigned long long int 0000008000000000
+user-defined-literal 0x80000000_ud1 _ud1 integer 0x80000000
+user-defined-literal 0x80000000_ud1 _ud1 integer 0x80000000
+user-defined-literal 0x80000000_ud1l _ud1l integer 0x80000000
+invalid 0x80000000l_ud1
+user-defined-literal 0x80000000_ud1L _ud1L integer 0x80000000
+invalid 0x80000000L_ud1
+user-defined-literal 0x80000000_ud1ll _ud1ll integer 0x80000000
+invalid 0x80000000ll_ud1
+user-defined-literal 0x80000000_ud1LL _ud1LL integer 0x80000000
+invalid 0x80000000LL_ud1
+literal 0xFFFFFFFF unsigned int FFFFFFFF
+literal 0xFFFFFFFF unsigned int FFFFFFFF
+literal 0xFFFFFFFFl long int FFFFFFFF00000000
+literal 0xFFFFFFFFl long int FFFFFFFF00000000
+literal 0xFFFFFFFFL long int FFFFFFFF00000000
+literal 0xFFFFFFFFL long int FFFFFFFF00000000
+literal 0xFFFFFFFFll long long int FFFFFFFF00000000
+literal 0xFFFFFFFFll long long int FFFFFFFF00000000
+literal 0xFFFFFFFFLL long long int FFFFFFFF00000000
+literal 0xFFFFFFFFLL long long int FFFFFFFF00000000
+literal 0xFFFFFFFFu unsigned int FFFFFFFF
+literal 0xFFFFFFFFu unsigned int FFFFFFFF
+literal 0xFFFFFFFFul unsigned long int FFFFFFFF00000000
+literal 0xFFFFFFFFlu unsigned long int FFFFFFFF00000000
+literal 0xFFFFFFFFuL unsigned long int FFFFFFFF00000000
+literal 0xFFFFFFFFLu unsigned long int FFFFFFFF00000000
+literal 0xFFFFFFFFull unsigned long long int FFFFFFFF00000000
+literal 0xFFFFFFFFllu unsigned long long int FFFFFFFF00000000
+literal 0xFFFFFFFFuLL unsigned long long int FFFFFFFF00000000
+literal 0xFFFFFFFFLLu unsigned long long int FFFFFFFF00000000
+literal 0xFFFFFFFFU unsigned int FFFFFFFF
+literal 0xFFFFFFFFU unsigned int FFFFFFFF
+literal 0xFFFFFFFFUl unsigned long int FFFFFFFF00000000
+literal 0xFFFFFFFFlU unsigned long int FFFFFFFF00000000
+literal 0xFFFFFFFFUL unsigned long int FFFFFFFF00000000
+literal 0xFFFFFFFFLU unsigned long int FFFFFFFF00000000
+literal 0xFFFFFFFFUll unsigned long long int FFFFFFFF00000000
+literal 0xFFFFFFFFllU unsigned long long int FFFFFFFF00000000
+literal 0xFFFFFFFFULL unsigned long long int FFFFFFFF00000000
+literal 0xFFFFFFFFLLU unsigned long long int FFFFFFFF00000000
+user-defined-literal 0xFFFFFFFF_ud1 _ud1 integer 0xFFFFFFFF
+user-defined-literal 0xFFFFFFFF_ud1 _ud1 integer 0xFFFFFFFF
+user-defined-literal 0xFFFFFFFF_ud1l _ud1l integer 0xFFFFFFFF
+invalid 0xFFFFFFFFl_ud1
+user-defined-literal 0xFFFFFFFF_ud1L _ud1L integer 0xFFFFFFFF
+invalid 0xFFFFFFFFL_ud1
+user-defined-literal 0xFFFFFFFF_ud1ll _ud1ll integer 0xFFFFFFFF
+invalid 0xFFFFFFFFll_ud1
+user-defined-literal 0xFFFFFFFF_ud1LL _ud1LL integer 0xFFFFFFFF
+invalid 0xFFFFFFFFLL_ud1
+literal 0xFFFFFFFF unsigned int FFFFFFFF
+literal 0xFFFFFFFF unsigned int FFFFFFFF
+literal 0xFFFFFFFFl long int FFFFFFFF00000000
+literal 0xFFFFFFFFl long int FFFFFFFF00000000
+literal 0xFFFFFFFFL long int FFFFFFFF00000000
+literal 0xFFFFFFFFL long int FFFFFFFF00000000
+literal 0xFFFFFFFFll long long int FFFFFFFF00000000
+literal 0xFFFFFFFFll long long int FFFFFFFF00000000
+literal 0xFFFFFFFFLL long long int FFFFFFFF00000000
+literal 0xFFFFFFFFLL long long int FFFFFFFF00000000
+literal 0xFFFFFFFFu unsigned int FFFFFFFF
+literal 0xFFFFFFFFu unsigned int FFFFFFFF
+literal 0xFFFFFFFFul unsigned long int FFFFFFFF00000000
+literal 0xFFFFFFFFlu unsigned long int FFFFFFFF00000000
+literal 0xFFFFFFFFuL unsigned long int FFFFFFFF00000000
+literal 0xFFFFFFFFLu unsigned long int FFFFFFFF00000000
+literal 0xFFFFFFFFull unsigned long long int FFFFFFFF00000000
+literal 0xFFFFFFFFllu unsigned long long int FFFFFFFF00000000
+literal 0xFFFFFFFFuLL unsigned long long int FFFFFFFF00000000
+literal 0xFFFFFFFFLLu unsigned long long int FFFFFFFF00000000
+literal 0xFFFFFFFFU unsigned int FFFFFFFF
+literal 0xFFFFFFFFU unsigned int FFFFFFFF
+literal 0xFFFFFFFFUl unsigned long int FFFFFFFF00000000
+literal 0xFFFFFFFFlU unsigned long int FFFFFFFF00000000
+literal 0xFFFFFFFFUL unsigned long int FFFFFFFF00000000
+literal 0xFFFFFFFFLU unsigned long int FFFFFFFF00000000
+literal 0xFFFFFFFFUll unsigned long long int FFFFFFFF00000000
+literal 0xFFFFFFFFllU unsigned long long int FFFFFFFF00000000
+literal 0xFFFFFFFFULL unsigned long long int FFFFFFFF00000000
+literal 0xFFFFFFFFLLU unsigned long long int FFFFFFFF00000000
+user-defined-literal 0xFFFFFFFF_ud1 _ud1 integer 0xFFFFFFFF
+user-defined-literal 0xFFFFFFFF_ud1 _ud1 integer 0xFFFFFFFF
+user-defined-literal 0xFFFFFFFF_ud1l _ud1l integer 0xFFFFFFFF
+invalid 0xFFFFFFFFl_ud1
+user-defined-literal 0xFFFFFFFF_ud1L _ud1L integer 0xFFFFFFFF
+invalid 0xFFFFFFFFL_ud1
+user-defined-literal 0xFFFFFFFF_ud1ll _ud1ll integer 0xFFFFFFFF
+invalid 0xFFFFFFFFll_ud1
+user-defined-literal 0xFFFFFFFF_ud1LL _ud1LL integer 0xFFFFFFFF
+invalid 0xFFFFFFFFLL_ud1
+literal 0x100000000 long int 0000000001000000
+literal 0x100000000 long int 0000000001000000
+literal 0x100000000l long int 0000000001000000
+literal 0x100000000l long int 0000000001000000
+literal 0x100000000L long int 0000000001000000
+literal 0x100000000L long int 0000000001000000
+literal 0x100000000ll long long int 0000000001000000
+literal 0x100000000ll long long int 0000000001000000
+literal 0x100000000LL long long int 0000000001000000
+literal 0x100000000LL long long int 0000000001000000
+literal 0x100000000u unsigned long int 0000000001000000
+literal 0x100000000u unsigned long int 0000000001000000
+literal 0x100000000ul unsigned long int 0000000001000000
+literal 0x100000000lu unsigned long int 0000000001000000
+literal 0x100000000uL unsigned long int 0000000001000000
+literal 0x100000000Lu unsigned long int 0000000001000000
+literal 0x100000000ull unsigned long long int 0000000001000000
+literal 0x100000000llu unsigned long long int 0000000001000000
+literal 0x100000000uLL unsigned long long int 0000000001000000
+literal 0x100000000LLu unsigned long long int 0000000001000000
+literal 0x100000000U unsigned long int 0000000001000000
+literal 0x100000000U unsigned long int 0000000001000000
+literal 0x100000000Ul unsigned long int 0000000001000000
+literal 0x100000000lU unsigned long int 0000000001000000
+literal 0x100000000UL unsigned long int 0000000001000000
+literal 0x100000000LU unsigned long int 0000000001000000
+literal 0x100000000Ull unsigned long long int 0000000001000000
+literal 0x100000000llU unsigned long long int 0000000001000000
+literal 0x100000000ULL unsigned long long int 0000000001000000
+literal 0x100000000LLU unsigned long long int 0000000001000000
+user-defined-literal 0x100000000_ud1 _ud1 integer 0x100000000
+user-defined-literal 0x100000000_ud1 _ud1 integer 0x100000000
+user-defined-literal 0x100000000_ud1l _ud1l integer 0x100000000
+invalid 0x100000000l_ud1
+user-defined-literal 0x100000000_ud1L _ud1L integer 0x100000000
+invalid 0x100000000L_ud1
+user-defined-literal 0x100000000_ud1ll _ud1ll integer 0x100000000
+invalid 0x100000000ll_ud1
+user-defined-literal 0x100000000_ud1LL _ud1LL integer 0x100000000
+invalid 0x100000000LL_ud1
+literal 0x7FFFFFFFFFFFFFFF long int FFFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFF long int FFFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFFl long int FFFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFFl long int FFFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFFL long int FFFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFFL long int FFFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFFll long long int FFFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFFll long long int FFFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFFLL long long int FFFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFFLL long long int FFFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFFu unsigned long int FFFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFFu unsigned long int FFFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFFul unsigned long int FFFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFFlu unsigned long int FFFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFFuL unsigned long int FFFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFFLu unsigned long int FFFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFFull unsigned long long int FFFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFFllu unsigned long long int FFFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFFuLL unsigned long long int FFFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFFLLu unsigned long long int FFFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFFU unsigned long int FFFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFFU unsigned long int FFFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFFUl unsigned long int FFFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFFlU unsigned long int FFFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFFUL unsigned long int FFFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFFLU unsigned long int FFFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFFUll unsigned long long int FFFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFFllU unsigned long long int FFFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFFULL unsigned long long int FFFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFFLLU unsigned long long int FFFFFFFFFFFFFF7F
+user-defined-literal 0x7FFFFFFFFFFFFFFF_ud1 _ud1 integer 0x7FFFFFFFFFFFFFFF
+user-defined-literal 0x7FFFFFFFFFFFFFFF_ud1 _ud1 integer 0x7FFFFFFFFFFFFFFF
+user-defined-literal 0x7FFFFFFFFFFFFFFF_ud1l _ud1l integer 0x7FFFFFFFFFFFFFFF
+invalid 0x7FFFFFFFFFFFFFFFl_ud1
+user-defined-literal 0x7FFFFFFFFFFFFFFF_ud1L _ud1L integer 0x7FFFFFFFFFFFFFFF
+invalid 0x7FFFFFFFFFFFFFFFL_ud1
+user-defined-literal 0x7FFFFFFFFFFFFFFF_ud1ll _ud1ll integer 0x7FFFFFFFFFFFFFFF
+invalid 0x7FFFFFFFFFFFFFFFll_ud1
+user-defined-literal 0x7FFFFFFFFFFFFFFF_ud1LL _ud1LL integer 0x7FFFFFFFFFFFFFFF
+invalid 0x7FFFFFFFFFFFFFFFLL_ud1
+literal 0x7FFFFFFFFFFFFFFE long int FEFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFE long int FEFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFEl long int FEFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFEl long int FEFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFEL long int FEFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFEL long int FEFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFEll long long int FEFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFEll long long int FEFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFELL long long int FEFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFELL long long int FEFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFEu unsigned long int FEFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFEu unsigned long int FEFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFEul unsigned long int FEFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFElu unsigned long int FEFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFEuL unsigned long int FEFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFELu unsigned long int FEFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFEull unsigned long long int FEFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFEllu unsigned long long int FEFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFEuLL unsigned long long int FEFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFELLu unsigned long long int FEFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFEU unsigned long int FEFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFEU unsigned long int FEFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFEUl unsigned long int FEFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFElU unsigned long int FEFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFEUL unsigned long int FEFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFELU unsigned long int FEFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFEUll unsigned long long int FEFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFEllU unsigned long long int FEFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFEULL unsigned long long int FEFFFFFFFFFFFF7F
+literal 0x7FFFFFFFFFFFFFFELLU unsigned long long int FEFFFFFFFFFFFF7F
+user-defined-literal 0x7FFFFFFFFFFFFFFE_ud1 _ud1 integer 0x7FFFFFFFFFFFFFFE
+user-defined-literal 0x7FFFFFFFFFFFFFFE_ud1 _ud1 integer 0x7FFFFFFFFFFFFFFE
+user-defined-literal 0x7FFFFFFFFFFFFFFE_ud1l _ud1l integer 0x7FFFFFFFFFFFFFFE
+invalid 0x7FFFFFFFFFFFFFFEl_ud1
+user-defined-literal 0x7FFFFFFFFFFFFFFE_ud1L _ud1L integer 0x7FFFFFFFFFFFFFFE
+invalid 0x7FFFFFFFFFFFFFFEL_ud1
+user-defined-literal 0x7FFFFFFFFFFFFFFE_ud1ll _ud1ll integer 0x7FFFFFFFFFFFFFFE
+invalid 0x7FFFFFFFFFFFFFFEll_ud1
+user-defined-literal 0x7FFFFFFFFFFFFFFE_ud1LL _ud1LL integer 0x7FFFFFFFFFFFFFFE
+invalid 0x7FFFFFFFFFFFFFFELL_ud1
+literal 0x8000000000000000 unsigned long int 0000000000000080
+literal 0x8000000000000000 unsigned long int 0000000000000080
+literal 0x8000000000000000l unsigned long int 0000000000000080
+literal 0x8000000000000000l unsigned long int 0000000000000080
+literal 0x8000000000000000L unsigned long int 0000000000000080
+literal 0x8000000000000000L unsigned long int 0000000000000080
+literal 0x8000000000000000ll unsigned long long int 0000000000000080
+literal 0x8000000000000000ll unsigned long long int 0000000000000080
+literal 0x8000000000000000LL unsigned long long int 0000000000000080
+literal 0x8000000000000000LL unsigned long long int 0000000000000080
+literal 0x8000000000000000u unsigned long int 0000000000000080
+literal 0x8000000000000000u unsigned long int 0000000000000080
+literal 0x8000000000000000ul unsigned long int 0000000000000080
+literal 0x8000000000000000lu unsigned long int 0000000000000080
+literal 0x8000000000000000uL unsigned long int 0000000000000080
+literal 0x8000000000000000Lu unsigned long int 0000000000000080
+literal 0x8000000000000000ull unsigned long long int 0000000000000080
+literal 0x8000000000000000llu unsigned long long int 0000000000000080
+literal 0x8000000000000000uLL unsigned long long int 0000000000000080
+literal 0x8000000000000000LLu unsigned long long int 0000000000000080
+literal 0x8000000000000000U unsigned long int 0000000000000080
+literal 0x8000000000000000U unsigned long int 0000000000000080
+literal 0x8000000000000000Ul unsigned long int 0000000000000080
+literal 0x8000000000000000lU unsigned long int 0000000000000080
+literal 0x8000000000000000UL unsigned long int 0000000000000080
+literal 0x8000000000000000LU unsigned long int 0000000000000080
+literal 0x8000000000000000Ull unsigned long long int 0000000000000080
+literal 0x8000000000000000llU unsigned long long int 0000000000000080
+literal 0x8000000000000000ULL unsigned long long int 0000000000000080
+literal 0x8000000000000000LLU unsigned long long int 0000000000000080
+user-defined-literal 0x8000000000000000_ud1 _ud1 integer 0x8000000000000000
+user-defined-literal 0x8000000000000000_ud1 _ud1 integer 0x8000000000000000
+user-defined-literal 0x8000000000000000_ud1l _ud1l integer 0x8000000000000000
+invalid 0x8000000000000000l_ud1
+user-defined-literal 0x8000000000000000_ud1L _ud1L integer 0x8000000000000000
+invalid 0x8000000000000000L_ud1
+user-defined-literal 0x8000000000000000_ud1ll _ud1ll integer 0x8000000000000000
+invalid 0x8000000000000000ll_ud1
+user-defined-literal 0x8000000000000000_ud1LL _ud1LL integer 0x8000000000000000
+invalid 0x8000000000000000LL_ud1
+literal 0xFFFFFFFFFFFFFFFF unsigned long int FFFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFF unsigned long int FFFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFFl unsigned long int FFFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFFl unsigned long int FFFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFFL unsigned long int FFFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFFL unsigned long int FFFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFFll unsigned long long int FFFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFFll unsigned long long int FFFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFFLL unsigned long long int FFFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFFLL unsigned long long int FFFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFFu unsigned long int FFFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFFu unsigned long int FFFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFFul unsigned long int FFFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFFlu unsigned long int FFFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFFuL unsigned long int FFFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFFLu unsigned long int FFFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFFull unsigned long long int FFFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFFllu unsigned long long int FFFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFFuLL unsigned long long int FFFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFFLLu unsigned long long int FFFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFFU unsigned long int FFFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFFU unsigned long int FFFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFFUl unsigned long int FFFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFFlU unsigned long int FFFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFFUL unsigned long int FFFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFFLU unsigned long int FFFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFFUll unsigned long long int FFFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFFllU unsigned long long int FFFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFFULL unsigned long long int FFFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFFLLU unsigned long long int FFFFFFFFFFFFFFFF
+user-defined-literal 0xFFFFFFFFFFFFFFFF_ud1 _ud1 integer 0xFFFFFFFFFFFFFFFF
+user-defined-literal 0xFFFFFFFFFFFFFFFF_ud1 _ud1 integer 0xFFFFFFFFFFFFFFFF
+user-defined-literal 0xFFFFFFFFFFFFFFFF_ud1l _ud1l integer 0xFFFFFFFFFFFFFFFF
+invalid 0xFFFFFFFFFFFFFFFFl_ud1
+user-defined-literal 0xFFFFFFFFFFFFFFFF_ud1L _ud1L integer 0xFFFFFFFFFFFFFFFF
+invalid 0xFFFFFFFFFFFFFFFFL_ud1
+user-defined-literal 0xFFFFFFFFFFFFFFFF_ud1ll _ud1ll integer 0xFFFFFFFFFFFFFFFF
+invalid 0xFFFFFFFFFFFFFFFFll_ud1
+user-defined-literal 0xFFFFFFFFFFFFFFFF_ud1LL _ud1LL integer 0xFFFFFFFFFFFFFFFF
+invalid 0xFFFFFFFFFFFFFFFFLL_ud1
+literal 0xFFFFFFFFFFFFFFFE unsigned long int FEFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFE unsigned long int FEFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFEl unsigned long int FEFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFEl unsigned long int FEFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFEL unsigned long int FEFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFEL unsigned long int FEFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFEll unsigned long long int FEFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFEll unsigned long long int FEFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFELL unsigned long long int FEFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFELL unsigned long long int FEFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFEu unsigned long int FEFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFEu unsigned long int FEFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFEul unsigned long int FEFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFElu unsigned long int FEFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFEuL unsigned long int FEFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFELu unsigned long int FEFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFEull unsigned long long int FEFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFEllu unsigned long long int FEFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFEuLL unsigned long long int FEFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFELLu unsigned long long int FEFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFEU unsigned long int FEFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFEU unsigned long int FEFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFEUl unsigned long int FEFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFElU unsigned long int FEFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFEUL unsigned long int FEFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFELU unsigned long int FEFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFEUll unsigned long long int FEFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFEllU unsigned long long int FEFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFEULL unsigned long long int FEFFFFFFFFFFFFFF
+literal 0xFFFFFFFFFFFFFFFELLU unsigned long long int FEFFFFFFFFFFFFFF
+user-defined-literal 0xFFFFFFFFFFFFFFFE_ud1 _ud1 integer 0xFFFFFFFFFFFFFFFE
+user-defined-literal 0xFFFFFFFFFFFFFFFE_ud1 _ud1 integer 0xFFFFFFFFFFFFFFFE
+user-defined-literal 0xFFFFFFFFFFFFFFFE_ud1l _ud1l integer 0xFFFFFFFFFFFFFFFE
+invalid 0xFFFFFFFFFFFFFFFEl_ud1
+user-defined-literal 0xFFFFFFFFFFFFFFFE_ud1L _ud1L integer 0xFFFFFFFFFFFFFFFE
+invalid 0xFFFFFFFFFFFFFFFEL_ud1
+user-defined-literal 0xFFFFFFFFFFFFFFFE_ud1ll _ud1ll integer 0xFFFFFFFFFFFFFFFE
+invalid 0xFFFFFFFFFFFFFFFEll_ud1
+user-defined-literal 0xFFFFFFFFFFFFFFFE_ud1LL _ud1LL integer 0xFFFFFFFFFFFFFFFE
+invalid 0xFFFFFFFFFFFFFFFELL_ud1
+invalid 0x10000000000000000
+invalid 0x10000000000000000
+invalid 0x10000000000000000l
+invalid 0x10000000000000000l
+invalid 0x10000000000000000L
+invalid 0x10000000000000000L
+invalid 0x10000000000000000ll
+invalid 0x10000000000000000ll
+invalid 0x10000000000000000LL
+invalid 0x10000000000000000LL
+invalid 0x10000000000000000u
+invalid 0x10000000000000000u
+invalid 0x10000000000000000ul
+invalid 0x10000000000000000lu
+invalid 0x10000000000000000uL
+invalid 0x10000000000000000Lu
+invalid 0x10000000000000000ull
+invalid 0x10000000000000000llu
+invalid 0x10000000000000000uLL
+invalid 0x10000000000000000LLu
+invalid 0x10000000000000000U
+invalid 0x10000000000000000U
+invalid 0x10000000000000000Ul
+invalid 0x10000000000000000lU
+invalid 0x10000000000000000UL
+invalid 0x10000000000000000LU
+invalid 0x10000000000000000Ull
+invalid 0x10000000000000000llU
+invalid 0x10000000000000000ULL
+invalid 0x10000000000000000LLU
+user-defined-literal 0x10000000000000000_ud1 _ud1 integer 0x10000000000000000
+user-defined-literal 0x10000000000000000_ud1 _ud1 integer 0x10000000000000000
+user-defined-literal 0x10000000000000000_ud1l _ud1l integer 0x10000000000000000
+invalid 0x10000000000000000l_ud1
+user-defined-literal 0x10000000000000000_ud1L _ud1L integer 0x10000000000000000
+invalid 0x10000000000000000L_ud1
+user-defined-literal 0x10000000000000000_ud1ll _ud1ll integer 0x10000000000000000
+invalid 0x10000000000000000ll_ud1
+user-defined-literal 0x10000000000000000_ud1LL _ud1LL integer 0x10000000000000000
+invalid 0x10000000000000000LL_ud1
+eof

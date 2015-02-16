@@ -1,0 +1,9 @@
+1 translation units
+start translation unit tests/330-multid-array.t
+start unnamed namespace
+variable arr array of 10 array of 20 array of 30 int
+variable fa array of 17 float
+variable afp array of 17 pointer to float
+variable x3d array of 3 array of 5 array of 7 int
+end namespace
+end translation unit

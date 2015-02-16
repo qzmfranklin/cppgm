@@ -1,0 +1,47 @@
+#include "io.inl"
+
+hd: '0'; '1'; '2'; '3'; '4'; '5'; '6'; '7'; '8'; '9'; 'a'; 'b'; 'c'; 'd'; 'e'; 'f';
+
+space: ' ';
+newline: '\n';
+
+start:
+	call iobegin;
+
+	move64 x64 [inbuf_begin];
+loop:
+	uge64 z8 x64 [inbuf_end];
+	jumpif z8 done;
+
+	move64 y64 0;
+	urshift8 y8 [x64] 4;
+	iadd64 y64 y64 hd;
+	write(t64, stdout, y64, 1);
+
+	move64 y64 0;
+	and8 y8 [x64] 0xF;
+	iadd64 y64 y64 hd;
+	write(t64, stdout, y64, 1);
+
+check_newline:
+	isub64 y64 x64 [inbuf_begin];
+	umod64 y64 y64 16;
+	ine64 z8 y64 15;
+	jumpif z8 check_space;
+	write(t64, stdout, newline, 1);
+	jump delimiter_done;
+
+check_space:
+	umod64 y64 y64 2;
+	ine64 z8 y64 1;
+	jumpif z8 delimiter_done;
+	write(t64, stdout, space, 1);
+	jump delimiter_done;
+
+delimiter_done:
+	iadd64 x64 x64 1;
+	jump loop;
+
+done:
+	call ioend;
+

@@ -1,0 +1,78 @@
+ERROR: malformed number (#2): 00017777777777l_ud1
+ERROR: malformed number (#2): 00017777777777L_ud1
+ERROR: malformed number (#2): 00017777777777ll_ud1
+ERROR: malformed number (#2): 00017777777777LL_ud1
+ERROR: malformed number (#2): 017777777776l_ud1
+ERROR: malformed number (#2): 017777777776L_ud1
+ERROR: malformed number (#2): 017777777776ll_ud1
+ERROR: malformed number (#2): 017777777776LL_ud1
+ERROR: malformed number (#2): 020000000000l_ud1
+ERROR: malformed number (#2): 020000000000L_ud1
+ERROR: malformed number (#2): 020000000000ll_ud1
+ERROR: malformed number (#2): 020000000000LL_ud1
+ERROR: malformed number (#2): 037777777777l_ud1
+ERROR: malformed number (#2): 037777777777L_ud1
+ERROR: malformed number (#2): 037777777777ll_ud1
+ERROR: malformed number (#2): 037777777777LL_ud1
+ERROR: malformed number (#2): 037777777776l_ud1
+ERROR: malformed number (#2): 037777777776L_ud1
+ERROR: malformed number (#2): 037777777776ll_ud1
+ERROR: malformed number (#2): 037777777776LL_ud1
+ERROR: malformed number (#2): 040000000000l_ud1
+ERROR: malformed number (#2): 040000000000L_ud1
+ERROR: malformed number (#2): 040000000000ll_ud1
+ERROR: malformed number (#2): 040000000000LL_ud1
+ERROR: malformed number (#2): 0000000000777777777777777777777l_ud1
+ERROR: malformed number (#2): 0000000000777777777777777777777L_ud1
+ERROR: malformed number (#2): 0000000000777777777777777777777ll_ud1
+ERROR: malformed number (#2): 0000000000777777777777777777777LL_ud1
+ERROR: malformed number (#2): 0777777777777777777776l_ud1
+ERROR: malformed number (#2): 0777777777777777777776L_ud1
+ERROR: malformed number (#2): 0777777777777777777776ll_ud1
+ERROR: malformed number (#2): 0777777777777777777776LL_ud1
+ERROR: malformed number (#2): 01000000000000000000000l_ud1
+ERROR: malformed number (#2): 01000000000000000000000L_ud1
+ERROR: malformed number (#2): 01000000000000000000000ll_ud1
+ERROR: malformed number (#2): 01000000000000000000000LL_ud1
+ERROR: malformed number (#2): 00000000000000000001777777777777777777777l_ud1
+ERROR: malformed number (#2): 00000000000000000001777777777777777777777L_ud1
+ERROR: malformed number (#2): 00000000000000000001777777777777777777777ll_ud1
+ERROR: malformed number (#2): 00000000000000000001777777777777777777777LL_ud1
+ERROR: malformed number (#2): 01777777777777777777776l_ud1
+ERROR: malformed number (#2): 01777777777777777777776L_ud1
+ERROR: malformed number (#2): 01777777777777777777776ll_ud1
+ERROR: malformed number (#2): 01777777777777777777776LL_ud1
+ERROR: octal integer literal out of range (#2): 2000000000000000000000
+ERROR: octal integer literal out of range (#2): 2000000000000000000000
+ERROR: octal integer literal out of range (#2): 2000000000000000000000
+ERROR: octal integer literal out of range (#2): 2000000000000000000000
+ERROR: octal integer literal out of range (#2): 2000000000000000000000
+ERROR: octal integer literal out of range (#2): 2000000000000000000000
+ERROR: octal integer literal out of range (#2): 2000000000000000000000
+ERROR: octal integer literal out of range (#2): 2000000000000000000000
+ERROR: octal integer literal out of range (#2): 2000000000000000000000
+ERROR: octal integer literal out of range (#2): 2000000000000000000000
+ERROR: octal integer literal out of range (#2): 2000000000000000000000
+ERROR: octal integer literal out of range (#2): 2000000000000000000000
+ERROR: octal integer literal out of range (#2): 2000000000000000000000
+ERROR: octal integer literal out of range (#2): 2000000000000000000000
+ERROR: octal integer literal out of range (#2): 2000000000000000000000
+ERROR: octal integer literal out of range (#2): 2000000000000000000000
+ERROR: octal integer literal out of range (#2): 2000000000000000000000
+ERROR: octal integer literal out of range (#2): 2000000000000000000000
+ERROR: octal integer literal out of range (#2): 2000000000000000000000
+ERROR: octal integer literal out of range (#2): 2000000000000000000000
+ERROR: octal integer literal out of range (#2): 2000000000000000000000
+ERROR: octal integer literal out of range (#2): 2000000000000000000000
+ERROR: octal integer literal out of range (#2): 2000000000000000000000
+ERROR: octal integer literal out of range (#2): 2000000000000000000000
+ERROR: octal integer literal out of range (#2): 2000000000000000000000
+ERROR: octal integer literal out of range (#2): 2000000000000000000000
+ERROR: octal integer literal out of range (#2): 2000000000000000000000
+ERROR: octal integer literal out of range (#2): 2000000000000000000000
+ERROR: octal integer literal out of range (#2): 2000000000000000000000
+ERROR: octal integer literal out of range (#2): 2000000000000000000000
+ERROR: malformed number (#2): 02000000000000000000000l_ud1
+ERROR: malformed number (#2): 02000000000000000000000L_ud1
+ERROR: malformed number (#2): 02000000000000000000000ll_ud1
+ERROR: malformed number (#2): 02000000000000000000000LL_ud1

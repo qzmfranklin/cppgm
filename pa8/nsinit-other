@@ -1,0 +1,4 @@
+#!/bin/sh
+
+../clang/build/Release+Asserts/bin/clang -std=c++11 -x c++ $1 $2 $3 $4 $5 $6 $7 $8 || exit
+

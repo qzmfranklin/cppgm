@@ -1,0 +1,7 @@
+identifier a
+identifier d
+literal 1 int 01000000
+literal 2 int 02000000
+literal 3 int 03000000
+identifier g
+eof

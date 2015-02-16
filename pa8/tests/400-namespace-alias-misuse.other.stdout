@@ -1,0 +1,7 @@
+tests/400-namespace-alias-misuse.t.1:5:11: error: redefinition of 'B' as different kind of symbol
+namespace B { }
+          ^
+tests/400-namespace-alias-misuse.t.1:4:11: note: previous definition is here
+namespace B = A;
+          ^
+1 error generated.

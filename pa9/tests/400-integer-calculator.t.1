@@ -1,0 +1,304 @@
+#include "debug.inl"
+
+// integer calculator input/output format
+//
+// first line is a positive integer <N> where N is the number of test inputs
+// followed by N lines, one per test input
+//
+// each test input line consists of 4 space-character separated tokens.
+// token 1: <S>: two character, one of 's1', 's2', 's4', 's8', 'u1', 'u2', 'u4', 'u8'
+// token 2: <x>: a decimal integer (possibly negative and prefixed with a minus sign '-')
+// token 3: <O>: an operator, one of '+', '-', '*', '/', '%', '<', '>', '<=', '>=', '==', '!='
+// token 4: <y>: a decimal integer (possibly negative and prefixed with a minus sign '-')
+//
+// Depending on `<S>` both operands must be within the following ranges (inclusive):
+//
+// <S>         min                  max
+// s1          -128                 127
+// u1          0                    255
+// s2          -32768               32767
+// u2          0                    65535
+// s4          -2147483648          2147483647
+// u4          0                    4294967295
+// s8          -9223372036854775808 9223372036854775807
+// u8          0                    18446744073709551615
+//
+// the first character of <S> determines whether the operation is [s]igned or [u]nsigned
+// the second character determines the operand width in bytes
+//
+// The operators correspond to the C++ operators of the same spelling.  For the comparisons
+// with bool result the output is 1 or 0
+//
+// For each test input one line is output with an integer (possibly negative and prefixed with
+// a minus sign).  The interpretation of the output is in the same format as the operands in
+// all cases.
+
+// behaviour is undefined if input format does not match above specification
+
+num_test_inputs: data64 0;
+
+in: data64 0;
+out: data64 0;
+S: data16 0;
+O: data16 0;
+op1: data64 0;
+op2: data64 0;
+retval: data64 0;
+retvalz: data8 0;
+retvald: data64 0;
+
+readint_retval: data64 0;
+readint_nextchar: data64 0;
+readint_negative: data8 0;
+
+readint:
+	move64 [readint_retval] 0;
+	move64 [readint_nextchar] 0;
+	move8 [readint_negative] 0;
+	move64 x64 [in];
+	move8 [readint_nextchar] [x64];
+	iadd64 [in] [in] 1;
+
+	ine8 z8 [readint_nextchar] '-';
+	jumpif z8 readint_skip;
+
+	move8 [readint_negative] 1;
+
+readint_loop:
+	move64 x64 [in];
+	move8 [readint_nextchar] [x64];
+	iadd64 [in] [in] 1;
+
+readint_skip:
+	isub8 [readint_nextchar] [readint_nextchar] '0';
+	uge8 z8 [readint_nextchar] 10;
+	jumpif z8 readint_done;
+
+	umul64 [readint_retval] [readint_retval] 10;
+	iadd64 [readint_retval] [readint_retval] [readint_nextchar];
+
+	jump readint_loop;
+
+readint_done:
+	isub64 [in] [in] 1;
+
+	jumpif [readint_negative] readint_negative_done;
+	ret;
+
+readint_negative_done:
+	not64 [readint_retval] [readint_retval];
+	iadd64 [readint_retval] [readint_retval] 1;
+	ret;
+
+writeint_in: data64 0;
+writeint_z: data64 0;
+
+writeint_p10:
+	                      1UL; // 0
+	                     10UL; // 1
+	                    100UL; // 2
+	                   1000UL; // 3
+	                  10000UL; // 4
+	                 100000UL; // 5
+	                1000000UL; // 6
+	               10000000UL; // 7
+	              100000000UL; // 8
+	             1000000000UL; // 9
+	            10000000000UL; // 10
+	           100000000000UL; // 11
+	          1000000000000UL; // 12
+	         10000000000000UL; // 13
+	        100000000000000UL; // 14
+	       1000000000000000UL; // 15
+	      10000000000000000UL; // 16
+	     100000000000000000UL; // 17
+	    1000000000000000000UL; // 18
+	   10000000000000000000UL; // 19
+	// 18446744073709551615;
+
+writeint:
+	move64 y64 20;
+	move8 [writeint_z] 0;
+
+writeint_loop:
+	isub64 y64 y64 1;
+	slt64 z8 y64 0;
+	jumpif z8 writeint_done;
+	umul64 x64 y64 8;
+	iadd64 x64 writeint_p10 x64;
+	udiv64 x64 [writeint_in] [x64];
+	umod64 x64 x64 10;
+	iadd8 x8 x8 '0';
+	ine8 z8 x8 '0';
+	or8 [writeint_z] [writeint_z] z8;
+	move64 t64 [out];
+	move8 [t64] x8;
+	iadd64 [out] [out] [writeint_z];
+	jump writeint_loop;
+
+writeint_done:
+	ret;
+
+start:
+	call iobegin;
+
+	move64 [in] [inbuf_begin];
+	move64 [out] [outbuf_end];
+
+	call readint;
+
+	move64 [num_test_inputs] [readint_retval];
+
+	iadd64 [in] [in] 1;
+
+do_test_input:
+	ieq64 z8 [num_test_inputs] 0;
+	jumpif z8 done;
+
+	move64 x64 [in];
+	move16 [S] [x64];
+	iadd64 [in] [in] 3;
+
+	call readint;
+	move64 [op1] [readint_retval];
+	iadd64 [in] [in] 1;
+
+	move64 x64 [in];
+	move8 [O] [x64];
+	move8 [O+1] [x64+1];
+	iadd64 [in] [in] 2;
+
+	ieq8 z8 [O+1] ' ';
+	jumpif z8 one_char_O;
+	iadd64 [in] [in] 1;
+
+one_char_O:	
+	call readint;
+	move64 [op2] [readint_retval];
+	iadd64 [in] [in] 1;
+
+	ieq16 z8 [O] "+ ";
+	jumpif z8 do_op_add;
+	ieq16 z8 [O] "- ";
+	jumpif z8 do_op_sub;
+	ieq16 z8 [O] "* ";
+	jumpif z8 do_op_mul;
+	ieq16 z8 [O] "/ ";
+	jumpif z8 do_op_div;
+	ieq16 z8 [O] "% ";
+	jumpif z8 do_op_mod;
+	ieq16 z8 [O] "==";
+	jumpif z8 do_op_eq;
+	ieq16 z8 [O] "!=";
+	jumpif z8 do_op_ne;
+	ieq16 z8 [O] "< ";
+	jumpif z8 do_op_lt;
+	ieq16 z8 [O] "> ";
+	jumpif z8 do_op_gt;
+	ieq16 z8 [O] "<=";
+	jumpif z8 do_op_le;
+	ieq16 z8 [O] ">=";
+	jumpif z8 do_op_ge;
+	jump ioerror;
+
+#define DO_OP_I(opcode) \
+do_op_##opcode: \
+	DO_OP2(i##opcode##8,  s1) \
+	DO_OP2(i##opcode##16, s2) \
+	DO_OP2(i##opcode##32, s4) \
+	DO_OP2(i##opcode##64, s8) \
+	DO_OP2(i##opcode##8,  u1) \
+	DO_OP2(i##opcode##16, u2) \
+	DO_OP2(i##opcode##32, u4) \
+	DO_OP2(i##opcode##64, u8) \
+	jump ioerror;
+
+#define DO_OP_S(opcode) \
+do_op_##opcode: \
+	DO_OP2(s##opcode##8,  s1) \
+	DO_OP2(s##opcode##16, s2) \
+	DO_OP2(s##opcode##32, s4) \
+	DO_OP2(s##opcode##64, s8) \
+	DO_OP2(u##opcode##8,  u1) \
+	DO_OP2(u##opcode##16, u2) \
+	DO_OP2(u##opcode##32, u4) \
+	DO_OP2(u##opcode##64, u8) \
+	jump ioerror;
+
+#define DO_OP2(opcode, sux) \
+	ine16 z8 [S] #sux; \
+	jumpif z8 skip_##opcode##sux; \
+	move64 [retval] 0; \
+	opcode [retval] [op1] [op2]; \
+	jump output_retval; \
+skip_##opcode##sux:
+
+DO_OP_I(add)
+DO_OP_I(sub)
+DO_OP_S(mul)
+DO_OP_S(div)
+DO_OP_S(mod)
+DO_OP_I(eq)
+DO_OP_I(ne)
+DO_OP_S(lt)
+DO_OP_S(gt)
+DO_OP_S(le)
+DO_OP_S(ge)
+jump ioerror;
+
+#define OUTPUT_RETVAL(sux, su, len) \
+	ine16 z8 [S] #sux; \
+	jumpif z8 skip_outret_##sux; \
+					\
+	ine##len z8 [retval] 0; \
+	jumpif z8 outret_notzero##sux; \
+	move64 x64 [out]; \
+	move8 [x64] '0'; \
+	iadd64 [out] [out] 1; \
+	jump continue_loop; \
+ \
+outret_notzero##sux: \
+\
+	su##ge##len z8 [retval] 0; \
+	jumpif z8 outret_positive##sux; \
+\
+	move64 x64 [out]; \
+	move8 [x64] '-'; \
+	iadd64 [out] [out] 1; \
+\
+	not##len [retval] [retval]; \
+	iadd##len [retval] [retval] 1; \
+\
+outret_positive##sux: \
+	move64 [writeint_in] 0; \
+	move##len [writeint_in] [retval]; \
+	call writeint; \
+	jump continue_loop; \
+\
+skip_outret_##sux:
+
+output_retval:
+	OUTPUT_RETVAL(s1, s, 8) 
+	OUTPUT_RETVAL(s2, s, 16) 
+	OUTPUT_RETVAL(s4, s, 32) 
+	OUTPUT_RETVAL(s8, s, 64)
+	OUTPUT_RETVAL(u1, u, 8)
+	OUTPUT_RETVAL(u2, u, 16)
+	OUTPUT_RETVAL(u4, u, 32)
+	OUTPUT_RETVAL(u8, u, 64)
+	jump ioerror;
+
+continue_loop:
+	move64 x64 [out];
+	move8 [x64] '\n';
+	iadd64 [out] [out] 1;
+
+	isub64 [num_test_inputs] [num_test_inputs] 1;
+	jump do_test_input;
+
+done:
+	move64 [outbuf_end] [out];
+	isub64 [outbuf_len] [outbuf_end] [outbuf_begin];
+	call ioend;
+
+

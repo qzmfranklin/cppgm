@@ -1,0 +1,9 @@
+preproc 1
+sof tests/200-onedef.t
+identifier bar
+identifier quux
+identifier foo
+identifier quux
+identifier foo
+identifier qux
+eof

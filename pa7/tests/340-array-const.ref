@@ -1,0 +1,7 @@
+1 translation units
+start translation unit tests/340-array-const.t
+start unnamed namespace
+variable p1 pointer to array of 5 const char
+variable p2 pointer to array of 5 const char
+end namespace
+end translation unit

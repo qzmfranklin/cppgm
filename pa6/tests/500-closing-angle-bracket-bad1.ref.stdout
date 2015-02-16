@@ -1,0 +1,25 @@
+parsing failed
+DEBUG: deepest call stack:
+    translation_unit 0 KW_INT
+    star 0 KW_INT
+    declaration 0 KW_INT
+    function_definition 0 KW_INT
+    function_body 4 OP_LBRACE
+    compound_statement 4 OP_LBRACE
+    star 5 TT_IDENTIFIER:TC1
+    statement 5 TT_IDENTIFIER:TC1
+    block_declaration 5 TT_IDENTIFIER:TC1
+    simple_declaration 5 TT_IDENTIFIER:TC1
+    decl_specifier_seq 5 TT_IDENTIFIER:TC1
+    decl_specifier 5 TT_IDENTIFIER:TC1
+    type_specifier 5 TT_IDENTIFIER:TC1
+    trailing_type_specifier 5 TT_IDENTIFIER:TC1
+    simple_type_specifier 5 TT_IDENTIFIER:TC1
+    nested_name_specifier 5 TT_IDENTIFIER:TC1
+    nested_name_specifier_root 5 TT_IDENTIFIER:TC1
+    type_name 5 TT_IDENTIFIER:TC1
+    type_name 5 TT_IDENTIFIER:TC1
+    simple_template_id 5 TT_IDENTIFIER:TC1
+    close_angle_bracket 8 OP_GT
+ERROR:tests/500-closing-angle-bracket-bad1.t:3: examined TT_LITERAL:2
+ERROR: parsing failed

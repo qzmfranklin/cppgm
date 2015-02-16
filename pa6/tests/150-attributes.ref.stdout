@@ -1,0 +1,49 @@
+
+    00: 
+        attribute-declaration: 
+            00: 
+                alignment-specifier: 
+                    type-id: 
+                        type-specifier-seq: 
+                            00: KW_INT
+    01: 
+        attribute-declaration: 
+            00: 
+                attribute-list: 
+                    00: 
+                        attribute: 
+                            attribute-token: 
+                                TT_IDENTIFER: TT_IDENTIFIER:foo
+    02: 
+        attribute-declaration: 
+            00: 
+                attribute-list: 
+                    00: 
+                        attribute: 
+                            attribute-argument-clause: 
+                                00: TT_IDENTIFIER:bar
+                            attribute-token: 
+                                TT_IDENTIFER: TT_IDENTIFIER:foo
+    03: 
+        attribute-declaration: 
+            00: 
+                attribute-list: 
+                    00: 
+                        attribute: 
+                            attribute-argument-clause: 
+                                00: TT_IDENTIFIER:bar
+                                01: 
+                                    lbracket: OP_LBRACE
+                                    rbracket: OP_RBRACE
+                                02: 
+                                    lbracket: OP_LPAREN
+                                    rbracket: OP_RPAREN
+                                03: 
+                                    00: 
+                                        00: TT_IDENTIFIER:foo
+                                        lbracket: OP_LPAREN
+                                        rbracket: OP_RPAREN
+                                    lbracket: OP_LSQUARE
+                                    rbracket: OP_RSQUARE
+                            attribute-token: 
+                                TT_IDENTIFER: TT_IDENTIFIER:foo

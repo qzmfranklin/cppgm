@@ -1,0 +1,4 @@
+preproc 1
+sof tests/650-recurse.t
+identifier x
+eof

@@ -1,0 +1,15 @@
+preproc 1
+sof tests/400-predefined-macros.t
+identifier right_foo
+identifier right_bar
+identifier right_foobar
+identifier right___CPPGM__
+identifier right___CPPGM_AUTHOR___
+identifier right___cpluscplus
+identifier right___STDC_HOSTED__
+identifier right___FILE__
+identifier right___LINE__
+identifier right___DATE__
+identifier right___TIME__
+identifier YAY
+eof

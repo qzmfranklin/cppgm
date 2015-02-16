@@ -1,0 +1,323 @@
+#include "debug.inl"
+
+// floating calculator input/output format
+//
+// first line is a positive integer <N> where N is the number of test inputs
+// followed by N lines, one per test input
+//
+// each test input line consists of 4 space-character separated tokens.
+// token 1: <S>: one character, one of '4', '8' or '0'
+// token 2: <x>: little endian hexidecimal encoding of float
+// token 3: <O>: an operator, one of '+', '-', '*', '/', '<', '>', '<=', '>=', '==', '!='
+// token 4: <y>: little endian hexidecimal encoding of float
+//
+// The meaning of <S> is
+// <S>       type
+// 4         32-bit single-precision
+// 8         64-bit double-precision
+// 0         80-bit extended double-precision
+//
+//
+// The operators correspond to the C++ operators of the same spelling.  For the comparisons
+// with bool result the output is 1 or 0
+//
+// For each test input one line is output:
+//
+// For the non-comparisons ('+', '-', '*', '/') the output is the same encoding as the input
+//
+// For remaining comparisons an integer is output, either 1 or 0
+//
+// behaviour is undefined if input format does not match above specification, or x or y are NaNs
+
+hd: '0'; '1'; '2'; '3'; '4'; '5'; '6'; '7'; '8'; '9'; 'a'; 'b'; 'c'; 'd'; 'e'; 'f'; 
+
+num_test_inputs: data64 0;
+
+in: data64 0;
+out: data64 0;
+S: data64 0;
+O: data64 0;
+op: 0.0l;
+op1: 0.0l;
+op2: 0.0l;
+res: 0.0l;
+opbyte: data64 0;
+comparison: data64 0;
+outz: data64 0;
+
+readop:
+	move64 [op] 0;
+	move16 [op+8] 0;
+
+	move64 [opbyte] 0;
+
+readop_loop:
+	ieq64 z8 [opbyte] [S];
+	jumpif z8 readop_done;
+
+	move64 x64 [in];
+	move8 x8 [x64];
+	iadd64 [in] [in] 1;
+
+	slt8 z8 x8 'a';
+	jumpif z8 op1_digit;
+	isub8 x8 x8 'a';
+	iadd8 x8 x8 10;
+	jump op1_continue;
+op1_digit:
+	isub8 x8 x8 '0';
+op1_continue:
+	lshift8 y8 x8 4;
+
+	move64 x64 [in];
+	move8 x8 [x64];
+	iadd64 [in] [in] 1;
+
+	slt8 z8 x8 'a';
+	jumpif z8 op2_digit;
+	isub8 x8 x8 'a';
+	iadd8 x8 x8 10;
+	jump op2_continue;
+op2_digit:
+	isub8 x8 x8 '0';
+op2_continue:
+	and8 y8 y8 0xF0;
+	and8 x8 x8 0x0F;
+	or8 y8 y8 x8;
+	
+	move64 x64 op;
+	iadd64 x64 x64 [opbyte];
+	move8 [x64] y8;
+
+	iadd64 [opbyte] [opbyte] 1;
+	jump readop_loop;
+
+readop_done:
+	ret;	
+
+start:
+	call iobegin;
+
+	move64 [in] [inbuf_begin];
+	move64 [out] [outbuf_end];
+
+read_num_test_inputs_loop:
+	move64 x64 0;
+	move64 y64 [in];
+	move8 x8 [y64];
+
+	iadd64 [in] [in] 1;
+
+	ieq8 z8 x8 '\n';
+	jumpif z8 do_test_input;
+
+	isub8 x8 x8 '0';
+	umul64 [num_test_inputs] [num_test_inputs] 10;
+	iadd64 [num_test_inputs] [num_test_inputs] x64;
+
+	jump read_num_test_inputs_loop;
+
+do_test_input:
+	ieq64 z8 [num_test_inputs] 0;
+	jumpif z8 done;
+
+	move64 x64 [in];
+	move64 [S] 0;
+	move8 [S] [x64];
+	iadd64 [in] [in] 2;
+
+	isub64 [S] [S] '0';	
+	iadd64 [S] [S] 19;
+	umod64 [S] [S] 10;
+	iadd64 [S] [S] 1;
+
+	call readop;
+	move64 [op1] [op];
+	move16 [op1+8] [op+8];
+
+	iadd64 [in] [in] 1;
+
+        move64 x64 [in];
+        move8 [O] [x64];
+        move8 [O+1] [x64+1];
+        iadd64 [in] [in] 2;
+
+        ieq8 z8 [O+1] ' ';
+        jumpif z8 one_char_O;
+        iadd64 [in] [in] 1;
+
+one_char_O:
+	call readop;
+	move64 [op2] [op];
+	move16 [op2+8] [op+8];
+
+	iadd64 [in] [in] 1;
+
+process_test_input:
+	ieq8 z8 [S] 4;
+	jumpif z8 on_4;
+	ieq8 z8 [S] 8;
+	jumpif z8 on_8;
+	ieq8 z8 [S] 10;
+	jumpif z8 on_10;
+	call ioerror;
+
+on_4:
+        ieq16 z8 [O] "+ ";
+        jumpif z8 do_op_add32;
+        ieq16 z8 [O] "- ";
+        jumpif z8 do_op_sub32;
+        ieq16 z8 [O] "* ";
+        jumpif z8 do_op_mul32;
+        ieq16 z8 [O] "/ ";
+        jumpif z8 do_op_div32;
+        ieq16 z8 [O] "==";
+        jumpif z8 do_op_eq32;
+        ieq16 z8 [O] "!=";
+        jumpif z8 do_op_ne32;
+        ieq16 z8 [O] "< ";
+        jumpif z8 do_op_lt32;
+        ieq16 z8 [O] "> ";
+        jumpif z8 do_op_gt32;
+        ieq16 z8 [O] "<=";
+        jumpif z8 do_op_le32;
+        ieq16 z8 [O] ">=";
+        jumpif z8 do_op_ge32;
+        jump ioerror;
+
+on_8:
+        ieq16 z8 [O] "+ ";
+        jumpif z8 do_op_add64;
+        ieq16 z8 [O] "- ";
+        jumpif z8 do_op_sub64;
+        ieq16 z8 [O] "* ";
+        jumpif z8 do_op_mul64;
+        ieq16 z8 [O] "/ ";
+        jumpif z8 do_op_div64;
+        ieq16 z8 [O] "==";
+        jumpif z8 do_op_eq64;
+        ieq16 z8 [O] "!=";
+        jumpif z8 do_op_ne64;
+        ieq16 z8 [O] "< ";
+        jumpif z8 do_op_lt64;
+        ieq16 z8 [O] "> ";
+        jumpif z8 do_op_gt64;
+        ieq16 z8 [O] "<=";
+        jumpif z8 do_op_le64;
+        ieq16 z8 [O] ">=";
+        jumpif z8 do_op_ge64;
+        jump ioerror;
+
+on_10:
+        ieq16 z8 [O] "+ ";
+        jumpif z8 do_op_add80;
+        ieq16 z8 [O] "- ";
+        jumpif z8 do_op_sub80;
+        ieq16 z8 [O] "* ";
+        jumpif z8 do_op_mul80;
+        ieq16 z8 [O] "/ ";
+        jumpif z8 do_op_div80;
+        ieq16 z8 [O] "==";
+        jumpif z8 do_op_eq80;
+        ieq16 z8 [O] "!=";
+        jumpif z8 do_op_ne80;
+        ieq16 z8 [O] "< ";
+        jumpif z8 do_op_lt80;
+        ieq16 z8 [O] "> ";
+        jumpif z8 do_op_gt80;
+        ieq16 z8 [O] "<=";
+        jumpif z8 do_op_le80;
+        ieq16 z8 [O] ">=";
+        jumpif z8 do_op_ge80;
+        jump ioerror;
+
+do_op_add32: fadd32 [res] [op1] [op2]; move8 [comparison] 0; jump output_retval;
+do_op_add64: fadd64 [res] [op1] [op2]; move8 [comparison] 0; jump output_retval;
+do_op_add80: fadd80 [res] [op1] [op2]; move8 [comparison] 0; jump output_retval;
+do_op_sub32: fsub32 [res] [op1] [op2]; move8 [comparison] 0; jump output_retval;
+do_op_sub64: fsub64 [res] [op1] [op2]; move8 [comparison] 0; jump output_retval;
+do_op_sub80: fsub80 [res] [op1] [op2]; move8 [comparison] 0; jump output_retval;
+do_op_mul32: fmul32 [res] [op1] [op2]; move8 [comparison] 0; jump output_retval;
+do_op_mul64: fmul64 [res] [op1] [op2]; move8 [comparison] 0; jump output_retval;
+do_op_mul80: fmul80 [res] [op1] [op2]; move8 [comparison] 0; jump output_retval;
+do_op_div32: fdiv32 [res] [op1] [op2]; move8 [comparison] 0; jump output_retval;
+do_op_div64: fdiv64 [res] [op1] [op2]; move8 [comparison] 0; jump output_retval;
+do_op_div80: fdiv80 [res] [op1] [op2]; move8 [comparison] 0; jump output_retval;
+do_op_eq32: feq32 [res] [op1] [op2]; move8 [comparison] 1; jump output_retval;
+do_op_eq64: feq64 [res] [op1] [op2]; move8 [comparison] 1; jump output_retval;
+do_op_eq80: feq80 [res] [op1] [op2]; move8 [comparison] 1; jump output_retval;
+do_op_ne32: fne32 [res] [op1] [op2]; move8 [comparison] 1; jump output_retval;
+do_op_ne64: fne64 [res] [op1] [op2]; move8 [comparison] 1; jump output_retval;
+do_op_ne80: fne80 [res] [op1] [op2]; move8 [comparison] 1; jump output_retval;
+do_op_lt32: flt32 [res] [op1] [op2]; move8 [comparison] 1; jump output_retval;
+do_op_lt64: flt64 [res] [op1] [op2]; move8 [comparison] 1; jump output_retval;
+do_op_lt80: flt80 [res] [op1] [op2]; move8 [comparison] 1; jump output_retval;
+do_op_gt32: fgt32 [res] [op1] [op2]; move8 [comparison] 1; jump output_retval;
+do_op_gt64: fgt64 [res] [op1] [op2]; move8 [comparison] 1; jump output_retval;
+do_op_gt80: fgt80 [res] [op1] [op2]; move8 [comparison] 1; jump output_retval;
+do_op_le32: fle32 [res] [op1] [op2]; move8 [comparison] 1; jump output_retval;
+do_op_le64: fle64 [res] [op1] [op2]; move8 [comparison] 1; jump output_retval;
+do_op_le80: fle80 [res] [op1] [op2]; move8 [comparison] 1; jump output_retval;
+do_op_ge32: fge32 [res] [op1] [op2]; move8 [comparison] 1; jump output_retval;
+do_op_ge64: fge64 [res] [op1] [op2]; move8 [comparison] 1; jump output_retval;
+do_op_ge80: fge80 [res] [op1] [op2]; move8 [comparison] 1; jump output_retval;
+
+output_retval:
+	jumpif [comparison] outcomparison;
+	move64 [outz] 0;
+	move8 [outz] [S];
+
+	move64 y64 0;
+
+output_retval_loop:
+	ieq64 z8 y64 [outz];
+	jumpif z8 continue_test_input;
+
+	iadd64 x64 y64 res;
+	move8 x8 [x64];
+	move64 t64 0;
+	urshift8 t8 x8 4;
+	iadd64 t64 t64 hd;
+	move64 x64 [out];
+	move8 [x64] [t64];
+	iadd64 [out] [out] 1;
+
+	iadd64 x64 y64 res;
+	move8 x8 [x64];
+	move64 t64 0;
+	and8 t8 x8 0xF;
+	iadd64 t64 t64 hd;
+	move64 x64 [out];
+	move8 [x64] [t64];
+	iadd64 [out] [out] 1;
+
+	iadd64 y64 y64 1;
+	jump output_retval_loop;
+
+outcomparison:
+	jumpif [res] true_comparison;
+	move64 x64 [out];
+	move64 [x64] '0';
+	iadd64 [out] [out] 1;
+	jump continue_test_input;
+
+true_comparison:
+	move64 x64 [out];
+	move64 [x64] '1';
+	iadd64 [out] [out] 1;
+	jump continue_test_input;
+
+continue_test_input:
+	move64 x64 [out];
+	move8 [x64] '\n';
+	iadd64 [out] [out] 1;
+
+	isub64 [num_test_inputs] [num_test_inputs] 1;
+	jump do_test_input;
+
+done:
+	move64 [outbuf_end] [out];
+	isub64 [outbuf_len] [outbuf_end] [outbuf_begin];
+	call ioend;
+
+

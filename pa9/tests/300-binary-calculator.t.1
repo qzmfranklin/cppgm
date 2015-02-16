@@ -1,0 +1,268 @@
+#include "debug.inl"
+
+// binary calculator input/output format
+//
+// first line is a positive integer <N> where N is the number of test inputs
+// followed by N lines, one per test input
+//
+// each test input consists of
+// first character <O> one of ~, &, |, ^, L, S, R
+// second character <S> is one of 1, 2, 4, 8
+// third character space
+// followed by operands delimited by spaces
+//
+// operand number and size depends on <O> as follows:
+// ~: 1 operand of <S>*2 hex digits
+// &: 2 operands of <S>*2 hex digits
+// |:           "
+// ^:           "
+// L: 2 operands. first of <S>*2 hex digits, second of 2 hex digits
+// S:           "
+// R:           "
+//
+// alphabetic hex digits are in lowercase
+//
+// output is application of binary operation <O> to operands,
+// in all cases it is one line consisting of <S>*2 hex digits
+//
+// the binary operations of <O> is as follows:
+// ~: NOT op1
+// &: op1 AND op2
+// |: op1 OR op2
+// ^: op1 XOR op2
+// L: op1 left shift op2 
+// S: op1 signed (arithmetic) right shift op2
+// U: op1 unsigned (logical) right shift op2
+//
+// for shift operations, behaviour is undefined if op2 is greater than or equal to <S>*8
+//
+// behaviour is undefined if input format does not match above specification
+
+hd: '0'; '1'; '2'; '3'; '4'; '5'; '6'; '7'; '8'; '9'; 'a'; 'b'; 'c'; 'd'; 'e'; 'f'; 
+
+num_test_inputs: data64 0;
+
+in: data64 0;
+out: data64 0;
+O: data8 0;
+S: data64 0;
+op1: data64 0;
+op2: data64 0;
+retval: data64 0;
+retval_size: data64 0;
+
+read_op_size: data64 0;
+read_op_retval: data64 0;
+read_op_nexthex: data64 0;
+
+read_op:
+	move64 [read_op_retval] 0;
+
+read_op_loop:
+	ieq64 z8 [read_op_size] 0;
+	jumpif z8 read_op_done;
+	move64 x64 [in];
+	move8 [read_op_nexthex] [x64];
+	iadd64 [in] [in] 1;
+
+	uge8 z8 [read_op_nexthex] 'a';
+	jumpif z8 read_op_alpha;
+
+read_op_number:
+	isub8 [read_op_nexthex] [read_op_nexthex] '0';
+	jump read_op_loop_continue;
+
+read_op_alpha:
+	isub8 [read_op_nexthex] [read_op_nexthex] 'a';
+	iadd8 [read_op_nexthex] [read_op_nexthex] 10;
+	jump read_op_loop_continue;
+
+read_op_loop_continue:
+	umul64 [read_op_retval] [read_op_retval] 16;
+	move64 x64 0;
+	move8 x8 [read_op_nexthex];
+	iadd64 [read_op_retval] [read_op_retval] x64;
+
+	isub64 [read_op_size] [read_op_size] 1;
+	jump read_op_loop;
+
+read_op_done:
+	iadd64 [in] [in] 1; // delimiter
+	ret;
+
+start:
+	call iobegin;
+
+	move64 [in] [inbuf_begin];
+	move64 [out] [outbuf_end];
+
+read_num_test_inputs_loop:
+	move64 x64 0;
+	move64 y64 [in];
+	move8 x8 [y64];
+	move64 y64 x64;
+	iadd64 [in] [in] 1;
+
+	ieq8 z8 x8 '\n';
+	jumpif z8 do_test_input;
+
+	isub8 x8 x8 '0';
+	umul64 [num_test_inputs] [num_test_inputs] 10;
+	iadd64 [num_test_inputs] [num_test_inputs] x64;
+
+	jump read_num_test_inputs_loop;
+
+do_test_input:
+	ieq64 z8 [num_test_inputs] 0;
+	jumpif z8 done;
+
+	move64 x64 [in];
+	move8 [O] [x64];
+	iadd64 [in] [in] 1;
+	move64 x64 [in];
+	move64 [S] 0;
+	move8 [S] [x64];
+	isub8 [S] [S] '0';
+	iadd64 [in] [in] 2;
+
+	ieq8 z8 [O] '~';
+	jumpif z8 do_op_not;
+	ieq8 z8 [O] '&';
+	jumpif z8 do_op_and;
+	ieq8 z8 [O] '|';
+	jumpif z8 do_op_or;
+	ieq8 z8 [O] '^';
+	jumpif z8 do_op_xor;
+	ieq8 z8 [O] 'L';
+	jumpif z8 do_op_lshift;
+	ieq8 z8 [O] 'S';
+	jumpif z8 do_op_srshift;
+	ieq8 z8 [O] 'U';
+	jumpif z8 do_op_urshift;
+	jump ioerror;
+	
+#define READ_OP(op, sz) \
+	move64 [read_op_size] sz; \
+	umul64 [read_op_size] [read_op_size] 2; \
+	call read_op; \
+	move64 [op] [read_op_retval];
+
+#define DO_UNARY(opcode, bytes, bits) \
+	ine8 z8 [S] bytes; \
+	jumpif z8 unary_##opcode##_##bytes##_continue; \
+	move64 [retval] 0; \
+	opcode##bits [retval] [op1]; \
+	move64 [retval_size] bytes; \
+	jump output_retval; \
+unary_##opcode##_##bytes##_continue:
+
+#define DO_BINARY(opcode, bytes, bits) \
+	ine8 z8 [S] bytes; \
+	jumpif z8 binary_##opcode##_##bytes##_continue; \
+	move64 [retval] 0; \
+	opcode##bits [retval] [op1] [op2]; \
+	move64 [retval_size] bytes; \
+	jump output_retval; \
+binary_##opcode##_##bytes##_continue:
+
+do_op_not:
+	READ_OP(op1, [S])
+
+	DO_UNARY(not,1,8) 
+	DO_UNARY(not,2,16) 
+	DO_UNARY(not,4,32) 
+	DO_UNARY(not,8,64) 
+	jump ioerror;
+
+do_op_and:
+	READ_OP(op1, [S]) 
+	READ_OP(op2, [S]) 
+	DO_BINARY(and,1,8) 
+	DO_BINARY(and,2,16) 
+	DO_BINARY(and,4,32) 
+	DO_BINARY(and,8,64)
+	jump ioerror;
+
+do_op_or:
+	READ_OP(op1, [S]) 
+	READ_OP(op2, [S]) 
+	DO_BINARY(or,1,8) 
+	DO_BINARY(or,2,16) 
+	DO_BINARY(or,4,32) 
+	DO_BINARY(or,8,64)
+	jump ioerror;
+
+do_op_xor:
+	READ_OP(op1, [S]) 
+	READ_OP(op2, [S]) 
+	DO_BINARY(xor,1,8) 
+	DO_BINARY(xor,2,16) 
+	DO_BINARY(xor,4,32) 
+	DO_BINARY(xor,8,64)
+	jump ioerror;
+
+do_op_lshift:
+	READ_OP(op1, [S]) 
+	READ_OP(op2, 1) 
+	DO_BINARY(lshift,1,8) 
+	DO_BINARY(lshift,2,16) 
+	DO_BINARY(lshift,4,32) 
+	DO_BINARY(lshift,8,64)
+	jump ioerror;
+
+do_op_srshift:
+	READ_OP(op1, [S])
+	READ_OP(op2, 1) 
+	DO_BINARY(srshift,1,8) 
+	DO_BINARY(srshift,2,16) 
+	DO_BINARY(srshift,4,32) 
+	DO_BINARY(srshift,8,64)
+	jump ioerror;
+
+do_op_urshift:
+	READ_OP(op1, [S]) 
+	READ_OP(op2, 1) 
+	DO_BINARY(urshift,1,8) 
+	DO_BINARY(urshift,2,16) 
+	DO_BINARY(urshift,4,32) 
+	DO_BINARY(urshift,8,64)
+	jump ioerror;
+
+output_retval:
+
+// [retval] [retval_size]
+
+	umul64 [retval_size] [retval_size] 2;
+
+output_retval_loop:
+	ieq64 z8 [retval_size] 0;
+	jumpif z8 continue_test_input;
+
+	move64 x64 [retval_size];
+	isub64 x64 x64 1;
+	umul64 x64 x64 4;
+	move64 y64 [retval];
+	urshift64 y64 y64 x8;
+	and64 y64 y64 15;
+	iadd64 y64 y64 hd;
+	move64 x64 [out];
+	move8 [x64] [y64];
+	iadd64 [out] [out] 1;
+
+	isub64 [retval_size] [retval_size] 1;
+	jump output_retval_loop;
+
+continue_test_input:
+	move64 x64 [out];
+	move8 [x64] '\n';
+	iadd64 [out] [out] 1;
+
+	isub64 [num_test_inputs] [num_test_inputs] 1;
+	jump do_test_input;
+
+done:
+	move64 [outbuf_end] [out];
+	isub64 [outbuf_len] [outbuf_end] [outbuf_begin];
+	call ioend;
+
+

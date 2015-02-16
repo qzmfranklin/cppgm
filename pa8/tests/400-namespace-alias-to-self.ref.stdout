@@ -1,0 +1,1 @@
+tests/400-namespace-alias-to-self.t.1:4:1: error: X is an original-namespace-name

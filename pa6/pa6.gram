@@ -1,0 +1,867 @@
+translation-unit:
+	declaration* ST_EOF
+
+primary-expression:
+	KW_TRUE
+	KW_FALSE
+	KW_NULLPTR
+	TT_LITERAL
+	KW_THIS
+	OP_LPAREN expression OP_RPAREN
+	id-expression
+	lambda-expression
+
+type-name:
+	class-name
+	enum-name
+	typedef-name
+	simple-template-id
+
+class-name:
+	TT_IDENTIFIER
+	simple-template-id
+
+enum-name:
+	TT_IDENTIFIER
+
+namespace-name:
+	TT_IDENTIFIER
+
+template-name:
+	TT_IDENTIFIER
+
+typedef-name:
+	TT_IDENTIFIER
+
+simple-template-id:
+	template-name OP_LT template-argument-list? close-angle-bracket
+		
+id-expression:
+	unqualified-id
+	qualified-id
+
+unqualified-id:
+	TT_IDENTIFIER
+	operator-function-id
+	conversion-function-id
+	literal-operator-id
+	OP_COMPL class-name
+	OP_COMPL decltype-specifier
+	template-id
+
+qualified-id:
+	nested-name-specifier KW_TEMPLATE? unqualified-id
+
+nested-name-specifier:
+	nested-name-specifier-root nested-name-specifier-suffix*
+
+nested-name-specifier-root:
+	OP_COLON2	
+	type-name OP_COLON2
+	namespace-name OP_COLON2
+	decltype-specifier OP_COLON2
+
+nested-name-specifier-suffix:
+	TT_IDENTIFIER OP_COLON2
+	KW_TEMPLATE? simple-template-id OP_COLON2
+
+lambda-expression:
+	lambda-introducer lambda-declarator? compound-statement
+
+lambda-introducer:
+	OP_LSQUARE lambda-capture? OP_RSQUARE
+
+lambda-capture:
+	capture-default
+	capture-list
+	capture-default OP_COMMA capture-list
+
+capture-default:
+	OP_AMP
+	OP_ASS
+
+capture-list:
+	capture OP_DOTS? (OP_COMMA capture OP_DOTS?)*
+
+capture:
+	TT_IDENTIFIER
+	OP_AMP TT_IDENTIFIER
+	KW_THIS
+
+lambda-declarator:
+	OP_LPAREN parameter-declaration-clause OP_RPAREN KW_MUTABLE? \
+		exception-specification? attribute-specifier* trailing-return-type?
+
+postfix-expression:
+	postfix-root postfix-suffix*
+
+postfix-root:
+	primary-expression
+	simple-type-specifier OP_LPAREN expression-list? OP_RPAREN
+	typename-specifier OP_LPAREN expression-list? OP_RPAREN
+	simple-type-specifier braced-init-list
+	typename-specifier braced-init-list
+	KW_DYNAMIC_CAST OP_LT type-id close-angle-bracket OP_LPAREN expression OP_RPAREN
+	KW_STATIC_CAST OP_LT type-id close-angle-bracket OP_LPAREN expression OP_RPAREN
+	KW_REINTERPET_CAST OP_LT type-id close-angle-bracket OP_LPAREN expression OP_RPAREN
+	KW_CONST_CAST OP_LT type-id close-angle-bracket OP_LPAREN expression OP_RPAREN
+	KW_TYPEID OP_LPAREN expression OP_RPAREN
+	KW_TYPEID OP_LPAREN type-id OP_RPAREN
+
+postfix-suffix:
+	OP_LSQUARE expression OP_RSQUARE
+	OP_LSQUARE braced-init-list OP_RSQUARE
+	OP_LPAREN expression-list? OP_RPAREN
+	OP_DOT pseudo-destructor-name
+	OP_DOT KW_TEMPLATE? id-expression
+	OP_ARROW pseudo-destructor-name
+	OP_ARROW KW_TEMPLATE? id-expression
+	OP_INC
+	OP_DEC
+
+expression-list:
+	initializer-list
+
+pseudo-destructor-name:
+	nested-name-specifier? OP_COMPL type-name
+	OP_COMPL decltype-specifier
+	
+unary-expression:
+	postfix-expression
+	unary-operator cast-expression
+	KW_SIZEOF unary-expression
+	KW_SIZEOF OP_LPAREN type-id OP_RPAREN
+	KW_SIZEOF OP_DOTS OP_LPAREN TT_IDENTIFIER OP_RPAREN
+	KW_ALIGNOF OP_LPAREN type-id OP_RPAREN
+	noexcept-expression
+	new-expression
+	delete-expression
+	
+unary-operator:
+	OP_INC
+	OP_DEC
+	OP_STAR
+	OP_AMP
+	OP_PLUS
+	OP_MINUS
+	OP_LNOT
+	OP_COMPL
+	
+new-expression:
+	OP_COLON2? KW_NEW new-placement? new-type-id new-initializer?
+	OP_COLON2? KW_NEW new-placement? OP_LPAREN type-id OP_RPAREN new-initializer?
+	
+new-placement:
+	OP_LPAREN expression-list OP_RPAREN
+
+new-type-id:
+	type-specifier-seq new-declarator?
+
+new-declarator:
+	ptr-operator* noptr-new-declarator
+	ptr-operator+
+	
+noptr-new-declarator:
+	OP_LSQUARE expression OP_RSQUARE attribute-specifier* (OP_LSQUARE constant-expression OP_RSQUARE attribute-specifier*)*
+
+new-initializer:
+	OP_LPAREN expression-list? OP_RPAREN
+	braced-init-list
+	
+delete-expression:
+	OP_COLON2? KW_DELETE cast-expression
+	OP_COLON2? KW_DELETE OP_LSQUARE OP_RSQUARE cast-expression
+
+noexcept-expression:
+	KW_NOEXCEPT OP_LPAREN expression OP_RPAREN
+
+cast-expression:
+	unary-expression
+	cast-operator cast-expression
+
+cast-operator:
+	OP_LPAREN type-id OP_RPAREN
+	
+pm-expression:
+	cast-expression (pm-operator cast-expression)*
+
+pm-operator:
+	OP_DOTSTAR
+	OP_ARROWSTAR
+	
+multiplicative-expression:
+	pm-expression (multiplicative-operator pm-expression)*
+
+multiplicative-operator:
+	OP_STAR
+	OP_DIV
+	OP_MOD
+
+additive-expression:
+	multiplicative-expression (additive-operator multiplicative-expression)*
+
+additive-operator:
+	OP_PLUS
+	OP_MINUS
+
+shift-expression:
+	additive-expression (shift-operator additive-expression)*
+
+shift-operator:
+	OP_LSHIFT
+	ST_RSHIFT_1 ST_RSHIFT_2
+
+relational-expression:
+	shift-expression (relational-operator shift-expression)*
+
+relational-operator:
+	OP_LT
+	OP_GT
+	OP_LE
+	OP_GE
+
+equality-expression:
+	relational-expression (equality-operator relational-expression)*
+
+equality-operator:
+	OP_EQ
+	OP_NE
+
+and-expression:
+	equality-expression (OP_AMP equality-expression)*
+
+exclusive-or-expression:
+	and-expression (OP_XOR and-expression)*
+
+inclusive-or-expression:
+	exclusive-or-expression (OP_BOR exclusive-or-expression)*
+
+logical-and-expression:
+	inclusive-or-expression (OP_LAND inclusive-or-expression)*
+
+logical-or-expression:
+	logical-and-expression (OP_LOR logical-and-expression)*
+
+conditional-expression:
+	logical-or-expression (OP_QMARK expression OP_COLON assignment-expression)?
+
+assignment-expression:
+	conditional-expression
+	logical-or-expression assignment-operator initializer-clause
+	throw-expression
+
+assignment-operator:
+	OP_ASS
+	OP_STARASS
+	OP_DIVASS
+	OP_MODASS
+	OP_PLUSASS
+	OP_MINUSASS
+	OP_RSHIFTASS
+	OP_LSHIFTASS
+	OP_BANDASS
+	OP_XORASS
+	OP_BORASS
+
+expression:
+	assignment-expression (OP_COMMA assignment-expression)*
+
+constant-expression:
+	conditional-expression
+
+statement:
+	labeled-statement
+	attribute-specifier* expression-statement
+	attribute-specifier* compound-statement
+	attribute-specifier* selection-statement
+	attribute-specifier* iteration-statement
+	attribute-specifier* jump-statement
+	declaration-statement
+	attribute-specifier* try-block
+
+labeled-statement:
+	attribute-specifier* TT_IDENTIFIER OP_COLON statement
+	attribute-specifier* KW_CASE constant-expression OP_COLON statement
+	attribute-specifier* KW_DEFAULT OP_COLON statement
+
+expression-statement:
+	expression? OP_SEMICOLON
+
+compound-statement:
+	OP_LBRACE statement* OP_RBRACE
+
+selection-statement:
+	KW_IF OP_LPAREN condition OP_RPAREN statement
+	KW_IF OP_LPAREN condition OP_RPAREN statement KW_ELSE statement
+	KW_SWITCH OP_LPAREN condition OP_RPAREN statement
+
+condition-declaration:
+	attribute-specifier* decl-specifier-seq declarator OP_ASS initializer-clause
+	attribute-specifier* decl-specifier-seq declarator braced-init-list
+
+condition:
+	condition-declaration
+	expression
+
+iteration-statement:
+	KW_WHILE OP_LPAREN condition OP_RPAREN statement
+	KW_DO statement KW_WHILE OP_LPAREN expression OP_RPAREN OP_SEMICOLON
+	KW_FOR OP_LPAREN for-init-statement condition? OP_SEMICOLON expression? OP_RPAREN statement
+	KW_FOR OP_LPAREN for-range-declaration OP_COLON for-range-initializer OP_RPAREN statement
+
+for-init-statement:
+	expression-statement
+	simple-declaration
+
+for-range-declaration:
+	attribute-specifier* decl-specifier-seq declarator
+
+for-range-initializer:
+	expression
+	braced-init-list
+	
+jump-statement:
+	KW_BREAK OP_SEMICOLON
+	KW_CONTINUE OP_SEMICOLON
+	KW_RETURN expression? OP_SEMICOLON
+	KW_RETURN braced-init-list OP_SEMICOLON
+	KW_GOTO TT_IDENTIFIER OP_SEMICOLON
+
+declaration-statement:
+	block-declaration
+
+declaration:
+	block-declaration
+	function-definition
+	template-declaration
+	explicit-instantiation
+	explicit-specialization
+	linkage-specification
+	namespace-definition
+	empty-declaration
+	attribute-declaration
+	
+block-declaration:
+	simple-declaration
+	asm-definition
+	namespace-alias-definition
+	using-declaration
+	using-directive
+	static_assert-declaration
+	alias-declaration
+	opaque-enum-declaration
+
+alias-declaration:
+	KW_USING TT_IDENTIFIER attribute-specifier* OP_ASS type-id OP_SEMICOLON
+
+simple-declaration:
+	attribute-specifier* decl-specifier-seq init-declarator-list? OP_SEMICOLON
+
+static_assert-declaration:
+	KW_STATIC_ASSERT OP_LPAREN constant-expression OP_COMMA TT_LITERAL OP_RPAREN OP_SEMICOLON
+
+empty-declaration:
+	OP_SEMICOLON
+
+attribute-declaration:
+	attribute-specifier+ OP_SEMICOLON
+
+decl-specifier:
+	storage-class-specifier
+	type-specifier
+	function-specifier
+	KW_FRIEND
+	KW_TYPEDEF
+	KW_CONSTEXPR
+
+decl-specifier-seq:
+	decl-specifier+ attribute-specifier*
+
+storage-class-specifier:
+	KW_REGISTER
+	KW_STATIC
+	KW_THREAD_LOCAL
+	KW_EXTERN
+	KW_MUTABLE
+
+function-specifier:
+	KW_INLINE
+	KW_VIRTUAL
+	KW_EXPLICIT
+
+type-specifier:
+	trailing-type-specifier
+	class-specifier
+	enum-specifier
+
+trailing-type-specifier:
+	simple-type-specifier
+	elaborated-type-specifier
+	typename-specifier
+	cv-qualifier
+
+type-specifier-seq:
+	type-specifier+ attribute-specifier*
+
+trailing-type-specifier-seq:
+	trailing-type-specifier+ attribute-specifier*
+
+simple-type-specifier:
+	KW_CHAR
+	KW_CHAR16_T
+	KW_CHAR32_T
+	KW_WCHAR_T
+	KW_BOOL
+	KW_SHORT
+	KW_INT
+	KW_LONG
+	KW_SIGNED
+	KW_UNSIGNED
+	KW_FLOAT
+	KW_DOUBLE
+	KW_VOID
+	KW_AUTO	
+	nested-name-specifier? type-name
+	nested-name-specifier KW_TEMPLATE simple-template-id
+	decltype-specifier
+
+decltype-specifier:
+	KW_DECLTYPE OP_LPAREN expression OP_RPAREN
+
+elaborated-type-specifier:
+	class-key attribute-specifier* nested-name-specifier? TT_IDENTIFIER
+	class-key nested-name-specifier? KW_TEMPLATE? simple-template-id
+	KW_ENUM nested-name-specifier? TT_IDENTIFIER
+
+enum-specifier:
+	enum-head OP_LBRACE enumerator-list? OP_RBRACE
+	enum-head OP_LBRACE enumerator-list OP_COMMA OP_RBRACE
+
+enum-head:
+	enum-key attribute-specifier* TT_IDENTIFIER? enum-base?
+	enum-key attribute-specifier* nested-name-specifier TT_IDENTIFIER enum-base?
+
+opaque-enum-declaration:
+	enum-key attribute-specifier* TT_IDENTIFIER enum-base? OP_SEMICOLON
+
+enum-key:
+	KW_ENUM
+	KW_ENUM KW_CLASS
+	KW_ENUM KW_STRUCT
+
+enum-base:
+	OP_COLON type-specifier-seq
+
+enumerator-list:
+	enumerator-definition (OP_COMMA enumerator-definition)*
+
+enumerator-definition:
+	enumerator
+	enumerator OP_ASS constant-expression
+
+enumerator:
+	TT_IDENTIFIER
+
+namespace-definition:
+	KW_INLINE? KW_NAMESPACE TT_IDENTIFIER? OP_LBRACE namespace-body OP_RBRACE
+
+namespace-body:
+	declaration*
+
+namespace-alias-definition:
+	KW_NAMESPACE TT_IDENTIFIER OP_ASS qualified-namespace-specifier OP_SEMICOLON
+
+qualified-namespace-specifier:
+	nested-name-specifier? namespace-name
+
+using-declaration:
+	KW_USING KW_TYPENAME? nested-name-specifier unqualified-id OP_SEMICOLON
+	KW_USING OP_COLON2 unqualified-id OP_SEMICOLON
+
+using-directive:
+	attribute-specifier* KW_USING KW_NAMESPACE nested-name-specifier? TT_IDENTIFIER OP_SEMICOLON
+	
+asm-definition:
+	KW_ASM OP_LPAREN TT_LITERAL OP_RPAREN OP_SEMICOLON
+
+linkage-specification:
+	KW_EXTERN TT_LITERAL OP_LBRACE declaration* OP_RBRACE
+	KW_EXTERN TT_LITERAL declaration
+
+attribute-specifier:
+	OP_LSQUARE OP_LSQUARE attribute-list OP_RSQUARE OP_RSQUARE
+	alignment-specifier
+
+alignment-specifier:
+	KW_ALIGNAS OP_LPAREN type-id OP_DOTS? OP_RPAREN
+	KW_ALIGNAS OP_LPAREN assignment-expression OP_DOTS? OP_RPAREN
+
+attribute-list:
+	attribute-part (OP_COMMA attribute-part)*
+
+attribute-part:
+	attribute?
+	attribute OP_DOTS
+
+attribute:
+	attribute-token attribute-argument-clause?
+
+attribute-token:
+	TT_IDENTIFIER
+	attribute-scoped-token
+
+attribute-scoped-token:
+	attribute-namespace OP_COLON2 TT_IDENTIFIER
+
+attribute-namespace:
+	TT_IDENTIFIER
+
+attribute-argument-clause:
+	OP_LPAREN balanced-token* OP_RPAREN
+
+balanced-token:
+	OP_LPAREN balanced-token* OP_RPAREN
+	OP_LSQUARE balanced-token* OP_RSQUARE
+	OP_LBRACE balanced-token* OP_RBRACE
+	ST_NONPAREN
+
+init-declarator-list:
+	init-declarator (OP_COMMA init-declarator)*
+
+init-declarator:
+	declarator initializer?
+
+declarator:
+	ptr-declarator
+	noptr-declarator trailing-return-type
+
+ptr-declarator:
+	ptr-operator* noptr-declarator
+
+noptr-declarator:
+	noptr-declarator-root (noptr-declarator-suffix)*
+
+noptr-declarator-root:
+	declarator-id attribute-specifier*
+	OP_LPAREN ptr-declarator OP_RPAREN
+
+noptr-declarator-suffix:
+	parameters-and-qualifiers
+	OP_LSQUARE constant-expression? OP_RSQUARE attribute-specifier*
+
+parameters-and-qualifiers:
+	OP_LPAREN parameter-declaration-clause OP_RPAREN cv-qualifier* \
+		ref-qualifier? exception-specification? attribute-specifier*
+
+trailing-return-type:
+	OP_ARROW trailing-type-specifier-seq abstract-declarator?
+
+ptr-operator:
+	OP_STAR attribute-specifier* cv-qualifier*
+	OP_AMP attribute-specifier*
+	OP_LAND attribute-specifier*
+	nested-name-specifier OP_STAR attribute-specifier* cv-qualifier*
+	
+cv-qualifier:
+	KW_CONST
+	KW_VOLATILE
+
+ref-qualifier:
+	OP_AMP
+	OP_LAND
+
+declarator-id:
+	OP_DOTS? id-expression
+		
+type-id:
+	type-specifier-seq abstract-declarator?
+
+abstract-declarator:
+	ptr-abstract-declarator
+	noptr-abstract-declarator? trailing-return-type
+	abstract-pack-declarator
+
+ptr-abstract-declarator:
+	ptr-operator* noptr-abstract-declarator
+	ptr-operator+
+	
+noptr-abstract-declarator:
+	noptr-abstract-declarator-root noptr-declarator-suffix*
+	noptr-declarator-suffix+
+
+noptr-abstract-declarator-root:
+	noptr-declarator-suffix
+	OP_LPAREN ptr-abstract-declarator OP_RPAREN
+	
+abstract-pack-declarator:
+	ptr-operator* noptr-abstract-pack-declarator
+
+noptr-abstract-pack-declarator:
+	OP_DOTS noptr-declarator-suffix*
+
+parameter-declaration-clause:
+	parameter-declaration-list? OP_DOTS?
+	parameter-declaration-list OP_COMMA OP_DOTS
+
+parameter-declaration-list:
+	parameter-declaration (OP_COMMA parameter-declaration)*
+
+parameter-declaration:
+	attribute-specifier* decl-specifier-seq declarator
+	attribute-specifier* decl-specifier-seq declarator OP_ASS initializer-clause
+	attribute-specifier* decl-specifier-seq abstract-declarator?
+	attribute-specifier* decl-specifier-seq abstract-declarator? OP_ASS initializer-clause
+
+function-definition:
+	attribute-specifier* decl-specifier-seq declarator virt-specifier* function-body
+
+function-body:
+	ctor-initializer? compound-statement
+	function-try-block
+	OP_ASS KW_DEFAULT OP_SEMICOLON
+	OP_ASS KW_DELETE OP_SEMICOLON
+
+initializer:
+	brace-or-equal-initializer
+	OP_LPAREN expression-list OP_RPAREN
+
+brace-or-equal-initializer:
+	OP_ASS initializer-clause
+	braced-init-list
+
+initializer-clause:
+	assignment-expression
+	braced-init-list
+
+initializer-list:
+	initializer-clause-dots (OP_COMMA initializer-clause-dots)*
+
+initializer-clause-dots:
+	initializer-clause OP_DOTS?
+
+braced-init-list:
+	OP_LBRACE initializer-list OP_COMMA? OP_RBRACE
+	OP_LBRACE OP_RBRACE
+
+class-specifier:
+	class-head OP_LBRACE member-specification* OP_RBRACE
+
+class-head:
+	class-key attribute-specifier* class-head-name class-virt-specifier? base-clause?
+	class-key attribute-specifier* base-clause?
+
+class-head-name:
+	nested-name-specifier? class-name
+
+class-virt-specifier:
+	ST_FINAL
+
+class-key:
+	KW_CLASS
+	KW_STRUCT
+	KW_UNION
+
+member-specification:
+	member-declaration
+	access-specifier OP_COLON
+
+member-declaration:
+	attribute-specifier* decl-specifier-seq member-declarator-list? OP_SEMICOLON
+	function-definition OP_SEMICOLON?
+	using-declaration
+	static_assert-declaration
+	template-declaration
+	alias-declaration
+	
+member-declarator-list:
+	member-declarator (OP_COMMA member-declarator)*
+
+member-declarator:
+	declarator virt-specifier* pure-specifier?
+	declarator brace-or-equal-initializer?
+	TT_IDENTIFIER? attribute-specifier* OP_COLON constant-expression
+
+virt-specifier:
+	ST_OVERRIDE
+	ST_FINAL
+
+pure-specifier:
+	OP_ASS ST_ZERO
+
+base-clause:
+	OP_COLON base-specifier-list
+
+base-specifier-list:
+	base-specifier-dots (OP_COMMA base-specifier-dots)*
+
+base-specifier-dots:
+	base-specifier OP_DOTS?
+
+base-specifier:
+	attribute-specifier* base-type-specifier
+	attribute-specifier* KW_VIRTUAL access-specifier? base-type-specifier
+	attribute-specifier* access-specifier KW_VIRTUAL? base-type-specifier
+
+class-or-decltype:
+	nested-name-specifier? class-name
+	decltype-specifier
+
+base-type-specifier:
+	class-or-decltype
+
+access-specifier:
+	KW_PRIVATE
+	KW_PROTECTED
+	KW_PUBLIC
+
+conversion-function-id:
+	KW_OPERATOR conversion-type-id
+	
+conversion-type-id:
+	type-specifier-seq ptr-operator*
+
+ctor-initializer:
+	OP_COLON mem-initializer-list
+
+mem-initializer-list:
+	mem-initializer-dots (OP_COMMA mem-initializer-dots)*
+
+mem-initializer-dots:
+	mem-initializer OP_DOTS?
+
+mem-initializer:
+	mem-initializer-id OP_LPAREN expression-list? OP_RPAREN
+	mem-initializer-id braced-init-list
+
+mem-initializer-id:
+	class-or-decltype
+	TT_IDENTIFIER
+
+operator-function-id:
+	KW_OPERATOR KW_NEW
+	KW_OPERATOR KW_NEW OP_LSQUARE OP_RSQUARE
+	KW_OPERATOR KW_DELETE
+	KW_OPERATOR KW_DELETE OP_LSQUARE OP_RSQUARE
+	KW_OPERATOR OP_PLUS
+	KW_OPERATOR OP_MINUS
+	KW_OPERATOR OP_STAR
+	KW_OPERATOR OP_DIV
+	KW_OPERATOR OP_MOD
+	KW_OPERATOR OP_XOR
+	KW_OPERATOR OP_AMP
+	KW_OPERATOR OP_BOR
+	KW_OPERATOR OP_COMPL
+	KW_OPERATOR OP_LNOT
+	KW_OPERATOR OP_ASS
+	KW_OPERATOR OP_LT
+	KW_OPERATOR OP_GT
+	KW_OPERATOR OP_PLUSASS
+	KW_OPERATOR OP_MINUSASS
+	KW_OPERATOR OP_STARASS
+	KW_OPERATOR OP_DIVASS
+	KW_OPERATOR OP_MODASS
+	KW_OPERATOR OP_XORASS
+	KW_OPERATOR OP_BANDASS
+	KW_OPERATOR OP_BORASS
+	KW_OPERATOR OP_LSHIFT
+	KW_OPERATOR ST_RSHIFT_1 ST_RSHIFT_2
+	KW_OPERATOR OP_RSHIFTASS
+	KW_OPERATOR OP_LSHIFTASS
+	KW_OPERATOR OP_EQ
+	KW_OPERATOR OP_NE
+	KW_OPERATOR OP_LE
+	KW_OPERATOR OP_GE
+	KW_OPERATOR OP_LAND
+	KW_OPERATOR OP_LOR
+	KW_OPERATOR OP_INC
+	KW_OPERATOR OP_DEC
+	KW_OPERATOR OP_COMMA
+	KW_OPERATOR OP_ARROWSTAR
+	KW_OPERATOR OP_ARROW
+	KW_OPERATOR OP_LPAREN OP_RPAREN
+	KW_OPERATOR OP_LSQUARE OP_RSQUARE
+
+literal-operator-id:
+	KW_OPERATOR ST_EMPTYSTR TT_IDENTIFIER
+
+template-declaration:
+	KW_TEMPLATE OP_LT template-parameter-list close-angle-bracket declaration
+
+template-parameter-list:
+	template-parameter (OP_COMMA template-parameter)*
+
+template-parameter:
+	type-parameter
+	parameter-declaration
+
+type-parameter:
+	KW_CLASS OP_DOTS? TT_IDENTIFIER?
+	KW_CLASS TT_IDENTIFIER? OP_ASS type-id
+	KW_TYPENAME OP_DOTS? TT_IDENTIFIER?
+	KW_TYPENAME TT_IDENTIFIER? OP_ASS type-id
+	KW_TEMPLATE OP_LT template-parameter-list close-angle-bracket KW_CLASS OP_DOTS? TT_IDENTIFIER?
+	KW_TEMPLATE OP_LT template-parameter-list close-angle-bracket KW_CLASS TT_IDENTIFIER? OP_ASS id-expression
+
+close-angle-bracket:
+	OP_GT
+	ST_RSHIFT_1
+	ST_RSHIFT_2
+
+template-id:
+	simple-template-id
+	operator-function-id OP_LT template-argument-list? close-angle-bracket
+	literal-operator-id OP_LT template-argument-list? close-angle-bracket
+
+template-argument-list:
+	template-argument-dots (OP_COMMA template-argument-dots)*
+
+template-argument-dots:
+	template-argument OP_DOTS?
+
+template-argument:
+	constant-expression
+	type-id
+	id-expression
+
+typename-specifier:
+	KW_TYPENAME nested-name-specifier TT_IDENTIFIER
+	KW_TYPENAME nested-name-specifier KW_TEMPLATE? simple-template-id
+
+explicit-instantiation:
+	KW_EXTERN? KW_TEMPLATE declaration
+
+explicit-specialization:
+	KW_TEMPLATE OP_LT close-angle-bracket declaration
+
+try-block:
+	KW_TRY compound-statement handler+
+
+function-try-block:
+	KW_TRY ctor-initializer? compound-statement handler+
+
+handler:
+	KW_CATCH OP_LPAREN exception-declaration OP_RPAREN compound-statement
+
+exception-declaration:
+	attribute-specifier* type-specifier+ attribute-specifier* declarator
+	attribute-specifier* type-specifier+ attribute-specifier* abstract-declarator?
+	OP_DOTS
+
+throw-expression:
+	KW_THROW assignment-expression?
+
+exception-specification:
+	dynamic-exception-specification
+	noexcept-specification
+
+dynamic-exception-specification:
+	KW_THROW OP_LPAREN type-id-list? OP_RPAREN
+
+type-id-list:
+	type-id-dots (OP_COMMA type-id-dots)*
+
+type-id-dots:
+	type-id OP_DOTS?
+
+noexcept-specification:
+	KW_NOEXCEPT (OP_LPAREN constant-expression OP_RPAREN)?

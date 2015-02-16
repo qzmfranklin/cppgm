@@ -1,0 +1,7 @@
+1 translation units
+start translation unit tests/310-varargs.t
+start unnamed namespace
+function f function of (...) returning void
+function printf function of (pointer to const char, ...) returning int
+end namespace
+end translation unit

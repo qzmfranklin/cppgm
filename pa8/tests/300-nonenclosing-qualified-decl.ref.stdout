@@ -1,0 +1,1 @@
+tests/300-nonenclosing-qualified-decl.t.1:7:1: error: qualified name not from enclosed namespace

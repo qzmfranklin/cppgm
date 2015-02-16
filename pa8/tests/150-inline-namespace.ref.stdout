@@ -1,0 +1,1 @@
+tests/150-inline-namespace.t.1:2:1: error: extension namespace cannot be inline

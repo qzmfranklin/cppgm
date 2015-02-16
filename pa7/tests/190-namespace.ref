@@ -1,0 +1,8 @@
+1 translation units
+start translation unit tests/190-namespace.t
+start unnamed namespace
+start namespace A
+variable i int
+end namespace
+end namespace
+end translation unit

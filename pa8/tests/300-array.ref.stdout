@@ -1,0 +1,2 @@
+LINKING: variable x SP_INT LK_EXTERNAL array of 10 int initializer=(DefaultInitializer) initializer_expression=(null) is_constant = 0
+LINKING: function main SP_INT function of () returning int defined=1

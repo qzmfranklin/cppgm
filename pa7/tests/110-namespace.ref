@@ -1,0 +1,19 @@
+1 translation units
+start translation unit tests/110-namespace.t
+start unnamed namespace
+start namespace A
+start namespace E
+end namespace
+start namespace C
+start namespace F
+end namespace
+end namespace
+end namespace
+start namespace B
+start namespace C
+end namespace
+end namespace
+start namespace D
+end namespace
+end namespace
+end translation unit

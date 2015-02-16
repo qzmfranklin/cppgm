@@ -1,0 +1,192 @@
+
+    00: 
+        function-definition: 
+            decl-specifier-seq: 
+                00: 
+                    type-specifier: KW_INT
+            declarator: 
+                noptr-declarator: 
+                    noptr-declarator-root: 
+                        declarator-id: 
+                            id-expression: 
+                                unqualified-id: 
+                                    TT_IDENTIFIER: TT_IDENTIFIER:main
+                    noptr-declartor-suffix-seq: 
+                        00: 
+                            parameters-and-qualifiers: 
+                                cv-qualifer-seq: empty
+                                parameter-declaration-clause: empty
+                ptr-operator-seq: empty
+            function-body: 
+                compound-statement: 
+                    00: 
+                        declaration-statement: 
+                            simple-declaration: 
+                                decl-specifier-seq: 
+                                    00: 
+                                        type-specifier: 
+                                            cv-qualifier: KW_CONST
+                                    01: 
+                                        type-specifier: 
+                                            type-name: 
+                                                class-name: 
+                                                    TT_IDENTIFIER: TT_IDENTIFIER:C
+                                init-declarator-list: 
+                                    00: 
+                                        declarator: 
+                                            noptr-declarator: 
+                                                noptr-declarator-root: 
+                                                    declarator-id: 
+                                                        id-expression: 
+                                                            unqualified-id: 
+                                                                TT_IDENTIFIER: TT_IDENTIFIER:c
+                                                noptr-declartor-suffix-seq: empty
+                                            ptr-operator-seq: 
+                                                00: 
+                                                    op: OP_AMP
+                                        initializer: 
+                                            initializer-clause: 
+                                                assignment-expression: 
+                                                    additive-operator: OP_PLUS
+                                                    lhs: 
+                                                        primary-expression: TT_LITERAL:2
+                                                    rhs: 
+                                                        primary-expression: TT_LITERAL:3
+                    01: 
+                        declaration-statement: 
+                            simple-declaration: 
+                                decl-specifier-seq: 
+                                    00: 
+                                        type-specifier: 
+                                            type-name: 
+                                                class-name: 
+                                                    TT_IDENTIFIER: TT_IDENTIFIER:C
+                                init-declarator-list: 
+                                    00: 
+                                        declarator: 
+                                            noptr-declarator: 
+                                                noptr-declarator-root: 
+                                                    declarator-id: 
+                                                        id-expression: 
+                                                            unqualified-id: 
+                                                                TT_IDENTIFIER: TT_IDENTIFIER:p
+                                                noptr-declartor-suffix-seq: empty
+                                            ptr-operator-seq: 
+                                                00: 
+                                                    cv-qualifier-seq: empty
+                                                    op: OP_STAR
+                                                01: 
+                                                    cv-qualifier-seq: empty
+                                                    op: OP_STAR
+                                                02: 
+                                                    cv-qualifier-seq: empty
+                                                    op: OP_STAR
+                                                03: 
+                                                    cv-qualifier-seq: empty
+                                                    op: OP_STAR
+                                        initializer: 
+                                            braced-init-list: 
+                                                initializer-list: 
+                                                    00: 
+                                                        initializer-clause: 
+                                                            assignment-expression: 
+                                                                primary-expression: TT_LITERAL:4
+                    02: 
+                        declaration-statement: 
+                            simple-declaration: 
+                                decl-specifier-seq: 
+                                    00: 
+                                        type-specifier: KW_INT
+                                init-declarator-list: 
+                                    00: 
+                                        declarator: 
+                                            noptr-declarator: 
+                                                noptr-declarator-root: 
+                                                    declarator-id: 
+                                                        id-expression: 
+                                                            unqualified-id: 
+                                                                TT_IDENTIFIER: TT_IDENTIFIER:x
+                                                noptr-declartor-suffix-seq: empty
+                                            ptr-operator-seq: empty
+                                        initializer: 
+                                            expression-list: 
+                                                00: 
+                                                    initializer-clause: 
+                                                        assignment-expression: 
+                                                            primary-expression: TT_LITERAL:3
+                    03: 
+                        declaration-statement: 
+                            simple-declaration: 
+                                decl-specifier-seq: 
+                                    00: 
+                                        type-specifier: 
+                                            type-name: 
+                                                class-name: 
+                                                    TT_IDENTIFIER: TT_IDENTIFIER:C
+                                    01: 
+                                        type-specifier: 
+                                            cv-qualifier: KW_CONST
+                                init-declarator-list: 
+                                    00: 
+                                        declarator: 
+                                            noptr-declarator: 
+                                                noptr-declarator-root: 
+                                                    declarator-id: 
+                                                        id-expression: 
+                                                            unqualified-id: 
+                                                                TT_IDENTIFIER: TT_IDENTIFIER:p
+                                                noptr-declartor-suffix-seq: empty
+                                            ptr-operator-seq: 
+                                                00: 
+                                                    cv-qualifier-seq: 
+                                                        00: KW_CONST
+                                                    op: OP_STAR
+                                                01: 
+                                                    cv-qualifier-seq: 
+                                                        00: KW_CONST
+                                                    op: OP_STAR
+                                        initializer: 
+                                            expression-list: 
+                                                00: 
+                                                    initializer-clause: 
+                                                        assignment-expression: 
+                                                            primary-expression: TT_LITERAL:4
+                    04: 
+                        declaration-statement: 
+                            simple-declaration: 
+                                decl-specifier-seq: 
+                                    00: 
+                                        type-specifier: 
+                                            cv-qualifier: KW_VOLATILE
+                                    01: 
+                                        type-specifier: 
+                                            type-name: 
+                                                class-name: 
+                                                    TT_IDENTIFIER: TT_IDENTIFIER:C
+                                init-declarator-list: 
+                                    00: 
+                                        declarator: 
+                                            noptr-declarator: 
+                                                noptr-declarator-root: 
+                                                    declarator-id: 
+                                                        id-expression: 
+                                                            unqualified-id: 
+                                                                TT_IDENTIFIER: TT_IDENTIFIER:p
+                                                noptr-declartor-suffix-seq: empty
+                                            ptr-operator-seq: 
+                                                00: 
+                                                    cv-qualifier-seq: 
+                                                        00: KW_CONST
+                                                        01: KW_VOLATILE
+                                                    op: OP_STAR
+                                                01: 
+                                                    cv-qualifier-seq: 
+                                                        00: KW_CONST
+                                                    op: OP_STAR
+                                        initializer: 
+                                            expression-list: 
+                                                00: 
+                                                    initializer-clause: 
+                                                        assignment-expression: 
+                                                            primary-expression: TT_LITERAL:4
+            virt-specifier-seq: empty

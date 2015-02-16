@@ -1,0 +1,2 @@
+recog 1
+tests/500-closing-angle-bracket-bad2.t BAD

@@ -1,0 +1,230 @@
+
+    00: 
+        function-definition: 
+            decl-specifier-seq: 
+                00: 
+                    type-specifier: KW_INT
+            declarator: 
+                noptr-declarator: 
+                    noptr-declarator-root: 
+                        declarator-id: 
+                            id-expression: 
+                                unqualified-id: 
+                                    TT_IDENTIFIER: TT_IDENTIFIER:main
+                    noptr-declartor-suffix-seq: 
+                        00: 
+                            parameters-and-qualifiers: 
+                                cv-qualifer-seq: empty
+                                parameter-declaration-clause: empty
+                ptr-operator-seq: empty
+            function-body: 
+                compound-statement: 
+                    00: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                cast-expression: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:x
+                                unary-operator: OP_DEC
+                    01: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                cast-expression: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:x
+                                unary-operator: OP_INC
+                    02: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                cast-expression: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:x
+                                unary-operator: OP_STAR
+                    03: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                cast-expression: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:x
+                                unary-operator: OP_AMP
+                    04: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                cast-expression: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:x
+                                unary-operator: OP_PLUS
+                    05: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                cast-expression: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:x
+                                unary-operator: OP_MINUS
+                    06: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                cast-expression: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:x
+                                unary-operator: OP_LNOT
+                    07: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                cast-expression: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:x
+                                unary-operator: OP_COMPL
+                    08: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                KW_SIZEOF: KW_SIZEOF
+                                unary-expression: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:x
+                    09: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                KW_SIZEOF: KW_SIZEOF
+                                unary-expression: 
+                                    cast-expression: 
+                                        primary-expression: 
+                                            id_expression: 
+                                                unqualified-id: 
+                                                    TT_IDENTIFIER: TT_IDENTIFIER:x
+                                    unary-operator: OP_LNOT
+                    10: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                KW_SIZEOF: KW_SIZEOF
+                                unary-expression: 
+                                    primary-expression: 
+                                        primary-expression: 
+                                            id_expression: 
+                                                unqualified-id: 
+                                                    TT_IDENTIFIER: TT_IDENTIFIER:x
+                    11: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                KW_SIZEOF: KW_SIZEOF
+                                OP_DOTS: OP_DOTS
+                                TT_IDENTIFIER: TT_IDENTIFIER:x
+                    12: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                KW_ALIGNOF: KW_ALIGNOF
+                                type-id: 
+                                    type-specifier-seq: 
+                                        00: KW_INT
+                    13: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                noexcept-expression: 
+                                    expression: 
+                                        primary-expression: TT_LITERAL:3
+                    14: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                new-expression: 
+                                    new-type-id: 
+                                        new-declarator: 
+                                            ptr-operator-seq: empty
+                                        type-specifier-seq: 
+                                            00: 
+                                                type-name: 
+                                                    class-name: 
+                                                        TT_IDENTIFIER: TT_IDENTIFIER:C
+                    15: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                new-expression: 
+                                    OP_COLON2: OP_COLON2
+                                    new-initializer: 
+                                        braced-init-list: 
+                                            initializer-list: 
+                                                00: 
+                                                    initializer-clause: 
+                                                        assignment-expression: 
+                                                            primary-expression: 
+                                                                id_expression: 
+                                                                    unqualified-id: 
+                                                                        TT_IDENTIFIER: TT_IDENTIFIER:foo
+                                    new-placement: 
+                                        expression-list: 
+                                            00: 
+                                                initializer-clause: 
+                                                    assignment-expression: 
+                                                        primary-expression: TT_LITERAL:3
+                                            01: 
+                                                initializer-clause: 
+                                                    assignment-expression: 
+                                                        primary-expression: TT_LITERAL:2
+                                            02: 
+                                                initializer-clause: 
+                                                    assignment-expression: 
+                                                        primary-expression: TT_LITERAL:4
+                                    new-type-id: 
+                                        new-declarator: 
+                                            ptr-operator-seq: empty
+                                        type-specifier-seq: 
+                                            00: 
+                                                type-name: 
+                                                    class-name: 
+                                                        TT_IDENTIFIER: TT_IDENTIFIER:C
+                    16: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                delete-expression: 
+                                    cast-expression: 
+                                        primary-expression: 
+                                            id_expression: 
+                                                unqualified-id: 
+                                                    TT_IDENTIFIER: TT_IDENTIFIER:x
+                    17: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                delete-expression: 
+                                    OP_COLON2: OP_COLON2
+                                    OP_LSQUARE: OP_LSQUARE
+                                    cast-expression: 
+                                        primary-expression: 
+                                            id_expression: 
+                                                unqualified-id: 
+                                                    TT_IDENTIFIER: TT_IDENTIFIER:x
+            virt-specifier-seq: empty

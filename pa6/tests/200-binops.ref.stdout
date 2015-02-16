@@ -1,0 +1,417 @@
+
+    00: 
+        function-definition: 
+            decl-specifier-seq: 
+                00: 
+                    type-specifier: KW_INT
+            declarator: 
+                noptr-declarator: 
+                    noptr-declarator-root: 
+                        declarator-id: 
+                            id-expression: 
+                                unqualified-id: 
+                                    TT_IDENTIFIER: TT_IDENTIFIER:main
+                    noptr-declartor-suffix-seq: 
+                        00: 
+                            parameters-and-qualifiers: 
+                                cv-qualifer-seq: empty
+                                parameter-declaration-clause: empty
+                ptr-operator-seq: empty
+            function-body: 
+                compound-statement: 
+                    00: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                lhs: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:x
+                                multiplicative-operator: OP_STAR
+                                rhs: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:y
+                    01: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                lhs: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:x
+                                multiplicative-operator: OP_MOD
+                                rhs: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:y
+                    02: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                lhs: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:x
+                                multiplicative-operator: OP_DIV
+                                rhs: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:y
+                    03: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                additive-operator: OP_PLUS
+                                lhs: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:x
+                                rhs: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:y
+                    04: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                additive-operator: OP_MINUS
+                                lhs: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:x
+                                rhs: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:y
+                    05: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                additive-operator: OP_PLUS
+                                lhs: 
+                                    additive-operator: OP_PLUS
+                                    lhs: 
+                                        primary-expression: 
+                                            id_expression: 
+                                                unqualified-id: 
+                                                    TT_IDENTIFIER: TT_IDENTIFIER:x
+                                    rhs: 
+                                        lhs: 
+                                            primary-expression: 
+                                                id_expression: 
+                                                    unqualified-id: 
+                                                        TT_IDENTIFIER: TT_IDENTIFIER:y
+                                        multiplicative-operator: OP_STAR
+                                        rhs: 
+                                            primary-expression: 
+                                                id_expression: 
+                                                    unqualified-id: 
+                                                        TT_IDENTIFIER: TT_IDENTIFIER:z
+                                rhs: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:w
+                    06: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                lhs: 
+                                    primary-expression: 
+                                        additive-operator: OP_PLUS
+                                        lhs: 
+                                            primary-expression: 
+                                                id_expression: 
+                                                    unqualified-id: 
+                                                        TT_IDENTIFIER: TT_IDENTIFIER:x
+                                        rhs: 
+                                            primary-expression: 
+                                                id_expression: 
+                                                    unqualified-id: 
+                                                        TT_IDENTIFIER: TT_IDENTIFIER:y
+                                multiplicative-operator: OP_STAR
+                                rhs: 
+                                    primary-expression: 
+                                        additive-operator: OP_PLUS
+                                        lhs: 
+                                            primary-expression: 
+                                                id_expression: 
+                                                    unqualified-id: 
+                                                        TT_IDENTIFIER: TT_IDENTIFIER:z
+                                        rhs: 
+                                            primary-expression: 
+                                                id_expression: 
+                                                    unqualified-id: 
+                                                        TT_IDENTIFIER: TT_IDENTIFIER:w
+                    07: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                lhs: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:x
+                                rhs: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:y
+                                shift-operator: OP_LSHIFT
+                    08: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                lhs: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:x
+                                rhs: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:y
+                                shift-operator: 
+                                    OP_RSHIFT: ST_RSHIFT_1
+                    09: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                lhs: 
+                                    lhs: 
+                                        primary-expression: 
+                                            id_expression: 
+                                                unqualified-id: 
+                                                    TT_IDENTIFIER: TT_IDENTIFIER:x
+                                    multiplicative-operator: OP_STAR
+                                    rhs: 
+                                        primary-expression: 
+                                            id_expression: 
+                                                unqualified-id: 
+                                                    TT_IDENTIFIER: TT_IDENTIFIER:y
+                                rhs: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:z
+                                shift-operator: OP_LSHIFT
+                    10: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                lhs: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:x
+                                relational-operator: OP_LT
+                                rhs: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:y
+                    11: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                lhs: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:x
+                                relational-operator: OP_GT
+                                rhs: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:y
+                    12: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                lhs: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:x
+                                relational-operator: OP_LE
+                                rhs: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:y
+                    13: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                lhs: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:x
+                                relational-operator: OP_GE
+                                rhs: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:y
+                    14: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                lhs: 
+                                    additive-operator: OP_PLUS
+                                    lhs: 
+                                        primary-expression: 
+                                            id_expression: 
+                                                unqualified-id: 
+                                                    TT_IDENTIFIER: TT_IDENTIFIER:x
+                                    rhs: 
+                                        primary-expression: 
+                                            id_expression: 
+                                                unqualified-id: 
+                                                    TT_IDENTIFIER: TT_IDENTIFIER:y
+                                relational-operator: OP_GT
+                                rhs: 
+                                    lhs: 
+                                        primary-expression: 
+                                            id_expression: 
+                                                unqualified-id: 
+                                                    TT_IDENTIFIER: TT_IDENTIFIER:x
+                                    multiplicative-operator: OP_STAR
+                                    rhs: 
+                                        primary-expression: 
+                                            id_expression: 
+                                                unqualified-id: 
+                                                    TT_IDENTIFIER: TT_IDENTIFIER:z
+                    15: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                equality-operator: OP_EQ
+                                lhs: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:x
+                                rhs: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:y
+                    16: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                equality-operator: OP_NE
+                                lhs: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:x
+                                rhs: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:y
+                    17: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                equality-operator: OP_EQ
+                                lhs: 
+                                    lhs: 
+                                        primary-expression: 
+                                            id_expression: 
+                                                unqualified-id: 
+                                                    TT_IDENTIFIER: TT_IDENTIFIER:x
+                                    relational-operator: OP_LE
+                                    rhs: 
+                                        primary-expression: 
+                                            id_expression: 
+                                                unqualified-id: 
+                                                    TT_IDENTIFIER: TT_IDENTIFIER:y
+                                rhs: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:z
+                    18: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                inclusive-or-operator: OP_BOR
+                                lhs: 
+                                    exclusive-or-operator: OP_XOR
+                                    lhs: 
+                                        primary-expression: 
+                                            id_expression: 
+                                                unqualified-id: 
+                                                    TT_IDENTIFIER: TT_IDENTIFIER:x
+                                    rhs: 
+                                        and-operator: OP_AMP
+                                        lhs: 
+                                            primary-expression: 
+                                                id_expression: 
+                                                    unqualified-id: 
+                                                        TT_IDENTIFIER: TT_IDENTIFIER:y
+                                        rhs: 
+                                            primary-expression: 
+                                                id_expression: 
+                                                    unqualified-id: 
+                                                        TT_IDENTIFIER: TT_IDENTIFIER:z
+                                rhs: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:w
+                    19: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                lhs: 
+                                    exclusive-or-operator: OP_XOR
+                                    lhs: 
+                                        primary-expression: 
+                                            id_expression: 
+                                                unqualified-id: 
+                                                    TT_IDENTIFIER: TT_IDENTIFIER:x
+                                    rhs: 
+                                        primary-expression: 
+                                            id_expression: 
+                                                unqualified-id: 
+                                                    TT_IDENTIFIER: TT_IDENTIFIER:y
+                                logical-and-operator: OP_LAND
+                                rhs: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:z
+                    20: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                lhs: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:x
+                                logical-or-operator: OP_LOR
+                                rhs: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:y
+            virt-specifier-seq: empty

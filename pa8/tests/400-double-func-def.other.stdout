@@ -1,0 +1,7 @@
+tests/400-double-func-def.t.1:2:6: error: redefinition of 'f'
+void f() {}
+     ^
+tests/400-double-func-def.t.1:1:6: note: previous definition is here
+void f() {}
+     ^
+1 error generated.

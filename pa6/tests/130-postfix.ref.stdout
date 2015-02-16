@@ -1,0 +1,207 @@
+
+    00: 
+        function-definition: 
+            decl-specifier-seq: 
+                00: 
+                    type-specifier: KW_INT
+            declarator: 
+                noptr-declarator: 
+                    noptr-declarator-root: 
+                        declarator-id: 
+                            id-expression: 
+                                unqualified-id: 
+                                    TT_IDENTIFIER: TT_IDENTIFIER:main
+                    noptr-declartor-suffix-seq: 
+                        00: 
+                            parameters-and-qualifiers: 
+                                cv-qualifer-seq: empty
+                                parameter-declaration-clause: empty
+                ptr-operator-seq: empty
+            function-body: 
+                compound-statement: 
+                    00: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                additive-operator: OP_PLUS
+                                lhs: 
+                                    primary-expression: TT_LITERAL:2
+                                rhs: 
+                                    expression-list: 
+                                        00: 
+                                            initializer-clause: 
+                                                assignment-expression: 
+                                                    primary-expression: TT_LITERAL:'a'
+                                    simple-type-specifier: KW_INT
+                    01: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                additive-operator: OP_PLUS
+                                lhs: 
+                                    primary-expression: TT_LITERAL:2
+                                rhs: 
+                                    expression-list: 
+                                        00: 
+                                            initializer-clause: 
+                                                assignment-expression: 
+                                                    primary-expression: TT_LITERAL:123
+                                    typename-specifier: 
+                                        identifier: TT_IDENTIFIER:bar
+                                        nested-name-specifier: 
+                                            nested-name-specifier-root: 
+                                                type-name: 
+                                                    class-name: 
+                                                        TT_IDENTIFIER: TT_IDENTIFIER:Cfoo
+                                            nested-name-specififier-suffix-seq: empty
+                    02: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                additive-operator: OP_PLUS
+                                lhs: 
+                                    primary-expression: TT_LITERAL:2
+                                rhs: 
+                                    braced-init-list: 
+                                        initializer-list: 
+                                            00: 
+                                                initializer-clause: 
+                                                    assignment-expression: 
+                                                        primary-expression: TT_LITERAL:2
+                                            01: 
+                                                initializer-clause: 
+                                                    assignment-expression: 
+                                                        primary-expression: TT_LITERAL:3
+                                            02: 
+                                                initializer-clause: 
+                                                    assignment-expression: 
+                                                        primary-expression: TT_LITERAL:4
+                                    simple-type-specifier: KW_INT
+                    03: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                additive-operator: OP_PLUS
+                                lhs: 
+                                    primary-expression: TT_LITERAL:2
+                                rhs: 
+                                    expression-list: 
+                                        00: 
+                                            initializer-clause: 
+                                                assignment-expression: 
+                                                    primary-expression: TT_LITERAL:"baz"
+                                    typename-specifier: 
+                                        identifier: TT_IDENTIFIER:bar
+                                        nested-name-specifier: 
+                                            nested-name-specifier-root: 
+                                                OP_COLON2: OP_COLON2
+                                                namespace-name: TT_IDENTIFIER:Nfoo
+                                            nested-name-specififier-suffix-seq: empty
+                    04: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                cast: KW_DYNAMIC_CAST
+                                expression: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:q
+                                type-id: 
+                                    abstract-declarator: 
+                                        ptr-abstract-declarator: 
+                                            ptr-operator-seq: 
+                                                00: 
+                                                    cv-qualifier-seq: empty
+                                                    op: OP_STAR
+                                    type-specifier-seq: 
+                                        00: 
+                                            type-name: 
+                                                class-name: 
+                                                    TT_IDENTIFIER: TT_IDENTIFIER:C
+                    05: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                cast: KW_STATIC_CAST
+                                expression: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:q
+                                type-id: 
+                                    abstract-declarator: 
+                                        ptr-abstract-declarator: 
+                                            ptr-operator-seq: 
+                                                00: 
+                                                    cv-qualifier-seq: empty
+                                                    op: OP_STAR
+                                    type-specifier-seq: 
+                                        00: 
+                                            type-name: 
+                                                class-name: 
+                                                    TT_IDENTIFIER: TT_IDENTIFIER:C
+                    06: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                cast: KW_REINTERPET_CAST
+                                expression: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:q
+                                type-id: 
+                                    abstract-declarator: 
+                                        ptr-abstract-declarator: 
+                                            ptr-operator-seq: 
+                                                00: 
+                                                    cv-qualifier-seq: empty
+                                                    op: OP_STAR
+                                    type-specifier-seq: 
+                                        00: 
+                                            type-name: 
+                                                class-name: 
+                                                    TT_IDENTIFIER: TT_IDENTIFIER:C
+                    07: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                cast: KW_CONST_CAST
+                                expression: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:q
+                                type-id: 
+                                    abstract-declarator: 
+                                        ptr-abstract-declarator: 
+                                            ptr-operator-seq: 
+                                                00: 
+                                                    cv-qualifier-seq: empty
+                                                    op: OP_STAR
+                                    type-specifier-seq: 
+                                        00: 
+                                            type-name: 
+                                                class-name: 
+                                                    TT_IDENTIFIER: TT_IDENTIFIER:C
+                    08: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                KW_TYPEID: KW_TYPEID
+                                expression: 
+                                    additive-operator: OP_PLUS
+                                    lhs: 
+                                        primary-expression: TT_LITERAL:2
+                                    rhs: 
+                                        primary-expression: TT_LITERAL:3
+                    09: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                KW_TYPEID: KW_TYPEID
+                                type-id: 
+                                    type-specifier-seq: 
+                                        00: KW_INT
+            virt-specifier-seq: empty

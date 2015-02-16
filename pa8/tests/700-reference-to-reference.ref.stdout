@@ -1,0 +1,5 @@
+LINKING: variable v SP_CONST LK_INTERNAL const unsigned long int initializer=(CopyInitializer (LiteralExpression (TT_LITERAL:42))) initializer_expression=(Immediate (VC_PRVALUE unsigned long int 2A00000000000000)) is_constant = 1
+LINKING: variable x SP_CONST LK_EXTERNAL lvalue-reference to const unsigned long int initializer=(CopyInitializer (IdExpression (v))) initializer_expression=(VariableExpression (VC_LVALUE const unsigned long int v)) is_constant = 1
+LINKING: variable y SP_CONST LK_EXTERNAL lvalue-reference to const unsigned long int initializer=(CopyInitializer (IdExpression (x))) initializer_expression=(VariableExpression (VC_LVALUE const unsigned long int x)) is_constant = 1
+LINKING: variable arr SP_SHORT|SP_INT|SP_UNSIGNED LK_EXTERNAL array of 42 pointer to unsigned short int initializer=(DefaultInitializer) initializer_expression=(null) is_constant = 0
+LINKING: function main SP_INT function of () returning int defined=1

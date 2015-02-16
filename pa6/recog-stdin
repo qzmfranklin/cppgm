@@ -1,0 +1,11 @@
+#!/bin/sh
+
+in=$(tempfile) || exit
+out=$(tempfile) || exit
+
+cat > $in
+
+./recog -o $out $in
+
+cat $out
+

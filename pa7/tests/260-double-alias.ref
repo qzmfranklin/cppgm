@@ -1,0 +1,8 @@
+1 translation units
+start translation unit tests/260-double-alias.t
+start unnamed namespace
+start namespace Company_with_very_long_name
+variable i int
+end namespace
+end namespace
+end translation unit

@@ -1,0 +1,108 @@
+ERROR: malformed number (#2): 2147483647l_ud1
+ERROR: malformed number (#2): 2147483647L_ud1
+ERROR: malformed number (#2): 2147483647ll_ud1
+ERROR: malformed number (#2): 2147483647LL_ud1
+ERROR: malformed number (#2): 2147483646l_ud1
+ERROR: malformed number (#2): 2147483646L_ud1
+ERROR: malformed number (#2): 2147483646ll_ud1
+ERROR: malformed number (#2): 2147483646LL_ud1
+ERROR: malformed number (#2): 2147483648l_ud1
+ERROR: malformed number (#2): 2147483648L_ud1
+ERROR: malformed number (#2): 2147483648ll_ud1
+ERROR: malformed number (#2): 2147483648LL_ud1
+ERROR: malformed number (#2): 4294967295l_ud1
+ERROR: malformed number (#2): 4294967295L_ud1
+ERROR: malformed number (#2): 4294967295ll_ud1
+ERROR: malformed number (#2): 4294967295LL_ud1
+ERROR: malformed number (#2): 4294967294l_ud1
+ERROR: malformed number (#2): 4294967294L_ud1
+ERROR: malformed number (#2): 4294967294ll_ud1
+ERROR: malformed number (#2): 4294967294LL_ud1
+ERROR: malformed number (#2): 4294967296l_ud1
+ERROR: malformed number (#2): 4294967296L_ud1
+ERROR: malformed number (#2): 4294967296ll_ud1
+ERROR: malformed number (#2): 4294967296LL_ud1
+ERROR: malformed number (#2): 9223372036854775807l_ud1
+ERROR: malformed number (#2): 9223372036854775807L_ud1
+ERROR: malformed number (#2): 9223372036854775807ll_ud1
+ERROR: malformed number (#2): 9223372036854775807LL_ud1
+ERROR: malformed number (#2): 9223372036854775806l_ud1
+ERROR: malformed number (#2): 9223372036854775806L_ud1
+ERROR: malformed number (#2): 9223372036854775806ll_ud1
+ERROR: malformed number (#2): 9223372036854775806LL_ud1
+ERROR: decimal integer literal out of range(#4): 9223372036854775808
+ERROR: decimal integer literal out of range(#4): 9223372036854775808
+ERROR: decimal integer literal out of range(#4): 9223372036854775808
+ERROR: decimal integer literal out of range(#4): 9223372036854775808
+ERROR: decimal integer literal out of range(#4): 9223372036854775808
+ERROR: decimal integer literal out of range(#4): 9223372036854775808
+ERROR: decimal integer literal out of range(#4): 9223372036854775808
+ERROR: decimal integer literal out of range(#4): 9223372036854775808
+ERROR: decimal integer literal out of range(#4): 9223372036854775808
+ERROR: decimal integer literal out of range(#4): 9223372036854775808
+ERROR: malformed number (#2): 9223372036854775808l_ud1
+ERROR: malformed number (#2): 9223372036854775808L_ud1
+ERROR: malformed number (#2): 9223372036854775808ll_ud1
+ERROR: malformed number (#2): 9223372036854775808LL_ud1
+ERROR: decimal integer literal out of range(#4): 18446744073709551615
+ERROR: decimal integer literal out of range(#4): 18446744073709551615
+ERROR: decimal integer literal out of range(#4): 18446744073709551615
+ERROR: decimal integer literal out of range(#4): 18446744073709551615
+ERROR: decimal integer literal out of range(#4): 18446744073709551615
+ERROR: decimal integer literal out of range(#4): 18446744073709551615
+ERROR: decimal integer literal out of range(#4): 18446744073709551615
+ERROR: decimal integer literal out of range(#4): 18446744073709551615
+ERROR: decimal integer literal out of range(#4): 18446744073709551615
+ERROR: decimal integer literal out of range(#4): 18446744073709551615
+ERROR: malformed number (#2): 18446744073709551615l_ud1
+ERROR: malformed number (#2): 18446744073709551615L_ud1
+ERROR: malformed number (#2): 18446744073709551615ll_ud1
+ERROR: malformed number (#2): 18446744073709551615LL_ud1
+ERROR: decimal integer literal out of range(#4): 18446744073709551614
+ERROR: decimal integer literal out of range(#4): 18446744073709551614
+ERROR: decimal integer literal out of range(#4): 18446744073709551614
+ERROR: decimal integer literal out of range(#4): 18446744073709551614
+ERROR: decimal integer literal out of range(#4): 18446744073709551614
+ERROR: decimal integer literal out of range(#4): 18446744073709551614
+ERROR: decimal integer literal out of range(#4): 18446744073709551614
+ERROR: decimal integer literal out of range(#4): 18446744073709551614
+ERROR: decimal integer literal out of range(#4): 18446744073709551614
+ERROR: decimal integer literal out of range(#4): 18446744073709551614
+ERROR: malformed number (#2): 18446744073709551614l_ud1
+ERROR: malformed number (#2): 18446744073709551614L_ud1
+ERROR: malformed number (#2): 18446744073709551614ll_ud1
+ERROR: malformed number (#2): 18446744073709551614LL_ud1
+ERROR: decimal integer literal out of range(#2): 18446744073709551616
+ERROR: decimal integer literal out of range(#2): 18446744073709551616
+ERROR: decimal integer literal out of range(#2): 18446744073709551616
+ERROR: decimal integer literal out of range(#2): 18446744073709551616
+ERROR: decimal integer literal out of range(#2): 18446744073709551616
+ERROR: decimal integer literal out of range(#2): 18446744073709551616
+ERROR: decimal integer literal out of range(#2): 18446744073709551616
+ERROR: decimal integer literal out of range(#2): 18446744073709551616
+ERROR: decimal integer literal out of range(#2): 18446744073709551616
+ERROR: decimal integer literal out of range(#2): 18446744073709551616
+ERROR: decimal integer literal out of range(#2): 18446744073709551616
+ERROR: decimal integer literal out of range(#2): 18446744073709551616
+ERROR: decimal integer literal out of range(#2): 18446744073709551616
+ERROR: decimal integer literal out of range(#2): 18446744073709551616
+ERROR: decimal integer literal out of range(#2): 18446744073709551616
+ERROR: decimal integer literal out of range(#2): 18446744073709551616
+ERROR: decimal integer literal out of range(#2): 18446744073709551616
+ERROR: decimal integer literal out of range(#2): 18446744073709551616
+ERROR: decimal integer literal out of range(#2): 18446744073709551616
+ERROR: decimal integer literal out of range(#2): 18446744073709551616
+ERROR: decimal integer literal out of range(#2): 18446744073709551616
+ERROR: decimal integer literal out of range(#2): 18446744073709551616
+ERROR: decimal integer literal out of range(#2): 18446744073709551616
+ERROR: decimal integer literal out of range(#2): 18446744073709551616
+ERROR: decimal integer literal out of range(#2): 18446744073709551616
+ERROR: decimal integer literal out of range(#2): 18446744073709551616
+ERROR: decimal integer literal out of range(#2): 18446744073709551616
+ERROR: decimal integer literal out of range(#2): 18446744073709551616
+ERROR: decimal integer literal out of range(#2): 18446744073709551616
+ERROR: decimal integer literal out of range(#2): 18446744073709551616
+ERROR: malformed number (#2): 18446744073709551616l_ud1
+ERROR: malformed number (#2): 18446744073709551616L_ud1
+ERROR: malformed number (#2): 18446744073709551616ll_ud1
+ERROR: malformed number (#2): 18446744073709551616LL_ud1

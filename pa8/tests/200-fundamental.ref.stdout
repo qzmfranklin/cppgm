@@ -1,0 +1,19 @@
+LINKING: variable c SP_CHAR LK_EXTERNAL char initializer=(CopyInitializer (LiteralExpression (TT_LITERAL:'a'))) initializer_expression=(Immediate (VC_PRVALUE char 61)) is_constant = 0
+LINKING: variable c16 SP_CHAR16_T LK_EXTERNAL char16_t initializer=(CopyInitializer (LiteralExpression (TT_LITERAL:u'π'))) initializer_expression=(Immediate (VC_PRVALUE char16_t C003)) is_constant = 0
+LINKING: variable c32 SP_CHAR32_T LK_EXTERNAL char32_t initializer=(CopyInitializer (LiteralExpression (TT_LITERAL:U'𝄞'))) initializer_expression=(Immediate (VC_PRVALUE char32_t 1ED10100)) is_constant = 0
+LINKING: variable cw SP_WCHAR_T LK_EXTERNAL wchar_t initializer=(CopyInitializer (LiteralExpression (TT_LITERAL:L'𝄞'))) initializer_expression=(Immediate (VC_PRVALUE wchar_t 1ED10100)) is_constant = 0
+LINKING: variable sc SP_CHAR|SP_SIGNED LK_EXTERNAL signed char initializer=(CopyInitializer (LiteralExpression (TT_LITERAL:1))) initializer_expression=(Immediate (VC_PRVALUE signed char 01)) is_constant = 0
+LINKING: variable si SP_SHORT|SP_INT LK_EXTERNAL short int initializer=(CopyInitializer (LiteralExpression (TT_LITERAL:2))) initializer_expression=(Immediate (VC_PRVALUE short int 0200)) is_constant = 0
+LINKING: variable i SP_INT LK_EXTERNAL int initializer=(CopyInitializer (LiteralExpression (TT_LITERAL:3))) initializer_expression=(Immediate (VC_PRVALUE int 03000000)) is_constant = 0
+LINKING: variable li SP_LONG_1|SP_INT LK_EXTERNAL long int initializer=(CopyInitializer (LiteralExpression (TT_LITERAL:4))) initializer_expression=(Immediate (VC_PRVALUE long int 0400000000000000)) is_constant = 0
+LINKING: variable lli SP_LONG_2|SP_INT LK_EXTERNAL long long int initializer=(CopyInitializer (LiteralExpression (TT_LITERAL:5))) initializer_expression=(Immediate (VC_PRVALUE long long int 0500000000000000)) is_constant = 0
+LINKING: variable uc SP_CHAR|SP_UNSIGNED LK_EXTERNAL unsigned char initializer=(CopyInitializer (LiteralExpression (TT_LITERAL:6))) initializer_expression=(Immediate (VC_PRVALUE unsigned char 06)) is_constant = 0
+LINKING: variable usi SP_SHORT|SP_INT|SP_UNSIGNED LK_EXTERNAL unsigned short int initializer=(CopyInitializer (LiteralExpression (TT_LITERAL:7))) initializer_expression=(Immediate (VC_PRVALUE unsigned short int 0700)) is_constant = 0
+LINKING: variable ui SP_INT|SP_UNSIGNED LK_EXTERNAL unsigned int initializer=(CopyInitializer (LiteralExpression (TT_LITERAL:8))) initializer_expression=(Immediate (VC_PRVALUE unsigned int 08000000)) is_constant = 0
+LINKING: variable uli SP_LONG_1|SP_INT|SP_UNSIGNED LK_EXTERNAL unsigned long int initializer=(CopyInitializer (LiteralExpression (TT_LITERAL:9))) initializer_expression=(Immediate (VC_PRVALUE unsigned long int 0900000000000000)) is_constant = 0
+LINKING: variable ulli SP_LONG_2|SP_INT|SP_UNSIGNED LK_EXTERNAL unsigned long long int initializer=(CopyInitializer (LiteralExpression (TT_LITERAL:10))) initializer_expression=(Immediate (VC_PRVALUE unsigned long long int 0A00000000000000)) is_constant = 0
+LINKING: variable f SP_FLOAT LK_EXTERNAL float initializer=(CopyInitializer (LiteralExpression (TT_LITERAL:2.0))) initializer_expression=(Immediate (VC_PRVALUE float 00000040)) is_constant = 0
+LINKING: variable d SP_DOUBLE LK_EXTERNAL double initializer=(CopyInitializer (LiteralExpression (TT_LITERAL:2.0))) initializer_expression=(Immediate (VC_PRVALUE double 0000000000000040)) is_constant = 0
+LINKING: variable ld SP_LONG_1|SP_DOUBLE LK_EXTERNAL long double initializer=(DefaultInitializer) initializer_expression=(null) is_constant = 0
+LINKING: variable p SP_VOID LK_EXTERNAL pointer to void initializer=(DefaultInitializer) initializer_expression=(null) is_constant = 0
+LINKING: function main SP_INT function of () returning int defined=1

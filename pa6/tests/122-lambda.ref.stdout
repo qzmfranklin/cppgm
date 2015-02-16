@@ -1,0 +1,174 @@
+
+    00: 
+        function-definition: 
+            decl-specifier-seq: 
+                00: 
+                    type-specifier: KW_INT
+            declarator: 
+                noptr-declarator: 
+                    noptr-declarator-root: 
+                        declarator-id: 
+                            id-expression: 
+                                unqualified-id: 
+                                    TT_IDENTIFIER: TT_IDENTIFIER:main
+                    noptr-declartor-suffix-seq: 
+                        00: 
+                            parameters-and-qualifiers: 
+                                cv-qualifer-seq: empty
+                                parameter-declaration-clause: empty
+                ptr-operator-seq: empty
+            function-body: 
+                compound-statement: 
+                    00: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                primary-expression: 
+                                    lambda-expression: 
+                                        compound-statement: empty
+                                        lambda-introducer: 
+                                            lambda-capture: empty
+                    01: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                primary-expression: 
+                                    lambda-expression: 
+                                        compound-statement: empty
+                                        lambda-introducer: 
+                                            lambda-capture: 
+                                                capture-default: OP_ASS
+                    02: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                primary-expression: 
+                                    lambda-expression: 
+                                        compound-statement: empty
+                                        lambda-introducer: 
+                                            lambda-capture: 
+                                                capture-default: OP_AMP
+                    03: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                primary-expression: 
+                                    lambda-expression: 
+                                        compound-statement: empty
+                                        lambda-introducer: 
+                                            lambda-capture: 
+                                                capture-list: 
+                                                    00: 
+                                                        capture: 
+                                                            TT_IDENTIFIER: TT_IDENTIFIER:x
+                                                    01: 
+                                                        capture: 
+                                                            OP_AMP: OP_AMP
+                                                            TT_IDENTIFIER: TT_IDENTIFIER:y
+                    04: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                primary-expression: 
+                                    lambda-expression: 
+                                        compound-statement: empty
+                                        lambda-introducer: 
+                                            lambda-capture: 
+                                                capture-default: OP_AMP
+                                                capture-list: 
+                                                    00: 
+                                                        capture: 
+                                                            TT_IDENTIFIER: TT_IDENTIFIER:x
+                                                    01: 
+                                                        capture: 
+                                                            OP_AMP: OP_AMP
+                                                            TT_IDENTIFIER: TT_IDENTIFIER:y
+                    05: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                primary-expression: 
+                                    lambda-expression: 
+                                        compound-statement: empty
+                                        lambda-introducer: 
+                                            lambda-capture: 
+                                                capture-default: OP_AMP
+                                                capture-list: 
+                                                    00: 
+                                                        OP_DOTS: OP_DOTS
+                                                        capture: 
+                                                            TT_IDENTIFIER: TT_IDENTIFIER:x
+                                                    01: 
+                                                        OP_DOTS: OP_DOTS
+                                                        capture: 
+                                                            OP_AMP: OP_AMP
+                                                            TT_IDENTIFIER: TT_IDENTIFIER:y
+                                                    02: 
+                                                        capture: KW_THIS
+                    06: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                primary-expression: 
+                                    lambda-expression: 
+                                        compound-statement: empty
+                                        lambda-declarator: 
+                                            parameter-declaration-clause: empty
+                                        lambda-introducer: 
+                                            lambda-capture: empty
+                    07: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                primary-expression: 
+                                    lambda-expression: 
+                                        compound-statement: empty
+                                        lambda-declarator: 
+                                            parameter-declaration-clause: 
+                                                parameter-declaration-list: 
+                                                    00: 
+                                                        decl-specifier-seq: 
+                                                            00: 
+                                                                type-specifier: KW_INT
+                                                        declarator: 
+                                                            noptr-declarator: 
+                                                                noptr-declarator-root: 
+                                                                    declarator-id: 
+                                                                        id-expression: 
+                                                                            unqualified-id: 
+                                                                                TT_IDENTIFIER: TT_IDENTIFIER:x
+                                                                noptr-declartor-suffix-seq: empty
+                                                            ptr-operator-seq: empty
+                                        lambda-introducer: 
+                                            lambda-capture: empty
+                    08: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                primary-expression: 
+                                    lambda-expression: 
+                                        compound-statement: empty
+                                        lambda-declarator: 
+                                            parameter-declaration-clause: 
+                                                OP_COMMA: OP_COMMA
+                                                OP_DOTS: OP_DOTS
+                                                parameter-declaration-list: 
+                                                    00: 
+                                                        decl-specifier-seq: 
+                                                            00: 
+                                                                type-specifier: 
+                                                                    type-name: 
+                                                                        class-name: 
+                                                                            TT_IDENTIFIER: TT_IDENTIFIER:C
+                                                        declarator: 
+                                                            noptr-declarator: 
+                                                                noptr-declarator-root: 
+                                                                    declarator-id: 
+                                                                        id-expression: 
+                                                                            unqualified-id: 
+                                                                                TT_IDENTIFIER: TT_IDENTIFIER:y
+                                                                noptr-declartor-suffix-seq: empty
+                                                            ptr-operator-seq: empty
+                                        lambda-introducer: 
+                                            lambda-capture: empty
+            virt-specifier-seq: empty

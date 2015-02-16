@@ -1,0 +1,3 @@
+LINKING: function f SP_VOID function of () returning void defined=1
+LINKING: variable p SP_VOID LK_EXTERNAL pointer to function of () returning void initializer=(CopyInitializer (IdExpression (f))) initializer_expression=(FunctionAddress (VC_PRVALUE pointer to function of () returning void f)) is_constant = 0
+LINKING: function main SP_INT function of () returning int defined=1

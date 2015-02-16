@@ -1,0 +1,23 @@
+simple int KW_INT
+identifier j
+simple [ OP_LSQUARE
+simple ] OP_RSQUARE
+simple = OP_ASS
+simple { OP_LBRACE
+literal 123 int 7B000000
+simple , OP_COMMA
+literal 45 int 2D000000
+simple , OP_COMMA
+literal 67 int 43000000
+simple , OP_COMMA
+literal 89 int 59000000
+simple , OP_COMMA
+literal 10 int 0A000000
+simple , OP_COMMA
+literal 11 int 0B000000
+simple , OP_COMMA
+literal 12 int 0C000000
+simple , OP_COMMA
+simple } OP_RBRACE
+simple ; OP_SEMICOLON
+eof

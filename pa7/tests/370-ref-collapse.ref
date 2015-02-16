@@ -1,0 +1,6 @@
+1 translation units
+start translation unit tests/370-ref-collapse.t
+start unnamed namespace
+function f function of (lvalue-reference to int, lvalue-reference to int, lvalue-reference to int, lvalue-reference to int, rvalue-reference to int) returning void
+end namespace
+end translation unit

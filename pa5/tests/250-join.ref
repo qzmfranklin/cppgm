@@ -1,0 +1,9 @@
+preproc 1
+sof tests/250-join.t
+literal 23 int 17000000
+simple , OP_COMMA
+literal 4 int 04000000
+simple , OP_COMMA
+literal 5 int 05000000
+simple , OP_COMMA
+eof

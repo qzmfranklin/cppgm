@@ -1,0 +1,7 @@
+preproc 1
+sof tests/200-include.t
+identifier bar
+identifier foo
+identifier baz
+identifier foo
+eof

@@ -1,0 +1,4 @@
+ERROR: UTF-16 char literal out of range: u'𝄞' 119070
+ERROR: UTF-16 char literal out of range: u'𝄞' 119070
+ERROR: UTF-16 char literal out of range: u'\x1D11E' 119070
+ERROR: multi code point character literals not supported: 'abc'

@@ -1,0 +1,18 @@
+#include "io.inl"
+
+start:
+	call iobegin;
+
+	move64 bp sp;
+	isub64 sp sp 24;
+	move64 [bp-8]  [outbuf_begin];
+	move64 [bp-16] [inbuf_begin];
+	move64 [bp-24] [inbuf_len];
+	call memcpy;
+	iadd64 sp sp 24;
+
+	move64 [outbuf_len] [inbuf_len];
+	iadd64 [outbuf_end] [outbuf_end] [inbuf_len];
+
+	call ioend;
+

@@ -1,0 +1,4 @@
+preproc 1
+sof tests/500-tricky-join.t
+literal "x ## y" array of 7 char 78202323207900
+eof

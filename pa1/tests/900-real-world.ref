@@ -1,0 +1,1054 @@
+whitespace-sequence 0 
+new-line 0 
+preprocessing-op-or-punc 1 #
+identifier 7 include
+whitespace-sequence 0 
+header-name 9 <stdio.h>
+new-line 0 
+preprocessing-op-or-punc 1 #
+identifier 7 include
+whitespace-sequence 0 
+header-name 10 <stdlib.h>
+whitespace-sequence 0 
+new-line 0 
+preprocessing-op-or-punc 1 #
+identifier 6 define
+whitespace-sequence 0 
+identifier 4 TRUE
+whitespace-sequence 0 
+pp-number 1 1
+new-line 0 
+preprocessing-op-or-punc 1 #
+identifier 6 define
+whitespace-sequence 0 
+identifier 5 FALSE
+whitespace-sequence 0 
+pp-number 1 0
+new-line 0 
+identifier 3 int
+whitespace-sequence 0 
+identifier 12 get_day_code
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 (
+identifier 3 int
+whitespace-sequence 0 
+identifier 4 year
+preprocessing-op-or-punc 1 )
+preprocessing-op-or-punc 1 ;
+new-line 0 
+identifier 3 int
+whitespace-sequence 0 
+identifier 13 get_leap_year
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 (
+identifier 3 int
+whitespace-sequence 0 
+identifier 4 year
+preprocessing-op-or-punc 1 )
+preprocessing-op-or-punc 1 ;
+new-line 0 
+identifier 4 void
+whitespace-sequence 0 
+identifier 14 print_calendar
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 (
+identifier 4 FILE
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 *
+identifier 4 fout
+preprocessing-op-or-punc 1 ,
+whitespace-sequence 0 
+identifier 3 int
+whitespace-sequence 0 
+identifier 4 year
+preprocessing-op-or-punc 1 ,
+whitespace-sequence 0 
+identifier 3 int
+whitespace-sequence 0 
+identifier 8 day_code
+preprocessing-op-or-punc 1 ,
+whitespace-sequence 0 
+identifier 3 int
+whitespace-sequence 0 
+identifier 9 leap_year
+preprocessing-op-or-punc 1 )
+preprocessing-op-or-punc 1 ;
+new-line 0 
+identifier 3 int
+whitespace-sequence 0 
+identifier 8 get_year
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 (
+identifier 4 void
+preprocessing-op-or-punc 1 )
+preprocessing-op-or-punc 1 ;
+new-line 0 
+identifier 4 main
+preprocessing-op-or-punc 1 (
+preprocessing-op-or-punc 1 )
+new-line 0 
+preprocessing-op-or-punc 1 {
+new-line 0 
+whitespace-sequence 0 
+new-line 0 
+whitespace-sequence 0 
+identifier 3 int
+whitespace-sequence 0 
+identifier 4 year
+preprocessing-op-or-punc 1 ,
+whitespace-sequence 0 
+identifier 8 day_code
+preprocessing-op-or-punc 1 ,
+whitespace-sequence 0 
+identifier 9 leap_year
+preprocessing-op-or-punc 1 ;
+whitespace-sequence 0 
+new-line 0 
+whitespace-sequence 0 
+new-line 0 
+whitespace-sequence 0 
+identifier 4 FILE
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 *
+identifier 4 fout
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+new-line 0 
+whitespace-sequence 0 
+identifier 4 fout
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 =
+whitespace-sequence 0 
+identifier 5 fopen
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 (
+string-literal 14 "calendar.txt"
+preprocessing-op-or-punc 1 ,
+whitespace-sequence 0 
+string-literal 3 "w"
+preprocessing-op-or-punc 1 )
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+new-line 0 
+whitespace-sequence 0 
+identifier 4 year
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 =
+whitespace-sequence 0 
+identifier 8 get_year
+preprocessing-op-or-punc 1 (
+preprocessing-op-or-punc 1 )
+preprocessing-op-or-punc 1 ;
+whitespace-sequence 0 
+new-line 0 
+whitespace-sequence 0 
+new-line 0 
+whitespace-sequence 0 
+identifier 8 day_code
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 =
+whitespace-sequence 0 
+identifier 12 get_day_code
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 (
+identifier 4 year
+preprocessing-op-or-punc 1 )
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+new-line 0 
+whitespace-sequence 0 
+identifier 9 leap_year
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 =
+whitespace-sequence 0 
+identifier 13 get_leap_year
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 (
+identifier 4 year
+preprocessing-op-or-punc 1 )
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+new-line 0 
+whitespace-sequence 0 
+identifier 14 print_calendar
+preprocessing-op-or-punc 1 (
+identifier 4 fout
+preprocessing-op-or-punc 1 ,
+whitespace-sequence 0 
+identifier 4 year
+preprocessing-op-or-punc 1 ,
+whitespace-sequence 0 
+identifier 8 day_code
+preprocessing-op-or-punc 1 ,
+whitespace-sequence 0 
+identifier 9 leap_year
+preprocessing-op-or-punc 1 )
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+new-line 0 
+whitespace-sequence 0 
+identifier 6 printf
+preprocessing-op-or-punc 1 (
+string-literal 52 "Open up \'calendar.txt\' to see your calendar...\n"
+preprocessing-op-or-punc 1 )
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+new-line 0 
+whitespace-sequence 0 
+identifier 6 system
+preprocessing-op-or-punc 1 (
+string-literal 7 "pause"
+preprocessing-op-or-punc 1 )
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+new-line 0 
+preprocessing-op-or-punc 1 }
+new-line 0 
+whitespace-sequence 0 
+new-line 0 
+identifier 3 int
+whitespace-sequence 0 
+identifier 8 get_year
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 (
+identifier 4 void
+preprocessing-op-or-punc 1 )
+new-line 0 
+preprocessing-op-or-punc 1 {
+new-line 0 
+identifier 3 int
+whitespace-sequence 0 
+identifier 4 year
+preprocessing-op-or-punc 1 ;
+new-line 0 
+identifier 6 printf
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 (
+string-literal 16 "Enter a year: "
+preprocessing-op-or-punc 1 )
+preprocessing-op-or-punc 1 ;
+new-line 0 
+identifier 5 scanf
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 (
+string-literal 4 "%d"
+preprocessing-op-or-punc 1 ,
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 &
+identifier 4 year
+preprocessing-op-or-punc 1 )
+preprocessing-op-or-punc 1 ;
+new-line 0 
+identifier 6 return
+whitespace-sequence 0 
+identifier 4 year
+preprocessing-op-or-punc 1 ;
+new-line 0 
+preprocessing-op-or-punc 1 }
+whitespace-sequence 0 
+new-line 0 
+identifier 3 int
+whitespace-sequence 0 
+identifier 12 get_day_code
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 (
+identifier 3 int
+whitespace-sequence 0 
+identifier 4 year
+preprocessing-op-or-punc 1 )
+new-line 0 
+preprocessing-op-or-punc 1 {
+new-line 0 
+identifier 3 int
+whitespace-sequence 0 
+identifier 8 day_code
+preprocessing-op-or-punc 1 ;
+new-line 0 
+identifier 3 int
+whitespace-sequence 0 
+identifier 2 x1
+preprocessing-op-or-punc 1 ,
+whitespace-sequence 0 
+identifier 2 x2
+preprocessing-op-or-punc 1 ,
+whitespace-sequence 0 
+identifier 2 x3
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 2 x1
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 =
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 (
+identifier 4 year
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 -
+whitespace-sequence 0 
+pp-number 2 1.
+preprocessing-op-or-punc 1 )
+preprocessing-op-or-punc 1 /
+whitespace-sequence 0 
+pp-number 3 4.0
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 2 x2
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 =
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 (
+identifier 4 year
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 -
+whitespace-sequence 0 
+pp-number 2 1.
+preprocessing-op-or-punc 1 )
+preprocessing-op-or-punc 1 /
+whitespace-sequence 0 
+pp-number 4 100.
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 2 x3
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 =
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 (
+identifier 4 year
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 -
+whitespace-sequence 0 
+pp-number 2 1.
+preprocessing-op-or-punc 1 )
+preprocessing-op-or-punc 1 /
+whitespace-sequence 0 
+pp-number 4 400.
+preprocessing-op-or-punc 1 ;
+new-line 0 
+identifier 8 day_code
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 =
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 (
+identifier 4 year
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 +
+whitespace-sequence 0 
+identifier 2 x1
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 -
+whitespace-sequence 0 
+identifier 2 x2
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 +
+whitespace-sequence 0 
+identifier 2 x3
+preprocessing-op-or-punc 1 )
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 %
+pp-number 1 7
+preprocessing-op-or-punc 1 ;
+new-line 0 
+identifier 6 return
+whitespace-sequence 0 
+identifier 8 day_code
+preprocessing-op-or-punc 1 ;
+new-line 0 
+preprocessing-op-or-punc 1 }
+whitespace-sequence 0 
+new-line 0 
+identifier 3 int
+whitespace-sequence 0 
+identifier 13 get_leap_year
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 (
+identifier 3 int
+whitespace-sequence 0 
+identifier 4 year
+preprocessing-op-or-punc 1 )
+new-line 0 
+preprocessing-op-or-punc 1 {
+new-line 0 
+whitespace-sequence 0 
+new-line 0 
+whitespace-sequence 0 
+new-line 0 
+identifier 2 if
+preprocessing-op-or-punc 1 (
+identifier 4 year
+preprocessing-op-or-punc 1 %
+whitespace-sequence 0 
+pp-number 1 4
+preprocessing-op-or-punc 2 ==
+pp-number 1 0
+whitespace-sequence 0 
+preprocessing-op-or-punc 2 &&
+whitespace-sequence 0 
+identifier 4 year
+preprocessing-op-or-punc 1 %
+pp-number 3 100
+whitespace-sequence 0 
+preprocessing-op-or-punc 2 !=
+whitespace-sequence 0 
+pp-number 1 0
+whitespace-sequence 0 
+preprocessing-op-or-punc 2 ||
+whitespace-sequence 0 
+identifier 4 year
+preprocessing-op-or-punc 1 %
+pp-number 3 400
+preprocessing-op-or-punc 2 ==
+pp-number 1 0
+preprocessing-op-or-punc 1 )
+new-line 0 
+whitespace-sequence 0 
+identifier 6 return
+whitespace-sequence 0 
+identifier 4 TRUE
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 4 else
+whitespace-sequence 0 
+identifier 6 return
+whitespace-sequence 0 
+identifier 5 FALSE
+preprocessing-op-or-punc 1 ;
+whitespace-sequence 0 
+new-line 0 
+whitespace-sequence 0 
+new-line 0 
+preprocessing-op-or-punc 1 }
+new-line 0 
+identifier 4 void
+whitespace-sequence 0 
+identifier 14 print_calendar
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 (
+identifier 4 FILE
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 *
+identifier 4 fout
+preprocessing-op-or-punc 1 ,
+whitespace-sequence 0 
+identifier 3 int
+whitespace-sequence 0 
+identifier 4 year
+preprocessing-op-or-punc 1 ,
+whitespace-sequence 0 
+identifier 3 int
+whitespace-sequence 0 
+identifier 8 day_code
+preprocessing-op-or-punc 1 ,
+whitespace-sequence 0 
+identifier 3 int
+whitespace-sequence 0 
+identifier 9 leap_year
+preprocessing-op-or-punc 1 )
+whitespace-sequence 0 
+new-line 0 
+preprocessing-op-or-punc 1 {
+new-line 0 
+whitespace-sequence 0 
+identifier 3 int
+whitespace-sequence 0 
+identifier 13 days_in_month
+preprocessing-op-or-punc 1 ,
+whitespace-sequence 0 
+new-line 0 
+whitespace-sequence 0 
+identifier 3 day
+preprocessing-op-or-punc 1 ,
+whitespace-sequence 0 
+new-line 0 
+whitespace-sequence 0 
+identifier 5 month
+preprocessing-op-or-punc 1 ;
+whitespace-sequence 0 
+new-line 0 
+whitespace-sequence 0 
+identifier 7 fprintf
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 (
+identifier 4 fout
+preprocessing-op-or-punc 1 ,
+string-literal 23 "                   %d"
+preprocessing-op-or-punc 1 ,
+whitespace-sequence 0 
+identifier 4 year
+preprocessing-op-or-punc 1 )
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 3 for
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 (
+whitespace-sequence 0 
+identifier 5 month
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 =
+whitespace-sequence 0 
+pp-number 1 1
+preprocessing-op-or-punc 1 ;
+whitespace-sequence 0 
+identifier 5 month
+whitespace-sequence 0 
+preprocessing-op-or-punc 2 <=
+whitespace-sequence 0 
+pp-number 2 12
+preprocessing-op-or-punc 1 ;
+whitespace-sequence 0 
+identifier 5 month
+preprocessing-op-or-punc 2 ++
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 )
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 {
+new-line 0 
+whitespace-sequence 0 
+identifier 6 switch
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 (
+whitespace-sequence 0 
+identifier 5 month
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 )
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 {
+whitespace-sequence 0 
+new-line 0 
+whitespace-sequence 0 
+identifier 4 case
+whitespace-sequence 0 
+pp-number 1 1
+preprocessing-op-or-punc 1 :
+new-line 0 
+whitespace-sequence 0 
+identifier 7 fprintf
+preprocessing-op-or-punc 1 (
+identifier 4 fout
+preprocessing-op-or-punc 1 ,
+string-literal 13 "\n\nJanuary"
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 )
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 13 days_in_month
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 =
+whitespace-sequence 0 
+pp-number 2 31
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 5 break
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 4 case
+whitespace-sequence 0 
+pp-number 1 2
+preprocessing-op-or-punc 1 :
+new-line 0 
+whitespace-sequence 0 
+identifier 7 fprintf
+preprocessing-op-or-punc 1 (
+identifier 4 fout
+preprocessing-op-or-punc 1 ,
+string-literal 14 "\n\nFebruary"
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 )
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 13 days_in_month
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 =
+whitespace-sequence 0 
+identifier 9 leap_year
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 ?
+whitespace-sequence 0 
+pp-number 2 29
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 :
+whitespace-sequence 0 
+pp-number 2 28
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 5 break
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 4 case
+whitespace-sequence 0 
+pp-number 1 3
+preprocessing-op-or-punc 1 :
+new-line 0 
+whitespace-sequence 0 
+identifier 7 fprintf
+preprocessing-op-or-punc 1 (
+identifier 4 fout
+preprocessing-op-or-punc 1 ,
+whitespace-sequence 0 
+string-literal 11 "\n\nMarch"
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 )
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 13 days_in_month
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 =
+whitespace-sequence 0 
+pp-number 2 31
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 5 break
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 4 case
+whitespace-sequence 0 
+pp-number 1 4
+preprocessing-op-or-punc 1 :
+new-line 0 
+whitespace-sequence 0 
+identifier 7 fprintf
+preprocessing-op-or-punc 1 (
+identifier 4 fout
+preprocessing-op-or-punc 1 ,
+string-literal 11 "\n\nApril"
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 )
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 13 days_in_month
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 =
+whitespace-sequence 0 
+pp-number 2 30
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 5 break
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 4 case
+whitespace-sequence 0 
+pp-number 1 5
+preprocessing-op-or-punc 1 :
+new-line 0 
+whitespace-sequence 0 
+identifier 7 fprintf
+preprocessing-op-or-punc 1 (
+identifier 4 fout
+preprocessing-op-or-punc 1 ,
+string-literal 9 "\n\nMay"
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 )
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 13 days_in_month
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 =
+whitespace-sequence 0 
+pp-number 2 31
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 5 break
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 4 case
+whitespace-sequence 0 
+pp-number 1 6
+preprocessing-op-or-punc 1 :
+new-line 0 
+whitespace-sequence 0 
+identifier 7 fprintf
+preprocessing-op-or-punc 1 (
+identifier 4 fout
+preprocessing-op-or-punc 1 ,
+string-literal 10 "\n\nJune"
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 )
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 13 days_in_month
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 =
+whitespace-sequence 0 
+pp-number 2 30
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 5 break
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 4 case
+whitespace-sequence 0 
+pp-number 1 7
+preprocessing-op-or-punc 1 :
+new-line 0 
+whitespace-sequence 0 
+identifier 7 fprintf
+preprocessing-op-or-punc 1 (
+identifier 4 fout
+preprocessing-op-or-punc 1 ,
+string-literal 10 "\n\nJuly"
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 )
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 13 days_in_month
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 =
+whitespace-sequence 0 
+pp-number 2 31
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 5 break
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 4 case
+whitespace-sequence 0 
+pp-number 1 8
+preprocessing-op-or-punc 1 :
+new-line 0 
+whitespace-sequence 0 
+identifier 7 fprintf
+preprocessing-op-or-punc 1 (
+identifier 4 fout
+preprocessing-op-or-punc 1 ,
+string-literal 12 "\n\nAugust"
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 )
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 13 days_in_month
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 =
+whitespace-sequence 0 
+pp-number 2 31
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 5 break
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 4 case
+whitespace-sequence 0 
+pp-number 1 9
+preprocessing-op-or-punc 1 :
+new-line 0 
+whitespace-sequence 0 
+identifier 7 fprintf
+preprocessing-op-or-punc 1 (
+identifier 4 fout
+preprocessing-op-or-punc 1 ,
+string-literal 15 "\n\nSeptember"
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 )
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 13 days_in_month
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 =
+whitespace-sequence 0 
+pp-number 2 30
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 5 break
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 4 case
+whitespace-sequence 0 
+pp-number 2 10
+preprocessing-op-or-punc 1 :
+new-line 0 
+whitespace-sequence 0 
+identifier 7 fprintf
+preprocessing-op-or-punc 1 (
+identifier 4 fout
+preprocessing-op-or-punc 1 ,
+string-literal 13 "\n\nOctober"
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 )
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 13 days_in_month
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 =
+whitespace-sequence 0 
+pp-number 2 31
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 5 break
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 4 case
+whitespace-sequence 0 
+pp-number 2 11
+preprocessing-op-or-punc 1 :
+new-line 0 
+whitespace-sequence 0 
+identifier 7 fprintf
+preprocessing-op-or-punc 1 (
+identifier 4 fout
+preprocessing-op-or-punc 1 ,
+string-literal 14 "\n\nNovember"
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 )
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 13 days_in_month
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 =
+whitespace-sequence 0 
+pp-number 2 30
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 5 break
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 4 case
+whitespace-sequence 0 
+pp-number 2 12
+preprocessing-op-or-punc 1 :
+new-line 0 
+whitespace-sequence 0 
+identifier 7 fprintf
+preprocessing-op-or-punc 1 (
+identifier 4 fout
+preprocessing-op-or-punc 1 ,
+string-literal 14 "\n\nDecember"
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 )
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 13 days_in_month
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 =
+whitespace-sequence 0 
+pp-number 2 31
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 5 break
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 }
+new-line 0 
+whitespace-sequence 0 
+identifier 7 fprintf
+preprocessing-op-or-punc 1 (
+identifier 4 fout
+preprocessing-op-or-punc 1 ,
+string-literal 41 "\n\nSun  Mon  Tue  Wed  Thu  Fri  Sat\n"
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 )
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+new-line 0 
+whitespace-sequence 0 
+identifier 3 for
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 (
+whitespace-sequence 0 
+identifier 3 day
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 =
+whitespace-sequence 0 
+pp-number 1 1
+preprocessing-op-or-punc 1 ;
+whitespace-sequence 0 
+identifier 3 day
+whitespace-sequence 0 
+preprocessing-op-or-punc 2 <=
+whitespace-sequence 0 
+pp-number 1 1
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 +
+whitespace-sequence 0 
+identifier 8 day_code
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 *
+whitespace-sequence 0 
+pp-number 1 5
+preprocessing-op-or-punc 1 ;
+whitespace-sequence 0 
+identifier 3 day
+preprocessing-op-or-punc 2 ++
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 )
+new-line 0 
+whitespace-sequence 0 
+identifier 7 fprintf
+preprocessing-op-or-punc 1 (
+identifier 4 fout
+preprocessing-op-or-punc 1 ,
+string-literal 3 " "
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 )
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+new-line 0 
+whitespace-sequence 0 
+identifier 3 for
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 (
+whitespace-sequence 0 
+identifier 3 day
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 =
+whitespace-sequence 0 
+pp-number 1 1
+preprocessing-op-or-punc 1 ;
+whitespace-sequence 0 
+identifier 3 day
+whitespace-sequence 0 
+preprocessing-op-or-punc 2 <=
+whitespace-sequence 0 
+identifier 13 days_in_month
+preprocessing-op-or-punc 1 ;
+whitespace-sequence 0 
+identifier 3 day
+preprocessing-op-or-punc 2 ++
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 )
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 {
+new-line 0 
+whitespace-sequence 0 
+identifier 7 fprintf
+preprocessing-op-or-punc 1 (
+identifier 4 fout
+preprocessing-op-or-punc 1 ,
+string-literal 5 "%2d"
+preprocessing-op-or-punc 1 ,
+whitespace-sequence 0 
+identifier 3 day
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 )
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 2 if
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 (
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 (
+whitespace-sequence 0 
+identifier 3 day
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 +
+whitespace-sequence 0 
+identifier 8 day_code
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 )
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 %
+whitespace-sequence 0 
+pp-number 1 7
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 >
+whitespace-sequence 0 
+pp-number 1 0
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 )
+whitespace-sequence 0 
+new-line 0 
+whitespace-sequence 0 
+new-line 0 
+whitespace-sequence 0 
+identifier 7 fprintf
+preprocessing-op-or-punc 1 (
+identifier 4 fout
+preprocessing-op-or-punc 1 ,
+string-literal 5 "   "
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 )
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+identifier 4 else
+whitespace-sequence 0 
+new-line 0 
+whitespace-sequence 0 
+identifier 7 fprintf
+preprocessing-op-or-punc 1 (
+identifier 4 fout
+preprocessing-op-or-punc 1 ,
+whitespace-sequence 0 
+string-literal 5 "\n "
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 )
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 }
+new-line 0 
+whitespace-sequence 0 
+new-line 0 
+whitespace-sequence 0 
+identifier 8 day_code
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 =
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 (
+whitespace-sequence 0 
+identifier 8 day_code
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 +
+whitespace-sequence 0 
+identifier 13 days_in_month
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 )
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 %
+whitespace-sequence 0 
+pp-number 1 7
+preprocessing-op-or-punc 1 ;
+new-line 0 
+whitespace-sequence 0 
+preprocessing-op-or-punc 1 }
+new-line 0 
+preprocessing-op-or-punc 1 }
+new-line 0 
+eof

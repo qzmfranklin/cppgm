@@ -1,0 +1,7 @@
+1 translation units
+start translation unit tests/350-function-adjust.t
+start unnamed namespace
+function f function of (int) returning void
+function g function of (pointer to function of (int) returning void, pointer to int) returning void
+end namespace
+end translation unit

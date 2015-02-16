@@ -1,0 +1,10 @@
+identifier 3 foo
+whitespace-sequence 0 
+pp-number 5 1.0e2
+whitespace-sequence 0 
+preprocessing-op-or-punc 2 *=
+non-whitespace-character 1 @
+whitespace-sequence 0 
+string-literal 5 "bar"
+new-line 0 
+eof

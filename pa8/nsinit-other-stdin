@@ -1,0 +1,11 @@
+#!/bin/sh
+
+in=$(tempfile) || exit
+out=$(tempfile) || exit
+
+cat > $in
+
+./nsinit-other -o $out $in || exit
+
+objdump -st $out
+

@@ -1,0 +1,111 @@
+
+    00: 
+        template-declaration: 
+            declaration: 
+                simple-declaration: 
+                    decl-specifier-seq: 
+                        00: 
+                            type-specifier: 
+                                class-specifier: 
+                                    class-head: 
+                                        class-head-name: 
+                                            class-name: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:C
+                                        class-key: KW_CLASS
+                                    member-specification-seq: 
+                                        00: 
+                                            member-declaration: 
+                                                decl-specifier-seq: 
+                                                    00: 
+                                                        type-specifier: KW_AUTO
+                                                member-declarator-list: 
+                                                    00: 
+                                                        brace-or-equal-initializer: 
+                                                            initializer-clause: 
+                                                                assignment-expression: 
+                                                                    primary-expression: 
+                                                                        lambda-expression: 
+                                                                            compound-statement: 
+                                                                                00: 
+                                                                                    jump-statement: 
+                                                                                        expression: 
+                                                                                            additive-operator: OP_PLUS
+                                                                                            lhs: 
+                                                                                                primary-expression: 
+                                                                                                    id_expression: 
+                                                                                                        unqualified-id: 
+                                                                                                            TT_IDENTIFIER: TT_IDENTIFIER:c1
+                                                                                            rhs: 
+                                                                                                primary-expression: 
+                                                                                                    id_expression: 
+                                                                                                        unqualified-id: 
+                                                                                                            TT_IDENTIFIER: TT_IDENTIFIER:c2
+                                                                                        jump: KW_RETURN
+                                                                            lambda-declarator: 
+                                                                                parameter-declaration-clause: 
+                                                                                    parameter-declaration-list: 
+                                                                                        00: 
+                                                                                            decl-specifier-seq: 
+                                                                                                00: 
+                                                                                                    type-specifier: 
+                                                                                                        cv-qualifier: KW_CONST
+                                                                                                01: 
+                                                                                                    type-specifier: 
+                                                                                                        type-name: 
+                                                                                                            class-name: 
+                                                                                                                TT_IDENTIFIER: TT_IDENTIFIER:C1
+                                                                                            declarator: 
+                                                                                                noptr-declarator: 
+                                                                                                    noptr-declarator-root: 
+                                                                                                        declarator-id: 
+                                                                                                            id-expression: 
+                                                                                                                unqualified-id: 
+                                                                                                                    TT_IDENTIFIER: TT_IDENTIFIER:c1
+                                                                                                    noptr-declartor-suffix-seq: empty
+                                                                                                ptr-operator-seq: 
+                                                                                                    00: 
+                                                                                                        op: OP_AMP
+                                                                                        01: 
+                                                                                            decl-specifier-seq: 
+                                                                                                00: 
+                                                                                                    type-specifier: 
+                                                                                                        cv-qualifier: KW_CONST
+                                                                                                01: 
+                                                                                                    type-specifier: 
+                                                                                                        type-name: 
+                                                                                                            class-name: 
+                                                                                                                TT_IDENTIFIER: TT_IDENTIFIER:C2
+                                                                                            declarator: 
+                                                                                                noptr-declarator: 
+                                                                                                    noptr-declarator-root: 
+                                                                                                        declarator-id: 
+                                                                                                            id-expression: 
+                                                                                                                unqualified-id: 
+                                                                                                                    TT_IDENTIFIER: TT_IDENTIFIER:c2
+                                                                                                    noptr-declartor-suffix-seq: empty
+                                                                                                ptr-operator-seq: 
+                                                                                                    00: 
+                                                                                                        op: OP_AMP
+                                                                                trailing-return-type: 
+                                                                                    trailing-type-specifier-seq: 
+                                                                                        00: 
+                                                                                            type-name: 
+                                                                                                class-name: 
+                                                                                                    TT_IDENTIFIER: TT_IDENTIFIER:C3
+                                                                            lambda-introducer: 
+                                                                                lambda-capture: 
+                                                                                    capture-default: OP_AMP
+                                                        declarator: 
+                                                            noptr-declarator: 
+                                                                noptr-declarator-root: 
+                                                                    declarator-id: 
+                                                                        id-expression: 
+                                                                            unqualified-id: 
+                                                                                TT_IDENTIFIER: TT_IDENTIFIER:x
+                                                                noptr-declartor-suffix-seq: empty
+                                                            ptr-operator-seq: empty
+            template-parameter-list: 
+                00: 
+                    type-parameter: 
+                        identifier: TT_IDENTIFIER:Y
+                        kw: KW_TYPENAME

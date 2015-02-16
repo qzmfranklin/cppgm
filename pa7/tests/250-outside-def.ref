@@ -1,0 +1,10 @@
+1 translation units
+start translation unit tests/250-outside-def.t
+start unnamed namespace
+start namespace Q
+start namespace V
+variable i int
+end namespace
+end namespace
+end namespace
+end translation unit

@@ -1,0 +1,4 @@
+tests/120-const-default.t.1:1:11: error: default initialization of an object of const type 'const int'
+const int x;
+          ^
+1 error generated.

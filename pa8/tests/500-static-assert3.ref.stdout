@@ -1,0 +1,3 @@
+LINKING: variable a SP_CHAR LK_EXTERNAL array of 3 char initializer=(DefaultInitializer) initializer_expression=(null) is_constant = 0
+LINKING: variable p SP_CONSTEXPR|SP_CONST|SP_CHAR LK_EXTERNAL const pointer to const char initializer=(CopyInitializer (IdExpression (a))) initializer_expression=(ArrayVariablePointer (VC_PRVALUE const pointer to const char a)) is_constant = 1
+LINKING: function main SP_INT function of () returning int defined=1

@@ -1,0 +1,7 @@
+preproc 1
+sof tests/500-predefined-macros.t
+identifier right_course_run
+identifier right_cplusplus_version
+identifier right__STDC_HOSTED_value
+identifier right__LINE__
+eof

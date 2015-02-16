@@ -1,0 +1,11 @@
+#!/bin/sh
+
+in=$(tempfile) || exit
+out=$(tempfile) || exit
+
+cat > $in
+
+./nsinit-ref -o $out $in || exit
+
+xxd $out
+

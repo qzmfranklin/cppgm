@@ -1,0 +1,8 @@
+1 translation units
+start translation unit tests/320-arrays.t
+start unnamed namespace
+variable arr array of 10 int
+variable arrp pointer to array of unknown bound of int
+variable arrpp pointer to pointer to array of unknown bound of int
+end namespace
+end translation unit

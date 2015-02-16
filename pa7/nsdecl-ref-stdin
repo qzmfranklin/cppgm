@@ -1,0 +1,11 @@
+#!/bin/sh
+
+in=$(tempfile) || exit
+out=$(tempfile) || exit
+
+cat > $in
+
+./nsdecl-ref -o $out $in || exit
+
+cat $out
+

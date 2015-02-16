@@ -1,0 +1,13 @@
+1 translation units
+start translation unit tests/280-inline-namespace.t
+start unnamed namespace
+variable i int
+variable d double
+start namespace A
+inline namespace
+end namespace
+start unnamed namespace
+inline namespace
+end namespace
+end namespace
+end translation unit

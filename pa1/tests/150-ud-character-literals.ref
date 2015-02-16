@@ -1,0 +1,7 @@
+user-defined-character-literal 6 'a'bcd
+new-line 0 
+user-defined-character-literal 8 'c'_fasf
+new-line 0 
+user-defined-character-literal 14 'fsafsa'fagasg
+new-line 0 
+eof

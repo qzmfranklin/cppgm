@@ -1,0 +1,11 @@
+#!/bin/sh
+
+in=$(tempfile) || exit
+out=$(tempfile) || exit
+
+cat > $in
+
+./preproc -o $out $in
+
+cat $out
+

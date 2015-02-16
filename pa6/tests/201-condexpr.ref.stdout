@@ -1,0 +1,96 @@
+
+    00: 
+        function-definition: 
+            decl-specifier-seq: 
+                00: 
+                    type-specifier: KW_INT
+            declarator: 
+                noptr-declarator: 
+                    noptr-declarator-root: 
+                        declarator-id: 
+                            id-expression: 
+                                unqualified-id: 
+                                    TT_IDENTIFIER: TT_IDENTIFIER:main
+                    noptr-declartor-suffix-seq: 
+                        00: 
+                            parameters-and-qualifiers: 
+                                cv-qualifer-seq: empty
+                                parameter-declaration-clause: empty
+                ptr-operator-seq: empty
+            function-body: 
+                compound-statement: 
+                    00: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                condition: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:x
+                                onfalse: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:z
+                                ontrue: 
+                                    primary-expression: 
+                                        id_expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:y
+                    01: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                condition: 
+                                    lhs: 
+                                        primary-expression: 
+                                            id_expression: 
+                                                unqualified-id: 
+                                                    TT_IDENTIFIER: TT_IDENTIFIER:x
+                                    logical-or-operator: OP_LOR
+                                    rhs: 
+                                        primary-expression: 
+                                            id_expression: 
+                                                unqualified-id: 
+                                                    TT_IDENTIFIER: TT_IDENTIFIER:y
+                                onfalse: 
+                                    assignment-operator: OP_ASS
+                                    initializer-clause: 
+                                        assignment-expression: 
+                                            primary-expression: TT_LITERAL:3
+                                    lhs: 
+                                        primary-expression: 
+                                            id_expression: 
+                                                unqualified-id: 
+                                                    TT_IDENTIFIER: TT_IDENTIFIER:w
+                                ontrue: 
+                                    additive-operator: OP_PLUS
+                                    lhs: 
+                                        primary-expression: 
+                                            id_expression: 
+                                                unqualified-id: 
+                                                    TT_IDENTIFIER: TT_IDENTIFIER:z
+                                    rhs: 
+                                        primary-expression: TT_LITERAL:2
+                    02: 
+                        expression-statement: 
+                            OP_SEMICOLON: OP_SEMICOLON
+                            expression: 
+                                condition: 
+                                    primary-expression: TT_LITERAL:1
+                                onfalse: 
+                                    condition: 
+                                        primary-expression: TT_LITERAL:5
+                                    onfalse: 
+                                        primary-expression: TT_LITERAL:7
+                                    ontrue: 
+                                        primary-expression: TT_LITERAL:6
+                                ontrue: 
+                                    condition: 
+                                        primary-expression: TT_LITERAL:2
+                                    onfalse: 
+                                        primary-expression: TT_LITERAL:4
+                                    ontrue: 
+                                        primary-expression: TT_LITERAL:3
+            virt-specifier-seq: empty

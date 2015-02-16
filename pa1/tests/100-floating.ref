@@ -1,0 +1,21 @@
+pp-number 3 0.0
+new-line 0 
+pp-number 6 0....1
+new-line 0 
+pp-number 6 0.0e+3
+new-line 0 
+pp-number 11 0.24512..E-
+new-line 0 
+pp-number 6 0...e+
+new-line 0 
+pp-number 5 0efsa
+preprocessing-op-or-punc 1 -
+new-line 0 
+pp-number 9 21412e421
+new-line 0 
+pp-number 7 241E421
+new-line 0 
+pp-number 7 12e...2
+new-line 0 
+new-line 0 
+eof

@@ -1,0 +1,3 @@
+LINKING: variable x SP_EXTERN|SP_INT LK_EXTERNAL int initializer=(null) initializer_expression=(null) is_constant = 0
+LINKING: function main SP_INT function of () returning int defined=1
+LINKING: variable x SP_INT LK_EXTERNAL int initializer=(CopyInitializer (LiteralExpression (TT_LITERAL:3))) initializer_expression=(Immediate (VC_PRVALUE int 03000000)) is_constant = 0

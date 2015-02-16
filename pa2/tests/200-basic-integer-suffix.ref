@@ -1,0 +1,481 @@
+literal 0 int 00000000
+literal 0 int 00000000
+literal 0l long int 0000000000000000
+literal 0l long int 0000000000000000
+literal 0L long int 0000000000000000
+literal 0L long int 0000000000000000
+literal 0ll long long int 0000000000000000
+literal 0ll long long int 0000000000000000
+literal 0LL long long int 0000000000000000
+literal 0LL long long int 0000000000000000
+invalid 0X
+invalid 0X
+invalid 0lL
+invalid 0lL
+user-defined-literal 0_ud2 _ud2 integer 0
+user-defined-literal 0_ud2 _ud2 integer 0
+literal 0u unsigned int 00000000
+literal 0u unsigned int 00000000
+literal 0ul unsigned long int 0000000000000000
+literal 0lu unsigned long int 0000000000000000
+literal 0uL unsigned long int 0000000000000000
+literal 0Lu unsigned long int 0000000000000000
+literal 0ull unsigned long long int 0000000000000000
+literal 0llu unsigned long long int 0000000000000000
+literal 0uLL unsigned long long int 0000000000000000
+literal 0LLu unsigned long long int 0000000000000000
+invalid 0uX
+invalid 0Xu
+invalid 0ulL
+invalid 0lLu
+invalid 0u_ud2
+user-defined-literal 0_ud2u _ud2u integer 0
+literal 0U unsigned int 00000000
+literal 0U unsigned int 00000000
+literal 0Ul unsigned long int 0000000000000000
+literal 0lU unsigned long int 0000000000000000
+literal 0UL unsigned long int 0000000000000000
+literal 0LU unsigned long int 0000000000000000
+literal 0Ull unsigned long long int 0000000000000000
+literal 0llU unsigned long long int 0000000000000000
+literal 0ULL unsigned long long int 0000000000000000
+literal 0LLU unsigned long long int 0000000000000000
+invalid 0UX
+invalid 0XU
+invalid 0UlL
+invalid 0lLU
+invalid 0U_ud2
+user-defined-literal 0_ud2U _ud2U integer 0
+invalid 0W
+invalid 0W
+invalid 0Wl
+invalid 0lW
+invalid 0WL
+invalid 0LW
+invalid 0Wll
+invalid 0llW
+invalid 0WLL
+invalid 0LLW
+invalid 0WX
+invalid 0XW
+invalid 0WlL
+invalid 0lLW
+invalid 0W_ud2
+user-defined-literal 0_ud2W _ud2W integer 0
+user-defined-literal 0_ud1 _ud1 integer 0
+user-defined-literal 0_ud1 _ud1 integer 0
+user-defined-literal 0_ud1l _ud1l integer 0
+invalid 0l_ud1
+user-defined-literal 0_ud1L _ud1L integer 0
+invalid 0L_ud1
+user-defined-literal 0_ud1ll _ud1ll integer 0
+invalid 0ll_ud1
+user-defined-literal 0_ud1LL _ud1LL integer 0
+invalid 0LL_ud1
+user-defined-literal 0_ud1X _ud1X integer 0
+invalid 0X_ud1
+user-defined-literal 0_ud1lL _ud1lL integer 0
+invalid 0lL_ud1
+user-defined-literal 0_ud1_ud2 _ud1_ud2 integer 0
+user-defined-literal 0_ud2_ud1 _ud2_ud1 integer 0
+literal 0x0 int 00000000
+literal 0x0 int 00000000
+literal 0x0l long int 0000000000000000
+literal 0x0l long int 0000000000000000
+literal 0x0L long int 0000000000000000
+literal 0x0L long int 0000000000000000
+literal 0x0ll long long int 0000000000000000
+literal 0x0ll long long int 0000000000000000
+literal 0x0LL long long int 0000000000000000
+literal 0x0LL long long int 0000000000000000
+invalid 0x0X
+invalid 0x0X
+invalid 0x0lL
+invalid 0x0lL
+user-defined-literal 0x0_ud2 _ud2 integer 0x0
+user-defined-literal 0x0_ud2 _ud2 integer 0x0
+literal 0x0u unsigned int 00000000
+literal 0x0u unsigned int 00000000
+literal 0x0ul unsigned long int 0000000000000000
+literal 0x0lu unsigned long int 0000000000000000
+literal 0x0uL unsigned long int 0000000000000000
+literal 0x0Lu unsigned long int 0000000000000000
+literal 0x0ull unsigned long long int 0000000000000000
+literal 0x0llu unsigned long long int 0000000000000000
+literal 0x0uLL unsigned long long int 0000000000000000
+literal 0x0LLu unsigned long long int 0000000000000000
+invalid 0x0uX
+invalid 0x0Xu
+invalid 0x0ulL
+invalid 0x0lLu
+invalid 0x0u_ud2
+user-defined-literal 0x0_ud2u _ud2u integer 0x0
+literal 0x0U unsigned int 00000000
+literal 0x0U unsigned int 00000000
+literal 0x0Ul unsigned long int 0000000000000000
+literal 0x0lU unsigned long int 0000000000000000
+literal 0x0UL unsigned long int 0000000000000000
+literal 0x0LU unsigned long int 0000000000000000
+literal 0x0Ull unsigned long long int 0000000000000000
+literal 0x0llU unsigned long long int 0000000000000000
+literal 0x0ULL unsigned long long int 0000000000000000
+literal 0x0LLU unsigned long long int 0000000000000000
+invalid 0x0UX
+invalid 0x0XU
+invalid 0x0UlL
+invalid 0x0lLU
+invalid 0x0U_ud2
+user-defined-literal 0x0_ud2U _ud2U integer 0x0
+invalid 0x0W
+invalid 0x0W
+invalid 0x0Wl
+invalid 0x0lW
+invalid 0x0WL
+invalid 0x0LW
+invalid 0x0Wll
+invalid 0x0llW
+invalid 0x0WLL
+invalid 0x0LLW
+invalid 0x0WX
+invalid 0x0XW
+invalid 0x0WlL
+invalid 0x0lLW
+invalid 0x0W_ud2
+user-defined-literal 0x0_ud2W _ud2W integer 0x0
+user-defined-literal 0x0_ud1 _ud1 integer 0x0
+user-defined-literal 0x0_ud1 _ud1 integer 0x0
+user-defined-literal 0x0_ud1l _ud1l integer 0x0
+invalid 0x0l_ud1
+user-defined-literal 0x0_ud1L _ud1L integer 0x0
+invalid 0x0L_ud1
+user-defined-literal 0x0_ud1ll _ud1ll integer 0x0
+invalid 0x0ll_ud1
+user-defined-literal 0x0_ud1LL _ud1LL integer 0x0
+invalid 0x0LL_ud1
+user-defined-literal 0x0_ud1X _ud1X integer 0x0
+invalid 0x0X_ud1
+user-defined-literal 0x0_ud1lL _ud1lL integer 0x0
+invalid 0x0lL_ud1
+user-defined-literal 0x0_ud1_ud2 _ud1_ud2 integer 0x0
+user-defined-literal 0x0_ud2_ud1 _ud2_ud1 integer 0x0
+literal 00 int 00000000
+literal 00 int 00000000
+literal 00l long int 0000000000000000
+literal 00l long int 0000000000000000
+literal 00L long int 0000000000000000
+literal 00L long int 0000000000000000
+literal 00ll long long int 0000000000000000
+literal 00ll long long int 0000000000000000
+literal 00LL long long int 0000000000000000
+literal 00LL long long int 0000000000000000
+invalid 00X
+invalid 00X
+invalid 00lL
+invalid 00lL
+user-defined-literal 00_ud2 _ud2 integer 00
+user-defined-literal 00_ud2 _ud2 integer 00
+literal 00u unsigned int 00000000
+literal 00u unsigned int 00000000
+literal 00ul unsigned long int 0000000000000000
+literal 00lu unsigned long int 0000000000000000
+literal 00uL unsigned long int 0000000000000000
+literal 00Lu unsigned long int 0000000000000000
+literal 00ull unsigned long long int 0000000000000000
+literal 00llu unsigned long long int 0000000000000000
+literal 00uLL unsigned long long int 0000000000000000
+literal 00LLu unsigned long long int 0000000000000000
+invalid 00uX
+invalid 00Xu
+invalid 00ulL
+invalid 00lLu
+invalid 00u_ud2
+user-defined-literal 00_ud2u _ud2u integer 00
+literal 00U unsigned int 00000000
+literal 00U unsigned int 00000000
+literal 00Ul unsigned long int 0000000000000000
+literal 00lU unsigned long int 0000000000000000
+literal 00UL unsigned long int 0000000000000000
+literal 00LU unsigned long int 0000000000000000
+literal 00Ull unsigned long long int 0000000000000000
+literal 00llU unsigned long long int 0000000000000000
+literal 00ULL unsigned long long int 0000000000000000
+literal 00LLU unsigned long long int 0000000000000000
+invalid 00UX
+invalid 00XU
+invalid 00UlL
+invalid 00lLU
+invalid 00U_ud2
+user-defined-literal 00_ud2U _ud2U integer 00
+invalid 00W
+invalid 00W
+invalid 00Wl
+invalid 00lW
+invalid 00WL
+invalid 00LW
+invalid 00Wll
+invalid 00llW
+invalid 00WLL
+invalid 00LLW
+invalid 00WX
+invalid 00XW
+invalid 00WlL
+invalid 00lLW
+invalid 00W_ud2
+user-defined-literal 00_ud2W _ud2W integer 00
+user-defined-literal 00_ud1 _ud1 integer 00
+user-defined-literal 00_ud1 _ud1 integer 00
+user-defined-literal 00_ud1l _ud1l integer 00
+invalid 00l_ud1
+user-defined-literal 00_ud1L _ud1L integer 00
+invalid 00L_ud1
+user-defined-literal 00_ud1ll _ud1ll integer 00
+invalid 00ll_ud1
+user-defined-literal 00_ud1LL _ud1LL integer 00
+invalid 00LL_ud1
+user-defined-literal 00_ud1X _ud1X integer 00
+invalid 00X_ud1
+user-defined-literal 00_ud1lL _ud1lL integer 00
+invalid 00lL_ud1
+user-defined-literal 00_ud1_ud2 _ud1_ud2 integer 00
+user-defined-literal 00_ud2_ud1 _ud2_ud1 integer 00
+literal 123 int 7B000000
+literal 123 int 7B000000
+literal 123l long int 7B00000000000000
+literal 123l long int 7B00000000000000
+literal 123L long int 7B00000000000000
+literal 123L long int 7B00000000000000
+literal 123ll long long int 7B00000000000000
+literal 123ll long long int 7B00000000000000
+literal 123LL long long int 7B00000000000000
+literal 123LL long long int 7B00000000000000
+invalid 123X
+invalid 123X
+invalid 123lL
+invalid 123lL
+user-defined-literal 123_ud2 _ud2 integer 123
+user-defined-literal 123_ud2 _ud2 integer 123
+literal 123u unsigned int 7B000000
+literal 123u unsigned int 7B000000
+literal 123ul unsigned long int 7B00000000000000
+literal 123lu unsigned long int 7B00000000000000
+literal 123uL unsigned long int 7B00000000000000
+literal 123Lu unsigned long int 7B00000000000000
+literal 123ull unsigned long long int 7B00000000000000
+literal 123llu unsigned long long int 7B00000000000000
+literal 123uLL unsigned long long int 7B00000000000000
+literal 123LLu unsigned long long int 7B00000000000000
+invalid 123uX
+invalid 123Xu
+invalid 123ulL
+invalid 123lLu
+invalid 123u_ud2
+user-defined-literal 123_ud2u _ud2u integer 123
+literal 123U unsigned int 7B000000
+literal 123U unsigned int 7B000000
+literal 123Ul unsigned long int 7B00000000000000
+literal 123lU unsigned long int 7B00000000000000
+literal 123UL unsigned long int 7B00000000000000
+literal 123LU unsigned long int 7B00000000000000
+literal 123Ull unsigned long long int 7B00000000000000
+literal 123llU unsigned long long int 7B00000000000000
+literal 123ULL unsigned long long int 7B00000000000000
+literal 123LLU unsigned long long int 7B00000000000000
+invalid 123UX
+invalid 123XU
+invalid 123UlL
+invalid 123lLU
+invalid 123U_ud2
+user-defined-literal 123_ud2U _ud2U integer 123
+invalid 123W
+invalid 123W
+invalid 123Wl
+invalid 123lW
+invalid 123WL
+invalid 123LW
+invalid 123Wll
+invalid 123llW
+invalid 123WLL
+invalid 123LLW
+invalid 123WX
+invalid 123XW
+invalid 123WlL
+invalid 123lLW
+invalid 123W_ud2
+user-defined-literal 123_ud2W _ud2W integer 123
+user-defined-literal 123_ud1 _ud1 integer 123
+user-defined-literal 123_ud1 _ud1 integer 123
+user-defined-literal 123_ud1l _ud1l integer 123
+invalid 123l_ud1
+user-defined-literal 123_ud1L _ud1L integer 123
+invalid 123L_ud1
+user-defined-literal 123_ud1ll _ud1ll integer 123
+invalid 123ll_ud1
+user-defined-literal 123_ud1LL _ud1LL integer 123
+invalid 123LL_ud1
+user-defined-literal 123_ud1X _ud1X integer 123
+invalid 123X_ud1
+user-defined-literal 123_ud1lL _ud1lL integer 123
+invalid 123lL_ud1
+user-defined-literal 123_ud1_ud2 _ud1_ud2 integer 123
+user-defined-literal 123_ud2_ud1 _ud2_ud1 integer 123
+literal 0x123 int 23010000
+literal 0x123 int 23010000
+literal 0x123l long int 2301000000000000
+literal 0x123l long int 2301000000000000
+literal 0x123L long int 2301000000000000
+literal 0x123L long int 2301000000000000
+literal 0x123ll long long int 2301000000000000
+literal 0x123ll long long int 2301000000000000
+literal 0x123LL long long int 2301000000000000
+literal 0x123LL long long int 2301000000000000
+invalid 0x123X
+invalid 0x123X
+invalid 0x123lL
+invalid 0x123lL
+user-defined-literal 0x123_ud2 _ud2 integer 0x123
+user-defined-literal 0x123_ud2 _ud2 integer 0x123
+literal 0x123u unsigned int 23010000
+literal 0x123u unsigned int 23010000
+literal 0x123ul unsigned long int 2301000000000000
+literal 0x123lu unsigned long int 2301000000000000
+literal 0x123uL unsigned long int 2301000000000000
+literal 0x123Lu unsigned long int 2301000000000000
+literal 0x123ull unsigned long long int 2301000000000000
+literal 0x123llu unsigned long long int 2301000000000000
+literal 0x123uLL unsigned long long int 2301000000000000
+literal 0x123LLu unsigned long long int 2301000000000000
+invalid 0x123uX
+invalid 0x123Xu
+invalid 0x123ulL
+invalid 0x123lLu
+invalid 0x123u_ud2
+user-defined-literal 0x123_ud2u _ud2u integer 0x123
+literal 0x123U unsigned int 23010000
+literal 0x123U unsigned int 23010000
+literal 0x123Ul unsigned long int 2301000000000000
+literal 0x123lU unsigned long int 2301000000000000
+literal 0x123UL unsigned long int 2301000000000000
+literal 0x123LU unsigned long int 2301000000000000
+literal 0x123Ull unsigned long long int 2301000000000000
+literal 0x123llU unsigned long long int 2301000000000000
+literal 0x123ULL unsigned long long int 2301000000000000
+literal 0x123LLU unsigned long long int 2301000000000000
+invalid 0x123UX
+invalid 0x123XU
+invalid 0x123UlL
+invalid 0x123lLU
+invalid 0x123U_ud2
+user-defined-literal 0x123_ud2U _ud2U integer 0x123
+invalid 0x123W
+invalid 0x123W
+invalid 0x123Wl
+invalid 0x123lW
+invalid 0x123WL
+invalid 0x123LW
+invalid 0x123Wll
+invalid 0x123llW
+invalid 0x123WLL
+invalid 0x123LLW
+invalid 0x123WX
+invalid 0x123XW
+invalid 0x123WlL
+invalid 0x123lLW
+invalid 0x123W_ud2
+user-defined-literal 0x123_ud2W _ud2W integer 0x123
+user-defined-literal 0x123_ud1 _ud1 integer 0x123
+user-defined-literal 0x123_ud1 _ud1 integer 0x123
+user-defined-literal 0x123_ud1l _ud1l integer 0x123
+invalid 0x123l_ud1
+user-defined-literal 0x123_ud1L _ud1L integer 0x123
+invalid 0x123L_ud1
+user-defined-literal 0x123_ud1ll _ud1ll integer 0x123
+invalid 0x123ll_ud1
+user-defined-literal 0x123_ud1LL _ud1LL integer 0x123
+invalid 0x123LL_ud1
+user-defined-literal 0x123_ud1X _ud1X integer 0x123
+invalid 0x123X_ud1
+user-defined-literal 0x123_ud1lL _ud1lL integer 0x123
+invalid 0x123lL_ud1
+user-defined-literal 0x123_ud1_ud2 _ud1_ud2 integer 0x123
+user-defined-literal 0x123_ud2_ud1 _ud2_ud1 integer 0x123
+literal 0123 int 53000000
+literal 0123 int 53000000
+literal 0123l long int 5300000000000000
+literal 0123l long int 5300000000000000
+literal 0123L long int 5300000000000000
+literal 0123L long int 5300000000000000
+literal 0123ll long long int 5300000000000000
+literal 0123ll long long int 5300000000000000
+literal 0123LL long long int 5300000000000000
+literal 0123LL long long int 5300000000000000
+invalid 0123X
+invalid 0123X
+invalid 0123lL
+invalid 0123lL
+user-defined-literal 0123_ud2 _ud2 integer 0123
+user-defined-literal 0123_ud2 _ud2 integer 0123
+literal 0123u unsigned int 53000000
+literal 0123u unsigned int 53000000
+literal 0123ul unsigned long int 5300000000000000
+literal 0123lu unsigned long int 5300000000000000
+literal 0123uL unsigned long int 5300000000000000
+literal 0123Lu unsigned long int 5300000000000000
+literal 0123ull unsigned long long int 5300000000000000
+literal 0123llu unsigned long long int 5300000000000000
+literal 0123uLL unsigned long long int 5300000000000000
+literal 0123LLu unsigned long long int 5300000000000000
+invalid 0123uX
+invalid 0123Xu
+invalid 0123ulL
+invalid 0123lLu
+invalid 0123u_ud2
+user-defined-literal 0123_ud2u _ud2u integer 0123
+literal 0123U unsigned int 53000000
+literal 0123U unsigned int 53000000
+literal 0123Ul unsigned long int 5300000000000000
+literal 0123lU unsigned long int 5300000000000000
+literal 0123UL unsigned long int 5300000000000000
+literal 0123LU unsigned long int 5300000000000000
+literal 0123Ull unsigned long long int 5300000000000000
+literal 0123llU unsigned long long int 5300000000000000
+literal 0123ULL unsigned long long int 5300000000000000
+literal 0123LLU unsigned long long int 5300000000000000
+invalid 0123UX
+invalid 0123XU
+invalid 0123UlL
+invalid 0123lLU
+invalid 0123U_ud2
+user-defined-literal 0123_ud2U _ud2U integer 0123
+invalid 0123W
+invalid 0123W
+invalid 0123Wl
+invalid 0123lW
+invalid 0123WL
+invalid 0123LW
+invalid 0123Wll
+invalid 0123llW
+invalid 0123WLL
+invalid 0123LLW
+invalid 0123WX
+invalid 0123XW
+invalid 0123WlL
+invalid 0123lLW
+invalid 0123W_ud2
+user-defined-literal 0123_ud2W _ud2W integer 0123
+user-defined-literal 0123_ud1 _ud1 integer 0123
+user-defined-literal 0123_ud1 _ud1 integer 0123
+user-defined-literal 0123_ud1l _ud1l integer 0123
+invalid 0123l_ud1
+user-defined-literal 0123_ud1L _ud1L integer 0123
+invalid 0123L_ud1
+user-defined-literal 0123_ud1ll _ud1ll integer 0123
+invalid 0123ll_ud1
+user-defined-literal 0123_ud1LL _ud1LL integer 0123
+invalid 0123LL_ud1
+user-defined-literal 0123_ud1X _ud1X integer 0123
+invalid 0123X_ud1
+user-defined-literal 0123_ud1lL _ud1lL integer 0123
+invalid 0123lL_ud1
+user-defined-literal 0123_ud1_ud2 _ud1_ud2 integer 0123
+user-defined-literal 0123_ud2_ud1 _ud2_ud1 integer 0123
+eof

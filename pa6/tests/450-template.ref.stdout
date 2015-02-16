@@ -1,0 +1,196 @@
+
+    00: 
+        template-declaration: 
+            declaration: 
+                simple-declaration: 
+                    decl-specifier-seq: 
+                        00: 
+                            type-specifier: 
+                                class-specifier: 
+                                    class-head: 
+                                        class-head-name: 
+                                            class-name: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:C2
+                                        class-key: KW_CLASS
+                                    member-specification-seq: 
+                                        00: 
+                                            member-declaration: 
+                                                template-declaration: 
+                                                    declaration: 
+                                                        function-definition: 
+                                                            decl-specifier-seq: 
+                                                                00: 
+                                                                    type-specifier: KW_VOID
+                                                            declarator: 
+                                                                noptr-declarator: 
+                                                                    noptr-declarator-root: 
+                                                                        declarator-id: 
+                                                                            id-expression: 
+                                                                                unqualified-id: 
+                                                                                    TT_IDENTIFIER: TT_IDENTIFIER:f
+                                                                    noptr-declartor-suffix-seq: 
+                                                                        00: 
+                                                                            parameters-and-qualifiers: 
+                                                                                cv-qualifer-seq: empty
+                                                                                parameter-declaration-clause: 
+                                                                                    parameter-declaration-list: 
+                                                                                        00: 
+                                                                                            decl-specifier-seq: 
+                                                                                                00: 
+                                                                                                    type-specifier: 
+                                                                                                        type-name: 
+                                                                                                            class-name: 
+                                                                                                                TT_IDENTIFIER: TT_IDENTIFIER:C3
+                                                                                            declarator: 
+                                                                                                noptr-declarator: 
+                                                                                                    noptr-declarator-root: 
+                                                                                                        declarator-id: 
+                                                                                                            id-expression: 
+                                                                                                                unqualified-id: 
+                                                                                                                    TT_IDENTIFIER: TT_IDENTIFIER:c
+                                                                                                    noptr-declartor-suffix-seq: empty
+                                                                                                ptr-operator-seq: empty
+                                                                ptr-operator-seq: empty
+                                                            function-body: 
+                                                                compound-statement: 
+                                                                    00: 
+                                                                        jump-statement: 
+                                                                            expression: 
+                                                                                expression-list: 
+                                                                                    00: 
+                                                                                        initializer-clause: 
+                                                                                            assignment-expression: 
+                                                                                                primary-expression: 
+                                                                                                    id_expression: 
+                                                                                                        unqualified-id: 
+                                                                                                            TT_IDENTIFIER: TT_IDENTIFIER:c
+                                                                                simple-type-specifier: 
+                                                                                    type-name: 
+                                                                                        class-name: 
+                                                                                            TT_IDENTIFIER: TT_IDENTIFIER:C2
+                                                                            jump: KW_RETURN
+                                                            virt-specifier-seq: empty
+                                                    template-parameter-list: 
+                                                        00: 
+                                                            parameter-declaration: 
+                                                                decl-specifier-seq: 
+                                                                    00: 
+                                                                        type-specifier: KW_INT
+                                                                declarator: 
+                                                                    noptr-declarator: 
+                                                                        noptr-declarator-root: 
+                                                                            declarator-id: 
+                                                                                id-expression: 
+                                                                                    unqualified-id: 
+                                                                                        TT_IDENTIFIER: TT_IDENTIFIER:m
+                                                                        noptr-declartor-suffix-seq: empty
+                                                                    ptr-operator-seq: empty
+                                                        01: 
+                                                            type-parameter: 
+                                                                identifier: TT_IDENTIFIER:C3
+                                                                kw: KW_CLASS
+            template-parameter-list: 
+                00: 
+                    parameter-declaration: 
+                        decl-specifier-seq: 
+                            00: 
+                                type-specifier: KW_INT
+                        declarator: 
+                            noptr-declarator: 
+                                noptr-declarator-root: 
+                                    declarator-id: 
+                                        id-expression: 
+                                            unqualified-id: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:n
+                                noptr-declartor-suffix-seq: empty
+                            ptr-operator-seq: empty
+                01: 
+                    type-parameter: 
+                        identifier: TT_IDENTIFIER:C1
+                        kw: KW_CLASS
+    01: 
+        explicit-specialization: 
+            declaration: 
+                simple-declaration: 
+                    decl-specifier-seq: 
+                        00: 
+                            type-specifier: 
+                                class-specifier: 
+                                    class-head: 
+                                        class-head-name: 
+                                            class-name: 
+                                                simple-template-id: 
+                                                    TT_IDENTIFIER: TT_IDENTIFIER:TC2
+                                                    template-argument-list: 
+                                                        00: 
+                                                            template-argument: 
+                                                                id-expression: 
+                                                                    unqualified-id: 
+                                                                        TT_IDENTIFIER: TT_IDENTIFIER:n
+                                                        01: 
+                                                            template-argument: 
+                                                                type-id: 
+                                                                    type-specifier-seq: 
+                                                                        00: 
+                                                                            type-name: 
+                                                                                class-name: 
+                                                                                    TT_IDENTIFIER: TT_IDENTIFIER:C1
+                                        class-key: KW_CLASS
+                                    member-specification-seq: 
+                                        00: 
+                                            member-declaration: 
+                                                decl-specifier-seq: 
+                                                    00: KW_TYPEDEF
+                                                    01: 
+                                                        type-specifier: 
+                                                            type-name: 
+                                                                class-name: 
+                                                                    TT_IDENTIFIER: TT_IDENTIFIER:C4
+                                                member-declarator-list: 
+                                                    00: 
+                                                        declarator: 
+                                                            noptr-declarator: 
+                                                                noptr-declarator-root: 
+                                                                    declarator-id: 
+                                                                        id-expression: 
+                                                                            unqualified-id: 
+                                                                                TT_IDENTIFIER: TT_IDENTIFIER:c
+                                                                noptr-declartor-suffix-seq: empty
+                                                            ptr-operator-seq: empty
+    02: 
+        template-declaration: 
+            declaration: 
+                function-definition: 
+                    decl-specifier-seq: 
+                        00: 
+                            type-specifier: 
+                                type-name: 
+                                    typedef-name: TT_IDENTIFIER:Y
+                    declarator: 
+                        noptr-declarator: 
+                            noptr-declarator-root: 
+                                declarator-id: 
+                                    id-expression: 
+                                        unqualified-id: 
+                                            TT_IDENTIFIER: TT_IDENTIFIER:foo
+                            noptr-declartor-suffix-seq: 
+                                00: 
+                                    parameters-and-qualifiers: 
+                                        cv-qualifer-seq: empty
+                                        parameter-declaration-clause: empty
+                        ptr-operator-seq: empty
+                    function-body: 
+                        compound-statement: 
+                            00: 
+                                jump-statement: 
+                                    expression: 
+                                        simple-type-specifier: 
+                                            type-name: 
+                                                typedef-name: TT_IDENTIFIER:Y
+                                    jump: KW_RETURN
+                    virt-specifier-seq: empty
+            template-parameter-list: 
+                00: 
+                    type-parameter: 
+                        identifier: TT_IDENTIFIER:Y
+                        kw: KW_TYPENAME

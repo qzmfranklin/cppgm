@@ -1,0 +1,4 @@
+preproc 1
+sof tests/610-line-macro.t
+literal 2 int 02000000
+eof

@@ -1,0 +1,46 @@
+string-literal 2 ""
+whitespace-sequence 0 
+string-literal 5 "foo"
+whitespace-sequence 0 
+string-literal 5 "bar"
+whitespace-sequence 0 
+string-literal 5 "baz"
+new-line 0 
+identifier 2 u7
+string-literal 5 "foo"
+whitespace-sequence 0 
+string-literal 7 u8"bar"
+whitespace-sequence 0 
+identifier 2 u9
+string-literal 5 "baz"
+new-line 0 
+new-line 0 
+identifier 1 r
+string-literal 5 "abc"
+whitespace-sequence 0 
+string-literal 6 u"abc"
+whitespace-sequence 0 
+identifier 1 t
+string-literal 5 "abc"
+new-line 0 
+identifier 1 r
+user-defined-string-literal 6 "abc"u
+user-defined-string-literal 6 "abc"t
+string-literal 5 "abc"
+new-line 0 
+new-line 0 
+identifier 1 Q
+string-literal 7 "(abc)"
+whitespace-sequence 0 
+string-literal 8 R"(abc)"
+whitespace-sequence 0 
+identifier 1 T
+string-literal 7 "(abc)"
+new-line 0 
+new-line 0 
+string-literal 6 U"ewe"
+whitespace-sequence 0 
+string-literal 6 L"moo"
+new-line 0 
+new-line 0 
+eof

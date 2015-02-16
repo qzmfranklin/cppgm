@@ -1,0 +1,78 @@
+ERROR: malformed number (#2): 0x7FFFFFFFl_ud1
+ERROR: malformed number (#2): 0x7FFFFFFFL_ud1
+ERROR: malformed number (#2): 0x7FFFFFFFll_ud1
+ERROR: malformed number (#2): 0x7FFFFFFFLL_ud1
+ERROR: malformed number (#2): 0x7FFFFFFEl_ud1
+ERROR: malformed number (#2): 0x7FFFFFFEL_ud1
+ERROR: malformed number (#2): 0x7FFFFFFEll_ud1
+ERROR: malformed number (#2): 0x7FFFFFFELL_ud1
+ERROR: malformed number (#2): 0x80000000l_ud1
+ERROR: malformed number (#2): 0x80000000L_ud1
+ERROR: malformed number (#2): 0x80000000ll_ud1
+ERROR: malformed number (#2): 0x80000000LL_ud1
+ERROR: malformed number (#2): 0xFFFFFFFFl_ud1
+ERROR: malformed number (#2): 0xFFFFFFFFL_ud1
+ERROR: malformed number (#2): 0xFFFFFFFFll_ud1
+ERROR: malformed number (#2): 0xFFFFFFFFLL_ud1
+ERROR: malformed number (#2): 0xFFFFFFFFl_ud1
+ERROR: malformed number (#2): 0xFFFFFFFFL_ud1
+ERROR: malformed number (#2): 0xFFFFFFFFll_ud1
+ERROR: malformed number (#2): 0xFFFFFFFFLL_ud1
+ERROR: malformed number (#2): 0x100000000l_ud1
+ERROR: malformed number (#2): 0x100000000L_ud1
+ERROR: malformed number (#2): 0x100000000ll_ud1
+ERROR: malformed number (#2): 0x100000000LL_ud1
+ERROR: malformed number (#2): 0x7FFFFFFFFFFFFFFFl_ud1
+ERROR: malformed number (#2): 0x7FFFFFFFFFFFFFFFL_ud1
+ERROR: malformed number (#2): 0x7FFFFFFFFFFFFFFFll_ud1
+ERROR: malformed number (#2): 0x7FFFFFFFFFFFFFFFLL_ud1
+ERROR: malformed number (#2): 0x7FFFFFFFFFFFFFFEl_ud1
+ERROR: malformed number (#2): 0x7FFFFFFFFFFFFFFEL_ud1
+ERROR: malformed number (#2): 0x7FFFFFFFFFFFFFFEll_ud1
+ERROR: malformed number (#2): 0x7FFFFFFFFFFFFFFELL_ud1
+ERROR: malformed number (#2): 0x8000000000000000l_ud1
+ERROR: malformed number (#2): 0x8000000000000000L_ud1
+ERROR: malformed number (#2): 0x8000000000000000ll_ud1
+ERROR: malformed number (#2): 0x8000000000000000LL_ud1
+ERROR: malformed number (#2): 0xFFFFFFFFFFFFFFFFl_ud1
+ERROR: malformed number (#2): 0xFFFFFFFFFFFFFFFFL_ud1
+ERROR: malformed number (#2): 0xFFFFFFFFFFFFFFFFll_ud1
+ERROR: malformed number (#2): 0xFFFFFFFFFFFFFFFFLL_ud1
+ERROR: malformed number (#2): 0xFFFFFFFFFFFFFFFEl_ud1
+ERROR: malformed number (#2): 0xFFFFFFFFFFFFFFFEL_ud1
+ERROR: malformed number (#2): 0xFFFFFFFFFFFFFFFEll_ud1
+ERROR: malformed number (#2): 0xFFFFFFFFFFFFFFFELL_ud1
+ERROR: hex integer literal out of range (#1): 10000000000000000
+ERROR: hex integer literal out of range (#1): 10000000000000000
+ERROR: hex integer literal out of range (#1): 10000000000000000
+ERROR: hex integer literal out of range (#1): 10000000000000000
+ERROR: hex integer literal out of range (#1): 10000000000000000
+ERROR: hex integer literal out of range (#1): 10000000000000000
+ERROR: hex integer literal out of range (#1): 10000000000000000
+ERROR: hex integer literal out of range (#1): 10000000000000000
+ERROR: hex integer literal out of range (#1): 10000000000000000
+ERROR: hex integer literal out of range (#1): 10000000000000000
+ERROR: hex integer literal out of range (#1): 10000000000000000
+ERROR: hex integer literal out of range (#1): 10000000000000000
+ERROR: hex integer literal out of range (#1): 10000000000000000
+ERROR: hex integer literal out of range (#1): 10000000000000000
+ERROR: hex integer literal out of range (#1): 10000000000000000
+ERROR: hex integer literal out of range (#1): 10000000000000000
+ERROR: hex integer literal out of range (#1): 10000000000000000
+ERROR: hex integer literal out of range (#1): 10000000000000000
+ERROR: hex integer literal out of range (#1): 10000000000000000
+ERROR: hex integer literal out of range (#1): 10000000000000000
+ERROR: hex integer literal out of range (#1): 10000000000000000
+ERROR: hex integer literal out of range (#1): 10000000000000000
+ERROR: hex integer literal out of range (#1): 10000000000000000
+ERROR: hex integer literal out of range (#1): 10000000000000000
+ERROR: hex integer literal out of range (#1): 10000000000000000
+ERROR: hex integer literal out of range (#1): 10000000000000000
+ERROR: hex integer literal out of range (#1): 10000000000000000
+ERROR: hex integer literal out of range (#1): 10000000000000000
+ERROR: hex integer literal out of range (#1): 10000000000000000
+ERROR: hex integer literal out of range (#1): 10000000000000000
+ERROR: malformed number (#2): 0x10000000000000000l_ud1
+ERROR: malformed number (#2): 0x10000000000000000L_ud1
+ERROR: malformed number (#2): 0x10000000000000000ll_ud1
+ERROR: malformed number (#2): 0x10000000000000000LL_ud1

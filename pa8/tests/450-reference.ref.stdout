@@ -1,0 +1,2 @@
+LINKING: variable i SP_CONST|SP_INT LK_EXTERNAL lvalue-reference to const int initializer=(CopyInitializer (LiteralExpression (TT_LITERAL:3))) initializer_expression=(VariableExpression (VC_LVALUE int <temp>)) is_constant = 1
+LINKING: function main SP_INT function of () returning int defined=1

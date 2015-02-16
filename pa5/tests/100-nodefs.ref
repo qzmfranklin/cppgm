@@ -1,0 +1,7 @@
+preproc 1
+sof tests/100-nodefs.t
+literal 123 int 7B000000
+identifier foo
+identifier bar
+identifier baz
+eof

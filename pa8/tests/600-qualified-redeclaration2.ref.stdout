@@ -1,0 +1,4 @@
+LINKING: variable x SP_CONST|SP_INT LK_EXTERNAL const int initializer=(CopyInitializer (IdExpression (y))) initializer_expression=(Immediate (VC_PRVALUE int 03000000)) is_constant = 1
+LINKING: variable arr SP_INT LK_EXTERNAL array of 3 int initializer=(DefaultInitializer) initializer_expression=(null) is_constant = 0
+LINKING: variable y SP_CONST|SP_INT LK_INTERNAL const int initializer=(CopyInitializer (LiteralExpression (TT_LITERAL:3))) initializer_expression=(Immediate (VC_PRVALUE int 03000000)) is_constant = 1
+LINKING: function main SP_INT function of () returning int defined=1

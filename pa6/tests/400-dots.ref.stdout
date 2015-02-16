@@ -1,0 +1,118 @@
+
+    00: 
+        template-declaration: 
+            declaration: 
+                simple-declaration: 
+                    decl-specifier-seq: 
+                        00: 
+                            type-specifier: 
+                                class-specifier: 
+                                    class-head: 
+                                        base-clause: 
+                                            base-specifier-list: 
+                                                00: 
+                                                    OP_DOTS: OP_DOTS
+                                                    base-specifier: 
+                                                        access-specifier: KW_PUBLIC
+                                                        base-type-specifier: 
+                                                            class-name: 
+                                                                TT_IDENTIFIER: TT_IDENTIFIER:CMixins
+                                        class-head-name: 
+                                            class-name: 
+                                                TT_IDENTIFIER: TT_IDENTIFIER:CX
+                                        class-key: KW_CLASS
+                                    member-specification-seq: 
+                                        00: 
+                                            access-specifier: KW_PUBLIC
+                                        01: 
+                                            member-declaration: 
+                                                function-definition: 
+                                                    decl-specifier-seq: 
+                                                        00: 
+                                                            type-specifier: KW_VOID
+                                                    declarator: 
+                                                        noptr-declarator: 
+                                                            noptr-declarator-root: 
+                                                                declarator-id: 
+                                                                    id-expression: 
+                                                                        unqualified-id: 
+                                                                            TT_IDENTIFIER: TT_IDENTIFIER:constructor
+                                                            noptr-declartor-suffix-seq: 
+                                                                00: 
+                                                                    parameters-and-qualifiers: 
+                                                                        cv-qualifer-seq: empty
+                                                                        parameter-declaration-clause: 
+                                                                            parameter-declaration-list: 
+                                                                                00: 
+                                                                                    decl-specifier-seq: 
+                                                                                        00: 
+                                                                                            type-specifier: 
+                                                                                                cv-qualifier: KW_CONST
+                                                                                        01: 
+                                                                                            type-specifier: 
+                                                                                                type-name: 
+                                                                                                    class-name: 
+                                                                                                        TT_IDENTIFIER: TT_IDENTIFIER:CMixins
+                                                                                    declarator: 
+                                                                                        noptr-declarator: 
+                                                                                            noptr-declarator-root: 
+                                                                                                declarator-id: 
+                                                                                                    OP_DOTS: OP_DOTS
+                                                                                                    id-expression: 
+                                                                                                        unqualified-id: 
+                                                                                                            TT_IDENTIFIER: TT_IDENTIFIER:mixins
+                                                                                            noptr-declartor-suffix-seq: empty
+                                                                                        ptr-operator-seq: 
+                                                                                            00: 
+                                                                                                op: OP_AMP
+                                                        ptr-operator-seq: empty
+                                                    function-body: 
+                                                        compound-statement: empty
+                                                        ctor-initializer: 
+                                                            mem-initializer-list: 
+                                                                00: 
+                                                                    OP_DOTS: OP_DOTS
+                                                                    mem-initializer: 
+                                                                        expression-list: 
+                                                                            00: 
+                                                                                initializer-clause: 
+                                                                                    assignment-expression: 
+                                                                                        primary-expression: 
+                                                                                            id_expression: 
+                                                                                                unqualified-id: 
+                                                                                                    TT_IDENTIFIER: TT_IDENTIFIER:mixins
+                                                                        mem-initializer-id: 
+                                                                            class-or-decltype: 
+                                                                                class-name: 
+                                                                                    TT_IDENTIFIER: TT_IDENTIFIER:CMixins
+                                                    virt-specifier-seq: empty
+                                        02: 
+                                            member-declaration: 
+                                                decl-specifier-seq: 
+                                                    00: 
+                                                        function-specifier: KW_VIRTUAL
+                                                    01: 
+                                                        type-specifier: KW_VOID
+                                                member-declarator-list: 
+                                                    00: 
+                                                        declarator: 
+                                                            noptr-declarator: 
+                                                                noptr-declarator-root: 
+                                                                    declarator-id: 
+                                                                        id-expression: 
+                                                                            unqualified-id: 
+                                                                                OP_COMPL: OP_COMPL
+                                                                                class-name: 
+                                                                                    TT_IDENTIFIER: TT_IDENTIFIER:CX
+                                                                noptr-declartor-suffix-seq: 
+                                                                    00: 
+                                                                        parameters-and-qualifiers: 
+                                                                            cv-qualifer-seq: empty
+                                                                            parameter-declaration-clause: empty
+                                                            ptr-operator-seq: empty
+            template-parameter-list: 
+                00: 
+                    type-parameter: 
+                        OP_DOTS: OP_DOTS
+                        identifier: TT_IDENTIFIER:CMixins
+                        kw: KW_CLASS

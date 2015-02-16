@@ -1,0 +1,35 @@
+char c;
+unsigned char uc;
+signed char sc;
+char16_t c16;
+char32_t c32;
+bool b;
+unsigned u;
+unsigned int ui;
+signed s;
+signed int si;
+int i;
+unsigned short int usi;
+unsigned short us;
+unsigned long int uli;
+unsigned long ul;
+unsigned long long int ulli;
+unsigned long long ull;
+signed long int sli;
+signed long sl;
+signed long long int slli;
+signed long long sll;
+long long int lli;
+long int li;
+long l;
+signed short int shi;
+signed short sh;
+short int hi;
+short h;
+wchar_t w;
+float f;
+double d;
+long double ld;
+void* pv;
+
+

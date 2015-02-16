@@ -1,0 +1,17 @@
+1 translation units
+start translation unit tests/120-namespace-special.t
+start unnamed namespace
+start unnamed namespace
+end namespace
+start namespace A
+start unnamed namespace
+end namespace
+end namespace
+start namespace B
+inline namespace
+start unnamed namespace
+inline namespace
+end namespace
+end namespace
+end namespace
+end translation unit

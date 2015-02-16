@@ -1,0 +1,16 @@
+character-literal 3 'f'
+new-line 0 
+character-literal 5 'foo'
+new-line 0 
+new-line 0 
+identifier 1 r
+character-literal 5 'bar'
+new-line 0 
+character-literal 6 u'bar'
+new-line 0 
+character-literal 6 U'bar'
+new-line 0 
+character-literal 6 L'baz'
+new-line 0 
+new-line 0 
+eof

@@ -1,0 +1,15 @@
+1 translation units
+start translation unit tests/240-unnamed.t
+start unnamed namespace
+variable i int
+variable x double
+variable j char
+start unnamed namespace
+end namespace
+start namespace A
+variable i double
+start unnamed namespace
+end namespace
+end namespace
+end namespace
+end translation unit

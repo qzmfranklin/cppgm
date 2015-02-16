@@ -1,0 +1,8 @@
+preproc 1
+sof tests/150-null-directive.t
+literal 1 int 01000000
+literal 2 int 02000000
+literal 3 int 03000000
+literal 4 int 04000000
+literal 5 int 05000000
+eof

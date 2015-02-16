@@ -1,0 +1,4 @@
+tests/300-void-ref.t.1:1:6: error: variable has incomplete type 'void'
+void x;
+     ^
+1 error generated.

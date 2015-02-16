@@ -1,0 +1,7 @@
+literal 42.421e20f float F7F66563
+literal 42.525e-20F float F705FB20
+literal 52.521515e300 double 78309204489B937E
+literal 421.45252e-300 double 3A712B68E6A33102
+user-defined-literal 42.421e20_ud1 _ud1 floating 42.421e20
+user-defined-literal 42.525e-20_ud1 _ud1 floating 42.525e-20
+eof

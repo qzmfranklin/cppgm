@@ -1,0 +1,4 @@
+preproc 1
+sof tests/500-alt.t
+identifier baz
+eof

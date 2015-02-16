@@ -1,0 +1,4 @@
+tests/300-nonenclosing-qualified-decl.t.1:7:12: error: cannot define or redeclare 'x' here because namespace 'B' does not enclose namespace 'A'
+    int A::x;
+        ~~~^
+1 error generated.

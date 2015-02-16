@@ -1,0 +1,10 @@
+1 translation units
+start translation unit tests/290-double-using.t
+start unnamed namespace
+start namespace A
+variable i int
+end namespace
+start namespace A1
+end namespace
+end namespace
+end translation unit

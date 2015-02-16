@@ -1,0 +1,15 @@
+1 translation units
+start translation unit tests/150-lookup.t
+start unnamed namespace
+variable x char
+start namespace A
+variable x int
+end namespace
+start namespace B
+variable x double
+end namespace
+start namespace C
+variable x char
+end namespace
+end namespace
+end translation unit

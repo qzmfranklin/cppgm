@@ -1,0 +1,4 @@
+tests/300-bad-ref1.t.1:1:13: error: 'T1' declared as a pointer to a reference of type 'int &'
+typedef int&* T1;
+            ^
+1 error generated.

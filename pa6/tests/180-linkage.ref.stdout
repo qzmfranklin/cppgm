@@ -1,0 +1,70 @@
+
+    00: 
+        linkage-specification: 
+            TT_LITERAL: TT_LITERAL:"C"
+            declaration: 
+                simple-declaration: 
+                    decl-specifier-seq: 
+                        00: 
+                            type-specifier: KW_VOID
+                    init-declarator-list: 
+                        00: 
+                            declarator: 
+                                noptr-declarator: 
+                                    noptr-declarator-root: 
+                                        declarator-id: 
+                                            id-expression: 
+                                                unqualified-id: 
+                                                    TT_IDENTIFIER: TT_IDENTIFIER:foo
+                                    noptr-declartor-suffix-seq: 
+                                        00: 
+                                            parameters-and-qualifiers: 
+                                                cv-qualifer-seq: empty
+                                                parameter-declaration-clause: empty
+                                ptr-operator-seq: empty
+    01: 
+        linkage-specification: 
+            TT_LITERAL: TT_LITERAL:"D"
+            declaration-seq: 
+                00: 
+                    simple-declaration: 
+                        decl-specifier-seq: 
+                            00: 
+                                type-specifier: KW_VOID
+                        init-declarator-list: 
+                            00: 
+                                declarator: 
+                                    noptr-declarator: 
+                                        noptr-declarator-root: 
+                                            declarator-id: 
+                                                id-expression: 
+                                                    unqualified-id: 
+                                                        TT_IDENTIFIER: TT_IDENTIFIER:bar
+                                        noptr-declartor-suffix-seq: 
+                                            00: 
+                                                parameters-and-qualifiers: 
+                                                    cv-qualifer-seq: empty
+                                                    parameter-declaration-clause: empty
+                                    ptr-operator-seq: empty
+                01: 
+                    simple-declaration: 
+                        decl-specifier-seq: 
+                            00: 
+                                type-specifier: KW_VOID
+                        init-declarator-list: 
+                            00: 
+                                declarator: 
+                                    noptr-declarator: 
+                                        noptr-declarator-root: 
+                                            declarator-id: 
+                                                id-expression: 
+                                                    unqualified-id: 
+                                                        TT_IDENTIFIER: TT_IDENTIFIER:baz
+                                        noptr-declartor-suffix-seq: 
+                                            00: 
+                                                parameters-and-qualifiers: 
+                                                    cv-qualifer-seq: empty
+                                                    parameter-declaration-clause: empty
+                                    ptr-operator-seq: empty
+    02: 
+        empty-declaration: empty

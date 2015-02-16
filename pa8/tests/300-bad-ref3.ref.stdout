@@ -1,0 +1,1 @@
+tests/300-bad-ref3.t.1:1:1: error: reference to reference in declarator

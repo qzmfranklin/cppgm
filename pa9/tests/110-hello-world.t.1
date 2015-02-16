@@ -1,0 +1,14 @@
+#include "syscalls.h"
+
+data:
+	"Hello, World!\n";
+start:
+	// calculate size of string:
+	isub64 x64 start data;
+
+	// write string to stdout:
+	syscall3 t64 SN_WRITE 1 data x64;
+
+	// exit success
+	syscall1 t64 SN_EXIT 0;
+

@@ -1,0 +1,26 @@
+preproc 1
+sof tests/150-max.t
+simple int KW_INT
+identifier table
+simple [ OP_LSQUARE
+literal 100 int 64000000
+simple ] OP_RSQUARE
+simple ; OP_SEMICOLON
+simple ( OP_LPAREN
+simple ( OP_LPAREN
+literal 2 int 02000000
+simple ) OP_RPAREN
+simple > OP_GT
+simple ( OP_LPAREN
+literal 3 int 03000000
+simple ) OP_RPAREN
+simple ? OP_QMARK
+simple ( OP_LPAREN
+literal 2 int 02000000
+simple ) OP_RPAREN
+simple : OP_COLON
+simple ( OP_LPAREN
+literal 3 int 03000000
+simple ) OP_RPAREN
+simple ) OP_RPAREN
+eof

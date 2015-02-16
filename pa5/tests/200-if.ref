@@ -1,0 +1,5 @@
+preproc 1
+sof tests/200-if.t
+identifier true1
+identifier true2
+eof

@@ -1,0 +1,3 @@
+LINKING: function f SP_INLINE|SP_VOID function of () returning void defined=1
+LINKING: function main SP_INT function of () returning int defined=1
+LINKING: function f SP_INLINE|SP_VOID function of () returning void defined=1

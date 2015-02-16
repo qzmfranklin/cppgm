@@ -1,0 +1,9 @@
+preproc 1
+sof tests/200-fnlike.t
+identifier bar
+identifier bar
+identifier bar
+identifier qux
+identifier bar
+identifier baz
+eof

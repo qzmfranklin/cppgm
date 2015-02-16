@@ -1,0 +1,131 @@
+
+    00: 
+        function-definition: 
+            decl-specifier-seq: 
+                00: 
+                    type-specifier: KW_INT
+            declarator: 
+                noptr-declarator: 
+                    noptr-declarator-root: 
+                        declarator-id: 
+                            id-expression: 
+                                unqualified-id: 
+                                    TT_IDENTIFIER: TT_IDENTIFIER:main
+                    noptr-declartor-suffix-seq: 
+                        00: 
+                            parameters-and-qualifiers: 
+                                cv-qualifer-seq: empty
+                                parameter-declaration-clause: empty
+                ptr-operator-seq: empty
+            function-body: 
+                compound-statement: 
+                    00: 
+                        declaration-statement: 
+                            simple-declaration: 
+                                decl-specifier-seq: 
+                                    00: 
+                                        type-specifier: 
+                                            type-name: 
+                                                class-name: 
+                                                    simple-template-id: 
+                                                        TT_IDENTIFIER: TT_IDENTIFIER:TC1
+                                                        template-argument-list: 
+                                                            00: 
+                                                                template-argument: 
+                                                                    constant-expression: 
+                                                                        primary-expression: 
+                                                                            lhs: 
+                                                                                primary-expression: TT_LITERAL:1
+                                                                            relational-operator: OP_GT
+                                                                            rhs: 
+                                                                                primary-expression: TT_LITERAL:2
+                                init-declarator-list: 
+                                    00: 
+                                        declarator: 
+                                            noptr-declarator: 
+                                                noptr-declarator-root: 
+                                                    declarator-id: 
+                                                        id-expression: 
+                                                            unqualified-id: 
+                                                                TT_IDENTIFIER: TT_IDENTIFIER:x2
+                                                noptr-declartor-suffix-seq: empty
+                                            ptr-operator-seq: empty
+                    01: 
+                        declaration-statement: 
+                            simple-declaration: 
+                                decl-specifier-seq: 
+                                    00: 
+                                        type-specifier: 
+                                            type-name: 
+                                                class-name: 
+                                                    simple-template-id: 
+                                                        TT_IDENTIFIER: TT_IDENTIFIER:TC1
+                                                        template-argument-list: 
+                                                            00: 
+                                                                template-argument: 
+                                                                    type-id: 
+                                                                        type-specifier-seq: 
+                                                                            00: 
+                                                                                type-name: 
+                                                                                    class-name: 
+                                                                                        simple-template-id: 
+                                                                                            TT_IDENTIFIER: TT_IDENTIFIER:TC2
+                                                                                            template-argument-list: 
+                                                                                                00: 
+                                                                                                    template-argument: 
+                                                                                                        constant-expression: 
+                                                                                                            primary-expression: TT_LITERAL:1
+                                init-declarator-list: 
+                                    00: 
+                                        declarator: 
+                                            noptr-declarator: 
+                                                noptr-declarator-root: 
+                                                    declarator-id: 
+                                                        id-expression: 
+                                                            unqualified-id: 
+                                                                TT_IDENTIFIER: TT_IDENTIFIER:x3
+                                                noptr-declartor-suffix-seq: empty
+                                            ptr-operator-seq: empty
+                    02: 
+                        declaration-statement: 
+                            simple-declaration: 
+                                decl-specifier-seq: 
+                                    00: 
+                                        type-specifier: 
+                                            type-name: 
+                                                class-name: 
+                                                    simple-template-id: 
+                                                        TT_IDENTIFIER: TT_IDENTIFIER:TC1
+                                                        template-argument-list: 
+                                                            00: 
+                                                                template-argument: 
+                                                                    type-id: 
+                                                                        type-specifier-seq: 
+                                                                            00: 
+                                                                                type-name: 
+                                                                                    class-name: 
+                                                                                        simple-template-id: 
+                                                                                            TT_IDENTIFIER: TT_IDENTIFIER:TC2
+                                                                                            template-argument-list: 
+                                                                                                00: 
+                                                                                                    template-argument: 
+                                                                                                        constant-expression: 
+                                                                                                            primary-expression: 
+                                                                                                                lhs: 
+                                                                                                                    primary-expression: TT_LITERAL:6
+                                                                                                                rhs: 
+                                                                                                                    primary-expression: TT_LITERAL:1
+                                                                                                                shift-operator: 
+                                                                                                                    OP_RSHIFT: ST_RSHIFT_1
+                                init-declarator-list: 
+                                    00: 
+                                        declarator: 
+                                            noptr-declarator: 
+                                                noptr-declarator-root: 
+                                                    declarator-id: 
+                                                        id-expression: 
+                                                            unqualified-id: 
+                                                                TT_IDENTIFIER: TT_IDENTIFIER:x5
+                                                noptr-declartor-suffix-seq: empty
+                                            ptr-operator-seq: empty
+            virt-specifier-seq: empty

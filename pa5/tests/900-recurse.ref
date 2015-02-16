@@ -1,0 +1,14 @@
+preproc 1
+sof tests/900-recurse.t
+literal 1 int 01000000
+literal 2 int 02000000
+identifier f
+simple ( OP_LPAREN
+literal 1 int 01000000
+literal 2 int 02000000
+identifier f
+simple ( OP_LPAREN
+identifier x
+simple ) OP_RPAREN
+simple ) OP_RPAREN
+eof

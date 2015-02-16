@@ -1,0 +1,194 @@
+translation-unit:
+	declaration* ST_EOF
+
+type-name:
+	typedef-name
+
+namespace-name:
+	TT_IDENTIFIER
+
+typedef-name:
+	TT_IDENTIFIER
+
+expression:
+	KW_TRUE
+	KW_FALSE
+	KW_NULLPTR
+	TT_LITERAL
+	OP_LPAREN expression OP_RPAREN
+	id-expression
+		
+id-expression:
+	unqualified-id
+	qualified-id
+
+unqualified-id:
+	TT_IDENTIFIER
+
+qualified-id:
+	nested-name-specifier unqualified-id
+
+nested-name-specifier:
+	nested-name-specifier-root nested-name-specifier-suffix*
+	
+nested-name-specifier-root:
+	OP_COLON2
+	namespace-name OP_COLON2
+
+nested-name-specifier-suffix:
+	TT_IDENTIFIER OP_COLON2
+
+constant-expression:
+	expression
+
+declaration:
+	namespace-definition
+	simple-declaration
+	function-definition
+	namespace-alias-definition
+	using-declaration
+	using-directive
+	static_assert-declaration
+	alias-declaration
+	empty-declaration
+
+alias-declaration:
+	KW_USING TT_IDENTIFIER OP_ASS type-id OP_SEMICOLON
+	
+simple-declaration:
+	decl-specifier-seq init-declarator-list OP_SEMICOLON
+	
+static_assert-declaration:
+	KW_STATIC_ASSERT OP_LPAREN constant-expression OP_COMMA TT_LITERAL OP_RPAREN OP_SEMICOLON
+
+empty-declaration:
+	OP_SEMICOLON
+
+decl-specifier:
+	storage-class-specifier
+	type-specifier
+	function-specifier
+	KW_TYPEDEF
+	KW_CONSTEXPR
+
+decl-specifier-seq:
+	decl-specifier+
+
+storage-class-specifier:
+	KW_STATIC
+	KW_THREAD_LOCAL
+	KW_EXTERN
+
+function-specifier:
+	KW_INLINE
+
+type-specifier:
+	simple-type-specifier
+	cv-qualifier
+
+type-specifier-seq:
+	type-specifier+
+
+simple-type-specifier:
+	KW_CHAR
+	KW_CHAR16_T
+	KW_CHAR32_T
+	KW_WCHAR_T
+	KW_BOOL
+	KW_SHORT
+	KW_INT
+	KW_LONG
+	KW_SIGNED
+	KW_UNSIGNED
+	KW_FLOAT
+	KW_DOUBLE
+	KW_VOID
+	nested-name-specifier? type-name
+
+namespace-definition:
+	KW_INLINE? KW_NAMESPACE TT_IDENTIFIER? OP_LBRACE namespace-body OP_RBRACE
+
+namespace-body:
+	declaration*
+
+namespace-alias-definition:
+	KW_NAMESPACE TT_IDENTIFIER OP_ASS qualified-namespace-specifier OP_SEMICOLON
+
+qualified-namespace-specifier:
+	nested-name-specifier? namespace-name
+
+using-declaration:
+	KW_USING nested-name-specifier unqualified-id OP_SEMICOLON
+
+using-directive:
+	KW_USING KW_NAMESPACE nested-name-specifier? TT_IDENTIFIER OP_SEMICOLON
+
+init-declarator-list:
+	init-declarator (OP_COMMA init-declarator)*
+
+init-declarator:
+	declarator initializer?
+
+initializer:
+	OP_ASS expression
+
+declarator:
+	ptr-declarator
+
+ptr-declarator:
+	ptr-operator* noptr-declarator-root noptr-declarator-suffix*
+
+noptr-declarator-root:
+	id-expression
+	OP_LPAREN ptr-declarator OP_RPAREN
+
+noptr-declarator-suffix:
+	parameters-and-qualifiers
+	OP_LSQUARE constant-expression? OP_RSQUARE
+
+parameters-and-qualifiers:
+	OP_LPAREN parameter-declaration-clause OP_RPAREN
+
+ptr-operator:
+	OP_STAR cv-qualifier*
+	OP_AMP
+	OP_LAND
+
+cv-qualifier:
+	KW_CONST
+	KW_VOLATILE
+	
+type-id:
+	type-specifier-seq abstract-declarator?
+
+abstract-declarator:
+	ptr-abstract-declarator
+
+ptr-abstract-declarator:
+	ptr-operator* noptr-abstract-declarator
+	ptr-operator+
+	
+noptr-abstract-declarator:
+	noptr-abstract-declarator-root noptr-declarator-suffix*
+	noptr-declarator-suffix+
+
+noptr-abstract-declarator-root:
+	noptr-declarator-suffix
+	OP_LPAREN ptr-abstract-declarator OP_RPAREN
+	
+parameter-declaration-clause:
+	parameter-declaration-list? OP_DOTS?
+	parameter-declaration-list OP_COMMA OP_DOTS
+
+parameter-declaration-list:
+	parameter-declaration (OP_COMMA parameter-declaration)*
+
+parameter-declaration:
+	decl-specifier-seq declarator
+	decl-specifier-seq abstract-declarator?
+
+function-definition:
+	decl-specifier-seq declarator function-body
+
+function-body:
+	OP_LBRACE OP_RBRACE

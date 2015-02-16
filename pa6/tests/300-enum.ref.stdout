@@ -1,0 +1,18 @@
+
+    00: 
+        simple-declaration: 
+            decl-specifier-seq: 
+                00: 
+                    type-specifier: 
+                        enum-specifier: 
+                            enum-head: 
+                                TT_IDENTIFIER: TT_IDENTIFIER:E
+                                enum-key: 
+                                    KW_ENUM: KW_ENUM
+                            enumerator-list: 
+                                00: 
+                                    enumerator: TT_IDENTIFIER:e1
+                                01: 
+                                    enumerator: TT_IDENTIFIER:e2
+                                02: 
+                                    enumerator: TT_IDENTIFIER:e3

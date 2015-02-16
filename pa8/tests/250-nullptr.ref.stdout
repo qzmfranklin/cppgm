@@ -1,0 +1,2 @@
+LINKING: variable k SP_INT LK_EXTERNAL pointer to int initializer=(CopyInitializer (LiteralExpression (KW_NULLPTR))) initializer_expression=(Immediate (VC_PRVALUE pointer to int 0000000000000000)) is_constant = 0
+LINKING: function main SP_INT function of () returning int defined=1

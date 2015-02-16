@@ -1,0 +1,4 @@
+tests/300-bad-ref2.t.1:1:13: error: cannot form a reference to 'void'
+typedef void& T2;
+            ^
+1 error generated.

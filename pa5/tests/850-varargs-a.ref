@@ -1,0 +1,46 @@
+preproc 1
+sof tests/850-varargs-a.t
+identifier fprintf
+simple ( OP_LPAREN
+identifier stderr
+simple , OP_COMMA
+literal "Flag" array of 5 char 466C616700
+simple ) OP_RPAREN
+simple ; OP_SEMICOLON
+identifier fprintf
+simple ( OP_LPAREN
+identifier stderr
+simple , OP_COMMA
+literal "X = %d\n" array of 8 char 58203D2025640A00
+simple , OP_COMMA
+identifier x
+simple ) OP_RPAREN
+simple ; OP_SEMICOLON
+identifier puts
+simple ( OP_LPAREN
+literal "The first, second, and third items." array of 36 char 5468652066697273742C207365636F6E642C20616E64207468697264206974656D732E00
+simple ) OP_RPAREN
+simple ; OP_SEMICOLON
+simple ( OP_LPAREN
+simple ( OP_LPAREN
+identifier x
+simple > OP_GT
+identifier y
+simple ) OP_RPAREN
+simple ? OP_QMARK
+identifier puts
+simple ( OP_LPAREN
+literal "x>y" array of 4 char 783E7900
+simple ) OP_RPAREN
+simple : OP_COLON
+identifier printf
+simple ( OP_LPAREN
+literal "x is %d but y is %d" array of 20 char 7820697320256420627574207920697320256400
+simple , OP_COMMA
+identifier x
+simple , OP_COMMA
+identifier y
+simple ) OP_RPAREN
+simple ) OP_RPAREN
+simple ; OP_SEMICOLON
+eof
