@@ -1,0 +1,4 @@
+tests/*
+!tests/*.t
+
+pptoken

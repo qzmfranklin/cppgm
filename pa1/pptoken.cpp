@@ -6,10 +6,8 @@
 #include <unordered_map>
 #include <unordered_set>
 
-using namespace std;
-
-#include "IPPTokenStream.h"
-#include "DebugPPTokenStream.h"
+#include "pp_token_stream_ifc.h"
+#include "pp_token_stream_test.h"
 
 // Translation features you need to implement:
 // - utf8 decoder
@@ -26,8 +24,7 @@ constexpr int EndOfFile = -1;
 // given hex digit character c, return its value
 int HexCharToValue(int c)
 {
-	switch (c)
-	{
+	switch (c) {
 	case '0': return 0;
 	case '1': return 1;
 	case '2': return 2;
@@ -55,7 +52,7 @@ int HexCharToValue(int c)
 }
 
 // See C++ standard 2.11 Identifiers and Appendix/Annex E.1
-const vector<pair<int, int>> AnnexE1_Allowed_RangesSorted =
+const std::vector<pair<int, int>> AnnexE1_Allowed_RangesSorted =
 {
 	{0xA8,0xA8},
 	{0xAA,0xAA},
@@ -105,7 +102,7 @@ const vector<pair<int, int>> AnnexE1_Allowed_RangesSorted =
 };
 
 // See C++ standard 2.11 Identifiers and Appendix/Annex E.2
-const vector<pair<int, int>> AnnexE2_DisallowedInitially_RangesSorted =
+const std::vector<pair<int, int>> AnnexE2_DisallowedInitially_RangesSorted =
 {
 	{0x300,0x36F},
 	{0x1DC0,0x1DFF},
@@ -114,7 +111,7 @@ const vector<pair<int, int>> AnnexE2_DisallowedInitially_RangesSorted =
 };
 
 // See C++ standard 2.13 Operators and punctuators
-const unordered_set<string> Digraph_IdentifierLike_Operators =
+const std::unordered_set<std::string> Digraph_IdentifierLike_Operators =
 {
 	"new", "delete", "and", "and_eq", "bitand",
 	"bitor", "compl", "not", "not_eq", "or",
@@ -122,7 +119,7 @@ const unordered_set<string> Digraph_IdentifierLike_Operators =
 };
 
 // See `simple-escape-sequence` grammar
-const unordered_set<int> SimpleEscapeSequence_CodePoints =
+const std::unordered_set<int> SimpleEscapeSequence_CodePoints =
 {
 	'\'', '"', '?', '\\', 'a', 'b', 'f', 'n', 'r', 't', 'v'
 };
@@ -130,22 +127,16 @@ const unordered_set<int> SimpleEscapeSequence_CodePoints =
 // Tokenizer
 struct PPTokenizer
 {
-	IPPTokenStream& output;
-
-	PPTokenizer(IPPTokenStream& output)
-		: output(output)
-	{}
-
-	void process(int c)
-	{
+	pp_token_stream_ifc& output;
+	PPTokenizer(pp_token_stream_ifc& output) : output(output) {}
+	void process(int c) {
 		// TODO:  Your code goes here.
 
 		// 1. do translation features
 		// 2. tokenize resulting stream
 		// 3. call an output.emit_* function for each token.
 
-		if (c == EndOfFile)
-		{
+		if (c == EndOfFile) {
 			output.emit_identifier("not_yet_implemented");
 			output.emit_eof();
 		}
@@ -158,28 +149,21 @@ struct PPTokenizer
 
 int main()
 {
-	try
-	{
-		ostringstream oss;
-		oss << cin.rdbuf();
-
-		string input = oss.str();
-
-		DebugPPTokenStream output;
-
+	try {
+		std::ostringstream oss;
+		oss << std::cin.rdbuf();
+		std::string input = oss.str();
+		pp_token_stream_test output;
 		PPTokenizer tokenizer(output);
 
-		for (char c : input)
-		{
-			unsigned char code_unit = c;
+		for (char c : input) {
+			uint8_t code_unit = c;
 			tokenizer.process(code_unit);
 		}
 
 		tokenizer.process(EndOfFile);
-	}
-	catch (exception& e)
-	{
-		cerr << "ERROR: " << e.what() << endl;
+	} catch (exception& e) {
+		std::cerr << "ERROR: " << e.what() << std::endl;
 		return EXIT_FAILURE;
 	}
 }

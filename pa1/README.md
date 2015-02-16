@@ -95,7 +95,7 @@ The first element is the _Token Type_ (defined below).  The next is an integer N
 
 At the end of the output `pptoken` should print `eof` on a line by itself.
 
-There is an interface and implementation in the skeleton code you can use, called `IPPTokenStream` and `DebugPPTokenStream` respectively, that will produce the correct output format for you.
+There is an interface and implementation in the skeleton code you can use, called `pp_token_stream_ifc` and `pp_token_stream_test` respectively, that will produce the correct output format for you.
 
 ### Definition: Course Defined
 
@@ -510,7 +510,7 @@ Also, there is some cross-over between `whitespace-sequence` comment starts `//`
 
 Usually you will need to match the longest token (some exceptions are comments, raw strings and the `<` `::` case).  So greedily "keep going" in the state machine until you cannot go and further, then emit the discovered token and return to the start state.
 
-To emit a token there is an interface provided in the skeleton code called `IPPTokenStream`.  It has one function for each token type.  In most cases you will need to store and then UTF-8 encode the code point sequence corresponding to the token to pass to the data argument.  The token data is expected to have the translation tasks applied (for one example _line splicing_), but not the literal tasks (for example decoding `simple-escape-sequences` is not required at this stage) (which occur later in translation phase 7 and is not part of this assignment).
+To emit a token there is an interface provided in the skeleton code called `pp_token_stream_ifc`.  It has one function for each token type.  In most cases you will need to store and then UTF-8 encode the code point sequence corresponding to the token to pass to the data argument.  The token data is expected to have the translation tasks applied (for one example _line splicing_), but not the literal tasks (for example decoding `simple-escape-sequences` is not required at this stage) (which occur later in translation phase 7 and is not part of this assignment).
 
 ### Self-Tokenizing (Optional/Ungraded)
 
