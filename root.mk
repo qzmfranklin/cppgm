@@ -1,6 +1,6 @@
 #	PROJECT-WIDE COMMON COMPILING FLAGS 
-CC		:=g++-4.9
-CFLAGS 		:=-g -O3 -Wall -Drestrict=__restrict__ -DNDEBUG
+CC		:=g++-4.9 -fdiagnostics-color=always
+CFLAGS 		:=-g -O3 -Wall -Drestrict=__restrict__ -DNDEBUG -std=c++11
 
 CXX		:=${CC}
 CXXFLAGS	:=${CFLAGS}

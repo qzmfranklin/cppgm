@@ -26,3 +26,9 @@
 *.exe
 *.out
 *.app
+
+# Dependency files
+*.d
+
+# Ctags tag file
+tags
