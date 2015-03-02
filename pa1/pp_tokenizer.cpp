@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <unordered_set>
+#include <unordered_map>
 #include <assert.h>
 #include <stdlib.h>
 
@@ -78,18 +79,18 @@ const std::unordered_set<char> pp_tokenizer::_basic_source_character_set = {
 /* 2.4 Trigraph sequences
  * ??X => Y is represented as X => Y in this hash table.
  */
-const std::unordered_set<char> pp_tokenizer::_trigraph_sequence_set = {
-	std::pair('=', '#'),
-	std::pair('/', '\\'),
-	std::pair('\'', '^'),
+const std::unordered_map<char, char> pp_tokenizer::_trigraph_sequence_map = {
+	std::pair<char, char>('=', '#'),
+	std::pair<char, char>('/', '\\'),
+	std::pair<char, char>('\'', '^'),
 
-	std::pair('(', '['),
-	std::pair(')', ']'),
-	std::pair('!', '|'),
+	std::pair<char, char>('(', '['),
+	std::pair<char, char>(')', ']'),
+	std::pair<char, char>('!', '|'),
 
-	std::pair('<', '{'),
-	std::pair('>', '}'),
-	std::pair('-', '~'),
+	std::pair<char, char>('<', '{'),
+	std::pair<char, char>('>', '}'),
+	std::pair<char, char>('-', '~'),
 };
 
 /*
@@ -113,26 +114,27 @@ const std::unordered_set<char> pp_tokenizer::_trigraph_sequence_set = {
  * 2. In all aspects of the language, each alternative token behaves the same,
  *    respectively, as its primary token, except for its spelling.
  */
-const std::unordered_set<std::string> pp_tokenizer::_alternative_token_set = {
-	std::pair("<%", "{");
-	std::pair("%>", "}");
-	std::pair("<:", "[");
-	std::pair(":>", "]");
-	std::pair("%:", "#");
-	std::pair("%:%:", "##");
+const std::unordered_map<std::string, std::string>
+pp_tokenizer::_alternative_token_map = {
+	std::pair<std::string, std::string>("<%", "{"),
+	std::pair<std::string, std::string>("%>", "}"),
+	std::pair<std::string, std::string>("<:", "["),
+	std::pair<std::string, std::string>(":>", "]"),
+	std::pair<std::string, std::string>("%:", "#"),
+	std::pair<std::string, std::string>("%:%:", "##"),
 
-	std::pair("and", "&&");
-	std::pair("bitor", "|");
-	std::pair("or", "||");
-	std::pair("xor", "^");
-	std::pair("compl", "~");
-	std::pair("bitand", "&");
+	std::pair<std::string, std::string>("and", "&&"),
+	std::pair<std::string, std::string>("bitor", "|"),
+	std::pair<std::string, std::string>("or", "||"),
+	std::pair<std::string, std::string>("xor", "^"),
+	std::pair<std::string, std::string>("compl", "~"),
+	std::pair<std::string, std::string>("bitand", "&"),
 
-	std::pair("and_eq", "&=");
-	std::pair("or_eq", "|=");
-	std::pair("xor_eq", "^=");
-	std::pair("not", "!");
-	std::pair("not_eq", "!=");
+	std::pair<std::string, std::string>("and_eq", "&="),
+	std::pair<std::string, std::string>("or_eq", "|="),
+	std::pair<std::string, std::string>("xor_eq", "^="),
+	std::pair<std::string, std::string>("not", "!"),
+	std::pair<std::string, std::string>("not_eq", "!="),
 };
 
 /*
@@ -147,7 +149,7 @@ const std::unordered_set<std::string> pp_tokenizer::_alternative_token_set = {
 
 /*
  * 2.8 Comments
- * The characters /* start a comment, which terminates with the characters * /.
+ * The characters / * start a comment, which terminates with the characters * /.
  * These comments do not nest.
  * The characters // start a comment, which terminates with the next '\n'.
  * If there is a form-feed or a vertical-tab character in such a comment, only
@@ -157,8 +159,8 @@ const std::unordered_set<std::string> pp_tokenizer::_alternative_token_set = {
 
 /*
  * 2.9 Header names
- * h-char; any member of the source character set except new line and >
- * q-char; any member of the source character set except new line and "
+ * h-char; any member of the source character set except new-line and >
+ * q-char; any member of the source character set except new-line and "
  */
 const std::unordered_set<char> pp_tokenizer::_h_char_set = {
 	' ',
@@ -180,9 +182,9 @@ const std::unordered_set<char> pp_tokenizer::_h_char_set = {
 	'\\',
 	'\"',
 	'\''
-}
+};
 
-const std::unordered_set<char> pp_tokenizer::_h_char_set = {
+const std::unordered_set<char> pp_tokenizer::_q_char_set = {
 	' ',
 	'\t',
 	//'\n',
@@ -202,7 +204,7 @@ const std::unordered_set<char> pp_tokenizer::_h_char_set = {
 	'\\',
 	//'\"',
 	'\''
-}
+};
 
 /*
  * 2.10 Preprocessing numbers
@@ -266,7 +268,7 @@ const std::unordered_set<char> pp_tokenizer::_nondigit_set = {
 };
 
 const std::unordered_set<char> pp_tokenizer::_digit_set = {
-	'1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
+	'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
 };
 
 /*
@@ -285,7 +287,7 @@ const std::unordered_set<char> pp_tokenizer::_digit_set = {
 /*
  * Table 4:
  */
-const std::unordered_set<string> pp_tokenizer::_keyword_set = {
+const std::unordered_set<std::string> pp_tokenizer::_keyword_set = {
 	"alignas",
 	"alignof",
 	"asm",
@@ -370,8 +372,8 @@ const std::unordered_set<string> pp_tokenizer::_keyword_set = {
  * Each preprocessing-op-or-punc token is converted to a single token in
  * translation phase 7 (2.2)
  */
-std::unordered_set<string> pp_tokenizer::_preprocessing_op_or_punc_set = {
-};
+//std::unordered_set<std::string> pp_tokenizer::_preprocessing_op_or_punc_set = {
+//};
 
 /*
  * 2.14.1 Kinds of literals
@@ -488,6 +490,74 @@ std::unordered_set<string> pp_tokenizer::_preprocessing_op_or_punc_set = {
  * hexadecimal-escape-sequence:
  *	\x hexadecimal-digit
  *	hexadecimal-escape-sequence hexadecimal-digit
+ * 1. - A character literal is on or more characters enclosed in single quotes,
+ *      as in 'x', optionally preceded by one of the letters u, U, or L, as in
+ *      u'y', U'z', or L'x', respectively.
+ *    - A character literal that does not begin with u, U, or L is an ordinary
+ *      character literal, also referred to as a narrow-character literal.
+ *    - An ordinary character literal that contains a single c-char
+ *      representable in the execution character set has type char, with value
+ *      equal to the numerical value of the encoding of the c-char in the
+ *      executaion character set.
+ *    - An ordinary character literal that contains more than one c-char is a
+ *      multicharacter literal.
+ *    - A multicharacter literal, or an ordinary character literal containing a
+ *      single c-char not representable in the executation character set, is
+ *      conditionally supported, has type int, and has an implementation-defined
+ *      value.
+ * 2. - u'y' has type char16_t. If the unicode code point is not representable
+ *      within 16 bits, the program is ill-formed.
+ *    - A char16_t containing multiple c-chars is ill-formed.
+ *    - U'z' has type char32_t.
+ *    - A char32_t containing multiple c-chars is ill-formed.
+ *    - L'x' has type wchar_t, or a wide-character literal.
+ *    - The type wchar_t is able to represent all members of the executtion
+ *      wide-character set (see 3.9.1).
+ *    - The value of a wide-character literal containing multiple c-chars is
+ *      implementation-defined.
+ * 3. - Certain nongraphic characters, the single quote ', the double quote ",
+ *      the question mark ?, and the backslash \, can be represented according
+ *      Table 7.
+ *    - The double quote " and the question mark ?, can be represented as
+ *      themselves or by the escape sequences \" and \? respectively.
+ *    - The single quote ' and the backslash \ can only be represented by the
+ *      escape sequences \' and \\ respectively.
+ *    - Escape sequences in which the character following the backslash is not
+ *      listed in Table 7 are conditionally-supported, with
+ *      implementation-defined semantics.
+ *    - An escape sequence specifies a single character.
+ * 4. - The escape \ooo consists of the backslash followed by one, two, or three
+ *      octal digits that are taken to specify the value of the desired
+ *      character.
+ *    - The escape \xhhh consists of the backslash followed by x followed by one
+ *      or more hexadecimal digits that are taken to specify the value of the
+ *      desired character.
+ *    - A sequence of octal or hexadecimal digits is terminated by the first
+ *      character that is not an octal digit or a hexadecimal digit,
+ *      respectively.
+ *    - The value of a character literal is implementation-defined if it falls
+ *      outside of the implementation-defined range defined for char, char16_t,
+ *      char32_t, or wchar_t, respectively.
+ * 5. - A universal-character-name is translated to the encoding, in the
+ *      appropriate executation character set, of the character named.
+ *    - If there is no such encoding, the universal
+ */
+
+/*
+ * Table 7 -- Escape sequences
+ * new-line         NL   \n
+ * horizontal tab   HT   \t
+ * vertical tab     VT   \v
+ * backspace        BS   \b
+ * carriage return  CR   \r
+ * form feed        FF   \f
+ * alert            BEL  \a
+ * backslash        \    \\
+ * question mark    ?    \?
+ * single quote     '    \'
+ * double quote     "    \"
+ * octal number     ooo  \ooo
+ * hex number       hhh  \xhhh
  */
 
 std::vector<uint64_t> pp_tokenizer::_state_bit_mask_list(pp_tokenizer::NUM_STATES);
@@ -496,7 +566,7 @@ pp_tokenizer::pp_tokenizer(FILE *fin): _stream(fin)
 {
 	assert(NUM_STATES < 64);
 	for (int i = 0; i < NUM_STATES; i++)
-		_state_mask_list[i] = 1 << i;
+		_state_bit_mask_list[i] = 1 << i;
 }
 
 int pp_tokenizer::issue_token(FILE *fout)
@@ -507,7 +577,7 @@ int pp_tokenizer::issue_token(FILE *fout)
 		fprintf(fout,"eof\n");
 	else
 		fprintf(fout,"%s %zu %s\n",
-				_token_type_string_map[this->_type].c_str(),
+				_token_type_to_string_map[this->_type].c_str(),
 				this->_data.size(), this->_data.c_str());
 	return 0;
 }

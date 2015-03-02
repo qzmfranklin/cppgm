@@ -1,6 +1,7 @@
 #include <string>
 #include <vector>
 #include <unordered_set>
+#include <unordered_map>
 
 class pp_tokenizer {
 public:
@@ -33,11 +34,11 @@ private:
 	class Stream {
 	public:
 		Stream(FILE *fp);
-		uint64_t fetch();
-		void push(uint64_t);
+		int fetch();
+		void push(const int ch);
 	private:
 		FILE *fp;
-		uint64_t _buf[BUFSIZ];
+		int _buf[BUFSIZ];
 	} _stream;
 
 	enum {
@@ -62,9 +63,18 @@ private:
 	uint64_t _state = 0;
 
 	bool _is_ready_to_issue() const;
-	uint64_t _get_bit_mask_for(const int state) const;
+	uint32_t _get_bit_mask_for(const int state) const;
 
 	static std::vector<uint64_t> _state_bit_mask_list;
 	const static std::vector<std::string> _token_type_to_string_map;
 	const static std::unordered_set<char> _basic_source_character_set;
+
+	const static std::unordered_map<std::string, std::string> _alternative_token_map;
+	const static std::unordered_map<char, char> _trigraph_sequence_map;
+
+	const static std::unordered_set<char> _h_char_set;
+	const static std::unordered_set<char> _q_char_set;
+	const static std::unordered_set<char> _nondigit_set;
+	const static std::unordered_set<char> _digit_set;
+	const static std::unordered_set<std::string> _keyword_set;
 };
