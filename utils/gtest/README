@@ -1,0 +1,6 @@
+Integrating Google Test
+
+Modified the Google's original Makefile
+
+Usage and build example:
+See demo/algorithm/bst/gtest_bst.cpp

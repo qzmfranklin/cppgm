@@ -7,8 +7,8 @@ CXXFLAGS	:=-O3 -Wall -Drestrict=__restrict__ -DNDEBUG -std=c++11
 
 #       PROJECT-WIDE DEFAULT LINKING LIBRARIES AND INCLUDE DIRECTORIES
 INCS		:=-iquote $(ROOT) \
-	-isystem utils/gtest \
-	-isystem utils/gtest/include \
+	-isystem $(ROOT)/utils/gtest \
+	-isystem $(ROOT)/utils/gtest/include \
 	`pkg-config --cflags icu-io`
 LIBS		:= \
 	`pkg-config --libs icu-io`
