@@ -22,3 +22,5 @@ test: $(TESTS)
 
 # Sample linking rules for building executables:
 test_icu.exe: $(D)/test_icu.o
+gtest_UnicodeString.exe: $(ROOT)/utils/gtest/gtest_main.a \
+	$(D)/gtest_UnicodeString.o
