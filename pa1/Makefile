@@ -1,20 +1,24 @@
-#ROOT    :=/home/zhongming/git/cppgm
-ROOT    :=~/git/cppgm
-d       :=${ROOT}/pa1# this directory
--include ${ROOT}/root.mk
--include ${ROOT}/pa1/rules.mk
--include ${DEP}
+ROOT    :=$(realpath ..)
+D       :=$(realpath $(dir $(lastword $(MAKEFILE_LIST))))# this directory
+-include $(ROOT)/root.mk
+-include $(ROOT)/gtest/rules.mk
+-include $(D)/rules.mk
+# Inlcude more rules.mk here if you this directory depends on them.
+-include $(DEP)
+
+# List all the executables you want to run when you type `make test` in $(TESTS)
+# Note that you need to -include $(ROOT)/gtest/rules.mk to actually build those
+# executables
+TESTS:=
 
 .PHONY: all asm clean test
-all: ${OBJ}
-asm: ${ASM}
-check:
-	@echo ${FOO}
-	@echo ${ROOT}/pa1/rules.mk
+all: $(OBJ)
+asm: $(ASM)
 clean:
-	rm -f *.exe ${OBJ} ${DEP} ${ASM}
-test: pptoken.exe
-	scripts/run_all_tests.pl $< my
-	scripts/compare_results.pl ref my
+	$(QUIET)rm -f *.exe $(OBJ) $(DEP) $(ASM)
+test: $(TESTS)
+	$(QUIET)for t in $^ ; do ./"$$t" || exit 1 ; done
 
-pptoken.exe: ${d}/pptoken.o ${d}/pp_tokenizer.o
+# Sample linking rules for building executables:
+#test_heapsort.exe: $(D)/heapsort.o $(D)/test_heapsort.o $(ROOT)/utils/utils.o
+#gtest_dag.exe: $(ROOT)/gtest/gtest_main.a $(D)/gtest_dag.o $(D)/dag.o
