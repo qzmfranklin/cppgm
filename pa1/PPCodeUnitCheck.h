@@ -29,6 +29,7 @@ public:
   static bool isBasicSourceCharacter(const UnitPtr);
   static bool isDigit(const UnitPtr);
   static bool isNondigit(const UnitPtr);
+  static bool isIdentifierNondigit(const UnitPtr);
   static bool isInAnnexE1(const UnitPtr);
   static bool isInAnnexE2(const UnitPtr);
   static bool isBinaryDigit(const UnitPtr);

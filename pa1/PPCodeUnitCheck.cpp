@@ -16,6 +16,12 @@ bool PPCodeUnitCheck::isNondigit(const UnitPtr unit)
   return PPCodePointCheck::isNondigit(unit->getChar32());
 }
 
+bool PPCodeUnitCheck::isIdentifierNondigit(const UnitPtr unit)
+{
+  return PPCodePointCheck::isNondigit(unit->getChar32())
+    || (unit->getType == PPCodeUnitType::UniversalCharacterName);
+}
+
 bool PPCodeUnitCheck::isInAnnexE1(const UnitPtr unit)
 {
   return PPCodePointCheck::isInAnnexE1(unit->getChar32());
