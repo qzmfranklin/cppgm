@@ -4,12 +4,13 @@ D       :=$(realpath $(dir $(lastword $(MAKEFILE_LIST))))# this directory
 -include $(ROOT)/gtest/rules.mk
 -include $(D)/rules.mk
 # Inlcude more rules.mk here if you this directory depends on them.
+-include $(ROOT)/utils/rules.mk
 -include $(DEP)
 
 # List all the executables you want to run when you type `make test` in $(TESTS)
 # Note that you need to -include $(ROOT)/gtest/rules.mk to actually build those
 # executables
-TESTS:=gtest_PPToken.exe gtest_PPCodePointCheck.exe
+TESTS:=gtest_PPToken.exe gtest_PPCodePointCheck.exe gtest_PPCodeUnit.exe
 
 .PHONY: all asm clean test
 all: $(OBJ)
@@ -22,3 +23,5 @@ test: $(TESTS)
 # Sample linking rules for building executables:
 gtest_PPToken.exe: $(ROOT)/gtest/gtest_main.a $(D)/gtest_PPToken.o $(D)/PPToken.o
 gtest_PPCodePointCheck.exe: $(ROOT)/gtest/gtest_main.a $(D)/gtest_PPCodePointCheck.o $(D)/PPCodePointCheck.o
+gtest_PPCodeUnit.exe: $(ROOT)/gtest/gtest_main.a $(ROOT)/utils/UStringTools.o \
+	$(D)/gtest_PPCodeUnit.o $(D)/PPCodeUnit.o
