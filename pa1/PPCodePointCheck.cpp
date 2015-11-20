@@ -144,7 +144,7 @@ bool PPCodePointCheck::isDigit(const char32_t ch32)
     _digit_set.end();
 }
 
-bool PPCodePointCheck::isNonDigit(const char32_t ch32)
+bool PPCodePointCheck::isNondigit(const char32_t ch32)
 {
   return _nondigit_set.find(static_cast<char>(ch32)) !=
     _nondigit_set.end();

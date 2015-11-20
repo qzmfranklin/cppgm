@@ -9,7 +9,7 @@ TEST(PPCodePointCheck, isDigit)
 {
 }
 
-TEST(PPCodePointCheck, isNonDigit)
+TEST(PPCodePointCheck, isNondigit)
 {
 }
 
