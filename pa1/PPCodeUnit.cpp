@@ -1,0 +1,49 @@
+#include "PPCodeUnit.h"
+#include "utils/UStringTools.h"
+
+std::shared_ptr<PPCodeUnitCodePoint> PPCodeUnit::createCodePoint(const char ch)
+{
+  return std::make_shared<PPCodeUnitCodePoint>(ch);
+}
+
+std::shared_ptr<PPCodeUnitUniversalCharacterName>
+PPCodeUnit::createUniversalCharacterName(const char32_t ch32, const std::u32string &u32str)
+{
+  return std::make_shared<PPCodeUnitUniversalCharacterName>(ch32, u32str);
+}
+
+std::shared_ptr<PPCodeUnitWhitespaceCharacter>
+PPCodeUnit::createWhitespaceCharacter(const std::u32string &u32str)
+{
+  return std::make_shared<PPCodeUnitWhitespaceCharacter>(u32str);
+}
+
+std::string PPCodeUnitCodePoint::getUTF8String() const
+{
+  return UStringTools::u32_to_u8(getUTF32String());
+}
+
+std::u32string PPCodeUnitCodePoint::getUTF32String() const
+{
+  return std::u32string(1, _ch32);
+}
+
+std::string PPCodeUnitUniversalCharacterName::getUTF8String() const
+{
+  return UStringTools::u32_to_u8(getUTF32String());
+}
+
+std::u32string PPCodeUnitUniversalCharacterName::getUTF32String() const
+{
+  return _u32string;
+}
+
+std::string PPCodeUnitWhitespaceCharacter::getUTF8String() const
+{
+  return UStringTools::u32_to_u8(getUTF32String());
+}
+
+std::u32string PPCodeUnitWhitespaceCharacter::getUTF32String() const
+{
+  return _u32string;
+}
