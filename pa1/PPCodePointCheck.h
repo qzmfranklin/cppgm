@@ -5,6 +5,7 @@
 class PPCodePointCheck {
 public:
   static bool isBasicSourceCharacter(const char32_t);
+  static bool isWhitespaceCharacter(const char32_t);
   static bool isDigit(const char32_t);
   static bool isNondigit(const char32_t);
   static bool isInAnnexE1(const char32_t);

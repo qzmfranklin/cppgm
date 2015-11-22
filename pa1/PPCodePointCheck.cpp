@@ -138,6 +138,15 @@ bool PPCodePointCheck::isBasicSourceCharacter(const char32_t ch32)
     _basic_source_character_set.end();
 }
 
+bool PPCodePointCheck::isWhitespaceCharacter(const char32_t ch32)
+{
+  return ch32 == U' '
+    ||  ch32 == U'\t'
+    ||  ch32 == static_cast<char32_t>(0x0B) // vertical tab
+    ||  ch32 == static_cast<char32_t>(0x0C) // form feed;
+  ;
+}
+
 bool PPCodePointCheck::isDigit(const char32_t ch32)
 {
   return _digit_set.find(static_cast<char>(ch32)) !=

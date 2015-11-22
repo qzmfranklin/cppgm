@@ -5,6 +5,10 @@ TEST(PPCodePointCheck, isBasicSourceCharacter)
 {
 }
 
+TEST(PPCodePointCheck, isWhitespaceCharacter)
+{
+}
+
 TEST(PPCodePointCheck, isDigit)
 {
 }
