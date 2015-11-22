@@ -6,7 +6,7 @@
 enum class PPCodeUnitType {
   CodePoint,
   UniversalCharacterName,
-  WhitespaceCharacter
+  WhitespaceSequence
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -14,15 +14,15 @@ enum class PPCodeUnitType {
 ////////////////////////////////////////////////////////////////////////////////
 class PPCodeUnitCodePoint;
 class PPCodeUnitUniversalCharacterName;
-class PPCodeUnitWhitespaceCharacter;
+class PPCodeUnitWhitespaceSequence;
 
 // Union class of Unicode code point, universal-character-name, and
-// whitespace-character.
+// whitespace-sequence.
 //
 // For a Unicode code point or a universal-character-name, getChar32() is equal
 // to the unicode code point it represents.
 //
-// For a whitespace-character, the value is 0.
+// For a whitespace-sequence, the value is 0.
 class PPCodeUnit {
 public:
   PPCodeUnit(const PPCodeUnitType type, const char32_t ch32):
@@ -40,8 +40,8 @@ public:
   static std::shared_ptr<PPCodeUnitCodePoint> createCodePoint(const char);
   static std::shared_ptr<PPCodeUnitUniversalCharacterName>
     createUniversalCharacterName(const char32_t, const std::u32string&);
-  static std::shared_ptr<PPCodeUnitWhitespaceCharacter>
-    createWhitespaceCharacter(const std::u32string&);
+  static std::shared_ptr<PPCodeUnitWhitespaceSequence>
+    createWhitespaceSequence(const std::u32string&);
 
 protected:
   const PPCodeUnitType _type;
@@ -70,10 +70,10 @@ private:
   const std::u32string _u32string;
 };
 
-class PPCodeUnitWhitespaceCharacter: public PPCodeUnit {
+class PPCodeUnitWhitespaceSequence: public PPCodeUnit {
 public:
-  PPCodeUnitWhitespaceCharacter(const std::u32string &u32str):
-    PPCodeUnit(PPCodeUnitType::WhitespaceCharacter, static_cast<char32_t>(0)), _u32string(u32str) {}
+  PPCodeUnitWhitespaceSequence(const std::u32string &u32str):
+    PPCodeUnit(PPCodeUnitType::WhitespaceSequence, static_cast<char32_t>(0)), _u32string(u32str) {}
   virtual std::string getUTF8String() const override;
   virtual std::u32string getUTF32String() const override;
 private:

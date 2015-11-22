@@ -20,10 +20,10 @@ TEST(PPCodeUnit, UniversalCharacterName)
   ASSERT_EQ(UR"(\U1F600)", unit->getUTF32String());
 }
 
-TEST(PPCodeUnit, WhitespaceCharacter)
+TEST(PPCodeUnit, WhitespaceSequence)
 {
-  const auto unit = PPCodeUnit::createWhitespaceCharacter(UR"(/*  \t \n // */)");
-  ASSERT_EQ(PPCodeUnitType::WhitespaceCharacter, unit->getType());
+  const auto unit = PPCodeUnit::createWhitespaceSequence(UR"(/*  \t \n // */)");
+  ASSERT_EQ(PPCodeUnitType::WhitespaceSequence, unit->getType());
   ASSERT_EQ(R"(/*  \t \n // */)",  unit->getUTF8String());
   ASSERT_EQ(UR"(/*  \t \n // */)", unit->getUTF32String());
 }
