@@ -39,7 +39,7 @@ public:
   // PPCodeUnitCodePoint deals with basic source characters, encodable in a char
   static std::shared_ptr<PPCodeUnitCodePoint> createCodePoint(const char);
   static std::shared_ptr<PPCodeUnitUniversalCharacterName>
-    createUniversalCharacterName(const char32_t, const std::u32string&);
+    createUniversalCharacterName(const char32_t, const std::string&);
   static std::shared_ptr<PPCodeUnitWhitespaceSequence>
     createWhitespaceSequence(const std::u32string&);
 
@@ -62,12 +62,12 @@ public:
 
 class PPCodeUnitUniversalCharacterName: public PPCodeUnit {
 public:
-  PPCodeUnitUniversalCharacterName(const char32_t ch32, const std::u32string &u32str):
-    PPCodeUnit(PPCodeUnitType::UniversalCharacterName, ch32), _u32string(u32str) {}
+  PPCodeUnitUniversalCharacterName(const char32_t ch32, const std::string &u8str):
+    PPCodeUnit(PPCodeUnitType::UniversalCharacterName, ch32), _u8string(u8str) {}
   virtual std::string getUTF8String() const override;
   virtual std::u32string getUTF32String() const override;
 private:
-  const std::u32string _u32string;
+  const std::string _u8string;
 };
 
 class PPCodeUnitWhitespaceSequence: public PPCodeUnit {

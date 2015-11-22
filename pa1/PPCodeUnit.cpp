@@ -7,9 +7,9 @@ std::shared_ptr<PPCodeUnitCodePoint> PPCodeUnit::createCodePoint(const char ch)
 }
 
 std::shared_ptr<PPCodeUnitUniversalCharacterName>
-PPCodeUnit::createUniversalCharacterName(const char32_t ch32, const std::u32string &u32str)
+PPCodeUnit::createUniversalCharacterName(const char32_t ch32, const std::string &u8str)
 {
-  return std::make_shared<PPCodeUnitUniversalCharacterName>(ch32, u32str);
+  return std::make_shared<PPCodeUnitUniversalCharacterName>(ch32, u8str);
 }
 
 std::shared_ptr<PPCodeUnitWhitespaceSequence>
@@ -30,12 +30,12 @@ std::u32string PPCodeUnitCodePoint::getUTF32String() const
 
 std::string PPCodeUnitUniversalCharacterName::getUTF8String() const
 {
-  return UStringTools::u32_to_u8(getUTF32String());
+  return _u8string;
 }
 
 std::u32string PPCodeUnitUniversalCharacterName::getUTF32String() const
 {
-  return _u32string;
+  return UStringTools::u8_to_u32(_u8string);
 }
 
 std::string PPCodeUnitWhitespaceSequence::getUTF8String() const

@@ -13,17 +13,17 @@ TEST(PPCodeUnit, CodePoint)
 TEST(PPCodeUnit, UniversalCharacterName)
 {
   // The code point is the smiley: 😀
-  const auto unit = PPCodeUnit::createUniversalCharacterName(0x1F600, UR"(\U1F600)");
+  const auto unit = PPCodeUnit::createUniversalCharacterName(0x1F600, R"(\U1F600)");
   ASSERT_EQ(PPCodeUnitType::UniversalCharacterName, unit->getType());
-  ASSERT_EQ(U'😀',          unit->getChar32());
-  ASSERT_EQ(R"(\U1F600)",  unit->getUTF8String());
-  ASSERT_EQ(UR"(\U1F600)", unit->getUTF32String());
+  ASSERT_EQ(U'😀',                          unit->getChar32());
+  ASSERT_EQ(std::string(R"(\U1F600)"),     unit->getUTF8String());
+  ASSERT_EQ(std::u32string(UR"(\U1F600)"), unit->getUTF32String());
 }
 
 TEST(PPCodeUnit, WhitespaceSequence)
 {
   const auto unit = PPCodeUnit::createWhitespaceSequence(UR"(/*  \t \n // */)");
-  ASSERT_EQ(PPCodeUnitType::WhitespaceSequence, unit->getType());
-  ASSERT_EQ(R"(/*  \t \n // */)",  unit->getUTF8String());
-  ASSERT_EQ(UR"(/*  \t \n // */)", unit->getUTF32String());
+  ASSERT_EQ(PPCodeUnitType::WhitespaceSequence,    unit->getType());
+  ASSERT_EQ(std::string(R"(/*  \t \n // */)"),     unit->getUTF8String());
+  ASSERT_EQ(std::u32string(UR"(/*  \t \n // */)"), unit->getUTF32String());
 }
