@@ -6,7 +6,7 @@
 enum class PPCodeUnitType {
   CodePoint,
   UniversalCharacterName,
-  WhitespaceSequence
+  Comment
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -14,7 +14,7 @@ enum class PPCodeUnitType {
 ////////////////////////////////////////////////////////////////////////////////
 class PPCodeUnitCodePoint;
 class PPCodeUnitUniversalCharacterName;
-class PPCodeUnitWhitespaceSequence;
+class PPCodeUnitComment;
 
 // Union class of Unicode code point, universal-character-name, and
 // whitespace-sequence.
@@ -40,8 +40,8 @@ public:
   static std::shared_ptr<PPCodeUnitCodePoint> createCodePoint(const char);
   static std::shared_ptr<PPCodeUnitUniversalCharacterName>
     createUniversalCharacterName(const char32_t, const std::string&);
-  static std::shared_ptr<PPCodeUnitWhitespaceSequence>
-    createWhitespaceSequence(const std::u32string&);
+  static std::shared_ptr<PPCodeUnitComment>
+    createComment(const std::u32string&);
 
 protected:
   const PPCodeUnitType _type;
@@ -70,10 +70,10 @@ private:
   const std::string _u8string;
 };
 
-class PPCodeUnitWhitespaceSequence: public PPCodeUnit {
+class PPCodeUnitComment: public PPCodeUnit {
 public:
-  PPCodeUnitWhitespaceSequence(const std::u32string &u32str):
-    PPCodeUnit(PPCodeUnitType::WhitespaceSequence, static_cast<char32_t>(0)), _u32string(u32str) {}
+  PPCodeUnitComment(const std::u32string &u32str):
+    PPCodeUnit(PPCodeUnitType::Comment, static_cast<char32_t>(0)), _u32string(u32str) {}
   virtual std::string getUTF8String() const override;
   virtual std::u32string getUTF32String() const override;
 private:
