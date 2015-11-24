@@ -18,14 +18,15 @@ PPCodeUnit::createComment(const std::u32string &u32str)
   return std::make_shared<PPCodeUnitComment>(u32str);
 }
 
-std::string PPCodeUnitCodePoint::getUTF8String() const
+std::shared_ptr<PPCodeUnitDigraph>
+PPCodeUnit::createDigraph(const std::string &u8str)
 {
-  return UStringTools::u32_to_u8(getUTF32String());
+  return std::make_shared<PPCodeUnitDigraph>(u8str);
 }
 
-std::u32string PPCodeUnitCodePoint::getUTF32String() const
+std::string PPCodeUnitCodePoint::getUTF8String() const
 {
-  return std::u32string(1, _ch32);
+  return UStringTools::u32_to_u8(std::u32string(1, _ch32));
 }
 
 std::string PPCodeUnitUniversalCharacterName::getUTF8String() const
@@ -33,17 +34,12 @@ std::string PPCodeUnitUniversalCharacterName::getUTF8String() const
   return _u8string;
 }
 
-std::u32string PPCodeUnitUniversalCharacterName::getUTF32String() const
-{
-  return UStringTools::u8_to_u32(_u8string);
-}
-
 std::string PPCodeUnitComment::getUTF8String() const
 {
-  return UStringTools::u32_to_u8(getUTF32String());
+  return UStringTools::u32_to_u8(_u32string);
 }
 
-std::u32string PPCodeUnitComment::getUTF32String() const
+std::string PPCodeUnitDigraph::getUTF8String() const
 {
-  return _u32string;
+  return _u8string;
 }

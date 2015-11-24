@@ -6,7 +6,8 @@
 enum class PPCodeUnitType {
   CodePoint,
   UniversalCharacterName,
-  Comment
+  Comment,
+  Digraph
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -15,6 +16,7 @@ enum class PPCodeUnitType {
 class PPCodeUnitCodePoint;
 class PPCodeUnitUniversalCharacterName;
 class PPCodeUnitComment;
+class PPCodeUnitDigraph;
 
 // Union class of Unicode code point, universal-character-name, and
 // whitespace-sequence.
@@ -31,17 +33,16 @@ public:
   PPCodeUnitType getType() const { return _type; }
   char32_t getChar32() const { return _ch32; }
 
-  // Virtual methods
   virtual std::string getUTF8String() const = 0;
-  virtual std::u32string getUTF32String() const = 0;
 
   // Factory methods
-  // PPCodeUnitCodePoint deals with basic source characters, encodable in a char
   static std::shared_ptr<PPCodeUnitCodePoint> createCodePoint(const char);
   static std::shared_ptr<PPCodeUnitUniversalCharacterName>
     createUniversalCharacterName(const char32_t, const std::string&);
   static std::shared_ptr<PPCodeUnitComment>
     createComment(const std::u32string&);
+  static std::shared_ptr<PPCodeUnitDigraph>
+    createDigraph(const std::string&);
 
 protected:
   const PPCodeUnitType _type;
@@ -57,7 +58,6 @@ public:
   PPCodeUnitCodePoint(const char ch):
     PPCodeUnit(PPCodeUnitType::CodePoint, static_cast<char32_t>(ch)) {}
   virtual std::string getUTF8String() const override;
-  virtual std::u32string getUTF32String() const override;
 };
 
 class PPCodeUnitUniversalCharacterName: public PPCodeUnit {
@@ -65,7 +65,6 @@ public:
   PPCodeUnitUniversalCharacterName(const char32_t ch32, const std::string &u8str):
     PPCodeUnit(PPCodeUnitType::UniversalCharacterName, ch32), _u8string(u8str) {}
   virtual std::string getUTF8String() const override;
-  virtual std::u32string getUTF32String() const override;
 private:
   const std::string _u8string;
 };
@@ -75,8 +74,16 @@ public:
   PPCodeUnitComment(const std::u32string &u32str):
     PPCodeUnit(PPCodeUnitType::Comment, static_cast<char32_t>(0)), _u32string(u32str) {}
   virtual std::string getUTF8String() const override;
-  virtual std::u32string getUTF32String() const override;
 private:
   const std::u32string _u32string;
+};
+
+class PPCodeUnitDigraph: public PPCodeUnit {
+public:
+  PPCodeUnitDigraph(const std::string &u8str):
+    PPCodeUnit(PPCodeUnitType::Digraph, static_cast<char32_t>(0)), _u8string(u8str) {}
+  virtual std::string getUTF8String() const override;
+private:
+  const std::string _u8string;
 };
 #endif /* end of include guard */
