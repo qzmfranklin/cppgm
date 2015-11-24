@@ -93,7 +93,7 @@ void PPCodeUnitStream::toNext()
           }
           _u32stream->toNext();
         } else if (PPCodePointCheck::isBasicSourceCharacter(curr32)) {
-          _curr = PPCodeUnit::createCodePoint(static_cast<const char>(curr32));
+          _curr = PPCodeUnit::createASCIIChar(static_cast<const char>(curr32));
           state = State::End;
         } else {
           _setError(R"(Not a basic-source-character)");

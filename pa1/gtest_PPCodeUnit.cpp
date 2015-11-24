@@ -3,8 +3,8 @@
 
 TEST(PPCodeUnit, CodePoint)
 {
-  const auto unit = PPCodeUnit::createCodePoint('j');
-  ASSERT_EQ(PPCodeUnitType::CodePoint,  unit->getType());
+  const auto unit = PPCodeUnit::createASCIIChar('j');
+  ASSERT_EQ(PPCodeUnitType::ASCIIChar,  unit->getType());
   ASSERT_EQ(static_cast<char32_t>('j'), unit->getChar32());
   ASSERT_EQ(std::string(1, 'j'),        unit->getUTF8String());
 }

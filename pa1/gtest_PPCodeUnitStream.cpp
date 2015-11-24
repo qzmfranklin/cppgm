@@ -112,7 +112,7 @@ TEST(PPCodeUnitStream, SimpleMixed)
   { // \n
     ASSERT_FALSE(stream->isEmpty());
     const auto unit = stream->getCodeUnit();
-    ASSERT_EQ(PPCodeUnitType::CodePoint, unit->getType());
+    ASSERT_EQ(PPCodeUnitType::ASCIIChar, unit->getType());
     ASSERT_EQ("\n", unit->getUTF8String());
     stream->toNext();
   }
@@ -136,7 +136,7 @@ TEST(PPCodeUnitStream, SimpleMixed)
   { // \n
     ASSERT_FALSE(stream->isEmpty());
     const auto unit = stream->getCodeUnit();
-    ASSERT_EQ(PPCodeUnitType::CodePoint, unit->getType());
+    ASSERT_EQ(PPCodeUnitType::ASCIIChar, unit->getType());
     ASSERT_EQ("\n", unit->getUTF8String());
     stream->toNext();
   }
@@ -155,7 +155,7 @@ TEST(PPCodeUnitStream, SimpleMixed)
     for (int i = 0; i < text.length(); i++) {
       ASSERT_FALSE(stream->isEmpty());
       const auto unit = stream->getCodeUnit();
-      ASSERT_EQ(PPCodeUnitType::CodePoint, unit->getType());
+      ASSERT_EQ(PPCodeUnitType::ASCIIChar, unit->getType());
       ASSERT_EQ(text[i], static_cast<char>(unit->getChar32()));
       stream->toNext();
     }
@@ -165,7 +165,7 @@ TEST(PPCodeUnitStream, SimpleMixed)
     for (int i = 0; i < 3; i++) {
       ASSERT_FALSE(stream->isEmpty());
       const auto unit = stream->getCodeUnit();
-      ASSERT_EQ(PPCodeUnitType::CodePoint, unit->getType());
+      ASSERT_EQ(PPCodeUnitType::ASCIIChar, unit->getType());
       ASSERT_EQ("\n", unit->getUTF8String());
       stream->toNext();
     }

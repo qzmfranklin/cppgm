@@ -1,9 +1,9 @@
 #include "PPCodeUnit.h"
 #include "utils/UStringTools.h"
 
-std::shared_ptr<PPCodeUnitCodePoint> PPCodeUnit::createCodePoint(const char ch)
+std::shared_ptr<PPCodeUnitASCIIChar> PPCodeUnit::createASCIIChar(const char ch)
 {
-  return std::make_shared<PPCodeUnitCodePoint>(ch);
+  return std::make_shared<PPCodeUnitASCIIChar>(ch);
 }
 
 std::shared_ptr<PPCodeUnitUniversalCharacterName>
@@ -24,7 +24,7 @@ PPCodeUnit::createDigraph(const std::string &u8str)
   return std::make_shared<PPCodeUnitDigraph>(u8str);
 }
 
-std::string PPCodeUnitCodePoint::getUTF8String() const
+std::string PPCodeUnitASCIIChar::getUTF8String() const
 {
   return UStringTools::u32_to_u8(std::u32string(1, _ch32));
 }

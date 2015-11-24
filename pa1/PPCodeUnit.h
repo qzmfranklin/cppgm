@@ -4,7 +4,7 @@
 #include <string>
 
 enum class PPCodeUnitType {
-  CodePoint,
+  ASCIIChar,
   UniversalCharacterName,
   Comment,
   Digraph
@@ -13,7 +13,7 @@ enum class PPCodeUnitType {
 ////////////////////////////////////////////////////////////////////////////////
 // Forward declaration of subclasses of PPCodeUnit
 ////////////////////////////////////////////////////////////////////////////////
-class PPCodeUnitCodePoint;
+class PPCodeUnitASCIIChar;
 class PPCodeUnitUniversalCharacterName;
 class PPCodeUnitComment;
 class PPCodeUnitDigraph;
@@ -36,7 +36,7 @@ public:
   virtual std::string getUTF8String() const = 0;
 
   // Factory methods
-  static std::shared_ptr<PPCodeUnitCodePoint> createCodePoint(const char);
+  static std::shared_ptr<PPCodeUnitASCIIChar> createASCIIChar(const char);
   static std::shared_ptr<PPCodeUnitUniversalCharacterName>
     createUniversalCharacterName(const char32_t, const std::string&);
   static std::shared_ptr<PPCodeUnitComment>
@@ -53,10 +53,10 @@ protected:
 // Subclasses
 ////////////////////////////////////////////////////////////////////////////////
 
-class PPCodeUnitCodePoint: public PPCodeUnit {
+class PPCodeUnitASCIIChar: public PPCodeUnit {
 public:
-  PPCodeUnitCodePoint(const char ch):
-    PPCodeUnit(PPCodeUnitType::CodePoint, static_cast<char32_t>(ch)) {}
+  PPCodeUnitASCIIChar(const char ch):
+    PPCodeUnit(PPCodeUnitType::ASCIIChar, static_cast<char32_t>(ch)) {}
   virtual std::string getUTF8String() const override;
 };
 
