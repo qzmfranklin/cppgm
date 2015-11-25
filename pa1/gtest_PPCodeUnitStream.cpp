@@ -88,6 +88,141 @@ TEST(PPCodeUnitStream, MultipleLineComment)
   ASSERT_EQ(0, unit->getChar32());
 }
 
+TEST(PPCodeUnitStream, Digraph)
+{
+  const std::vector<std::string> digraphs = {"<%", "%>", "<:", ":>", "%:", "%:%:"};
+
+  for (const std::string &str: digraphs) {
+    auto u32stream = std::make_shared<PPUTF32Stream>(str);
+    auto stream = std::make_shared<PPCodeUnitStream>(u32stream);
+
+    { // digraph
+      ASSERT_FALSE(stream->isEmpty());
+      const std::shared_ptr<PPCodeUnit> unit = stream->getCodeUnit();
+      ASSERT_EQ(PPCodeUnitType::Digraph, unit->getType());
+      ASSERT_EQ(str, unit->getUTF8String());
+      ASSERT_EQ(0, unit->getChar32());
+      stream->toNext();
+    }
+
+    { // \n
+      ASSERT_FALSE(stream->isEmpty());
+      const std::shared_ptr<PPCodeUnit> unit = stream->getCodeUnit();
+      ASSERT_EQ(PPCodeUnitType::ASCIIChar, unit->getType());
+      ASSERT_EQ(U'\n', unit->getChar32());
+      stream->toNext();
+    }
+
+    ASSERT_TRUE(stream->isEmpty());
+  }
+}
+
+TEST(PPCodeUnitStream, Digraphs2)
+{
+  { // %:%d => {%:, %, d}, not {%, :, %, d}
+    const std::string src = R"(%:%d)";
+
+    auto u32stream = std::make_shared<PPUTF32Stream>(src);
+    auto stream = std::make_shared<PPCodeUnitStream>(u32stream);
+
+    { // digraph %:
+      ASSERT_FALSE(stream->isEmpty());
+      const auto unit = stream->getCodeUnit();
+      ASSERT_EQ(PPCodeUnitType::Digraph, unit->getType());
+      ASSERT_EQ("%:", unit->getUTF8String());
+      stream->toNext();
+    }
+
+    { // %
+      ASSERT_FALSE(stream->isEmpty());
+      const std::shared_ptr<PPCodeUnit> unit = stream->getCodeUnit();
+      ASSERT_EQ(PPCodeUnitType::ASCIIChar, unit->getType());
+      ASSERT_EQ(U'%', unit->getChar32());
+      stream->toNext();
+    }
+
+    { // %
+      ASSERT_FALSE(stream->isEmpty());
+      const std::shared_ptr<PPCodeUnit> unit = stream->getCodeUnit();
+      ASSERT_EQ(PPCodeUnitType::ASCIIChar, unit->getType());
+      ASSERT_EQ(U'd', unit->getChar32());
+      stream->toNext();
+    }
+
+    { // \n
+      ASSERT_FALSE(stream->isEmpty());
+      const std::shared_ptr<PPCodeUnit> unit = stream->getCodeUnit();
+      ASSERT_EQ(PPCodeUnitType::ASCIIChar, unit->getType());
+      ASSERT_EQ(U'\n', unit->getChar32());
+      stream->toNext();
+    }
+
+    ASSERT_TRUE(stream->isEmpty());
+  }
+
+  { // :::> => {:, :, :>}
+    const std::string src = R"(:::>)";
+
+    auto u32stream = std::make_shared<PPUTF32Stream>(src);
+    auto stream = std::make_shared<PPCodeUnitStream>(u32stream);
+
+    // : x 2
+    for (int i = 0; i < 2; i++) {
+      ASSERT_FALSE(stream->isEmpty());
+      const auto unit = stream->getCodeUnit();
+      ASSERT_EQ(PPCodeUnitType::ASCIIChar, unit->getType());
+      ASSERT_EQ(U':', unit->getChar32());
+      stream->toNext();
+
+    }
+
+    { // %
+      ASSERT_FALSE(stream->isEmpty());
+      const std::shared_ptr<PPCodeUnit> unit = stream->getCodeUnit();
+      ASSERT_EQ(PPCodeUnitType::Digraph, unit->getType());
+      ASSERT_EQ(":>", unit->getUTF8String());
+      stream->toNext();
+    }
+
+    { // \n
+      ASSERT_FALSE(stream->isEmpty());
+      const std::shared_ptr<PPCodeUnit> unit = stream->getCodeUnit();
+      ASSERT_EQ(PPCodeUnitType::ASCIIChar, unit->getType());
+      ASSERT_EQ(U'\n', unit->getChar32());
+      stream->toNext();
+    }
+
+    ASSERT_TRUE(stream->isEmpty());
+  }
+}
+
+
+TEST(PPCodeUnitStream, DigraphsInSingleLineComment)
+{
+  const std::string src = R"(// <: %:%: %: :> */)";
+
+  auto u32stream = std::make_shared<PPUTF32Stream>(src);
+  auto stream = std::make_shared<PPCodeUnitStream>(u32stream);
+
+  ASSERT_FALSE(stream->isEmpty());
+  const auto unit = stream->getCodeUnit();
+  ASSERT_EQ(PPCodeUnitType::Comment, unit->getType());
+  ASSERT_EQ(src, unit->getUTF8String());
+}
+
+TEST(PPCodeUnitStream, DigraphsInMultipleLineComment)
+{
+  const std::string src = "/* <: %:%: \n * %: :> */";
+
+  auto u32stream = std::make_shared<PPUTF32Stream>(src);
+  auto stream = std::make_shared<PPCodeUnitStream>(u32stream);
+
+  ASSERT_FALSE(stream->isEmpty());
+  const auto unit = stream->getCodeUnit();
+  ASSERT_EQ(PPCodeUnitType::Comment, unit->getType());
+  ASSERT_EQ(src, unit->getUTF8String());
+}
+
 TEST(PPCodeUnitStream, SimpleMixed)
 {
   const std::string src = R"(\u340F
