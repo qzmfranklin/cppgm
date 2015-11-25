@@ -22,7 +22,7 @@ bool PPUTF32Stream::isEmpty() const
 
 char32_t PPUTF32Stream::getChar32() const
 {
-  assert(!empty());
+  assert(!isEmpty());
   return _itr.current32();
 }
 
