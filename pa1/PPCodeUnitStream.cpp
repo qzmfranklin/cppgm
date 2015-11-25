@@ -45,6 +45,8 @@ void PPCodeUnitStream::toNext()
 
 void PPCodeUnitStream::_pushCodeUnits()
 {
+  assert(_queue.empty());
+
   enum class State {
     Start,
 
@@ -59,7 +61,6 @@ void PPCodeUnitStream::_pushCodeUnits()
     Column,
     PercentSign,
     PercentSign2,
-    PercentSign3,
 
     End,
     Error
@@ -68,10 +69,7 @@ void PPCodeUnitStream::_pushCodeUnits()
   std::u32string u32str;
   State state = State::Start;
   _clearError();
-  while(state != State::End  &&  state != State::Error) {
-    if (_u32stream->isEmpty())
-      break;
-
+  while(!_u32stream->isEmpty()  &&  state != State::End  &&  state != State::Error) {
     const char32_t curr32 = _u32stream->getChar32();
     _u32stream->toNext();
 
@@ -79,7 +77,7 @@ void PPCodeUnitStream::_pushCodeUnits()
       if (curr32 == U'\\') { // Line splicing, universal-character-name
         const char32_t next32 = _u32stream->getChar32();
         if (next32 == U'\n') { // Line splicing
-          // Pass
+          // No-op pass
         } else if (next32 == U'u') { // \uXXXX
           state = State::SingleQuad;
         } else if (next32 == U'U') { // \UXXXXXXXX
@@ -209,12 +207,37 @@ void PPCodeUnitStream::_pushCodeUnits()
       // %      =>  Emit <% as Digraph
       // :      =>  Emit <: as Digraph
       // other  =>  Emit U'<' and curr32 as ASCIIChar
+      if (curr32 == U'%') {
+        state = State::End;
+        _queue.push(PPCodeUnit::createDigraph("<%"));
+      } else if (curr32 == U':') {
+        state = State::End;
+        _queue.push(PPCodeUnit::createDigraph("<:"));
+      } else if (PPCodePointCheck::isBasicSourceCharacter(curr32)) {
+        state = State::End;
+        _queue.push(PPCodeUnit::createASCIIChar('<'));
+        _queue.push(PPCodeUnit::createASCIIChar(static_cast<char>(curr32)));
+      } else {
+        state = State::Error;
+        _setError(R"(Not a basic-source-character)");
+      }
     }
 
     else if (state == State::Column) {
       // Previous:  :
       // >      =>  Emit :> as Digraph
       // other  =>  Emit U':' and curr32 as ASCIIChar
+      if (curr32 == U'>') {
+        state = State::End;
+        _queue.push(PPCodeUnit::createDigraph(":>"));
+      } else if (PPCodePointCheck::isBasicSourceCharacter(curr32)) {
+        state = State::End;
+        _queue.push(PPCodeUnit::createASCIIChar(':'));
+        _queue.push(PPCodeUnit::createASCIIChar(static_cast<char>(curr32)));
+      } else {
+        state = State::Error;
+        _setError(R"(Not a basic-source-character)");
+      }
     }
 
     else if (state == State::PercentSign) {
@@ -223,21 +246,45 @@ void PPCodeUnitStream::_pushCodeUnits()
       // :      =>  Emit U'%' and U':' as ASCIIChar, or
       //            PercentSign2 otherwise, if next32 is U'%'
       // other  =>  Emit U'%' and curr32 as ASCIIChar
+      if (curr32 == U'>') {
+        state = State::End;
+        _queue.push(PPCodeUnit::createDigraph("%>"));
+      } else if (curr32 == U':') {
+        const char32_t next32 = _u32stream->getChar32();
+        if (next32 == U'%') {
+          state = State::PercentSign2;
+          _u32stream->toNext();
+        } else {
+          state = State::End;
+          _queue.push(PPCodeUnit::createDigraph("%:"));
+        }
+      } else if (PPCodePointCheck::isBasicSourceCharacter(curr32)) {
+        state = State::End;
+        _queue.push(PPCodeUnit::createASCIIChar(':'));
+        _queue.push(PPCodeUnit::createASCIIChar(static_cast<char>(curr32)));
+      } else {
+        state = State::Error;
+        _setError(R"(Not a basic-source-character)");
+      }
     }
 
     else if (state == State::PercentSign2) {
       // Previous:  %:%
       // :      =>  Emit %:%: as Digraph
-      // other  =>  Emit U'%', U':', U'%', and curr32 as ASCIIChar
-      //
-      // For example: %:%d is converted to {'%', ':', '%', 'd'}, not {'%:', '%',
-      // 'd'}.
-    }
-
-    else if (state == State::PercentSign3) {
-      // Previous:  %:%
-      // :      =>  Emit %:%: as Digraph
-      // other  =>  Emit U'%', U':', and curr32 as ASCIIChar
+      // other  =>  Emit "%:" as Digraph, and
+      //            Emit U'%' and curr32 as ASCIIChar
+      if (curr32 == U':') {
+        state = State::End;
+        _queue.push(PPCodeUnit::createDigraph("%:%:"));
+      } else if (PPCodePointCheck::isBasicSourceCharacter(curr32)) {
+        state = State::End;
+        _queue.push(PPCodeUnit::createDigraph("%:"));
+        _queue.push(PPCodeUnit::createASCIIChar('%'));
+        _queue.push(PPCodeUnit::createASCIIChar(static_cast<char>(curr32)));
+      } else {
+        state = State::Error;
+        _setError(R"(Not a basic-source-character)");
+      }
     }
 
     else if (state == State::End) {
