@@ -32,6 +32,8 @@ public:
   static bool isIdentifierNondigit(const UnitPtr);
   static bool isInAnnexE1(const UnitPtr);
   static bool isInAnnexE2(const UnitPtr);
+  static bool isIdentifierStart(const UnitPtr);
+  static bool isIdentifierNonStart(const UnitPtr);
   static bool isBinaryDigit(const UnitPtr);
   static bool isOctalDigit(const UnitPtr);
   static bool isHexadecimalDigit(const UnitPtr);
