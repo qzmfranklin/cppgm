@@ -24,20 +24,20 @@ DEP:=$(DEP) $($(TMP)CC:%.cc=%.d)
 ASM:=$(ASM) $($(TMP)CC:%.cc=%.s)
 
 $($(TMP)DIR)/%.o: $($(TMP)DIR)/%.cc
+	$(QUIET)echo "make $(GREEN)$@ $(NONE)"
 	$(QUIET)$(CXX) -o $@ -c $< $(DEPFLAGS) ${$($(TMP)DIR)CXXFLAGS} ${$($(TMP)DIR)INCS}
-	$(QUIET)echo "Compiling $(GREEN)$(notdir $<) $(NONE)..."
 $($(TMP)DIR)/%.s: $($(TMP)DIR)/%.cc
+	$(QUIET)echo "make $(CYAN)$@ $(NONE)"
 	$(QUIET)$(CXX) -o $@ $< $(ASMFLAGS) ${$($(TMP)DIR)CXXFLAGS} ${$($(TMP)DIR)INCS}
-	$(QUIET)echo "Assembly listing $(CYAN)$(notdir $<) $(NONE)..."
 
 %.exe: $($(TMP)DIR)/samples/%.o
+	$(QUIET)echo "make $(MAGENTA)$@ $(NONE)"
 	$(QUIET)$(CXX) -o $@ $^ ${$($(TMP)DIR)LIBS}
-	$(QUIET)echo "Linking $(MAGENTA)$(notdir $@) $(NONE)..."
 
 $($(TMP)DIR)/gtest.a : $($(TMP)DIR)/src/gtest-all.o
+	$(QUIET)echo "make $(MAGENTA)$@ $(NONE)"
 	$(QUIET)$(AR) $(ARFLAGS) $@ $^
-	$(QUIET)echo "Linking $(MAGENTA)$(notdir $@) $(NONE)..."
 
 $($(TMP)DIR)/gtest_main.a : $($(TMP)DIR)/src/gtest-all.o $($(TMP)DIR)/src/gtest_main.o
+	$(QUIET)echo "make $(MAGENTA)$@ $(NONE)"
 	$(QUIET)$(AR) $(ARFLAGS) $@ $^
-	$(QUIET)echo "Linking $(MAGENTA)$(notdir $@) $(NONE)..."
