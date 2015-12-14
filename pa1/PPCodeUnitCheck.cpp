@@ -19,7 +19,7 @@ bool PPCodeUnitCheck::isNondigit(const UnitPtr unit)
 bool PPCodeUnitCheck::isIdentifierNondigit(const UnitPtr unit)
 {
   return PPCodePointCheck::isNondigit(unit->getChar32())
-    || (unit->getType == PPCodeUnitType::UniversalCharacterName);
+    || (unit->getType() == PPCodeUnitType::UniversalCharacterName);
 }
 
 bool PPCodeUnitCheck::isInAnnexE1(const UnitPtr unit)

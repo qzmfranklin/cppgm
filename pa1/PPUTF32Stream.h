@@ -4,6 +4,7 @@
 #include "UTF32StreamIfc.h"
 #include "unicode/ucnv.h"
 #include "unicode/schriter.h"
+#include <memory>
 #include <string>
 
 class PPUTF32Stream: public UTF32StreamIfc {

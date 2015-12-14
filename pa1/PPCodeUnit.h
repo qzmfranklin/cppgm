@@ -1,6 +1,7 @@
 #ifndef PPCodeUnit_h
 #define PPCodeUnit_h
 
+#include <memory>
 #include <string>
 
 enum class PPCodeUnitType {

@@ -1,6 +1,7 @@
 #ifndef PPToken_h
 #define PPToken_h
 
+#include <memory>
 #include <string>
 #include <vector>
 
