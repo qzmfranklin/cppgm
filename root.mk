@@ -1,8 +1,8 @@
 #	PROJECT-WIDE COMMON COMPILING FLAGS
-CC		:=gcc
+CC		:=clang
 CFLAGS 		:=-O3 -Wall -Drestrict=__restrict__ -DNDEBUG
 
-CXX		:=g++
+CXX		:=clang++
 CXXFLAGS	:=-O3 -Wall -Drestrict=__restrict__ -DNDEBUG -std=c++11
 
 #       PROJECT-WIDE DEFAULT LINKING LIBRARIES AND INCLUDE DIRECTORIES
