@@ -4,8 +4,25 @@
 #include <memory>
 #include <string>
 
+// ASCIIChar is one of the printable characters in the basic source character
+// set.
+//
+// WhitespaceCharacter is one of the following:
+//   0x09     horizontal tab, \t
+//   0x0A     line feed, \n
+//   0x0B     vertical tab
+//   0x0C     form feed
+//   0x0D     carriage return, \r
+//   A backslash \ followed by a newline \n
+// The value associated with a WhitespaceCharacter is the same as its ASCII
+// character for single characters, or same as the ASCII space character 0x20
+// for the backslash followed by a newline.
+//
+// WhitespaceCharacter and UniversalCharacterName are used for reverting strings
+// in raw strings.
 enum class PPCodeUnitType {
   ASCIIChar,
+  WhitespaceCharacter,
   UniversalCharacterName,
   Comment,
   Digraph
@@ -15,6 +32,7 @@ enum class PPCodeUnitType {
 // Forward declaration of subclasses of PPCodeUnit
 ////////////////////////////////////////////////////////////////////////////////
 class PPCodeUnitASCIIChar;
+class PPCodeUnitWhitespaceCharacter;
 class PPCodeUnitUniversalCharacterName;
 class PPCodeUnitComment;
 class PPCodeUnitDigraph;
@@ -38,6 +56,8 @@ public:
 
   // Factory methods
   static std::shared_ptr<PPCodeUnitASCIIChar> createASCIIChar(const char);
+  static std::shared_ptr<PPCodeUnitWhitespaceCharacter>
+    createWhitespaceCharacter(const std::string&);
   static std::shared_ptr<PPCodeUnitUniversalCharacterName>
     createUniversalCharacterName(const char32_t, const std::string&);
   static std::shared_ptr<PPCodeUnitComment>
@@ -52,6 +72,8 @@ protected:
 
 ////////////////////////////////////////////////////////////////////////////////
 // Subclasses
+//
+// DO NOT USE THE CONSTRUCTORS BELOW. INSTEAD, USE THE FACTORY METHODS.
 ////////////////////////////////////////////////////////////////////////////////
 
 class PPCodeUnitASCIIChar: public PPCodeUnit {
@@ -59,6 +81,15 @@ public:
   PPCodeUnitASCIIChar(const char ch):
     PPCodeUnit(PPCodeUnitType::ASCIIChar, static_cast<char32_t>(ch)) {}
   virtual std::string getUTF8String() const override;
+};
+
+class PPCodeUnitWhitespaceCharacter: public PPCodeUnit {
+public:
+  PPCodeUnitWhitespaceCharacter(const char ch, const std::string &u8str):
+    PPCodeUnit(PPCodeUnitType::WhitespaceCharacter, ch), _u8string(u8str) {}
+  virtual std::string getUTF8String() const override;
+private:
+  const std::string _u8string;
 };
 
 class PPCodeUnitUniversalCharacterName: public PPCodeUnit {

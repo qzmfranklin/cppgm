@@ -9,6 +9,33 @@ TEST(PPCodeUnit, CodePoint)
   ASSERT_EQ(std::string(1, 'j'),        unit->getUTF8String());
 }
 
+TEST(PPCodeUnit, WhitespaceCharacterSingleChar)
+{
+  const std::vector<std::string> singleList = { "\t", "\n", "\u000B", "\u000C", "\r" };
+  for (const auto &str: singleList) {
+    const auto unit = PPCodeUnit::createWhitespaceCharacter(str);
+    ASSERT_EQ(PPCodeUnitType::WhitespaceCharacter,  unit->getType());
+    ASSERT_EQ(static_cast<char32_t>(str[0]),        unit->getChar32());
+    ASSERT_EQ(str,                                  unit->getUTF8String());
+  }
+}
+
+TEST(PPCodeUnit, WhitespaceCharacterLineSplice)
+{
+  const std::string str = "\\\n";
+  const auto unit = PPCodeUnit::createWhitespaceCharacter(str);
+  ASSERT_EQ(PPCodeUnitType::WhitespaceCharacter,  unit->getType());
+  ASSERT_EQ(U' ',                                 unit->getChar32());
+  ASSERT_EQ("\\\n",                               unit->getUTF8String());
+}
+
+TEST(PPCodeUnit, WhitespaceCharacterInvalidInput)
+{
+  const std::string str = "Hello";
+  const auto unit = PPCodeUnit::createWhitespaceCharacter(str);
+  ASSERT_EQ(nullptr,  unit);
+}
+
 TEST(PPCodeUnit, UniversalCharacterName)
 {
   // The code point is the smiley: 😀
