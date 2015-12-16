@@ -7,6 +7,16 @@
 #include <queue>
 #include <string>
 
+// Stream UTF32 code points into stream of PPCodeUnit that is easy to tokenize.
+//
+//   - Line splicing. i.e., occurrences of "\\\n" are replaced with
+//     PPCodeUnitType::WhitespaceCharacter so that we can revert it in raw strings.
+//
+//   - Comments are streamed into PPCodeUnitType::Comment objects. Other tools
+//     can extract the comment strings for more processing
+//
+//   - Digraphs and universal-character-names are also extracted out and can be
+//     reverted in raw strings.
 class PPCodeUnitStream: public PPCodeUnitStreamIfc {
 public:
   PPCodeUnitStream(std::shared_ptr<UTF32StreamIfc>);
