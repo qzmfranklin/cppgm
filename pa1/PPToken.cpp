@@ -1,6 +1,8 @@
 #include "PPToken.h"
 #include "unicode/ucnv.h"
 
+// The order of this list must be exactly the same as the enum PPTokeyType,
+// defined in PPToken.h.
 const std::vector<std::string> PPToken::_typeStringList = {
   "header_name",
   "identifier",
