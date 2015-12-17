@@ -11,7 +11,7 @@ D       :=$(realpath $(dir $(lastword $(MAKEFILE_LIST))))# this directory
 # Note that you need to -include $(ROOT)/gtest/rules.mk to actually build those
 # executables
 TESTS:=gtest_PPToken.exe gtest_PPCodePointCheck.exe gtest_PPCodeUnit.exe \
-	gtest_PPUTF32Stream.exe gtest_PPCodeUnitStream.exe
+	gtest_PPUTF32Stream.exe gtest_PPCodeUnitStream.exe gtest_PPTokenizerDFA.exe
 
 .PHONY: all asm clean test
 all: $(OBJ)
@@ -35,3 +35,8 @@ gtest_PPUTF32Stream.exe: $(ROOT)/gtest/gtest_main.a $(ROOT)/utils/UStringTools.o
 gtest_PPCodeUnitStream.exe: $(ROOT)/gtest/gtest_main.a $(ROOT)/utils/UStringTools.o \
 	$(D)/gtest_PPCodeUnitStream.o $(D)/PPCodeUnit.o $(D)/PPCodeUnitStream.o \
 	$(D)/PPCodePointCheck.o $(D)/PPUTF32Stream.o
+
+gtest_PPTokenizerDFA.exe: $(ROOT)/gtest/gtest_main.a $(ROOT)/utils/UStringTools.o \
+	$(D)/gtest_PPTokenizerDFA.o $(D)/PPCodeUnit.o $(D)/PPCodeUnitStream.o \
+	$(D)/PPCodePointCheck.o $(D)/PPUTF32Stream.o \
+	$(D)/PPTokenizerDFA.o $(D)/PPToken.o $(D)/PPCodeUnitCheck.o
