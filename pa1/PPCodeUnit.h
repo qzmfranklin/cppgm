@@ -19,13 +19,16 @@
 // for the backslash followed by a newline.
 //
 // WhitespaceCharacter and UniversalCharacterName are used for reverting strings
-// in raw strings.
+// in raw strings. Note that WhitespaceCharacter and UniversalCharacterName have
+// either a control character or a backslash, which are not permitted as a
+// d-char. This ensures that we can safely revert WhitespaceCharacter and
+// UniversalCharacterName in raw strings without having to worry about collision
+// with the enclosing sequence of raw strings.
+
 enum class PPCodeUnitType {
   ASCIIChar,
   WhitespaceCharacter,
   UniversalCharacterName,
-  Comment,
-  Digraph
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,8 +37,6 @@ enum class PPCodeUnitType {
 class PPCodeUnitASCIIChar;
 class PPCodeUnitWhitespaceCharacter;
 class PPCodeUnitUniversalCharacterName;
-class PPCodeUnitComment;
-class PPCodeUnitDigraph;
 
 // Union class of Unicode code point, universal-character-name, and
 // whitespace-sequence.
@@ -60,10 +61,6 @@ public:
     createWhitespaceCharacter(const std::string&);
   static std::shared_ptr<PPCodeUnitUniversalCharacterName>
     createUniversalCharacterName(const char32_t, const std::string&);
-  static std::shared_ptr<PPCodeUnitComment>
-    createComment(const std::u32string&);
-  static std::shared_ptr<PPCodeUnitDigraph>
-    createDigraph(const std::string&);
 
 protected:
   const PPCodeUnitType _type;
@@ -101,21 +98,4 @@ private:
   const std::string _u8string;
 };
 
-class PPCodeUnitComment: public PPCodeUnit {
-public:
-  PPCodeUnitComment(const std::u32string &u32str):
-    PPCodeUnit(PPCodeUnitType::Comment, static_cast<char32_t>(0)), _u32string(u32str) {}
-  virtual std::string getUTF8String() const override;
-private:
-  const std::u32string _u32string;
-};
-
-class PPCodeUnitDigraph: public PPCodeUnit {
-public:
-  PPCodeUnitDigraph(const std::string &u8str):
-    PPCodeUnit(PPCodeUnitType::Digraph, static_cast<char32_t>(0)), _u8string(u8str) {}
-  virtual std::string getUTF8String() const override;
-private:
-  const std::string _u8string;
-};
 #endif /* end of include guard */
