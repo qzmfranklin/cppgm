@@ -3,88 +3,81 @@
 
 TEST(PPToken, HeaderName)
 {
-  const auto tok = PPToken::createHeaderName("stdio.h");
-  std::string expected = "header_name stdio.h";
-  std::string actually = tok->dumpUTF8String();
-  ASSERT_EQ(expected, actually);
+  const std::string src = "stdio.h";
+  const auto tok = PPToken::createHeaderName(src);
+  ASSERT_EQ(PPTokenType::HeaderName, tok->getType());
+  ASSERT_EQ(src, tok->getUTF8String());
 }
 
 TEST(PPToken, Identifier)
 {
-  const auto tok = PPToken::createIdentifier("snake_case_var");
-  std::string expected = "identifier snake_case_var";
-  std::string actually = tok->dumpUTF8String();
-  ASSERT_EQ(expected, actually);
+  const std::string src = "snake_case_var";
+  const auto tok = PPToken::createIdentifier(src);
+  ASSERT_EQ(PPTokenType::Identifier, tok->getType());
+  ASSERT_EQ(src, tok->getUTF8String());
 }
 
 TEST(PPToken, PPNumber)
 {
-  const auto tok = PPToken::createPPNumber("-6.23E-32");
-  std::string expected = "pp_number -6.23E-32";
-  std::string actually = tok->dumpUTF8String();
-  ASSERT_EQ(expected, actually);
+  const std::string src = "-6.23E-32";
+  const auto tok = PPToken::createPPNumber(src);
+  ASSERT_EQ(PPTokenType::PPNumber, tok->getType());
+  ASSERT_EQ(src, tok->getUTF8String());
 }
 
 TEST(PPToken, CharacterLiteral)
 {
-  const auto tok = PPToken::createCharacterLiteral(U"U\'ひ\'");
-  std::string expected = "character_literal U'ひ'";
-  std::string actually = tok->dumpUTF8String();
-  ASSERT_EQ(expected, actually);
+  const auto tok = PPToken::createCharacterLiteral(UR"(U'ひ')");
+  ASSERT_EQ(PPTokenType::CharacterLiteral, tok->getType());
+  ASSERT_EQ(R"(U'ひ')", tok->getUTF8String());
 }
 
 TEST(PPToken, UserDefinedCharacterLiteral)
 {
-  const auto tok = PPToken::createUserDefinedCharacterLiteral(U"TBD");
-  std::string expected = "user_defined_character_literal TBD";
-  std::string actually = tok->dumpUTF8String();
-  ASSERT_EQ(expected, actually);
+  const auto tok = PPToken::createUserDefinedCharacterLiteral(UR"(U'TBD')");
+  ASSERT_EQ(PPTokenType::UserDefinedCharacterLiteral, tok->getType());
+  ASSERT_EQ(R"(U'TBD')", tok->getUTF8String());
 }
 
 TEST(PPToken, StringLiteral)
 {
   const auto tok = PPToken::createStringLiteral(U"Hiragana(平仮名,ひらがな)");
-  std::string expected = "string_literal Hiragana(平仮名,ひらがな)";
-  std::string actually = tok->dumpUTF8String();
-  ASSERT_EQ(expected, actually);
+  ASSERT_EQ(PPTokenType::StringLiteral, tok->getType());
+  ASSERT_EQ("Hiragana(平仮名,ひらがな)", tok->getUTF8String());
 }
 
 TEST(PPToken, UserDefinedStringLiteral)
 {
   const auto tok = PPToken::createUserDefinedStringLiteral(U"Hiragana(平仮名,ひらがな)");
-  std::string expected = "user_defined_string_literal Hiragana(平仮名,ひらがな)";
-  std::string actually = tok->dumpUTF8String();
-  ASSERT_EQ(expected, actually);
+  ASSERT_EQ(PPTokenType::UserDefinedStringLiteral, tok->getType());
+  ASSERT_EQ("Hiragana(平仮名,ひらがな)", tok->getUTF8String());
 }
 
 TEST(PPToken, PreprocessingOpOrPunc)
 {
-  const auto tok = PPToken::createPreprocessingOpOrPunc(">>");
-  std::string expected = "preprocessing_op_or_punc >>";
-  std::string actually = tok->dumpUTF8String();
-  ASSERT_EQ(expected, actually);
+  const std::string src = ">>";
+  const auto tok = PPToken::createPreprocessingOpOrPunc(src);
+  ASSERT_EQ(PPTokenType::PreprocessingOpOrPunc, tok->getType());
+  ASSERT_EQ(src, tok->getUTF8String());
 }
 
 TEST(PPToken, NonWhitespaceChar)
 {
   const auto tok = PPToken::createNonWhitespaceChar(U"😈");
-  std::string expected = "non_whitespace_char 😈";
-  std::string actually = tok->dumpUTF8String();
-  ASSERT_EQ(expected, actually);
+  ASSERT_EQ(PPTokenType::NonWhitespaceChar, tok->getType());
+  ASSERT_EQ("😈", tok->getUTF8String());
 }
 
 TEST(PPToken, NewLine)
 {
   const auto tok = PPToken::createNewLine();
-  std::string expected = "new_line ";
-  std::string actually = tok->dumpUTF8String();
-  ASSERT_EQ(expected, actually);
+  ASSERT_EQ(PPTokenType::NewLine, tok->getType());
+  ASSERT_EQ("\n", tok->getUTF8String());
 }
 
 TEST(PPToken, WhitespaceSequence)
 {
   const auto tok = PPToken::createWhitespaceSequence(UR"(djfi  jdie )");
-  std::string expected = R"(whitespace_sequence djfi  jdie )";
-  std::string actually = tok->dumpUTF8String();
-  ASSERT_EQ(expected, actually);
+  ASSERT_EQ(PPTokenType::WhitespaceSequence, tok->getType());
+  ASSERT_EQ(R"(djfi  jdie )", tok->getUTF8String());
 }

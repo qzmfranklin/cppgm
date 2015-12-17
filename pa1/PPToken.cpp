@@ -99,57 +99,57 @@ std::string _u32_to_u8(const std::u32string &u32str)
 }
 } // namespace
 
-std::string PPTokenHeaderName::dumpUTF8String() const
+std::string PPTokenHeaderName::getUTF8String() const
 {
-  return getTokenTypeUTF8String(_type) + " " + _u8string;
+  return _u8string;
 }
 
-std::string PPTokenIdentifier::dumpUTF8String() const
+std::string PPTokenIdentifier::getUTF8String() const
 {
-  return getTokenTypeUTF8String(_type) + " " + _u8string;
+  return _u8string;
 }
 
-std::string PPTokenPPNumber::dumpUTF8String() const
+std::string PPTokenPPNumber::getUTF8String() const
 {
-  return getTokenTypeUTF8String(_type) + " " + _u8string;
+  return _u8string;
 }
 
-std::string PPTokenCharacterLiteral::dumpUTF8String() const
+std::string PPTokenCharacterLiteral::getUTF8String() const
 {
-  return getTokenTypeUTF8String(_type) + " " + _u32_to_u8(_u32string);
+  return _u32_to_u8(_u32string);
 }
 
-std::string PPTokenUserDefinedCharacterLiteral::dumpUTF8String() const
+std::string PPTokenUserDefinedCharacterLiteral::getUTF8String() const
 {
-  return getTokenTypeUTF8String(_type) + " " + _u32_to_u8(_u32string);
+  return _u32_to_u8(_u32string);
 }
 
-std::string PPTokenStringLiteral::dumpUTF8String() const
+std::string PPTokenStringLiteral::getUTF8String() const
 {
-  return getTokenTypeUTF8String(_type) + " " + _u32_to_u8(_u32string);
+  return _u32_to_u8(_u32string);
 }
 
-std::string PPTokenUserDefinedStringLiteral::dumpUTF8String() const
+std::string PPTokenUserDefinedStringLiteral::getUTF8String() const
 {
-  return getTokenTypeUTF8String(_type) + " " + _u32_to_u8(_u32string);
+  return _u32_to_u8(_u32string);
 }
 
-std::string PPTokenPreprocessingOpOrPunc::dumpUTF8String() const
+std::string PPTokenPreprocessingOpOrPunc::getUTF8String() const
 {
-  return getTokenTypeUTF8String(_type) + " " + _u8string;
+  return _u8string;
 }
 
-std::string PPTokenNonWhitespaceChar::dumpUTF8String() const
+std::string PPTokenNonWhitespaceChar::getUTF8String() const
 {
-  return getTokenTypeUTF8String(_type) + " " + _u32_to_u8(_u32string);
+  return _u32_to_u8(_u32string);
 }
 
-std::string PPTokenNewLine::dumpUTF8String() const
+std::string PPTokenNewLine::getUTF8String() const
 {
-  return getTokenTypeUTF8String(_type) + " ";
+  return "\n";
 }
 
-std::string PPTokenWhitespaceSequence::dumpUTF8String() const
+std::string PPTokenWhitespaceSequence::getUTF8String() const
 {
-  return getTokenTypeUTF8String(_type) + " " + _u32_to_u8(_u32string);
+  return _u32_to_u8(_u32string);
 }
