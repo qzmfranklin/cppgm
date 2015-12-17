@@ -29,7 +29,9 @@ private:
   void _pushTokens();
   std::queue<std::shared_ptr<PPToken>> _queue;
 
-  bool _isBeginningOfLine;
+  bool _isBeginningOfLine = true;
+  bool _isPreprocessingDirective = false;
+  bool _isRawStringMode = false;
 };
 
 #endif /* end of include guard */
