@@ -30,7 +30,7 @@ private:
   std::queue<std::shared_ptr<PPToken>> _queue;
 
   bool _isBeginningOfLine = true;
-  bool _isPreprocessingDirective = false;
+  bool _isBeginningOfHeaderName = false;
   bool _isRawStringMode = false;
 };
 

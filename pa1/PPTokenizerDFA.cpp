@@ -4,12 +4,13 @@
 #include <map>
 #include <assert.h>
 
+// Comment the following line to see all sorts of debug information
+#define fprintf(stderr,...)
+
 PPTokenizerDFA::PPTokenizerDFA(std::shared_ptr<PPCodeUnitStreamIfc> stream):
   _stream(stream)
 {
-  fprintf(stderr,"Ctor0\n");
   _pushTokens();
-  fprintf(stderr,"Ctor1\n");
 }
 
 bool PPTokenizerDFA::isEmpty() const
@@ -46,13 +47,10 @@ void PPTokenizerDFA::_pushTokens()
   assert(_queue.empty());
 
   enum class State {
-    Start,
+    Start = 0,
 
-    HeaderName_Start,
-    HeaderName_HSequenceStart,
-    HeaderName_HSequence,
-    HeaderName_QSequenceStart,
-    HeaderName_QSequence,
+    HeaderNameH,    // e.g., <stdio.h>
+    HeaderNameQ,    // e.g., "my_lib.h"
 
     PPNumber_LackDigit,
     PPNumber_Exponent,
@@ -61,11 +59,12 @@ void PPTokenizerDFA::_pushTokens()
 
     Identifier,
 
+    Slash,          // / // /*
     SingleLineComment,
-    MultipleLineComment_Start,
     MultipleLineComment,
+    MultipleLineCommentStar,
 
-    EqualSignOp,
+    EqualSignOp,    // e.g., {+ +=}, {- -=}
 
     VerticalBar,    // |
     PoundSign,      // #
@@ -84,6 +83,8 @@ void PPTokenizerDFA::_pushTokens()
     Ket,            // >
     KetKet,         // >>
 
+    NumberOfStates, // Convenience for statistics
+
     End,
     Error
   } state = State::Start;
@@ -96,6 +97,22 @@ void PPTokenizerDFA::_pushTokens()
   std::string equal_sign_op_u8str;
   std::string identifier_u8str;
 
+  const auto _emitToken = [this] (const std::shared_ptr<PPToken> tok) {
+    fprintf(stderr,"======== %s =======\n", tok->getUTF8String().c_str());
+    this->_queue.push(tok);
+  };
+
+  const auto _toNext = [this] () {
+    char32_t tmp;
+    tmp = _stream->getCodeUnit()->getChar32();
+    fprintf(stderr,"%c(%0X) => ", tmp, tmp);
+    this->_stream->toNext();
+    if (!this->_stream->isEmpty()) {
+      tmp = _stream->getCodeUnit()->getChar32();
+      fprintf(stderr,"%c(%0X)\n", tmp, tmp);
+    }
+  };
+
   while (!_stream->isEmpty()  &&  state != State::End  &&  state != State::Error) {
     // In a state block, e.g., the block for if (state == State::SomeState), the
     // developer needs to call _stream->toNext() explicitly otherwise the stream
@@ -105,51 +122,39 @@ void PPTokenizerDFA::_pushTokens()
     // being processed, e.g., in State::LeftParenthesis.
     const std::shared_ptr<PPCodeUnit> curr = _stream->getCodeUnit();
     const char32_t currChar32 = curr->getChar32();
+    fprintf(stderr,"\n==  U+%06X <%c> \n", static_cast<uint32_t>(currChar32), static_cast<char>(currChar32));
 
     if (state == State::Start) {
       // State::Start means starting to parse and emit the next PPToken.
       // Specifically, this does not imply start of line/file, although in
       // certain cases it could be a start of line/file.
-      _stream->toNext();
-
-      fprintf(stderr,"Start: %s\n", curr->getUTF8String().c_str());
+      fprintf(stderr,"State::Start\n");
+      _toNext();
 
       if (currChar32 == U'\n') {
         // The begining of a line is either immediately after a newline
         // character \n or is at the start of the input stream.
         state = State::End;
-        _queue.push(PPToken::createNewLine());
+        _emitToken(PPToken::createNewLine());
         _isBeginningOfLine = true;
-        _isPreprocessingDirective = false;
+        _isBeginningOfHeaderName = false;
       }
 
-      else if (currChar32 == U'/') { // Comments
-        if (_stream->isEmpty()) {
-          state = State::Error;
-          _setError(R"(Expecting / or * after a backslash /)");
-          continue;
-        }
-
-        const std::shared_ptr<PPCodeUnit> next = _stream->getCodeUnit();
-        _stream->toNext();
-        const std::string str = next->getUTF8String();
-        if (str == "/") { // Single-line comment
-          state = State::SingleLineComment;
-        } else if (str == "*") { // Multiple-line comment
-          state = State::MultipleLineComment_Start;
-        } else {
-          state = State::Error;
-          _setError(R"(Illegal sequence following /)");
-        }
-      } // else if (currChar32 == U'/')
 
       // simple-op-or-punc
       else if (currChar32 == U'{'  ||  currChar32 == U'}'  ||  currChar32 == U'['
           ||   currChar32 == U']'  ||  currChar32 == U'('  ||  currChar32 == U')'
           ||   currChar32 == U'?'  ||  currChar32 == U','  ||  currChar32 == U';'
-          ||   currChar32 == U'/') {
+          ) {
         state = State::End;
-        _queue.push(PPToken::createPreprocessingOpOrPunc(std::string(1, static_cast<char>(currChar32))));
+        _emitToken(PPToken::createPreprocessingOpOrPunc(std::string(1, static_cast<char>(currChar32))));
+      }
+
+      // The slash is the common entry point for three different states:
+      //    preprocessing-op-or-punc /
+      //    comments: // /*
+      else if (currChar32 == U'/') {
+        state = State::Slash;
       }
 
       // equal-sign-punc
@@ -160,6 +165,7 @@ void PPTokenizerDFA::_pushTokens()
       }
 
       // stateful-op-or-punc
+      // header-name h-sequence, e.g., <stdio.h> enters here too
       else if (currChar32 == U'#') { // # ##
         state = State::PoundSign;
       } else if (currChar32 == U'|') { // | |= ||
@@ -170,8 +176,8 @@ void PPTokenizerDFA::_pushTokens()
         state = State::Minus;
       } else if (currChar32 == U'&') { // & &= &&
         state = State::Ampersand;
-      } else if (currChar32 == U'<') { // < <= <% <: << <<=
-        state = State::Bra;
+      } else if (currChar32 == U'<') { // < <= <% <: << <<= HeaderName_HSequenceStart
+        state = _isBeginningOfHeaderName ? State::HeaderNameH : State::Bra;
       } else if (currChar32 == U'>') { // > >= >> >>=
         state = State::Ket;
       } else if (currChar32 == U':') { // : :> ::
@@ -183,18 +189,35 @@ void PPTokenizerDFA::_pushTokens()
       }
 
       else if (PPCodeUnitCheck::isIdentifierStart(curr)) {
+        fprintf(stderr,"isIdentifierStart %c\n", static_cast<char>(currChar32));
         identifier_u8str = curr->getUTF8String();
         state = State::Identifier;
       }
 
-      //else if (!PPCodePointCheck::isBasicSourceCharacter(currChar32)) {
-        //state = State::End;
-        //_queue.push(PPToken::createNonWhitespaceChar(std::u32string(currChar32)));
-      //}
+      // raw strings
+      // header-name q-sequence, e.g., "my_lib.h" enters here too
+      else if (currChar32 == U'\"') {
+        if (_isBeginningOfHeaderName) {
+          state = State::HeaderNameQ;
+        } else {
+          // handle raw strings here...
+        }
+      }
 
+      else if (PPCodePointCheck::isDigit(currChar32)) {
+        ppnumber_u8str = static_cast<char>(currChar32);
+        state = State::PPNumber;
+      }
 
-      //else if (currChar32 == U'') {
-      //}
+      else if (!PPCodePointCheck::isBasicSourceCharacter(currChar32)) {
+        // TODO: Should probably emit some warnings here
+        state = State::End;
+        _emitToken(PPToken::createNonWhitespaceChar(std::u32string(1, currChar32)));
+      }
+
+      else {
+        fprintf(stderr,"Dude, you literally exhausted all cases in the pptokenizer's DFA. The DFA does not know what you want to do here\n");
+      }
 
     } // State::Start
 
@@ -238,18 +261,27 @@ void PPTokenizerDFA::_pushTokens()
     else if (state == State::Identifier) {
       // Previous: identifier-start
       // identifier-nonstart  =>  Identifier
-      // other                =>  Emit identifier
+      // other                =>  Emit identifier, the curr PPCodeUnit is not
+      //                          consumed.
       //
       // When emitting an identifier, if _isBeginningOfLine is true and the
-      // identifier is "include", set _isPreprocessingDirective to true.
-      _stream->toNext();
+      // identifier is "include", set _isBeginningOfHeaderName to true.
+      fprintf(stderr,"State::Identifier\n");
 
-      identifier_u8str += curr->getUTF8String();
-      if (!PPCodeUnitCheck::isIdentifierNonStart(curr)) {
+      if (PPCodeUnitCheck::isIdentifierNonStart(curr)) {
+        _toNext();
+        identifier_u8str += curr->getUTF8String();
+      } else {
         state = State::End;
-        _queue.push(PPToken::createIdentifier(identifier_u8str));
-        if (_isBeginningOfLine  &&  identifier_u8str == "include")
-          _isPreprocessingDirective = true;
+        _emitToken(PPToken::createIdentifier(identifier_u8str));
+        if (identifier_u8str == "include") {
+          if (_isBeginningOfLine) {
+            _isBeginningOfHeaderName = true;
+          } else {
+            state = State::Error;
+            _setError(R"(The identifier "include" can only be used following # at the beginning of a new line)");
+          }
+        }
       }
     }
 
@@ -259,87 +291,51 @@ void PPTokenizerDFA::_pushTokens()
     // Entry:
     //   The #include preprocessing directive ensuing a fresh new-line
     ////////////////////////////////////////////////////////////////////////////////
-    // header-name start
-    else if (state == State::HeaderName_Start) {
-      // Expect < or "
-      _stream->toNext();
 
+    else if (state == State::HeaderNameH) {
+      // Previous: <
+      // Set _isBeginningOfHeaderName to false.
+      // h-char     =>  Append curr char to header_name_u8str.
+      // >          =>  Emit header-name
+      // other      =>  Error, curr PPCodeUnit is not consumed.
+      fprintf(stderr,"State::HeaderNameH\n");
 
-      if (currChar32 == U'<') {
-        // <bracket_header>
-        header_name_u8str = "<";
-        state = State::HeaderName_HSequenceStart;
-      } else if (currChar32 == U'\"') {
-        // "quote_header"
-        header_name_u8str = "\"";
-        state = State::HeaderName_QSequenceStart;
-      } else {
-        state = State::Error;
-        _setError(
-            R"(Expecting either < or " to start parsing the header name sequence.)");
-      }
-    }
-
-    // header-name h-char-sequence
-    if (state == State::HeaderName_HSequenceStart) {
-      // Expect an h-char
-      _stream->toNext();
-
-      if (PPCodePointCheck::isNotHChar(currChar32)) {
-        state = State::Error;
-        _setError(
-            R"(Expecting an initial h-char for the header name.)");
-      } else {
-        state = State::HeaderName_HSequence;
-        header_name_u8str += static_cast<char>(currChar32);
-      }
-    }
-
-    if (state == State::HeaderName_HSequence) {
-      // Expect an h-char or >
-      _stream->toNext();
-
+      _isBeginningOfHeaderName = false;
       if (currChar32 == U'>') {
+        _toNext();
         state = State::End;
+        header_name_u8str.insert(0, 1, '<');
         header_name_u8str += '>';
-        _queue.push(PPToken::createHeaderName(header_name_u8str));
+        _emitToken(PPToken::createHeaderName(header_name_u8str));
       } else if (PPCodePointCheck::isNotHChar(currChar32)) {
         state = State::Error;
-        _setError(
-            R"(Expecting an initial h-char to continue the header name or > to terminate the header name.)");
+        _setError(R"(Expecting an initial h-char for the header name.)");
       } else {
+        _toNext();
         header_name_u8str += static_cast<char>(currChar32);
       }
     }
 
-    // header-name q-char-sequence
-    if (state == State::HeaderName_QSequenceStart) {
-      // Expect an q-char
-      _stream->toNext();
+    else if (state == State::HeaderNameQ) {
+      // Previous: "
+      // Set _isBeginningOfHeaderName to false.
+      // q-char     =>  Append curr char to header_name_u8str.
+      // "          =>  Emit header-name.
+      // other      =>  Error, curr PPCodeUnit is not consumed.
+      fprintf(stderr,"State::HeaderNameQ\n");
 
-      if (PPCodePointCheck::isNotHChar(currChar32)) {
-        state = State::Error;
-        _setError(
-            R"(Expecting an initial q-char for the header name.)");
-      } else {
-        state = State::HeaderName_QSequence;
-        header_name_u8str += static_cast<char>(currChar32);
-      }
-    }
-
-    if (state == State::HeaderName_QSequence) {
-      // Expect an q-char or "
-      _stream->toNext();
-
+      _isBeginningOfHeaderName = false;
       if (currChar32 == U'\"') {
+        _toNext();
         state = State::End;
+        header_name_u8str.insert(0, 1, '\"');
         header_name_u8str += '\"';
-        _queue.push(PPToken::createHeaderName(header_name_u8str));
-      } else if (PPCodePointCheck::isNotHChar(currChar32)) {
+        _emitToken(PPToken::createHeaderName(header_name_u8str));
+      } else if (PPCodePointCheck::isNotQChar(currChar32)) {
         state = State::Error;
-        _setError(
-            R"(Expecting an initial q-char to continue the header name or > to terminate the header name.)");
+        _setError(R"(Expecting a q-char for the header name.)");
       } else {
+        _toNext();
         header_name_u8str += static_cast<char>(currChar32);
       }
     }
@@ -351,9 +347,38 @@ void PPTokenizerDFA::_pushTokens()
     //   .      =>  PPNumber_LackDigit
     //   digit  =>  PPNumber
     ////////////////////////////////////////////////////////////////////////////////
+
+    else if (state == State::PPNumber) {
+      // Expect one of the following:
+      //   ., digit, identifier-nondigit   =>  PPNumber
+      //   '      =>  PPNumber_Apostrophe
+      //   e, E   =>  PPNumber_Exponent
+      //   other  =>  Emit pp-number, curr PPCodeUnit is not consumed.
+      fprintf(stderr,"State::PPNumber\n");
+
+      if (currChar32 == U'e'  ||  currChar32 == U'E') {
+        _toNext();
+        state = State::PPNumber_Exponent;
+        ppnumber_u8str += static_cast<char>(currChar32);
+      } else if (currChar32 == U'\'') {
+        _toNext();
+        state = State::PPNumber_Apostrophe;
+        ppnumber_u8str += static_cast<char>(currChar32);
+      } else if (currChar32 == U'.'  ||  PPCodePointCheck::isDigit(currChar32)  ||  PPCodeUnitCheck::isIdentifierNondigit(curr)) {
+        _toNext();
+        ppnumber_u8str += static_cast<char>(currChar32);
+      } else {
+        state = State::End;
+        _emitToken(PPToken::createPPNumber(ppnumber_u8str));
+      }
+    }
+
     else if (state == State::PPNumber_LackDigit) {
-      // Expect a digit. Previous curr was a dot, transition to PPNumber
-      _stream->toNext();
+      // Previous: dot .
+      // digit  =>  PPNumber
+      // other  =>  Error
+      fprintf(stderr,"State::PPNumber_LackDigit\n");
+      _toNext();
 
       if (PPCodePointCheck::isDigit(currChar32)) {
         state = State::PPNumber;
@@ -365,54 +390,34 @@ void PPTokenizerDFA::_pushTokens()
     }
 
     else if (state == State::PPNumber_Exponent) {
-      // Expect a sign. Previous curr was e or E, transition to PPNumber
-      _stream->toNext();
+      // Previous: e E
+      // + -    =>  PPNumber
+      // other  =>  Error
+      _toNext();
+      fprintf(stderr,"State::PPNumber_Exponent\n");
 
       if (PPCodePointCheck::isSign(currChar32)) {
         state = State::PPNumber;
         ppnumber_u8str += static_cast<char>(currChar32);
       } else {
-        _setError(
-            R"(Expect a sign, i.e., either + or -, to transition to pp-number.)");
+        state = State::Error;
+        _setError(R"(Expect a sign, i.e., either + or -, to transition to pp-number.)");
       }
     }
 
     else if (state == State::PPNumber_Apostrophe) {
-      // Expect a digit or a nondigit. Previous curr was ', transition to PPNumber
-      _stream->toNext();
+      // Previous: '
+      // digit, nondigit => PPNumber
+      // other           => Error
+      _toNext();
+      fprintf(stderr,"State::PPNumber_Apostrophe\n");
 
       if (PPCodePointCheck::isDigit(currChar32) || PPCodePointCheck::isNondigit(currChar32)) {
         state = State::PPNumber;
         ppnumber_u8str += static_cast<char>(currChar32);
-      } else if (PPCodePointCheck::isNotHChar(currChar32)) {
-        state = State::Error;
-        _setError(
-            R"(Expect a digit or a nondigit to transition to pp-number.)");
-      } else {
-        header_name_u8str += '\"';
-        _queue.push(PPToken::createHeaderName(header_name_u8str));
-       }
-    }
-
-    else if (state == State::PPNumber) {
-      // Expect one of the following:
-      //   ., digit, identifier-nondigit   =>  PPNumber
-      //   '                               =>  PPNumber_Apostrophe
-      //   e, E                            =>  PPNumber_Exponent
-      _stream->toNext();
-
-      if (currChar32 == U'e'  ||  currChar32 == U'E') {
-        state = State::PPNumber_Exponent;
-        ppnumber_u8str += static_cast<char>(currChar32);
-      } else if (currChar32 == U'\'') {
-        state = State::PPNumber_Apostrophe;
-        ppnumber_u8str += static_cast<char>(currChar32);
-      } else if (currChar32 == U'.'  ||  PPCodePointCheck::isDigit(currChar32)  ||  PPCodeUnitCheck::isIdentifierNondigit(curr)) {
-        ppnumber_u8str += static_cast<char>(currChar32);
       } else {
         state = State::Error;
-        _setError(
-            R"(Expecting one of the following: ., digit, identifier-nondigit, ', e, E)");
+        _setError(R"(Expects a digit or a nondigit after an apostrophe)");
       }
     }
 
@@ -426,71 +431,66 @@ void PPTokenizerDFA::_pushTokens()
     //
     ////////////////////////////////////////////////////////////////////////////////
 
-    else if (state == State::SingleLineComment) {
-      // Consumes possibly more than one character until the first newline
-      // character. The newline character is not part of the comment and is not
-      // consumed.
-      //
-      // Note that the parsing of the newline character that terminated this
-      // single line comment is delayed to the next call of te _pushTokens()
-      // method.
-      _stream->toNext();
+    else if (state == State::Slash) {
+      // Previous: /
+      // /      =>  SingleLineComment
+      // *      =>  MultipleLineComment
+      // other  =>  Emit /, curr PPCodeUnit is not consumed.
+      fprintf(stderr,"State::Slash\n");
 
-      comment_u32str = U"//";
-      comment_u32str += currChar32;
-      while(1) {
-        if (_stream->isEmpty()) {
-          // The UTF32StreamIfc guarantees that the last character is a new-line
-          // character. Therefore, it is impossible to reach the end of file before
-          // a newline character along normal paths.
-          state = State::Error;
-          _setError(R"(Reached end-of-file in single-line-comment)");
-          break;
-        }
-
-        const std::shared_ptr<PPCodeUnit> next = _stream->getCodeUnit();
-        if (next->getChar32() == U'\n') {
-          state = State::End;
-          break;
-        } else {
-          comment_u32str += next->getChar32();
-          _stream->toNext();
-        }
+      if (currChar32 == U'/') {
+        _toNext();
+        state = State::SingleLineComment;
+      } else if (currChar32 == U'*') {
+        _toNext();
+        state = State::MultipleLineComment;
+      } else {
+        state = State::End;
+        _emitToken(PPToken::createPreprocessingOpOrPunc("/"));
       }
     }
 
-    else if (state == State::MultipleLineComment_Start) {
-      // *      =>  MultipleLineComment
-      // other  =>  Error
-      _stream->toNext();
+    else if (state == State::SingleLineComment) {
+      // Previous: //
+      // \n     =>  Prepend "//' to comment_u32str, emit comment_u32str as
+      //            whitespace-sequence
+      // other  =>  SingleLineComment
 
-      comment_u32str = U"/*";
-      comment_u32str += currChar32;
-      state = State::MultipleLineComment;
+      if (currChar32 == U'\n') {
+        state = State::End;
+        comment_u32str.insert(0, U"//");
+        _emitToken(PPToken::createWhitespaceSequence(comment_u32str));
+      } else {
+        _toNext();
+        comment_u32str += currChar32;
+      }
     }
 
     else if (state == State::MultipleLineComment) {
-      // *      =>  MultipleLineComment_Start
+      // *      =>  MultipleLineCommentStar
       // other  =>  MultipleLineComment
-      _stream->toNext();
+      _toNext();
 
       comment_u32str += currChar32;
       if (currChar32 == U'*')
-        state = State::MultipleLineComment_Start;
+        state = State::MultipleLineCommentStar;
     }
 
-    else if (state == State::MultipleLineComment_Start) {
-      // *      =>  MultipleLineComment_Start
-      // /      =>  End
+    else if (state == State::MultipleLineCommentStar) {
+      // Previous: *
+      // *      =>  MultipleLineCommentStar
+      // /      =>  Prepend "/*' to comment_u32str, emit comment_u32str as a
+      //            whitespace-sequence
       // other  =>  MultipleLineComment
-      _stream->toNext();
+      _toNext();
 
       comment_u32str += currChar32;
       if (currChar32 == U'*') {
-        //state = State::MultipleLineComment_Start;
+        // no-op
       } else if (currChar32 == U'/') {
         state = State::End;
-        _queue.push(PPToken::createWhitespaceSequence(comment_u32str));
+        comment_u32str.insert(0, U"/*");
+        _emitToken(PPToken::createWhitespaceSequence(comment_u32str));
       } else {
         state = State::MultipleLineComment;
       }
@@ -547,8 +547,8 @@ void PPTokenizerDFA::_pushTokens()
     // NOTE:
     //  When "#" or "%:" is emitted at the start of line, i.e.,
     //  _isBeginningOfLine is true, this is indeed a preprocessing directive. In
-    //  this case, we need to set _isPreprocessingDirective to true. If an
-    //  identifier "include" is emitted while _isPreprocessingDirective is true,
+    //  this case, we need to set _isBeginningOfHeaderName to true. If an
+    //  identifier "include" is emitted while _isBeginningOfHeaderName is true,
     //  we start parsing for header-name, i.e., go to State::HeaderName_Start.
     //
     ////////////////////////////////////////////////////////////////////////////////
@@ -558,30 +558,32 @@ void PPTokenizerDFA::_pushTokens()
       // =      =>  Emit "X="
       // other  =>  Emit "X", curr PPCodeUnit is not consumed.
       if (currChar32 == U'=') {
-        _stream->toNext();
+        _toNext();
         state = State::End;
-        _queue.push(PPToken::createPreprocessingOpOrPunc(equal_sign_op_u8str + "="));
+        _emitToken(PPToken::createPreprocessingOpOrPunc(equal_sign_op_u8str + "="));
       } else {
         state = State::End;
-        _queue.push(PPToken::createPreprocessingOpOrPunc(equal_sign_op_u8str));
+        _emitToken(PPToken::createPreprocessingOpOrPunc(equal_sign_op_u8str));
       }
     }
 
     else if (state == State::PoundSign) {
       // Previous: #
       // #      =>  Emit ##
-      // other  =>  Emit #, set _isPreprocessingDirective to true if
+      // other  =>  Emit #, set _isBeginningOfHeaderName to true if
       //            _isBeginningOfLine is true. The curr PPCodeUnit is not
       //            consumed.
+      fprintf(stderr,"State::PoundSign <%02X>\n", currChar32);
+
       if (currChar32 == U'#') {
-        _stream->toNext();
+        _toNext();
         state = State::End;
-        _queue.push(PPToken::createPreprocessingOpOrPunc("##"));
+        _emitToken(PPToken::createPreprocessingOpOrPunc("##"));
       } else {
         state = State::End;
-        _queue.push(PPToken::createPreprocessingOpOrPunc("#"));
+        _emitToken(PPToken::createPreprocessingOpOrPunc("#"));
         if (_isBeginningOfLine)
-          _isPreprocessingDirective = true;
+          _isBeginningOfHeaderName = true;
       }
     }
 
@@ -591,16 +593,16 @@ void PPTokenizerDFA::_pushTokens()
       // |      =>  Emit ||
       // other  =>  Emit |, curr PPCodeUnit is not consumed.
       if (currChar32 == U'=') {
-        _stream->toNext();
+        _toNext();
         state = State::End;
-        _queue.push(PPToken::createPreprocessingOpOrPunc("|="));
+        _emitToken(PPToken::createPreprocessingOpOrPunc("|="));
       } else if (currChar32 == U'|') {
-        _stream->toNext();
+        _toNext();
         state = State::End;
-        _queue.push(PPToken::createPreprocessingOpOrPunc("||"));
+        _emitToken(PPToken::createPreprocessingOpOrPunc("||"));
       } else {
         state = State::End;
-        _queue.push(PPToken::createPreprocessingOpOrPunc("|"));
+        _emitToken(PPToken::createPreprocessingOpOrPunc("|"));
       }
     }
 
@@ -610,16 +612,16 @@ void PPTokenizerDFA::_pushTokens()
       // +      =>  Emit ++
       // other  =>  Emit +, curr PPCodeUnit is not consumed.
       if (currChar32 == U'=') {
-        _stream->toNext();
+        _toNext();
         state = State::End;
-        _queue.push(PPToken::createPreprocessingOpOrPunc("+="));
+        _emitToken(PPToken::createPreprocessingOpOrPunc("+="));
       } else if (currChar32 == U'+') {
-        _stream->toNext();
+        _toNext();
         state = State::End;
-        _queue.push(PPToken::createPreprocessingOpOrPunc("++"));
+        _emitToken(PPToken::createPreprocessingOpOrPunc("++"));
       } else {
         state = State::End;
-        _queue.push(PPToken::createPreprocessingOpOrPunc("+"));
+        _emitToken(PPToken::createPreprocessingOpOrPunc("+"));
       }
     }
 
@@ -630,19 +632,19 @@ void PPTokenizerDFA::_pushTokens()
       // >      =>  Minus2 (-> ->*)
       // other  =>  Emit -, curr PPCodeUnit is not consumed.
       if (currChar32 == U'=') {
-        _stream->toNext();
+        _toNext();
         state = State::End;
-        _queue.push(PPToken::createPreprocessingOpOrPunc("-="));
+        _emitToken(PPToken::createPreprocessingOpOrPunc("-="));
       } else if (currChar32 == U'-') {
-        _stream->toNext();
+        _toNext();
         state = State::End;
-        _queue.push(PPToken::createPreprocessingOpOrPunc("--"));
+        _emitToken(PPToken::createPreprocessingOpOrPunc("--"));
       } else if (currChar32 == U'>') {
-        _stream->toNext();
+        _toNext();
         state = State::Minus2;
       } else {
         state = State::End;
-        _queue.push(PPToken::createPreprocessingOpOrPunc("-"));
+        _emitToken(PPToken::createPreprocessingOpOrPunc("-"));
       }
     }
 
@@ -651,12 +653,12 @@ void PPTokenizerDFA::_pushTokens()
       // *      =>  Emit ->*
       // other  =>  Emit ->, curr PPCodeUnit is not consumed.
       if (currChar32 == U'*') {
-        _stream->toNext();
+        _toNext();
         state = State::End;
-        _queue.push(PPToken::createPreprocessingOpOrPunc("->*"));
+        _emitToken(PPToken::createPreprocessingOpOrPunc("->*"));
       } else {
         state = State::End;
-        _queue.push(PPToken::createPreprocessingOpOrPunc("->"));
+        _emitToken(PPToken::createPreprocessingOpOrPunc("->"));
       }
     }
 
@@ -666,16 +668,16 @@ void PPTokenizerDFA::_pushTokens()
       // &      =>  Emit &&
       // other  =>  Emit &, curr PPCodeUnit is not consumed.
       if (currChar32 == U'=') {
-        _stream->toNext();
+        _toNext();
         state = State::End;
-        _queue.push(PPToken::createPreprocessingOpOrPunc("&="));
+        _emitToken(PPToken::createPreprocessingOpOrPunc("&="));
       }  else if (currChar32 == U'&') {
-        _stream->toNext();
+        _toNext();
         state = State::End;
-        _queue.push(PPToken::createPreprocessingOpOrPunc("&&"));
+        _emitToken(PPToken::createPreprocessingOpOrPunc("&&"));
       } else {
         state = State::End;
-        _queue.push(PPToken::createPreprocessingOpOrPunc("&"));
+        _emitToken(PPToken::createPreprocessingOpOrPunc("&"));
       }
     }
 
@@ -688,12 +690,12 @@ void PPTokenizerDFA::_pushTokens()
       // other  =>  Emit <, curr PPCodeUnit is not consumed.
       if (currChar32 == U'='  ||  currChar32 == U'%'  ||  currChar32 == U':') {
         state = State::End;
-        _stream->toNext();
-        _queue.push(PPToken::createPreprocessingOpOrPunc(
+        _toNext();
+        _emitToken(PPToken::createPreprocessingOpOrPunc(
               std::string("<") + std::string(1, static_cast<char>(currChar32))));
       } else {
         state = State::End;
-        _queue.push(PPToken::createPreprocessingOpOrPunc("<"));
+        _emitToken(PPToken::createPreprocessingOpOrPunc("<"));
       }
     }
 
@@ -703,11 +705,11 @@ void PPTokenizerDFA::_pushTokens()
       // other  =>  Emit <<, curr PPCodeUnit is not consumed.
       if (currChar32 == U'=') {
         state = State::End;
-        _stream->toNext();
-        _queue.push(PPToken::createPreprocessingOpOrPunc("<<="));
+        _toNext();
+        _emitToken(PPToken::createPreprocessingOpOrPunc("<<="));
       } else {
         state = State::End;
-        _queue.push(PPToken::createPreprocessingOpOrPunc("<<"));
+        _emitToken(PPToken::createPreprocessingOpOrPunc("<<"));
       }
     }
 
@@ -719,18 +721,20 @@ void PPTokenizerDFA::_pushTokens()
       // other  =>  Emit ., curr PPCodeUnit is not consumed.
 
       if (currChar32 == U'*') {
-        _stream->toNext();
+        _toNext();
         state = State::End;
-        _queue.push(PPToken::createPreprocessingOpOrPunc(".*"));
+        _emitToken(PPToken::createPreprocessingOpOrPunc(".*"));
       } else if (currChar32 == U'.') {
-        _stream->toNext();
+        _toNext();
         state = State::DotDot;
-      } else if (PPCodeUnitCheck::isDigit(curr)) {
-        _stream->toNext();
+      } else if (PPCodePointCheck::isDigit(currChar32)) {
+        _toNext();
+        ppnumber_u8str = ".";
+        ppnumber_u8str += static_cast<char>(currChar32);
         state = State::PPNumber_LackDigit;
       } else {
         state = State::End;
-        _queue.push(PPToken::createPreprocessingOpOrPunc("."));
+        _emitToken(PPToken::createPreprocessingOpOrPunc("."));
       }
     }
 
@@ -741,11 +745,11 @@ void PPTokenizerDFA::_pushTokens()
       //
       // Otherwise, report error because the C++ language does not permit
       // only two consecutive dots.
-      _stream->toNext();
+      _toNext();
 
       if (currChar32 == U'.') {
         state = State::End;
-        _queue.push(PPToken::createPreprocessingOpOrPunc("..."));
+        _emitToken(PPToken::createPreprocessingOpOrPunc("..."));
       } else {
         state = State::Error;
         _setError(R"(Encountered two consecutive dots, expect a third dot)");
@@ -758,10 +762,10 @@ void PPTokenizerDFA::_pushTokens()
       // other  =>  Emit :, curr PPCodeUnit is not consumed
       if (currChar32 == U'>') {
         state = State::End;
-        _queue.push(PPToken::createPreprocessingOpOrPunc(":>"));
+        _emitToken(PPToken::createPreprocessingOpOrPunc(":>"));
       } else if (PPCodePointCheck::isBasicSourceCharacter(currChar32)) {
         state = State::End;
-        _queue.push(PPToken::createPreprocessingOpOrPunc(":"));
+        _emitToken(PPToken::createPreprocessingOpOrPunc(":"));
       } else {
         state = State::Error;
         _setError(R"(Not a basic-source-character)");
@@ -772,27 +776,27 @@ void PPTokenizerDFA::_pushTokens()
       // Previous:  %
       // >      =>  Emit %> as Digraph
       // :      =>  If nextChar32 is U'%', goto PercentSign2. Otherwise emit %:
-      //            and set _isPreprocessingDirective if _isBeginningOfLine is
+      //            and set _isBeginningOfHeaderName if _isBeginningOfLine is
       //            true and the next PPCodeUnit is not consumed.
       // other  =>  Emit %, curr PPCodeUnit is not consumed.
 
       if (currChar32 == U'>') {
         state = State::End;
-        _queue.push(PPToken::createPreprocessingOpOrPunc("%>"));
+        _emitToken(PPToken::createPreprocessingOpOrPunc("%>"));
       } else if (currChar32 == U':') {
         const std::shared_ptr<PPCodeUnit> next = _stream->getCodeUnit();
         if (next->getChar32() == U'%') {
-          _stream->toNext();
+          _toNext();
           state = State::PercentSign2;
         } else {
           state = State::End;
-          _queue.push(PPToken::createPreprocessingOpOrPunc("%:"));
+          _emitToken(PPToken::createPreprocessingOpOrPunc("%:"));
           if (_isBeginningOfLine)
-            _isPreprocessingDirective = true;
+            _isBeginningOfHeaderName = true;
         }
       } else if (PPCodePointCheck::isBasicSourceCharacter(currChar32)) {
         state = State::End;
-        _queue.push(PPToken::createPreprocessingOpOrPunc(":"));
+        _emitToken(PPToken::createPreprocessingOpOrPunc(":"));
       } else {
         state = State::Error;
         _setError(R"(Not a basic-source-character)");
@@ -807,10 +811,10 @@ void PPTokenizerDFA::_pushTokens()
 
       if (currChar32 == U':') {
         state = State::End;
-        _queue.push(PPToken::createPreprocessingOpOrPunc("%:%:"));
+        _emitToken(PPToken::createPreprocessingOpOrPunc("%:%:"));
       } else if (PPCodePointCheck::isBasicSourceCharacter(currChar32)) {
         state = State::PercentSign;
-        _queue.push(PPToken::createPreprocessingOpOrPunc("%:"));
+        _emitToken(PPToken::createPreprocessingOpOrPunc("%:"));
       } else {
         state = State::Error;
         _setError(R"(Not a basic-source-character)");
