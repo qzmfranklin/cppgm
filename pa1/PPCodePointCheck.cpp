@@ -49,6 +49,7 @@ namespace {
   // For s- and r-char, the exclusion is complete in the contextual free part.
   const std::vector<char> _h_char_exclude_list = { '\n', '>' };
   const std::vector<char> _q_char_exclude_list = { '\n', '\"' };
+  const std::vector<char> _c_char_exclude_list = { '\n', '\'', '\\' };
   const std::vector<char> _s_char_exclude_list = { '\n', '\"', '\\' };
   const std::vector<char> _r_char_exclude_list = { '\n', '\"' };
   const std::vector<char> _d_char_exclude_list = {
@@ -215,6 +216,14 @@ bool PPCodePointCheck::isNotHChar(const char32_t ch32)
 bool PPCodePointCheck::isNotQChar(const char32_t ch32)
 {
   for (const char ch: _q_char_exclude_list)
+    if (static_cast<char>(ch32) == ch)
+      return true;
+  return !PPCodePointCheck::isBasicSourceCharacter(ch32);
+}
+
+bool PPCodePointCheck::isNotCChar(const char32_t ch32)
+{
+  for (const char ch: _c_char_exclude_list)
     if (static_cast<char>(ch32) == ch)
       return true;
   return !PPCodePointCheck::isBasicSourceCharacter(ch32);

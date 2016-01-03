@@ -43,11 +43,13 @@ public:
   // Relation to PPCodePointCheck::isNotXChar():
   //
   //   Exactly same for h-char, q-char, r-char, and d-char. The only difference
-  //   is in s-char. If an s-char is a universal-character-name, e.g.,
-  //   R"(\u034F)", PPCodeUnitCheck::isNotSChar() returns false but
+  //   is in s-char and c-char. If an s-char or an c-char is a
+  //   universal-character-name, e.g., R"(\u034F)",
+  //   PPCodeUnitCheck::isNotSChar() returns false but
   //   PPCodePointCheck::isNotSChar() returns true.
   static bool isNotHChar(const UnitPtr);
   static bool isNotQChar(const UnitPtr);
+  static bool isNotCChar(const UnitPtr);
   static bool isNotSChar(const UnitPtr);
   static bool isNotRChar(const UnitPtr);
   static bool isNotDChar(const UnitPtr);

@@ -87,6 +87,12 @@ bool PPCodeUnitCheck::isNotQChar(const UnitPtr unit)
   return PPCodePointCheck::isNotQChar(unit->getChar32());
 }
 
+bool PPCodeUnitCheck::isNotCChar(const UnitPtr unit)
+{
+  return PPCodePointCheck::isNotCChar(unit->getChar32())
+    && !(unit->getType() == PPCodeUnitType::UniversalCharacterName);
+}
+
 bool PPCodeUnitCheck::isNotSChar(const UnitPtr unit)
 {
   return PPCodePointCheck::isNotSChar(unit->getChar32())

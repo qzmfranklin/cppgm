@@ -27,10 +27,11 @@ public:
   //
   // CAVEAT:
   //
-  //   If isNotSChar() or isNotRChar() returns false, the code point is NOT
-  //   guaranteed to be an s-char or an r-char, respectively.
+  //   If isNotSChar(), isNotCChar, or isNotRChar() returns false, the code
+  //   point is NOT guaranteed to be an s-char or an r-char, respectively.
   static bool isNotHChar(const char32_t);
   static bool isNotQChar(const char32_t);
+  static bool isNotCChar(const char32_t);
   static bool isNotSChar(const char32_t);
   static bool isNotRChar(const char32_t);
   static bool isNotDChar(const char32_t);
