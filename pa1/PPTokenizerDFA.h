@@ -31,7 +31,6 @@ private:
 
   bool _isBeginningOfLine = true;
   bool _isBeginningOfHeaderName = false;
-  bool _isRawStringMode = false;
 };
 
 #endif /* end of include guard */

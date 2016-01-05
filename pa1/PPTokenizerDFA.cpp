@@ -1,10 +1,11 @@
 #include "PPCodePointCheck.h"
 #include "PPCodeUnitCheck.h"
 #include "PPTokenizerDFA.h"
-#include <map>
 #include <assert.h>
 
-// Comment the following line to see all sorts of debug information
+// TODO: Create a common utility debug logging tool instead of this macro
+// solution.
+// Comment the following line to see all sorts of debug information at run time.
 #define fprintf(stderr,...)
 
 PPTokenizerDFA::PPTokenizerDFA(std::shared_ptr<PPCodeUnitStreamIfc> stream):
@@ -83,6 +84,29 @@ void PPTokenizerDFA::_pushTokens()
     Ket,            // >
     KetKet,         // >>
 
+    PossibleCharacterOrStringLiteral, // u8, u8, U, L
+    PossibleRawStringLiteral, // u8R, R, u8R, UR, LR
+    CharacterLiteral,
+    CharacterLiteralEscape,
+    CharacterLiteralHex,
+    CharacterLiteralOct,
+    CharacterLiteralEnd,
+
+    UserDefinedCharacterLiteral,
+
+    RawString,
+    RawStringDelimiter,
+    RawStringKet,
+
+    StringLiteral,
+    StringLiteralEscape,
+    StringLiteralHex,
+    StringLiteralOct,
+    StringLiteralEnd,
+
+    UserDefinedStringLiteral,
+
+
     NumberOfStates, // Convenience for statistics
 
     End,
@@ -90,12 +114,19 @@ void PPTokenizerDFA::_pushTokens()
   } state = State::Start;
 
   // String variables used by the DFA.
-  std::string raw_string_u8str;
   std::string comment_u8str;
   std::string header_name_u8str;
   std::string ppnumber_u8str;
   std::string equal_sign_op_u8str;
   std::string identifier_u8str;
+  std::string encoding_prefix_u8str;
+  std::string character_literal_u8str;
+  std::string string_literal_u8str;
+  std::string raw_string_u8str;
+  std::string raw_string_delimiter_u8str;
+  std::string raw_string_ket_u8str;
+  std::string ud_suffix_u8str;
+  std::string oct_escape_u8str;
 
   const auto _emitToken = [this] (const std::shared_ptr<PPToken> tok) {
     fprintf(stderr,"======== %s =======\n", tok->getUTF8String().c_str());
@@ -140,7 +171,6 @@ void PPTokenizerDFA::_pushTokens()
         _isBeginningOfHeaderName = false;
       }
 
-
       // simple-op-or-punc
       else if (currChar32 == U'{'  ||  currChar32 == U'}'  ||  currChar32 == U'['
           ||   currChar32 == U']'  ||  currChar32 == U'('  ||  currChar32 == U')'
@@ -178,6 +208,7 @@ void PPTokenizerDFA::_pushTokens()
         state = State::Ampersand;
       } else if (currChar32 == U'<') { // < <= <% <: << <<= HeaderName_HSequenceStart
         state = _isBeginningOfHeaderName ? State::HeaderNameH : State::Bra;
+        header_name_u8str.clear();
       } else if (currChar32 == U'>') { // > >= >> >>=
         state = State::Ket;
       } else if (currChar32 == U':') { // : :> ::
@@ -194,15 +225,23 @@ void PPTokenizerDFA::_pushTokens()
         state = State::Identifier;
       }
 
-      // raw strings
+      // ordinary string-literal, a string-literal without any encoding prefix.
       // header-name q-sequence, e.g., "my_lib.h" enters here too
       else if (currChar32 == U'\"') {
         if (_isBeginningOfHeaderName) {
           state = State::HeaderNameQ;
+          header_name_u8str.clear();
         } else {
-          // handle raw strings here...
+          state = State::StringLiteral;
+          string_literal_u8str = "\"";
         }
       }
+
+      else if (currChar32 == U'\'') {
+        state = State::CharacterLiteral;
+        character_literal_u8str = "\'";
+      }
+
 
       else if (PPCodePointCheck::isDigit(currChar32)) {
         ppnumber_u8str = static_cast<char>(currChar32);
@@ -220,6 +259,419 @@ void PPTokenizerDFA::_pushTokens()
       }
 
     } // State::Start
+
+
+    ////////////////////////////////////////////////////////////////////////////////
+    // string-literal
+    // user-defined-string-literal
+    // character-literal
+    // user-defined-character-literal
+    //
+    // Entry:
+    //
+    //   A string literal starts with either a double quote ", or an encoding
+    //   prefix followed by a double quote ". If the encoding prefix ends with
+    //   the letter R, the string literal is a raw string literal.
+    //
+    //   User defined literals are extensions of string-literal and
+    //   character-literal with certain restrictions.
+    //
+    // Implementation:
+    //
+    //   We use UTF8 encoding for internal storage of string literals,
+    //   regardless of their intended types. We convert them to the proper
+    //   encoding in later phases.
+    //
+    //   In raw strings, universal-character-names are passed onto the next
+    //   phase as-is. Otherwise, universal-character-names are replaced by their
+    //   corresponding code ponints in the proper encoding.
+    //
+    ////////////////////////////////////////////////////////////////////////////////
+
+    else if (state == State::PossibleCharacterOrStringLiteral) {
+      // Previous: one of {u8, u, U, L}
+      // '      =>  CharacterLiteral
+      // "      =>  StringLiteral
+      // other  =>  Emit identifier_u8str as a PPTokenIdentifier, curr
+      //            PPCodeUnit is not consumed.
+      //
+      // Note:  raw-string and non-raw-string both use string_literal_u8str.
+      // This is safe because at most one of the two can be true at a time.
+      fprintf(stderr,"State::PossibleCharacterOrStringLiteral\n");
+
+      if (currChar32 == U'\'') {
+        _toNext();
+        state = State::CharacterLiteral;
+        character_literal_u8str = encoding_prefix_u8str + static_cast<char>(currChar32);
+      } else if (currChar32 == U'\"') {
+        _toNext();
+        state = State::StringLiteral;
+        string_literal_u8str = encoding_prefix_u8str + static_cast<char>(currChar32);
+      } else {
+        state = State::End;
+        _emitToken(PPToken::createIdentifier(identifier_u8str));
+      }
+    }
+
+    else if (state == State::PossibleRawStringLiteral) {
+      // Previous: one of {u8R, uR, UR, LR, R}
+      // "      =>  RawStringDelimiter, clear raw_string_delimiter_u8str.
+      // other  =>  Emit identifier_u8str as a PPTokenIdentifier, curr
+      //            PPCodeUnit is not consumed.
+
+      if (currChar32 == U'\"') {
+        _toNext();
+        state = State::RawStringDelimiter;
+        string_literal_u8str = encoding_prefix_u8str + static_cast<char>(currChar32);
+        raw_string_delimiter_u8str.clear();
+      } else {
+        state = State::End;
+        _emitToken(PPToken::createIdentifier(identifier_u8str));
+      }
+    }
+
+    else if (state == State::CharacterLiteral) {
+      // Previous: Start ', or PossibleCharacterOrStringLiteral '
+      // c-char =>  Append curr->getUTF8String() to character_literal_u8str
+      // '      =>  CharacterLiteralEnd
+      // \      =>  CharacterLiteralEscape
+      // other  =>  Error, curr PPCodeUnit is not consumed.
+      //
+      // Note: The C++ standard says that multicharacter literals are
+      // conditionally supported, have type int, and have implementation defined
+      // values. This tokenizer supports multicharacter literal but the value of
+      // the literal is not determined by the tokenizer.
+      fprintf(stderr,"State::CharacterLiteral\n");
+      if (!PPCodeUnitCheck::isNotCChar(curr)) {
+        _toNext();
+        character_literal_u8str += curr->getUTF8String();
+      } else if (currChar32 == U'\'') {
+        _toNext();
+        state = State::CharacterLiteralEnd;
+        character_literal_u8str += static_cast<char>(currChar32);
+      } else if (currChar32 == U'\\') {
+        _toNext();
+        state = State::CharacterLiteralEscape;
+        character_literal_u8str += static_cast<char>(currChar32);
+      } else {
+        state = State::Error;
+        _setError(R"(Expect a c-char, ', or \ in parsing character-literal.)");
+      }
+    }
+
+    else if (state == State::CharacterLiteralEnd) {
+      // Previous: '
+      // identifier-start => UserDefinedCharacterLiteral
+      // other            => Emit character_literal_u8str, curr PPCodeUnit is
+      //                     not consumed.
+      if (PPCodeUnitCheck::isIdentifierStart(curr)) {
+        _toNext();
+        state = State::UserDefinedCharacterLiteral;
+        ud_suffix_u8str = std::string(1, static_cast<char>(currChar32));
+      } else {
+        state = State::End;
+        _emitToken(PPToken::createCharacterLiteral(character_literal_u8str));
+      }
+    }
+
+    else if (state == State::UserDefinedCharacterLiteral) {
+      // Previous: CharacterLiteralEnd identifier-start
+      // identifier-nonstart => UserDefinedCharacterLiteral
+      // other               => Emit character_literal_u8str + ud_suffix_u8str as
+      //                        user-defined-character-literal, curr PPCodeUnit
+      //                        is not consumed.
+      if (PPCodeUnitCheck::isIdentifierNonStart(curr)) {
+        _toNext();
+        ud_suffix_u8str += curr->getUTF8String();
+      } else {
+        state = State::End;
+        _emitToken(PPToken::createUserDefinedCharacterLiteral(character_literal_u8str + ud_suffix_u8str));
+      }
+    }
+
+    else if (state == State::CharacterLiteralEscape) {
+      // Previous: CharacterLiteral \
+      // ' " ? \ a b f n r t v  => CharacterLiteral
+      // 0-7    =>  CharacterLiteralOct
+      // x      =>  CharacterLiteralHex
+      // other  =>  Error
+      fprintf(stderr,"State::CharacterLiteralEscape\n");
+      if (PPCodePointCheck::isSimpleEscapeChar(currChar32)) {
+        _toNext();
+        state = State::CharacterLiteral;
+        character_literal_u8str += static_cast<char>(currChar32);
+      } else if (PPCodePointCheck::isOctalDigit(currChar32)) {
+        _toNext();
+        state = State::CharacterLiteralOct;
+        oct_escape_u8str = std::string(1, static_cast<char>(currChar32));
+      } else if (currChar32 == U'x') {
+        _toNext();
+        state = State::CharacterLiteralHex;
+        character_literal_u8str += static_cast<char>(currChar32);
+      } else {
+        state = State::Error;
+        _setError(R"(Invalid escape sequence in parsing character-literal.)");
+      }
+    }
+
+    else if (state == State::CharacterLiteralOct) {
+      // Previous: CharacterLiteralEscape octal-digit
+      // 0-7  and  oct_escape_u8str.length() < 3:
+      //            Append currChar32 to oct_escape_u8str
+      // other  =>  CharacterLiteral, append oct_escape_u8str to
+      //            character_literal_u8str, curr PPCodeUnit is not consumed.
+      //
+      // Note: octal-escape-sequence can only take one of the following three
+      // formats:
+      //        \o \oo \ooo
+      if (PPCodePointCheck::isOctalDigit(currChar32) && oct_escape_u8str.length() < 3) {
+        _toNext();
+        oct_escape_u8str += static_cast<char>(currChar32);
+      } else {
+        state = State::CharacterLiteral;
+        character_literal_u8str += oct_escape_u8str;
+      }
+    }
+
+    else if (state == State::CharacterLiteralHex) {
+      // Previous: CharacterLiteralEscape, CharacterLiteralHex
+      // hexadecimal-digit  =>  CharacterLiteralHex
+      // other  => CharacterLiteral
+      fprintf(stderr,"State::CharacterLiteralHex\n");
+      if (PPCodePointCheck::isHexadecimalDigit(currChar32)) {
+        _toNext();
+        character_literal_u8str += static_cast<char>(currChar32);
+      } else {
+        state = State::CharacterLiteral;
+      }
+    }
+
+    else if (state == State::StringLiteral) {
+      // Previous: Start ", or PossibleCharacterOrStringLiteral "
+      // "      => StringLiteralEnd, append " to string_literal_u8str.
+      // \      => StringLiteralEscape
+      // s-char => Append curr->getUTF8String() to string_literal_u8str.
+      // other  => Error
+      fprintf(stderr,"State::StringLiteral\n");
+      if (currChar32 == U'\"') {
+        _toNext();
+        state = State::StringLiteralEnd;
+        string_literal_u8str += static_cast<char>(currChar32);
+      } else if (currChar32 == U'\\') {
+        _toNext();
+        state = State::StringLiteralEscape;
+        string_literal_u8str += static_cast<char>(currChar32);
+      } else if (!PPCodeUnitCheck::isNotSChar(curr)) {
+        _toNext();
+        string_literal_u8str += curr->getUTF8String();
+      } else {
+        state = State::Error;
+        _setError(R"(Expect a quote ", backslash \, or an s-char to continue parsing string literal.)");
+      }
+    }
+
+    else if (state == State::StringLiteralEscape) {
+      // Previous: StringLiteral \
+      // n t v b r f a \ ? ' " => StringLiteral
+      // x      => StringLiteralHex
+      // 0-7    => StringLiteralOct
+      // other  => Error
+      fprintf(stderr,"State::StringLiteralEscape\n");
+      if (PPCodePointCheck::isSimpleEscapeChar(currChar32)) {
+        _toNext();
+        state = State::StringLiteral;
+        string_literal_u8str += static_cast<char>(currChar32);
+      } else if (currChar32 == U'x') {
+        _toNext();
+        state = State::StringLiteralHex;
+        string_literal_u8str += static_cast<char>(currChar32);
+      } else if (PPCodePointCheck::isOctalDigit(currChar32)) {
+        _toNext();
+        state = State::StringLiteralOct;
+        oct_escape_u8str = std::string(1, static_cast<char>(currChar32));
+      } else {
+        state = State::Error;
+        _setError(R"(Invalid character following \ in string-literal.)");
+      }
+    }
+
+    else if (state == State::StringLiteralHex) {
+      // Previous: StringLiteralEscape x, or StringLiteralHex hexadecimal-digit
+      // hexadecimal-digit => StringLiteralHex, append currChar32 to
+      //                      string_literal_u8str.
+      // other             => StringLiteral, curr PPCodeUnit is not consumed.
+      //
+      // Note: Per the N4527 specification 2.13.3, hexadecimal escape sequence
+      // can be arbitrarily long and terminates with the first non-hexadecimal-
+      // digit character. For example:
+      //     "\x9f3aff" = \9f3aff \0
+      // An important implication of this parsing rule is that it is impossible
+      // to describe using this language a single string with the following
+      // memory image
+      //    \9fffff 'f' \0,
+      // because the second 'f' is unconditionally assimilated into the
+      // preceding hexadeciaml escape sequence. Though, we can still achieve the
+      // goal by concatenation:
+      //    "\x9ffff" "f"
+      //
+      // In reality, Unicode code points can have at most six hexadecimal
+      // digits. It might be advisable to stipulate that a hexadecimal escape
+      // sequence in string literals have a maximal lengths of six hexadecimal
+      // digits.
+      if (PPCodePointCheck::isHexadecimalDigit(currChar32)) {
+        _toNext();
+        string_literal_u8str += static_cast<char>(currChar32);
+      } else {
+        state = State::StringLiteral;
+      }
+    }
+
+    else if (state == State::StringLiteralOct) {
+      // Previous: StringLiteral 0-7, or StringLiteralOct 0-7
+      // octal-digit  &&  oct_escape_u8str.length() < 3:
+      //           Append currChar32 to oct_escape_u8str.
+      // other  => StringLiteral, curr PPCodeUnit is not consumed.
+      //
+      // Note: Per the N4527 specification 2.13.3, octal escape sequence has a
+      // maximal length of three octal-digits or terminate with the first
+      // non-octal-digit character, whichever comes first. For example:
+      //     "\277"  = \277 \0
+      //     "\0277" = \27 '7' \0
+      if (PPCodePointCheck::isOctalDigit(currChar32) && oct_escape_u8str.length() < 3) {
+        _toNext();
+        oct_escape_u8str += static_cast<char>(currChar32);
+      } else {
+        state = State::StringLiteral;
+        string_literal_u8str += oct_escape_u8str;
+      }
+    }
+
+    else if (state == State::RawStringDelimiter) {
+      // Previous: PossibleRawStringLiteral or RawStringDelimiter
+      // (      => RawString, clear raw_string_u8str.
+      //           The variable raw_string_delimiter_u8str stores the delimiter
+      //           used in this raw string. It is possible that the delimiter is
+      //           an empty string.
+      // d-char => Append currChar32 to raw_string_delimiter_u8str
+      // other  => Error
+      if (currChar32 == U'(') {
+        _toNext();
+        state = State::RawString;
+        raw_string_u8str.clear();
+      } else if (!PPCodePointCheck::isNotDChar(currChar32)) {
+        _toNext();
+        raw_string_delimiter_u8str += static_cast<char>(currChar32);
+      } else {
+        state = State::Error;
+        _setError(R"(Expect a ( or a d-char in parsing the delimiter d-sequence in raw string.)");
+      }
+    }
+
+    else if (state == State::RawString) {
+      // Previous: RawString or RawStringDelimiter
+      // )      => RawStringKet, clear raw_string_ket_u8str
+      // r-char (excluding ))
+      //        => Append curr->getUTF8String() to raw_string_u8str
+      // other  => Error
+      //
+      // Note: By definition, r-char is contextual, as in
+      //    any member of the source character set, except a right parenthesis )
+      //    followed by the initial d-char-sequence (which may be empty)
+      //    followed by a double quote ".
+      //
+      //    As a result, if PPCodeUnitCheck::isNotRChar() returns false, the
+      // char is _not_ guaranteed to be an r-char. The contextual informaion
+      // needed to fully determin whether a PPCodeUnit is an r-char is stored in
+      // raw_string_delimiter_u8str. The state RawStringKet is the state devoted
+      // to determining r-char and end-of-string delimiters in raw strings.
+
+      _toNext();
+      if (currChar32 == U')') {
+        state = State::RawStringKet;
+        raw_string_ket_u8str.clear();
+      } else if (!PPCodeUnitCheck::isNotRChar(curr)) {
+        // Must be an r-char here. Note that universal-character-names shall be
+        // reverted here using the getUTF8String() methods.
+        raw_string_u8str += curr->getUTF8String();
+      } else {
+        state = State::Error;
+        _setError(R"(Expecting an r-char in raw-string)");
+      }
+    }
+
+    else if (state == State::RawStringKet) {
+      // Previous: RawString or RawStringKet
+      // "      => If raw_string_ket_u8str == raw_string_delimiter_u8str
+      //           construct string_literal_u8str and transition to
+      //           StringLiteralEnd, otherwise append raw_string_ket_u8str and "
+      //           to raw_string_u8str and transition to RawString.
+      // )      => Append raw_string_ket_u8str and ) to raw_string_u8str. Clear
+      //           raw_string_ket_u8str.
+      // d-char (excluding ")
+      //        => Append currChar32 to raw_string_ket_u8str.
+      // r-char (excluding d-char and ")
+      //        => Append raw_string_ket_u8str and curr->getUTF8String() to
+      //           raw_string_ket_u8str. Transition to RawString.
+      // other  => Error
+
+      _toNext();
+      if (currChar32 == U'\"') {
+        if (raw_string_ket_u8str == raw_string_delimiter_u8str) {
+          state = State::StringLiteralEnd;
+          string_literal_u8str = encoding_prefix_u8str +
+            "\"" + raw_string_delimiter_u8str +
+            "(" + raw_string_u8str + ")" +
+            raw_string_delimiter_u8str + "\"";
+        } else {
+          raw_string_u8str += raw_string_ket_u8str;
+          raw_string_u8str += static_cast<char>(currChar32);
+        }
+      } else if (currChar32 == U')') {
+        raw_string_u8str += raw_string_ket_u8str;
+        raw_string_u8str += static_cast<char>(currChar32);
+        raw_string_ket_u8str.clear();
+      } else if (!PPCodeUnitCheck::isNotDChar(curr)) {
+        raw_string_ket_u8str += static_cast<char>(currChar32);
+      } else if (!PPCodeUnitCheck::isNotRChar(curr)) {
+        state = State::RawString;
+        raw_string_u8str += raw_string_ket_u8str + curr->getUTF8String();
+      } else {
+        state = State::Error;
+        _setError(R"(Expect a d-char, ", or an r-char in parsing a raw string.)");
+      }
+    }
+
+    else if (state == State::StringLiteralEnd) {
+      // Hereby, string_literal_u8str stores the longest input text that is
+      // considered a string-literal for preprocessing lexing purpose.
+      //
+      // identifier-start => UserDefinedStringLiteral
+      // other            => Emit string_literal_u8str as string-literal, curr
+      //                     PPCodeUnit is not consumed.
+      if (PPCodeUnitCheck::isIdentifierStart(curr)) {
+        _toNext();
+        state = State::UserDefinedStringLiteral;
+        ud_suffix_u8str = std::string(1, static_cast<char>(currChar32));
+      } else {
+        state = State::End;
+        _emitToken(PPToken::createStringLiteral(string_literal_u8str));
+      }
+    }
+
+    else if (state == State::UserDefinedStringLiteral) {
+      // Previous: StringLiteralEnd identifier-start
+      // identifier-nonstart => UserDefinedStringLiteral
+      // other               => Emit string_literal_u8str + ud_suffix_u8str as
+      //                        user-defined-string-literal, curr PPCodeUnit is
+      //                        not consumed.
+      if (PPCodeUnitCheck::isIdentifierNonStart(curr)) {
+        _toNext();
+        ud_suffix_u8str += static_cast<char>(currChar32);
+      } else {
+        state = State::End;
+        _emitToken(PPToken::createUserDefinedStringLiteral(string_literal_u8str + ud_suffix_u8str));
+      }
+    }
 
     ////////////////////////////////////////////////////////////////////////////////
     // identifier
@@ -261,28 +713,81 @@ void PPTokenizerDFA::_pushTokens()
     else if (state == State::Identifier) {
       // Previous: identifier-start
       // identifier-nonstart  =>  Identifier
-      // other                =>  Emit identifier, the curr PPCodeUnit is not
-      //                          consumed.
+      // other                =>  Emit identifier or preprocessing-op-or-punc,
       //
-      // When emitting an identifier, if _isBeginningOfLine is true and the
-      // identifier is "include", set _isBeginningOfHeaderName to true.
+      // When emitting:
+      //
+      //  - If _isBeginningOfLine is true and the identifier is "include", set
+      //    _isPreprocessingDirective to true.
+      //
+      //  - If the identifier is "include" but _isBeginningOfLine is false,
+      //    report error.
+      //
+      //  - If the identifier is one of the alternative representations:
+      //        new delete and and_eq bitand bitor compl not not_eq or or_eq xor
+      //        xor_eq,
+      //    emit a preprocessing-op-or-punc. The string stored in the PPToken
+      //    object is the alternative representation, not the primary
+      //    representation.
+      //
+      //    Note that new and delete are not indeed alternative representations,
+      //    but they are preprocessing-op-or-punc as well.
+      //
+      //  - If the identifier being emitted is one of the encoding prefixes:
+      //        u8, u, U, L,
+      //    transition to State::PossibleCharacterOrStringLiteral to check for
+      //    either the single quote ' for starting a character literal or the
+      //    double quote " for starting a non-raw string-literal.
+      //
+      //    Note that none of u8, u, U, and L is a reserved identifier. They can
+      //    still be used as macros, variable names, or function names other
+      //    than as encoding prefixes. This is why the processing of these
+      //    identifier has to overlap with the identifier.
+      //
+      //  - If the identifier beining emitted is one of:
+      //        u8R, uR, UR, LR, R
+      //    transition to State::PossibleRawStringLiteral to check for the
+      //    double quote ", an optinal d-sequence, and a left parenthesis for
+      //    starting a raw-string-literal.
+      //
       fprintf(stderr,"State::Identifier\n");
+
+      fprintf(stderr,"%s + <%c> (U+%06X)\n", identifier_u8str.c_str(),
+          static_cast<char>(currChar32), static_cast<uint32_t>(currChar32));
+
+      const static std::vector<std::string> _ar_ = {
+        "new", "delete", "and", "and_eq", "bitand", "bitor", "compl", "not",
+        "not_eq", "or", "or_eq", "xor", "xor_eq"
+      }; // ar is short for alternative representations
 
       if (PPCodeUnitCheck::isIdentifierNonStart(curr)) {
         _toNext();
         identifier_u8str += curr->getUTF8String();
-      } else {
+        continue;
+      } else if (std::find(_ar_.begin(), _ar_.end(), identifier_u8str) != _ar_.end()) {
         state = State::End;
-        _emitToken(PPToken::createIdentifier(identifier_u8str));
-        if (identifier_u8str == "include") {
-          if (_isBeginningOfLine) {
-            _isBeginningOfHeaderName = true;
-          } else {
-            state = State::Error;
-            _setError(R"(The identifier "include" can only be used following # at the beginning of a new line)");
-          }
+        _emitToken(PPToken::createPreprocessingOpOrPunc(identifier_u8str));
+      } else if (identifier_u8str == "include") {
+        if (_isBeginningOfLine) {
+          state = State::End;
+          _emitToken(PPToken::createIdentifier(identifier_u8str));
+          _isBeginningOfHeaderName = true;
+        } else {
+          state = State::Error;
+          _setError(R"(The identifier "include" can only be used following # at the beginning of a new line)");
         }
+      } else if (identifier_u8str == "u"  ||  identifier_u8str == "u8"
+              || identifier_u8str == "U"  ||  identifier_u8str == "L") {
+        state = State::PossibleCharacterOrStringLiteral;
+        encoding_prefix_u8str = identifier_u8str;
+      } else if (identifier_u8str == "uR"  ||  identifier_u8str == "u8R"
+              || identifier_u8str == "UR"  ||  identifier_u8str == "LR"
+              || identifier_u8str == "R") {
+        state = State::PossibleRawStringLiteral;
+        encoding_prefix_u8str = identifier_u8str;
       }
+
+      fprintf(stderr,"return from State::Identifier\n");
     }
 
     ////////////////////////////////////////////////////////////////////////////////
