@@ -27,28 +27,28 @@ TEST(PPToken, PPNumber)
 
 TEST(PPToken, CharacterLiteral)
 {
-  const auto tok = PPToken::createCharacterLiteral(UR"(U'ひ')");
+  const auto tok = PPToken::createCharacterLiteral(R"(U'ひ')");
   ASSERT_EQ(PPTokenType::CharacterLiteral, tok->getType());
   ASSERT_EQ(R"(U'ひ')", tok->getUTF8String());
 }
 
 TEST(PPToken, UserDefinedCharacterLiteral)
 {
-  const auto tok = PPToken::createUserDefinedCharacterLiteral(UR"(U'TBD')");
+  const auto tok = PPToken::createUserDefinedCharacterLiteral(R"(U'TBD')");
   ASSERT_EQ(PPTokenType::UserDefinedCharacterLiteral, tok->getType());
   ASSERT_EQ(R"(U'TBD')", tok->getUTF8String());
 }
 
 TEST(PPToken, StringLiteral)
 {
-  const auto tok = PPToken::createStringLiteral(U"Hiragana(平仮名,ひらがな)");
+  const auto tok = PPToken::createStringLiteral("Hiragana(平仮名,ひらがな)");
   ASSERT_EQ(PPTokenType::StringLiteral, tok->getType());
   ASSERT_EQ("Hiragana(平仮名,ひらがな)", tok->getUTF8String());
 }
 
 TEST(PPToken, UserDefinedStringLiteral)
 {
-  const auto tok = PPToken::createUserDefinedStringLiteral(U"Hiragana(平仮名,ひらがな)");
+  const auto tok = PPToken::createUserDefinedStringLiteral("Hiragana(平仮名,ひらがな)");
   ASSERT_EQ(PPTokenType::UserDefinedStringLiteral, tok->getType());
   ASSERT_EQ("Hiragana(平仮名,ひらがな)", tok->getUTF8String());
 }
@@ -77,7 +77,7 @@ TEST(PPToken, NewLine)
 
 TEST(PPToken, WhitespaceSequence)
 {
-  const auto tok = PPToken::createWhitespaceSequence(UR"(djfi  jdie )");
+  const auto tok = PPToken::createWhitespaceSequence(R"(djfi  jdie )");
   ASSERT_EQ(PPTokenType::WhitespaceSequence, tok->getType());
   ASSERT_EQ(R"(djfi  jdie )", tok->getUTF8String());
 }

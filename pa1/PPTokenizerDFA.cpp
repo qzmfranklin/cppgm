@@ -90,8 +90,8 @@ void PPTokenizerDFA::_pushTokens()
   } state = State::Start;
 
   // String variables used by the DFA.
-  std::u32string comment_u32str;
   std::string raw_string_u8str;
+  std::string comment_u8str;
   std::string header_name_u8str;
   std::string ppnumber_u8str;
   std::string equal_sign_op_u8str;
@@ -452,17 +452,17 @@ void PPTokenizerDFA::_pushTokens()
 
     else if (state == State::SingleLineComment) {
       // Previous: //
-      // \n     =>  Prepend "//' to comment_u32str, emit comment_u32str as
+      // \n     =>  Prepend "//' to comment_u8str, emit comment_u8str as
       //            whitespace-sequence
       // other  =>  SingleLineComment
 
       if (currChar32 == U'\n') {
         state = State::End;
-        comment_u32str.insert(0, U"//");
-        _emitToken(PPToken::createWhitespaceSequence(comment_u32str));
+        comment_u8str.insert(0, "//");
+        _emitToken(PPToken::createWhitespaceSequence(comment_u8str));
       } else {
         _toNext();
-        comment_u32str += currChar32;
+        comment_u8str += static_cast<char>(currChar32);
       }
     }
 
@@ -471,7 +471,7 @@ void PPTokenizerDFA::_pushTokens()
       // other  =>  MultipleLineComment
       _toNext();
 
-      comment_u32str += currChar32;
+      comment_u8str += static_cast<char>(currChar32);
       if (currChar32 == U'*')
         state = State::MultipleLineCommentStar;
     }
@@ -479,18 +479,18 @@ void PPTokenizerDFA::_pushTokens()
     else if (state == State::MultipleLineCommentStar) {
       // Previous: *
       // *      =>  MultipleLineCommentStar
-      // /      =>  Prepend "/*' to comment_u32str, emit comment_u32str as a
+      // /      =>  Prepend "/*' to comment_u8str, emit comment_u8str as a
       //            whitespace-sequence
       // other  =>  MultipleLineComment
       _toNext();
 
-      comment_u32str += currChar32;
+      comment_u8str += static_cast<char>(currChar32);
       if (currChar32 == U'*') {
         // no-op
       } else if (currChar32 == U'/') {
         state = State::End;
-        comment_u32str.insert(0, U"/*");
-        _emitToken(PPToken::createWhitespaceSequence(comment_u32str));
+        comment_u8str.insert(0, "/*");
+        _emitToken(PPToken::createWhitespaceSequence(comment_u8str));
       } else {
         state = State::MultipleLineComment;
       }

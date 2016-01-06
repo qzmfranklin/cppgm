@@ -41,27 +41,27 @@ PPToken::createPPNumber(const std::string &u8str)
 }
 
 std::shared_ptr<PPTokenCharacterLiteral>
-PPToken::createCharacterLiteral(const std::u32string &u32str)
+PPToken::createCharacterLiteral(const std::string &u8str)
 {
-  return std::make_shared<PPTokenCharacterLiteral>(u32str);
+  return std::make_shared<PPTokenCharacterLiteral>(u8str);
 }
 
 std::shared_ptr<PPTokenUserDefinedCharacterLiteral>
-PPToken::createUserDefinedCharacterLiteral(const std::u32string &u32str)
+PPToken::createUserDefinedCharacterLiteral(const std::string &u8str)
 {
-  return std::make_shared<PPTokenUserDefinedCharacterLiteral>(u32str);
+  return std::make_shared<PPTokenUserDefinedCharacterLiteral>(u8str);
 }
 
 std::shared_ptr<PPTokenStringLiteral>
-PPToken::createStringLiteral(const std::u32string &u32str)
+PPToken::createStringLiteral(const std::string &u8str)
 {
-  return std::make_shared<PPTokenStringLiteral>(u32str);
+  return std::make_shared<PPTokenStringLiteral>(u8str);
 }
 
 std::shared_ptr<PPTokenUserDefinedStringLiteral>
-PPToken::createUserDefinedStringLiteral(const std::u32string &u32str)
+PPToken::createUserDefinedStringLiteral(const std::string &u8str)
 {
-  return std::make_shared<PPTokenUserDefinedStringLiteral>(u32str);
+  return std::make_shared<PPTokenUserDefinedStringLiteral>(u8str);
 }
 
 std::shared_ptr<PPTokenPreprocessingOpOrPunc>
@@ -83,9 +83,9 @@ PPToken::createNewLine()
 }
 
 std::shared_ptr<PPTokenWhitespaceSequence>
-PPToken::createWhitespaceSequence(const std::u32string &u32str)
+PPToken::createWhitespaceSequence(const std::string &u8str)
 {
-  return std::make_shared<PPTokenWhitespaceSequence>(u32str);
+  return std::make_shared<PPTokenWhitespaceSequence>(u8str);
 }
 
 namespace {
@@ -116,22 +116,22 @@ std::string PPTokenPPNumber::getUTF8String() const
 
 std::string PPTokenCharacterLiteral::getUTF8String() const
 {
-  return _u32_to_u8(_u32string);
+  return _u8string;
 }
 
 std::string PPTokenUserDefinedCharacterLiteral::getUTF8String() const
 {
-  return _u32_to_u8(_u32string);
+  return _u8string;
 }
 
 std::string PPTokenStringLiteral::getUTF8String() const
 {
-  return _u32_to_u8(_u32string);
+  return _u8string;
 }
 
 std::string PPTokenUserDefinedStringLiteral::getUTF8String() const
 {
-  return _u32_to_u8(_u32string);
+  return _u8string;
 }
 
 std::string PPTokenPreprocessingOpOrPunc::getUTF8String() const
@@ -151,5 +151,5 @@ std::string PPTokenNewLine::getUTF8String() const
 
 std::string PPTokenWhitespaceSequence::getUTF8String() const
 {
-  return _u32_to_u8(_u32string);
+  return _u8string;
 }
