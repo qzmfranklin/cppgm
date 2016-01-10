@@ -2,6 +2,8 @@
 #include "PPCodeUnitStream.h"
 #include <assert.h>
 
+// Comment out this following line to see debug prints.
+#define fprintf(stderr,...)
 
 PPCodeUnitStream::PPCodeUnitStream(std::shared_ptr<UTF32StreamIfc> u32stream):
   _u32stream(u32stream)
@@ -74,8 +76,11 @@ void PPCodeUnitStream::_pushCodeUnits()
   while(!_u32stream->isEmpty()  &&  state != State::End  &&  state != State::Error) {
     const char32_t curr32 = _u32stream->getChar32();
     _u32stream->toNext();
+    fprintf(stderr,"\n==PPCodeUnitStream== U+%06X <%c>\n",
+        static_cast<uint32_t>(curr32), static_cast<char>(curr32));
 
     if (state == State::Start) {
+      fprintf(stderr,"State::Start\n");
       if (curr32 == U'\\') { // Line splicing, universal-character-name
         state = State::Backslash;
       } else if (PPCodePointCheck::isBasicSourceCharacter(curr32)) {
@@ -88,6 +93,7 @@ void PPCodeUnitStream::_pushCodeUnits()
     }
 
     else if (state == State::Backslash) {
+      fprintf(stderr,"State::Backslash\n");
       if (curr32 == U'\n') { // Line splicing state = State::End;
         _queue.push(PPCodeUnit::createUniversalCharacterName(0, R"(\n)"));
       } else if (curr32 == U'u') { // \uXXXX
@@ -104,6 +110,7 @@ void PPCodeUnitStream::_pushCodeUnits()
     }
 
     else if (state == State::SingleQuad) {
+      fprintf(stderr,"State::SingleQuad\n");
       std::string u8str(1, static_cast<char>(curr32));
       for (int i = 0; i < 3; i++) {
         const char32_t ch32 = _u32stream->getChar32();
@@ -121,6 +128,7 @@ void PPCodeUnitStream::_pushCodeUnits()
     }
 
     else if (state == State::DoubleQuad) {
+      fprintf(stderr,"State::DoubleQuad\n");
       std::string u8str(1, static_cast<char>(curr32));
       for (int i = 0; i < 7; i++) {
         const char32_t ch32 = _u32stream->getChar32();
