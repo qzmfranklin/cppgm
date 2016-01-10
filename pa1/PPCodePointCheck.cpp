@@ -30,6 +30,10 @@ namespace {
 
   // h-char: any member of the basic source character set except new-line and >
   // q-char: any member of the basic source character set except new-line and "
+  // c-char: any member of the source character set except the single-quote ’,
+  //         backslash \, or new-line character
+  //         escape-sequence
+  //         universal-character-name
   // s-char: any member of the basic source character set except new-line,
   //         double-quote ", and backslash \
   //         escape-sequence
@@ -42,7 +46,7 @@ namespace {
   //         the control characters representing horizontal tab, vertical tab,
   //         form feed, and newline
   //
-  // _X_char_exclude_set (X = h, q, s, r, d) is the set of code points that are
+  // _X_char_exclude_set (X = h, q, s, r, d, c) is the set of code points that are
   // excluded from the basic source character set.
   //
   // For h-, q-, and d-char, the exclusion is complete.
