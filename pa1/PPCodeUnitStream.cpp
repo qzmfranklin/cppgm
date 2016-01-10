@@ -50,6 +50,8 @@ void PPCodeUnitStream::_pushCodeUnits()
   enum class State {
     Start,
 
+    Backslash,
+
     SingleQuad,
     DoubleQuad,
     SingleLineComment,
@@ -75,24 +77,29 @@ void PPCodeUnitStream::_pushCodeUnits()
 
     if (state == State::Start) {
       if (curr32 == U'\\') { // Line splicing, universal-character-name
-        const char32_t next32 = _u32stream->getChar32();
-        if (next32 == U'\n') { // Line splicing
-          // No-op pass
-        } else if (next32 == U'u') { // \uXXXX
-          state = State::SingleQuad;
-        } else if (next32 == U'U') { // \UXXXXXXXX
-          state = State::DoubleQuad;
-        } else {
-          state = State::Error;
-          _setError(R"(Illegal character following \)");
-        }
-        _u32stream->toNext();
+        state = State::Backslash;
       } else if (PPCodePointCheck::isBasicSourceCharacter(curr32)) {
         _queue.push(PPCodeUnit::createASCIIChar(static_cast<const char>(curr32)));
         state = State::End;
       } else {
         _setError(R"(Not a basic-source-character)");
         state = State::Error;
+      }
+    }
+
+    else if (state == State::Backslash) {
+      if (curr32 == U'\n') { // Line splicing state = State::End;
+        _queue.push(PPCodeUnit::createUniversalCharacterName(0, R"(\n)"));
+      } else if (curr32 == U'u') { // \uXXXX
+        state = State::SingleQuad;
+      } else if (curr32 == U'U') { // \UXXXXXXXX
+        state = State::DoubleQuad;
+      } else if (PPCodePointCheck::isBasicSourceCharacter(curr32)) {
+        state = State::End;
+        _queue.push(PPCodeUnit::createASCIIChar('\''));
+      } else {
+        state = State::Error;
+        _setError(R"(Illegal character following \)");
       }
     }
 
