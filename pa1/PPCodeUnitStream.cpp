@@ -70,21 +70,24 @@ void PPCodeUnitStream::_pushCodeUnits()
     Error
   };
 
+  const auto _toNext = [this] () { this->_u32stream->toNext(); };
+  const auto _emitCodeUnit = [this] (const std::shared_ptr<PPCodeUnit> ptr) { this->_queue.push(ptr); };
+
   std::u32string u32str;
   State state = State::Start;
   _clearError();
   while(!_u32stream->isEmpty()  &&  state != State::End  &&  state != State::Error) {
     const char32_t curr32 = _u32stream->getChar32();
-    _u32stream->toNext();
     fprintf(stderr,"\n==PPCodeUnitStream== U+%06X <%c>\n",
         static_cast<uint32_t>(curr32), static_cast<char>(curr32));
 
     if (state == State::Start) {
+      _toNext();
       fprintf(stderr,"State::Start\n");
       if (curr32 == U'\\') { // Line splicing, universal-character-name
         state = State::Backslash;
       } else if (PPCodePointCheck::isBasicSourceCharacter(curr32)) {
-        _queue.push(PPCodeUnit::createASCIIChar(static_cast<const char>(curr32)));
+        _emitCodeUnit(PPCodeUnit::createASCIIChar(static_cast<const char>(curr32)));
         state = State::End;
       } else {
         _setError(R"(Not a basic-source-character)");
@@ -95,14 +98,17 @@ void PPCodeUnitStream::_pushCodeUnits()
     else if (state == State::Backslash) {
       fprintf(stderr,"State::Backslash\n");
       if (curr32 == U'\n') { // Line splicing state = State::End;
-        _queue.push(PPCodeUnit::createUniversalCharacterName(0, R"(\n)"));
+        _toNext();
+        _emitCodeUnit(PPCodeUnit::createUniversalCharacterName(0, R"(\n)"));
       } else if (curr32 == U'u') { // \uXXXX
+        _toNext();
         state = State::SingleQuad;
       } else if (curr32 == U'U') { // \UXXXXXXXX
+        _toNext();
         state = State::DoubleQuad;
       } else if (PPCodePointCheck::isBasicSourceCharacter(curr32)) {
         state = State::End;
-        _queue.push(PPCodeUnit::createASCIIChar('\''));
+        _emitCodeUnit(PPCodeUnit::createASCIIChar('\''));
       } else {
         state = State::Error;
         _setError(R"(Illegal character following \)");
@@ -110,11 +116,12 @@ void PPCodeUnitStream::_pushCodeUnits()
     }
 
     else if (state == State::SingleQuad) {
+      _toNext();
       fprintf(stderr,"State::SingleQuad\n");
       std::string u8str(1, static_cast<char>(curr32));
       for (int i = 0; i < 3; i++) {
         const char32_t ch32 = _u32stream->getChar32();
-        _u32stream->toNext();
+        _toNext();
         if (PPCodePointCheck::isHexadecimalDigit(ch32)) {
           u8str  += static_cast<char>(ch32);
         } else {
@@ -123,16 +130,17 @@ void PPCodeUnitStream::_pushCodeUnits()
         }
       }
       const char32_t value = static_cast<char32_t>(std::stoull(u8str, nullptr, 16));
-      _queue.push(PPCodeUnit::createUniversalCharacterName(value, std::string("\\u") + u8str));
+      _emitCodeUnit(PPCodeUnit::createUniversalCharacterName(value, std::string("\\u") + u8str));
       state = State::End;
     }
 
     else if (state == State::DoubleQuad) {
+      _toNext();
       fprintf(stderr,"State::DoubleQuad\n");
       std::string u8str(1, static_cast<char>(curr32));
       for (int i = 0; i < 7; i++) {
         const char32_t ch32 = _u32stream->getChar32();
-        _u32stream->toNext();
+        _toNext();
         if (PPCodePointCheck::isHexadecimalDigit(ch32)) {
           u8str  += static_cast<char>(ch32);
         } else {
@@ -141,7 +149,7 @@ void PPCodeUnitStream::_pushCodeUnits()
         }
       }
       const char32_t value = static_cast<char32_t>(std::stoull(u8str, nullptr, 16));
-      _queue.push(PPCodeUnit::createUniversalCharacterName(value, std::string("\\U") + u8str));
+      _emitCodeUnit(PPCodeUnit::createUniversalCharacterName(value, std::string("\\U") + u8str));
 
       state = State::End;
     }
