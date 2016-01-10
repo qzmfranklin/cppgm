@@ -108,7 +108,7 @@ void PPCodeUnitStream::_pushCodeUnits()
         state = State::DoubleQuad;
       } else if (PPCodePointCheck::isBasicSourceCharacter(curr32)) {
         state = State::End;
-        _emitCodeUnit(PPCodeUnit::createASCIIChar('\''));
+        _emitCodeUnit(PPCodeUnit::createASCIIChar('\\'));
       } else {
         state = State::Error;
         _setError(R"(Illegal character following \)");
