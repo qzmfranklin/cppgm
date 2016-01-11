@@ -60,6 +60,88 @@ TEST(PPCodeUnitStream, DoubleQuad)
   //ASSERT_EQ(std::u32string(UR"(\U0001104D)"), unit->getUTF32String());
 }
 
+TEST(PPCodeUnitStream, IncompleteSingleQuad)
+{
+  const std::string src = R"(\u0FX)";
+  auto u32stream = std::make_shared<PPUTF32Stream>(src);
+  auto stream = std::make_shared<PPCodeUnitStream>(u32stream);
+
+  for (const char ch: src) {
+    ASSERT_FALSE(stream->isEmpty());
+    const std::shared_ptr<PPCodeUnit> unit = stream->getCodeUnit();
+    ASSERT_EQ(static_cast<char32_t>(ch),  unit->getChar32());
+    ASSERT_EQ(std::string(1, ch), unit->getUTF8String());
+    stream->toNext();
+  }
+
+  { // new-line
+    ASSERT_FALSE(stream->isEmpty());
+    const std::shared_ptr<PPCodeUnit> unit = stream->getCodeUnit();
+    ASSERT_EQ(U'\n', unit->getChar32());
+    ASSERT_EQ("\n",  unit->getUTF8String());
+    stream->toNext();
+  }
+
+  ASSERT_TRUE(stream->isEmpty());
+}
+
+TEST(PPCodeUnitStream, IncompleteDoubleQuad)
+{
+  const std::string src = R"(\U0FX)";
+  auto u32stream = std::make_shared<PPUTF32Stream>(src);
+  auto stream = std::make_shared<PPCodeUnitStream>(u32stream);
+
+  for (const char ch: src) {
+    ASSERT_FALSE(stream->isEmpty());
+    const std::shared_ptr<PPCodeUnit> unit = stream->getCodeUnit();
+    ASSERT_EQ(static_cast<char32_t>(ch),  unit->getChar32());
+    ASSERT_EQ(std::string(1, ch), unit->getUTF8String());
+    stream->toNext();
+  }
+
+  { // new-line
+    ASSERT_FALSE(stream->isEmpty());
+    const std::shared_ptr<PPCodeUnit> unit = stream->getCodeUnit();
+    ASSERT_EQ(U'\n', unit->getChar32());
+    ASSERT_EQ("\n",  unit->getUTF8String());
+    stream->toNext();
+  }
+
+  ASSERT_TRUE(stream->isEmpty());
+}
+
+TEST(PPCodeUnitStream, BackslashEscape)
+{
+  const std::string src = R"(\n)";
+  auto u32stream = std::make_shared<PPUTF32Stream>(src);
+  auto stream = std::make_shared<PPCodeUnitStream>(u32stream);
+
+  { // '\'
+    ASSERT_FALSE(stream->isEmpty());
+    const std::shared_ptr<PPCodeUnit> unit = stream->getCodeUnit();
+    ASSERT_EQ(U'\\',  unit->getChar32());
+    ASSERT_EQ(R"(\)", unit->getUTF8String());
+    stream->toNext();
+  }
+
+  { // n
+    ASSERT_FALSE(stream->isEmpty());
+    const std::shared_ptr<PPCodeUnit> unit = stream->getCodeUnit();
+    ASSERT_EQ(U'n', unit->getChar32());
+    ASSERT_EQ("n",  unit->getUTF8String());
+    stream->toNext();
+  }
+
+  { // new-line
+    ASSERT_FALSE(stream->isEmpty());
+    const std::shared_ptr<PPCodeUnit> unit = stream->getCodeUnit();
+    ASSERT_EQ(U'\n', unit->getChar32());
+    ASSERT_EQ("\n",  unit->getUTF8String());
+    stream->toNext();
+  }
+
+  ASSERT_TRUE(stream->isEmpty());
+}
 
 TEST(PPCodeUnitStream, SimpleMixed)
 {

@@ -70,8 +70,22 @@ void PPCodeUnitStream::_pushCodeUnits()
     Error
   };
 
-  const auto _toNext = [this] () { this->_u32stream->toNext(); };
-  const auto _emitCodeUnit = [this] (const std::shared_ptr<PPCodeUnit> ptr) { this->_queue.push(ptr); };
+  std::string single_quad_u8str;
+  std::string double_quad_u8str;
+
+  const auto _toNext = [this] () {
+    //const char32_t curr = this->_u32stream->getChar32();
+    this->_u32stream->toNext();
+    //const char32_t next = this->_u32stream->getChar32();
+    //fprintf(stderr,"U+%06X <%c> => U+%06X <%c>\n",
+        //static_cast<uint32_t>(curr), static_cast<char>(curr),
+        //static_cast<uint32_t>(next), static_cast<char>(next));
+  };
+
+  const auto _emitCodeUnit = [this] (const std::shared_ptr<PPCodeUnit> ptr) {
+    fprintf(stderr,"_emitCodeUnit <%s>\n", ptr->getUTF8String().c_str());
+    this->_queue.push(ptr);
+  };
 
   std::u32string u32str;
   State state = State::Start;
@@ -103,9 +117,11 @@ void PPCodeUnitStream::_pushCodeUnits()
       } else if (curr32 == U'u') { // \uXXXX
         _toNext();
         state = State::SingleQuad;
+        single_quad_u8str.clear();
       } else if (curr32 == U'U') { // \UXXXXXXXX
         _toNext();
         state = State::DoubleQuad;
+        double_quad_u8str.clear();
       } else if (PPCodePointCheck::isBasicSourceCharacter(curr32)) {
         state = State::End;
         _emitCodeUnit(PPCodeUnit::createASCIIChar('\\'));
@@ -116,42 +132,52 @@ void PPCodeUnitStream::_pushCodeUnits()
     }
 
     else if (state == State::SingleQuad) {
-      _toNext();
       fprintf(stderr,"State::SingleQuad\n");
-      std::string u8str(1, static_cast<char>(curr32));
-      for (int i = 0; i < 3; i++) {
-        const char32_t ch32 = _u32stream->getChar32();
+
+      if (single_quad_u8str.length() == 4) {
+        // Emit the universal-character-name the hex-quad is filled.
+        state = State::End;
+        const char32_t value = static_cast<char32_t>(std::stoull(single_quad_u8str, nullptr, 16));
+        _emitCodeUnit(PPCodeUnit::createUniversalCharacterName(value, std::string("\\u") + single_quad_u8str));
+      } else if (single_quad_u8str.length() > 4) {
+        // Impossible to reach this state given the structure of this DFA.
+        state = State::Error;
+        _setError(R"(PPCodeUnitStream reached a seemingly impossible internal state.)");
+      } else if (PPCodePointCheck::isHexadecimalDigit(curr32)) {
         _toNext();
-        if (PPCodePointCheck::isHexadecimalDigit(ch32)) {
-          u8str  += static_cast<char>(ch32);
-        } else {
-          state = State::Error;
-          _setError(R"(Illegal character following \u: )" + std::string(1, static_cast<char>(ch32)));
-        }
+        single_quad_u8str += static_cast<char>(curr32);
+      } else {
+        // The single-quad terminated prematurely, emit everything in ASCII.
+        state = State::End;
+        _emitCodeUnit(PPCodeUnit::createASCIIChar('\\'));
+        _emitCodeUnit(PPCodeUnit::createASCIIChar('u'));
+        for (const auto ch: single_quad_u8str)
+          _emitCodeUnit(PPCodeUnit::createASCIIChar(ch));
       }
-      const char32_t value = static_cast<char32_t>(std::stoull(u8str, nullptr, 16));
-      _emitCodeUnit(PPCodeUnit::createUniversalCharacterName(value, std::string("\\u") + u8str));
-      state = State::End;
     }
 
     else if (state == State::DoubleQuad) {
-      _toNext();
       fprintf(stderr,"State::DoubleQuad\n");
-      std::string u8str(1, static_cast<char>(curr32));
-      for (int i = 0; i < 7; i++) {
-        const char32_t ch32 = _u32stream->getChar32();
+      if (double_quad_u8str.length() == 8) {
+        // Emit the universal-character-name the hex-quad is filled.
+        state = State::End;
+        const char32_t value = static_cast<char32_t>(std::stoull(double_quad_u8str, nullptr, 16));
+        _emitCodeUnit(PPCodeUnit::createUniversalCharacterName(value, std::string("\\U") + double_quad_u8str));
+      } else if (double_quad_u8str.length() > 8) {
+        // Impossible to reach this state given the structure of this DFA.
+        state = State::Error;
+        _setError(R"(PPCodeUnitStream reached a seemingly impossible internal state.)");
+      } else if (PPCodePointCheck::isHexadecimalDigit(curr32)) {
         _toNext();
-        if (PPCodePointCheck::isHexadecimalDigit(ch32)) {
-          u8str  += static_cast<char>(ch32);
-        } else {
-          state = State::Error;
-          _setError(R"(Illegal character following \U)" + std::string(1, static_cast<char>(ch32)));
-        }
+        double_quad_u8str += static_cast<char>(curr32);
+      } else {
+        // The single-quad terminated prematurely, emit everything in ASCII.
+        state = State::End;
+        _emitCodeUnit(PPCodeUnit::createASCIIChar('\\'));
+        _emitCodeUnit(PPCodeUnit::createASCIIChar('U'));
+        for (const auto ch: double_quad_u8str)
+          _emitCodeUnit(PPCodeUnit::createASCIIChar(ch));
       }
-      const char32_t value = static_cast<char32_t>(std::stoull(u8str, nullptr, 16));
-      _emitCodeUnit(PPCodeUnit::createUniversalCharacterName(value, std::string("\\U") + u8str));
-
-      state = State::End;
     }
 
     else if (state == State::End) {
