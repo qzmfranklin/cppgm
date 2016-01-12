@@ -793,6 +793,9 @@ void PPTokenizerDFA::_pushTokens()
               || identifier_u8str == "R") {
         state = State::PossibleRawStringLiteral;
         encoding_prefix_u8str = identifier_u8str;
+      } else {
+        state = State::End;
+        _emitToken(PPToken::createIdentifier(identifier_u8str));
       }
 
       fprintf(stderr,"return from State::Identifier\n");
