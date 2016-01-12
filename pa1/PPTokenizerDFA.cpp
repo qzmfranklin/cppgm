@@ -1229,6 +1229,38 @@ void PPTokenizerDFA::_pushTokens()
       }
     }
 
+    else if (state == State::Ket) {
+      // Previous: >
+      // =      => Emit >=
+      // >      => KetKet
+      // other  => Emit >, curr PPCodeUnit is not consumed.
+      if (currChar32 == U'=') {
+        _toNext();
+        state = State::End;
+        _emitToken(PPToken::createPreprocessingOpOrPunc(">="));
+      } else if (currChar32 == U'>') {
+        _toNext();
+        state = State::KetKet;
+      } else {
+        state = State::End;
+        _emitToken(PPToken::createPreprocessingOpOrPunc(">"));
+      }
+    }
+
+    else if (state == State::KetKet) {
+      // Previous: Ket >>
+      // =      => Emit >>=
+      // other  => Emit >>, curr PPCodeUnit is not consumed.
+      if (currChar32 == U'=') {
+        _toNext();
+        state = State::End;
+        _emitToken(PPToken::createPreprocessingOpOrPunc(">>="));
+      } else {
+        state = State::End;
+        _emitToken(PPToken::createPreprocessingOpOrPunc(">>"));
+      }
+    }
+
     else if (state == State::Dot) {
       // Previous: .
       // .      =>  DotDot
