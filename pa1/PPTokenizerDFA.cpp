@@ -252,6 +252,10 @@ void PPTokenizerDFA::_pushTokens()
         state = State::PPNumber;
       }
 
+      else if (currChar32 == U' ') {
+        // no-op pass
+      }
+
       else if (!PPCodePointCheck::isBasicSourceCharacter(currChar32)) {
         // TODO: Should probably emit some warnings here
         state = State::End;
