@@ -78,7 +78,7 @@ void PPTokenizerDFA::_pushTokens()
     Minus,          // -
     Minus2,         // ->
     Divide,         // /
-    Column,         // :
+    Column,         // : ::
     PercentSign,    // %
     PercentSign2,   // %:%
     Dot,            // .
@@ -1307,10 +1307,16 @@ void PPTokenizerDFA::_pushTokens()
     else if (state == State::Column) {
       // Previous:  :
       // >      =>  Emit :>
+      // :      =>  Emit ::
       // other  =>  Emit :, curr PPCodeUnit is not consumed
       if (currChar32 == U'>') {
+        _toNext();
         state = State::End;
         _emitToken(PPToken::createPreprocessingOpOrPunc(":>"));
+      } else if (currChar32 == U':') {
+        _toNext();
+        state = State::End;
+        _emitToken(PPToken::createPreprocessingOpOrPunc("::"));
       } else if (PPCodePointCheck::isBasicSourceCharacter(currChar32)) {
         state = State::End;
         _emitToken(PPToken::createPreprocessingOpOrPunc(":"));
