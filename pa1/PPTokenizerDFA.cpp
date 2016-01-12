@@ -33,6 +33,10 @@ void PPTokenizerDFA::toNext()
     _pushTokens();
 }
 
+std::string PPTokenizerDFA::getErrorMessage() const{
+  return _errorMessage;
+}
+
 void PPTokenizerDFA::_setError(const std::string &&msg)
 {
   _errorMessage = std::move(msg);
