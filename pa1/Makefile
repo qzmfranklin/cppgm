@@ -40,3 +40,8 @@ gtest_PPTokenizerDFA.exe: $(ROOT)/gtest/gtest_main.a $(ROOT)/utils/UStringTools.
 	$(D)/gtest_PPTokenizerDFA.o $(D)/PPCodeUnit.o $(D)/PPCodeUnitStream.o \
 	$(D)/PPCodePointCheck.o $(D)/PPUTF32Stream.o \
 	$(D)/PPTokenizerDFA.o $(D)/PPToken.o $(D)/PPCodeUnitCheck.o
+
+pptok.exe: $(D)/pptok.o $(ROOT)/utils/os/path.o $(ROOT)/utils/UStringTools.o \
+	$(D)/PPCodeUnit.o $(D)/PPCodeUnitStream.o \
+	$(D)/PPCodePointCheck.o $(D)/PPUTF32Stream.o \
+	$(D)/PPTokenizerDFA.o $(D)/PPToken.o $(D)/PPCodeUnitCheck.o
