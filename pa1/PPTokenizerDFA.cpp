@@ -180,6 +180,7 @@ void PPTokenizerDFA::_pushTokens()
           ||   currChar32 == U']'  ||  currChar32 == U'('  ||  currChar32 == U')'
           ||   currChar32 == U'?'  ||  currChar32 == U','  ||  currChar32 == U';'
           ) {
+        fprintf(stderr,"simple-op-or-punc\n");
         state = State::End;
         _emitToken(PPToken::createPreprocessingOpOrPunc(std::string(1, static_cast<char>(currChar32))));
       }
@@ -562,6 +563,7 @@ void PPTokenizerDFA::_pushTokens()
       //           an empty string.
       // d-char => Append currChar32 to raw_string_delimiter_u8str
       // other  => Error
+      fprintf(stderr,"State::RawStringDelimiter\n");
       if (currChar32 == U'(') {
         _toNext();
         state = State::RawString;
@@ -592,6 +594,7 @@ void PPTokenizerDFA::_pushTokens()
       // needed to fully determin whether a PPCodeUnit is an r-char is stored in
       // raw_string_delimiter_u8str. The state RawStringKet is the state devoted
       // to determining r-char and end-of-string delimiters in raw strings.
+      fprintf(stderr,"State::RawString\n");
 
       _toNext();
       if (currChar32 == U')') {
@@ -971,6 +974,7 @@ void PPTokenizerDFA::_pushTokens()
       // \n     =>  Prepend "//' to comment_u8str, emit comment_u8str as
       //            whitespace-sequence
       // other  =>  SingleLineComment
+      fprintf(stderr,"State::SingleLineComment\n");
 
       if (currChar32 == U'\n') {
         state = State::End;
@@ -1204,6 +1208,7 @@ void PPTokenizerDFA::_pushTokens()
       // :      =>  Emit <:
       // <      =>  BraBra
       // other  =>  Emit <, curr PPCodeUnit is not consumed.
+      fprintf(stderr,"State::Bra\n");
       if (currChar32 == U'='  ||  currChar32 == U'%'  ||  currChar32 == U':') {
         state = State::End;
         _toNext();
