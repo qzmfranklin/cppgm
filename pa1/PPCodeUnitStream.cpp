@@ -53,18 +53,8 @@ void PPCodeUnitStream::_pushCodeUnits()
     Start,
 
     Backslash,
-
     SingleQuad,
     DoubleQuad,
-    SingleLineComment,
-    MultipleLineCommentStart,
-    MultipleLineComment,
-    MultipleLineCommentStar,
-
-    LeftParenthesis,
-    Column,
-    PercentSign,
-    PercentSign2,
 
     End,
     Error
