@@ -295,6 +295,15 @@ void PPTokenizerDFA::_pushTokens()
     //   phase as-is. Otherwise, universal-character-names are replaced by their
     //   corresponding code ponints in the proper encoding.
     //
+    //
+    // Why can we freely revert a universal-character-name in parsing a raw-
+    // string-literal?
+    //
+    //   a) All characters in a universal-character-name are r-chars.
+    //
+    //   b) The universal-character-name starts with a backslash \, which is not
+    //      a d-char.
+    //
     ////////////////////////////////////////////////////////////////////////////////
 
     else if (state == State::PossibleCharacterOrStringLiteral) {
