@@ -1365,7 +1365,7 @@ void PPTokenizerDFA::_pushTokens()
         }
       } else if (PPCodePointCheck::isBasicSourceCharacter(currChar32)) {
         state = State::End;
-        _emitToken(PPToken::createPreprocessingOpOrPunc(":"));
+        _emitToken(PPToken::createPreprocessingOpOrPunc("%"));
       } else {
         state = State::Error;
         _setError(R"(Not a basic-source-character)");
