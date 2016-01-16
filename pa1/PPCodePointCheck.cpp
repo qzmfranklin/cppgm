@@ -55,7 +55,7 @@ namespace {
   const std::vector<char> _q_char_exclude_list = { '\n', '\"' };
   const std::vector<char> _c_char_exclude_list = { '\n', '\'', '\\' };
   const std::vector<char> _s_char_exclude_list = { '\n', '\"', '\\' };
-  const std::vector<char> _r_char_exclude_list = { '\n' };
+  const std::vector<char> _r_char_exclude_list = { };
   const std::vector<char> _d_char_exclude_list = {
     ' ', '(', ')', '\\',
     '\t', '\n', static_cast<char>(0x0B), static_cast<char>(0x0C)
