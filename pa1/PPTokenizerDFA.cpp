@@ -157,7 +157,8 @@ void PPTokenizerDFA::_pushTokens()
     // being processed, e.g., in State::LeftParenthesis.
     const std::shared_ptr<PPCodeUnit> curr = _stream->getCodeUnit();
     const char32_t currChar32 = curr->getChar32();
-    fprintf(stderr,"\n==  U+%06X <%c> \n", static_cast<uint32_t>(currChar32), static_cast<char>(currChar32));
+    fprintf(stderr,"\n==  U+%06X <%s> \n",
+        static_cast<uint32_t>(currChar32), curr->getUTF8String().c_str());
 
     if (state == State::Start) {
       // State::Start means starting to parse and emit the next PPToken.
@@ -603,7 +604,7 @@ void PPTokenizerDFA::_pushTokens()
       // needed to fully determin whether a PPCodeUnit is an r-char is stored in
       // raw_string_delimiter_u8str. The state RawStringKet is the state devoted
       // to determining r-char and end-of-string delimiters in raw strings.
-      fprintf(stderr,"State::RawString\n");
+      fprintf(stderr,"State::RawString <%s>\n", curr->getUTF8String().c_str());
 
       _toNext();
       if (currChar32 == U')') {
