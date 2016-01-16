@@ -6,6 +6,12 @@ std::shared_ptr<PPCodeUnitASCIIChar> PPCodeUnit::createASCIIChar(const char ch)
   return std::make_shared<PPCodeUnitASCIIChar>(ch);
 }
 
+std::shared_ptr<PPCodeUnitNonASCIIChar>
+PPCodeUnit::createNonASCIIChar(const char32_t ch32)
+{
+  return std::make_shared<PPCodeUnitNonASCIIChar>(ch32);
+}
+
 std::shared_ptr<PPCodeUnitWhitespaceCharacter>
 PPCodeUnit::createWhitespaceCharacter(const std::string &u8str)
 {
@@ -43,6 +49,11 @@ PPCodeUnit::createUniversalCharacterName(const char32_t ch32, const std::string 
 std::string PPCodeUnitASCIIChar::getUTF8String() const
 {
   return UStringTools::u32_to_u8(std::u32string(1, _ch32));
+}
+
+std::string PPCodeUnitNonASCIIChar::getUTF8String() const
+{
+  return _u8string;
 }
 
 std::string PPCodeUnitWhitespaceCharacter::getUTF8String() const

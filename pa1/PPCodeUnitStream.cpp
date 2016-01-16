@@ -104,8 +104,8 @@ void PPCodeUnitStream::_pushCodeUnits()
         _emitCodeUnit(PPCodeUnit::createASCIIChar(static_cast<const char>(curr32)));
         state = State::End;
       } else {
-        _setError(R"(Not a basic-source-character)");
-        state = State::Error;
+        state = State::End;
+        _emitCodeUnit(PPCodeUnit::createNonASCIIChar(curr32));
       }
     }
 
