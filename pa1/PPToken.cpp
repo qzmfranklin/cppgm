@@ -4,17 +4,17 @@
 // The order of this list must be exactly the same as the enum PPTokeyType,
 // defined in PPToken.h.
 const std::vector<std::string> PPToken::_typeStringList = {
-  "header_name",
+  "header-name",
   "identifier",
-  "pp_number",
-  "character_literal",
-  "user_defined_character_literal",
-  "string_literal",
-  "user_defined_string_literal",
-  "preprocessing_op_or_punc",
-  "non_whitespace_char",
-  "new_line",
-  "whitespace_sequence",
+  "pp-number",
+  "character-literal",
+  "user-defined-character-literal",
+  "string-literal",
+  "user-defined-string-literal",
+  "preprocessing-op-or-punc",
+  "non-whitespace-char",
+  "new-line",
+  "whitespace-sequence",
 };
 
 std::string PPToken::getTokenTypeUTF8String(const PPTokenType type)
