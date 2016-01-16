@@ -90,13 +90,13 @@ bool PPCodeUnitCheck::isNotQChar(const UnitPtr unit)
 bool PPCodeUnitCheck::isNotCChar(const UnitPtr unit)
 {
   return PPCodePointCheck::isNotCChar(unit->getChar32())
-    && !(unit->getType() == PPCodeUnitType::UniversalCharacterName);
+    && unit->getType() != PPCodeUnitType::UniversalCharacterName;
 }
 
 bool PPCodeUnitCheck::isNotSChar(const UnitPtr unit)
 {
   return PPCodePointCheck::isNotSChar(unit->getChar32())
-    && !(unit->getType() == PPCodeUnitType::UniversalCharacterName);
+    && unit->getType() != PPCodeUnitType::UniversalCharacterName;
 }
 
 bool PPCodeUnitCheck::isNotRChar(const UnitPtr unit)
