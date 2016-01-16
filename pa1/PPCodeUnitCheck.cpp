@@ -101,7 +101,8 @@ bool PPCodeUnitCheck::isNotSChar(const UnitPtr unit)
 
 bool PPCodeUnitCheck::isNotRChar(const UnitPtr unit)
 {
-  return PPCodePointCheck::isNotRChar(unit->getChar32());
+  return PPCodePointCheck::isNotRChar(unit->getChar32())
+    && unit->getType() != PPCodeUnitType::UniversalCharacterName;
 }
 
 bool PPCodeUnitCheck::isNotDChar(const UnitPtr unit)
