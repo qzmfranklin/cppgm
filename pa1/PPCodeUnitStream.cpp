@@ -103,7 +103,7 @@ void PPCodeUnitStream::_pushCodeUnits()
       fprintf(stderr,"State::Backslash\n");
       if (curr32 == U'\n') { // line-splice
         _toNext();
-        _emitCodeUnit(PPCodeUnit::createUniversalCharacterName(0, R"(\n)"));
+        _emitCodeUnit(PPCodeUnit::createWhitespaceCharacter("\\\n"));
       } else if (curr32 == U'u') { // \uXXXX
         _toNext();
         state = State::SingleQuad;
