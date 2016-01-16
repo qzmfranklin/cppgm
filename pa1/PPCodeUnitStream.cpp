@@ -91,8 +91,8 @@ void PPCodeUnitStream::_pushCodeUnits()
       if (curr32 == U'\\') { // Line splicing, universal-character-name
         state = State::Backslash;
       } else if (PPCodePointCheck::isBasicSourceCharacter(curr32)) {
-        _emitCodeUnit(PPCodeUnit::createASCIIChar(static_cast<const char>(curr32)));
         state = State::End;
+        _emitCodeUnit(PPCodeUnit::createASCIIChar(static_cast<const char>(curr32)));
       } else {
         state = State::End;
         _emitCodeUnit(PPCodeUnit::createNonASCIIChar(curr32));
