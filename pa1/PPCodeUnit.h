@@ -38,7 +38,7 @@ enum class PPCodeUnitType {
   ASCIIChar,
   NonASCIIChar,
   WhitespaceCharacter,
-  UniversalCharacterName,
+  UniversalCharacterName
 };
 
 ////////////////////////////////////////////////////////////////////////////////
