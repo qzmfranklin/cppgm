@@ -43,7 +43,7 @@ TEST(PPCodeUnitStream, SingleQuad)
   ASSERT_FALSE(stream->isEmpty());
   const std::shared_ptr<PPCodeUnit> unit = stream->getCodeUnit();
   ASSERT_EQ(U'\u340F',   unit->getChar32());
-  ASSERT_EQ(R"(\u340F)", unit->getUTF8String());
+  ASSERT_EQ(R"(\u340F)", unit->getRawText());
   //ASSERT_EQ(std::u32string(UR"(\u340F)"), unit->getUTF32String());
 }
 
@@ -56,7 +56,7 @@ TEST(PPCodeUnitStream, DoubleQuad)
   ASSERT_FALSE(stream->isEmpty());
   const std::shared_ptr<PPCodeUnit> unit = stream->getCodeUnit();
   ASSERT_EQ(U'\U0001104D',   unit->getChar32());
-  ASSERT_EQ(R"(\U0001104D)", unit->getUTF8String());
+  ASSERT_EQ(R"(\U0001104D)", unit->getRawText());
   //ASSERT_EQ(std::u32string(UR"(\U0001104D)"), unit->getUTF32String());
 }
 
@@ -70,7 +70,7 @@ TEST(PPCodeUnitStream, IncompleteSingleQuad)
     ASSERT_FALSE(stream->isEmpty());
     const std::shared_ptr<PPCodeUnit> unit = stream->getCodeUnit();
     ASSERT_EQ(static_cast<char32_t>(ch),  unit->getChar32());
-    ASSERT_EQ(std::string(1, ch), unit->getUTF8String());
+    ASSERT_EQ(std::string(1, ch), unit->getRawText());
     stream->toNext();
   }
 
@@ -78,7 +78,7 @@ TEST(PPCodeUnitStream, IncompleteSingleQuad)
     ASSERT_FALSE(stream->isEmpty());
     const std::shared_ptr<PPCodeUnit> unit = stream->getCodeUnit();
     ASSERT_EQ(U'\n', unit->getChar32());
-    ASSERT_EQ("\n",  unit->getUTF8String());
+    ASSERT_EQ("\n",  unit->getRawText());
     stream->toNext();
   }
 
@@ -95,7 +95,7 @@ TEST(PPCodeUnitStream, IncompleteDoubleQuad)
     ASSERT_FALSE(stream->isEmpty());
     const std::shared_ptr<PPCodeUnit> unit = stream->getCodeUnit();
     ASSERT_EQ(static_cast<char32_t>(ch),  unit->getChar32());
-    ASSERT_EQ(std::string(1, ch), unit->getUTF8String());
+    ASSERT_EQ(std::string(1, ch), unit->getRawText());
     stream->toNext();
   }
 
@@ -103,7 +103,7 @@ TEST(PPCodeUnitStream, IncompleteDoubleQuad)
     ASSERT_FALSE(stream->isEmpty());
     const std::shared_ptr<PPCodeUnit> unit = stream->getCodeUnit();
     ASSERT_EQ(U'\n', unit->getChar32());
-    ASSERT_EQ("\n",  unit->getUTF8String());
+    ASSERT_EQ("\n",  unit->getRawText());
     stream->toNext();
   }
 
@@ -120,7 +120,7 @@ TEST(PPCodeUnitStream, BackslashEscape)
     ASSERT_FALSE(stream->isEmpty());
     const std::shared_ptr<PPCodeUnit> unit = stream->getCodeUnit();
     ASSERT_EQ(U'\\',  unit->getChar32());
-    ASSERT_EQ(R"(\)", unit->getUTF8String());
+    ASSERT_EQ(R"(\)", unit->getRawText());
     stream->toNext();
   }
 
@@ -128,7 +128,7 @@ TEST(PPCodeUnitStream, BackslashEscape)
     ASSERT_FALSE(stream->isEmpty());
     const std::shared_ptr<PPCodeUnit> unit = stream->getCodeUnit();
     ASSERT_EQ(U'n', unit->getChar32());
-    ASSERT_EQ("n",  unit->getUTF8String());
+    ASSERT_EQ("n",  unit->getRawText());
     stream->toNext();
   }
 
@@ -136,7 +136,7 @@ TEST(PPCodeUnitStream, BackslashEscape)
     ASSERT_FALSE(stream->isEmpty());
     const std::shared_ptr<PPCodeUnit> unit = stream->getCodeUnit();
     ASSERT_EQ(U'\n', unit->getChar32());
-    ASSERT_EQ("\n",  unit->getUTF8String());
+    ASSERT_EQ("\n",  unit->getRawText());
     stream->toNext();
   }
 
@@ -159,7 +159,7 @@ TEST(PPCodeUnitStream, SimpleMixed)
     ASSERT_FALSE(stream->isEmpty());
     const auto unit = stream->getCodeUnit();
     ASSERT_EQ(PPCodeUnitType::UniversalCharacterName, unit->getType());
-    ASSERT_EQ(R"(\u340F)", unit->getUTF8String());
+    ASSERT_EQ(R"(\u340F)", unit->getRawText());
     stream->toNext();
   }
 
@@ -167,7 +167,7 @@ TEST(PPCodeUnitStream, SimpleMixed)
     ASSERT_FALSE(stream->isEmpty());
     const auto unit = stream->getCodeUnit();
     ASSERT_EQ(PPCodeUnitType::ASCIIChar, unit->getType());
-    ASSERT_EQ("\n", unit->getUTF8String());
+    ASSERT_EQ("\n", unit->getRawText());
     stream->toNext();
   }
 
@@ -175,7 +175,7 @@ TEST(PPCodeUnitStream, SimpleMixed)
     ASSERT_FALSE(stream->isEmpty());
     const auto unit = stream->getCodeUnit();
     ASSERT_EQ(PPCodeUnitType::UniversalCharacterName, unit->getType());
-    ASSERT_EQ(R"(\U0001240F)", unit->getUTF8String());
+    ASSERT_EQ(R"(\U0001240F)", unit->getRawText());
     stream->toNext();
   }
 
@@ -183,7 +183,7 @@ TEST(PPCodeUnitStream, SimpleMixed)
     ASSERT_FALSE(stream->isEmpty());
     const auto unit = stream->getCodeUnit();
     ASSERT_EQ(PPCodeUnitType::ASCIIChar, unit->getType());
-    ASSERT_EQ("\n", unit->getUTF8String());
+    ASSERT_EQ("\n", unit->getRawText());
     stream->toNext();
   }
 
@@ -203,7 +203,7 @@ TEST(PPCodeUnitStream, SimpleMixed)
       ASSERT_FALSE(stream->isEmpty());
       const auto unit = stream->getCodeUnit();
       ASSERT_EQ(PPCodeUnitType::ASCIIChar, unit->getType());
-      ASSERT_EQ("\n", unit->getUTF8String());
+      ASSERT_EQ("\n", unit->getRawText());
       stream->toNext();
     }
   }

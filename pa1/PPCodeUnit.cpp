@@ -46,22 +46,32 @@ PPCodeUnit::createUniversalCharacterName(const char32_t ch32, const std::string 
   return std::make_shared<PPCodeUnitUniversalCharacterName>(ch32, u8str);
 }
 
-std::string PPCodeUnitASCIIChar::getUTF8String() const
+std::string PPCodeUnitASCIIChar::getRawText() const
 {
   return UStringTools::u32_to_u8(std::u32string(1, _ch32));
 }
 
-std::string PPCodeUnitNonASCIIChar::getUTF8String() const
+std::string PPCodeUnitNonASCIIChar::getRawText() const
 {
   return _u8string;
 }
 
-std::string PPCodeUnitWhitespaceCharacter::getUTF8String() const
+std::string PPCodeUnitNonASCIIChar::getUTF8String() const
+{
+  return UStringTools::u32_to_u8(std::u32string(1, _ch32));
+}
+
+std::string PPCodeUnitWhitespaceCharacter::getRawText() const
+{
+  return _u8string;
+}
+
+std::string PPCodeUnitUniversalCharacterName::getRawText() const
 {
   return _u8string;
 }
 
 std::string PPCodeUnitUniversalCharacterName::getUTF8String() const
 {
-  return _u8string;
+  return UStringTools::u32_to_u8(std::u32string(1, _ch32));
 }

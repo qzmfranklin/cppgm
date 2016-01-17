@@ -64,7 +64,8 @@ public:
   PPCodeUnitType getType() const { return _type; }
   char32_t getChar32() const { return _ch32; }
 
-  virtual std::string getUTF8String() const = 0;
+  virtual std::string getRawText() const = 0;
+  virtual std::string getUTF8String() const { return getRawText(); }
 
   // Factory methods
   static std::shared_ptr<PPCodeUnitASCIIChar> createASCIIChar(const char);
@@ -90,7 +91,7 @@ class PPCodeUnitASCIIChar: public PPCodeUnit {
 public:
   PPCodeUnitASCIIChar(const char ch):
     PPCodeUnit(PPCodeUnitType::ASCIIChar, static_cast<char32_t>(ch)) {}
-  virtual std::string getUTF8String() const override;
+  virtual std::string getRawText() const override;
 };
 
 class PPCodeUnitNonASCIIChar: public PPCodeUnit {
@@ -98,6 +99,7 @@ public:
   PPCodeUnitNonASCIIChar(const char32_t ch32):
     PPCodeUnit(PPCodeUnitType::NonASCIIChar, ch32),
     _u8string(UStringTools::u32_to_u8(std::u32string(1, ch32))) {}
+  virtual std::string getRawText() const override;
   virtual std::string getUTF8String() const override;
 private:
   const std::string _u8string;
@@ -107,7 +109,7 @@ class PPCodeUnitWhitespaceCharacter: public PPCodeUnit {
 public:
   PPCodeUnitWhitespaceCharacter(const char ch, const std::string &u8str):
     PPCodeUnit(PPCodeUnitType::WhitespaceCharacter, ch), _u8string(u8str) {}
-  virtual std::string getUTF8String() const override;
+  virtual std::string getRawText() const override;
 private:
   const std::string _u8string;
 };
@@ -116,6 +118,7 @@ class PPCodeUnitUniversalCharacterName: public PPCodeUnit {
 public:
   PPCodeUnitUniversalCharacterName(const char32_t ch32, const std::string &u8str):
     PPCodeUnit(PPCodeUnitType::UniversalCharacterName, ch32), _u8string(u8str) {}
+  virtual std::string getRawText() const override;
   virtual std::string getUTF8String() const override;
 private:
   const std::string _u8string;

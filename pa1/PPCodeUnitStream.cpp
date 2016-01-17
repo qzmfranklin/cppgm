@@ -73,7 +73,7 @@ void PPCodeUnitStream::_pushCodeUnits()
   };
 
   const auto _emitCodeUnit = [this] (const std::shared_ptr<PPCodeUnit> ptr) {
-    fprintf(stderr,"_emitCodeUnit <%s>\n", ptr->getUTF8String().c_str());
+    fprintf(stderr,"_emitCodeUnit <%s>\n", ptr->getRawText().c_str());
     this->_queue.push(ptr);
   };
 

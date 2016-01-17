@@ -133,7 +133,7 @@ void PPTokenizerDFA::_pushTokens()
   std::string oct_escape_u8str;
 
   const auto _emitToken = [this] (const std::shared_ptr<PPToken> tok) {
-    fprintf(stderr,"======== %s =======\n", tok->getUTF8String().c_str());
+    fprintf(stderr,"======== %s =======\n", tok->getRawText().c_str());
     this->_queue.push(tok);
   };
 
@@ -158,7 +158,7 @@ void PPTokenizerDFA::_pushTokens()
     const std::shared_ptr<PPCodeUnit> curr = _stream->getCodeUnit();
     const char32_t currChar32 = curr->getChar32();
     fprintf(stderr,"\n==  U+%06X <%s> \n",
-        static_cast<uint32_t>(currChar32), curr->getUTF8String().c_str());
+        static_cast<uint32_t>(currChar32), curr->getRawText().c_str());
 
     if (state == State::Start) {
       // State::Start means starting to parse and emit the next PPToken.
@@ -591,7 +591,7 @@ void PPTokenizerDFA::_pushTokens()
       // Previous: RawString or RawStringDelimiter
       // )      => RawStringKet, clear raw_string_ket_u8str
       // r-char (excluding ))
-      //        => Append curr->getUTF8String() to raw_string_u8str
+      //        => Append curr->getRawText() to raw_string_u8str
       // other  => Error
       //
       // Note: By definition, r-char is contextual, as in
@@ -604,7 +604,7 @@ void PPTokenizerDFA::_pushTokens()
       // needed to fully determin whether a PPCodeUnit is an r-char is stored in
       // raw_string_delimiter_u8str. The state RawStringKet is the state devoted
       // to determining r-char and end-of-string delimiters in raw strings.
-      fprintf(stderr,"State::RawString <%s>\n", curr->getUTF8String().c_str());
+      fprintf(stderr,"State::RawString <%s>\n", curr->getRawText().c_str());
 
       _toNext();
       if (currChar32 == U')') {
@@ -612,8 +612,8 @@ void PPTokenizerDFA::_pushTokens()
         raw_string_ket_u8str.clear();
       } else if (!PPCodeUnitCheck::isNotRChar(curr)) {
         // Must be an r-char here. Note that universal-character-names shall be
-        // reverted here using the getUTF8String() methods.
-        raw_string_u8str += curr->getUTF8String();
+        // reverted here using the getRawText() methods.
+        raw_string_u8str += curr->getRawText();
       } else {
         state = State::Error;
         _setError(R"(Expecting an r-char in raw-string)");
@@ -631,7 +631,7 @@ void PPTokenizerDFA::_pushTokens()
       // d-char (excluding ")
       //        => Append currChar32 to raw_string_ket_u8str.
       // r-char (excluding d-char and ")
-      //        => Append raw_string_ket_u8str and curr->getUTF8String() to
+      //        => Append raw_string_ket_u8str and curr->getRawText() to
       //           raw_string_ket_u8str. Transition to RawString.
       // other  => Error
 
@@ -655,7 +655,7 @@ void PPTokenizerDFA::_pushTokens()
         raw_string_ket_u8str += static_cast<char>(currChar32);
       } else if (!PPCodeUnitCheck::isNotRChar(curr)) {
         state = State::RawString;
-        raw_string_u8str += raw_string_ket_u8str + curr->getUTF8String();
+        raw_string_u8str += raw_string_ket_u8str + curr->getRawText();
       } else {
         state = State::Error;
         _setError(R"(Expect a d-char, ", or an r-char in parsing a raw string.)");

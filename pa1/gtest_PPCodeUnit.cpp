@@ -6,7 +6,7 @@ TEST(PPCodeUnit, CodePoint)
   const auto unit = PPCodeUnit::createASCIIChar('j');
   ASSERT_EQ(PPCodeUnitType::ASCIIChar,  unit->getType());
   ASSERT_EQ(static_cast<char32_t>('j'), unit->getChar32());
-  ASSERT_EQ(std::string(1, 'j'),        unit->getUTF8String());
+  ASSERT_EQ(std::string(1, 'j'),        unit->getRawText());
 }
 
 TEST(PPCodeUnit, WhitespaceCharacterSingleChar)
@@ -16,7 +16,7 @@ TEST(PPCodeUnit, WhitespaceCharacterSingleChar)
     const auto unit = PPCodeUnit::createWhitespaceCharacter(str);
     ASSERT_EQ(PPCodeUnitType::WhitespaceCharacter,  unit->getType());
     ASSERT_EQ(static_cast<char32_t>(str[0]),        unit->getChar32());
-    ASSERT_EQ(str,                                  unit->getUTF8String());
+    ASSERT_EQ(str,                                  unit->getRawText());
   }
 }
 
@@ -26,7 +26,7 @@ TEST(PPCodeUnit, WhitespaceCharacterLineSplice)
   const auto unit = PPCodeUnit::createWhitespaceCharacter(str);
   ASSERT_EQ(PPCodeUnitType::WhitespaceCharacter,  unit->getType());
   ASSERT_EQ(U' ',                                 unit->getChar32());
-  ASSERT_EQ("\\\n",                               unit->getUTF8String());
+  ASSERT_EQ("\\\n",                               unit->getRawText());
 }
 
 TEST(PPCodeUnit, WhitespaceCharacterInvalidInput)
@@ -42,5 +42,5 @@ TEST(PPCodeUnit, UniversalCharacterName)
   const auto unit = PPCodeUnit::createUniversalCharacterName(0x1F600, R"(\U1F600)");
   ASSERT_EQ(PPCodeUnitType::UniversalCharacterName, unit->getType());
   ASSERT_EQ(U'😀',                      unit->getChar32());
-  ASSERT_EQ(std::string(R"(\U1F600)"), unit->getUTF8String());
+  ASSERT_EQ(std::string(R"(\U1F600)"), unit->getRawText());
 }
