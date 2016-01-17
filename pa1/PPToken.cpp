@@ -1,5 +1,4 @@
 #include "PPToken.h"
-#include "unicode/ucnv.h"
 
 // The order of this list must be exactly the same as the enum PPTokeyType,
 // defined in PPToken.h.
@@ -87,14 +86,3 @@ PPToken::createWhitespaceSequence(const std::string &u8str)
 {
   return std::make_shared<PPTokenWhitespaceSequence>(u8str);
 }
-
-namespace {
-std::string _u32_to_u8(const std::u32string &u32str)
-{
-  icu::UnicodeString ustring = icu::UnicodeString::fromUTF32(
-      reinterpret_cast<const UChar32*>(u32str.data()), u32str.length());
-  std::string u8str;
-  ustring.toUTF8String<std::string>(u8str);
-  return u8str;
-}
-} // namespace
