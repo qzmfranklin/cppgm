@@ -1302,20 +1302,25 @@ void PPTokenizerDFA::_pushTokens()
     }
 
     else if (state == State::DotDot) {
-      // Previous state can only be State::Dot.
+      // Previous: Dot .
       //
-      // Expect a dot . to emit ...
-      //
-      // Otherwise, report error because the C++ language does not permit
-      // only two consecutive dots.
+      // .      =>  Emit ...
+      // 0-9    =>  Emit ., transition to PPNumber.
+      // other  =>  Emit . and . (same dot twice).
+      //            The curr PPCodeUnit is not consumed.
       _toNext();
-
       if (currChar32 == U'.') {
         state = State::End;
         _emitToken(PPToken::createPreprocessingOpOrPunc("..."));
+      } else if (PPCodePointCheck::isDigit(currChar32)) {
+        state = State::PPNumber;
+        _emitToken(PPToken::createPreprocessingOpOrPunc("."));
+        ppnumber_u8str  = ".";
+        ppnumber_u8str += static_cast<char>(currChar32);
       } else {
-        state = State::Error;
-        _setError(R"(Encountered two consecutive dots, expect a third dot)");
+        state = State::End;
+        _emitToken(PPToken::createPreprocessingOpOrPunc("."));
+        _emitToken(PPToken::createPreprocessingOpOrPunc("."));
       }
     }
 
