@@ -105,6 +105,7 @@ void PPCodeUnitStream::_pushCodeUnits()
     else if (state == State::Backslash) {
       fprintf(stderr,"State::Backslash\n");
       if (curr32 == U'\n') { // line-splice
+        state = State::End;
         _toNext();
         _emitCodeUnit(PPCodeUnit::createWhitespaceCharacter("\\\n"));
       } else if (curr32 == U'u') { // \uXXXX

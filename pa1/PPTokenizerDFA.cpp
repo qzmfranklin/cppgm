@@ -790,6 +790,9 @@ void PPTokenizerDFA::_pushTokens()
         _toNext();
         identifier_u8str += curr->getUTF8String();
         continue;
+      } else if (curr->getRawText() == "\\\n") {
+        // "foo\\\nbar" is parsed as an identifier "foorbar".
+        _toNext();
       } else if (std::find(_ar_.begin(), _ar_.end(), identifier_u8str) != _ar_.end()) {
         state = State::End;
         _emitToken(PPToken::createPreprocessingOpOrPunc(identifier_u8str));
