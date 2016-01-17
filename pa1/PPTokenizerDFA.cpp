@@ -738,6 +738,9 @@ void PPTokenizerDFA::_pushTokens()
       //
       // When emitting:
       //
+      //  - All universal-character-names in the identifier are replaced with
+      //    their UTF8 encoded strings. For example, "7 \uAAAAn" => "4 ꪪn".
+      //
       //  - If _isBeginningOfLine is true and the identifier is "include", set
       //    _isPreprocessingDirective to true.
       //
