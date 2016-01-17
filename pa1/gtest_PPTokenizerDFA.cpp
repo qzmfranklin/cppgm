@@ -16,7 +16,7 @@ TEST(PPTokenizerDFA, HeaderNameH)
     ASSERT_FALSE(ppdfa->isEmpty());
     const auto tok = ppdfa->getPPToken();
     ASSERT_EQ(PPTokenType::PreprocessingOpOrPunc, tok->getType());
-    //ASSERT_EQ("#", tok->getUTF8String());
+    //ASSERT_EQ("#", tok->getRawText());
     ppdfa->toNext();
   }
 
@@ -24,7 +24,7 @@ TEST(PPTokenizerDFA, HeaderNameH)
     ASSERT_FALSE(ppdfa->isEmpty());
     const auto tok = ppdfa->getPPToken();
     ASSERT_EQ(PPTokenType::Identifier, tok->getType());
-    ASSERT_EQ("include", tok->getUTF8String());
+    ASSERT_EQ("include", tok->getRawText());
     ppdfa->toNext();
   }
 
@@ -32,7 +32,7 @@ TEST(PPTokenizerDFA, HeaderNameH)
     ASSERT_FALSE(ppdfa->isEmpty());
     const auto tok = ppdfa->getPPToken();
     ASSERT_EQ(PPTokenType::HeaderName, tok->getType());
-    ASSERT_EQ("<stdio.h>", tok->getUTF8String());
+    ASSERT_EQ("<stdio.h>", tok->getRawText());
     ppdfa->toNext();
   }
 
@@ -59,7 +59,7 @@ TEST(PPTokenizerDFA, HeaderNameQ)
     ASSERT_FALSE(ppdfa->isEmpty());
     const auto tok = ppdfa->getPPToken();
     ASSERT_EQ(PPTokenType::PreprocessingOpOrPunc, tok->getType());
-    //ASSERT_EQ("#", tok->getUTF8String());
+    //ASSERT_EQ("#", tok->getRawText());
     ppdfa->toNext();
   }
 
@@ -67,7 +67,7 @@ TEST(PPTokenizerDFA, HeaderNameQ)
     ASSERT_FALSE(ppdfa->isEmpty());
     const auto tok = ppdfa->getPPToken();
     ASSERT_EQ(PPTokenType::Identifier, tok->getType());
-    ASSERT_EQ("include", tok->getUTF8String());
+    ASSERT_EQ("include", tok->getRawText());
     ppdfa->toNext();
   }
 
@@ -75,7 +75,7 @@ TEST(PPTokenizerDFA, HeaderNameQ)
     ASSERT_FALSE(ppdfa->isEmpty());
     const auto tok = ppdfa->getPPToken();
     ASSERT_EQ(PPTokenType::HeaderName, tok->getType());
-    ASSERT_EQ(R"("stdio.h")", tok->getUTF8String());
+    ASSERT_EQ(R"("stdio.h")", tok->getRawText());
     ppdfa->toNext();
   }
 
@@ -104,7 +104,7 @@ TEST(PPTokenizerDFA, SingleLineComment)
     ASSERT_FALSE(ppdfa->isEmpty());
     const auto tok = ppdfa->getPPToken();
     ASSERT_EQ(PPTokenType::WhitespaceSequence, tok->getType());
-    ASSERT_EQ("// single line comment", tok->getUTF8String());
+    ASSERT_EQ("// single line comment", tok->getRawText());
     ppdfa->toNext();
   }
 
@@ -137,7 +137,7 @@ TEST(PPTokenizerDFA, MultipleLineComment)
     ASSERT_FALSE(ppdfa->isEmpty());
     const auto tok = ppdfa->getPPToken();
     ASSERT_EQ(PPTokenType::WhitespaceSequence, tok->getType());
-    ASSERT_EQ(expected_string, tok->getUTF8String());
+    ASSERT_EQ(expected_string, tok->getRawText());
     ppdfa->toNext();
   }
 
@@ -164,7 +164,7 @@ TEST(PPTokenizerDFA, PPNumber)
     ASSERT_FALSE(ppdfa->isEmpty());
     const auto tok = ppdfa->getPPToken();
     ASSERT_EQ(PPTokenType::PPNumber, tok->getType());
-    ASSERT_EQ(expected_string, tok->getUTF8String());
+    ASSERT_EQ(expected_string, tok->getRawText());
     ppdfa->toNext();
   }
 
@@ -207,7 +207,7 @@ TEST(PPTokenizerDFA, StringLiteral)
         ASSERT_FALSE(ppdfa->isEmpty());
         const auto tok = ppdfa->getPPToken();
         ASSERT_EQ(PPTokenType::StringLiteral, tok->getType());
-        ASSERT_EQ(expected_string, tok->getUTF8String());
+        ASSERT_EQ(expected_string, tok->getRawText());
         ppdfa->toNext();
       }
 
@@ -253,7 +253,7 @@ TEST(PPTokenizerDFA, UserDefinedStringLiteral)
           ASSERT_FALSE(ppdfa->isEmpty());
           const auto tok = ppdfa->getPPToken();
           ASSERT_EQ(PPTokenType::UserDefinedStringLiteral, tok->getType());
-          ASSERT_EQ(expected_string, tok->getUTF8String());
+          ASSERT_EQ(expected_string, tok->getRawText());
           ppdfa->toNext();
         }
 
@@ -291,7 +291,7 @@ TEST(PPTokenizerDFA, CharacterLiteral)
         ASSERT_FALSE(ppdfa->isEmpty());
         const auto tok = ppdfa->getPPToken();
         ASSERT_EQ(PPTokenType::CharacterLiteral, tok->getType());
-        ASSERT_EQ(expected_string, tok->getUTF8String());
+        ASSERT_EQ(expected_string, tok->getRawText());
         ppdfa->toNext();
       }
 
@@ -332,7 +332,7 @@ TEST(PPTokenizerDFA, UserDefinedCharacterLiteral)
           ASSERT_FALSE(ppdfa->isEmpty());
           const auto tok = ppdfa->getPPToken();
           ASSERT_EQ(PPTokenType::UserDefinedCharacterLiteral, tok->getType());
-          ASSERT_EQ(expected_string, tok->getUTF8String());
+          ASSERT_EQ(expected_string, tok->getRawText());
           ppdfa->toNext();
         }
 

@@ -59,8 +59,8 @@ public:
   // Interface
   PPTokenType getType() const { return _type; }
 
-  // Get the corresponding raw text
-  virtual std::string getUTF8String() const { return _u8string; }
+  // Get the corresponding raw text in UTF8
+  virtual std::string getRawText() const { return _u8string; }
 
   // Get human friendly UTF8 string for the given token type
   static std::string getTokenTypeUTF8String(const PPTokenType type);
