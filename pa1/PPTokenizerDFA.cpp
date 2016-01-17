@@ -58,7 +58,7 @@ void PPTokenizerDFA::_pushTokens()
     HeaderNameQ,    // e.g., "my_lib.h"
 
     PPNumber_LackDigit,
-    PPNumber_Exponent,
+    PPNumber_E,
     PPNumber_Apostrophe,
     PPNumber,
 
@@ -881,13 +881,13 @@ void PPTokenizerDFA::_pushTokens()
       // Expect one of the following:
       //   ., digit, identifier-nondigit   =>  PPNumber
       //   '      =>  PPNumber_Apostrophe
-      //   e, E   =>  PPNumber_Exponent
+      //   e, E   =>  PPNumber_E
       //   other  =>  Emit pp-number, curr PPCodeUnit is not consumed.
       fprintf(stderr,"State::PPNumber\n");
 
       if (currChar32 == U'e'  ||  currChar32 == U'E') {
         _toNext();
-        state = State::PPNumber_Exponent;
+        state = State::PPNumber_E;
         ppnumber_u8str += static_cast<char>(currChar32);
       } else if (currChar32 == U'\'') {
         _toNext();
@@ -918,19 +918,22 @@ void PPTokenizerDFA::_pushTokens()
       }
     }
 
-    else if (state == State::PPNumber_Exponent) {
+    else if (state == State::PPNumber_E) {
       // Previous: e E
-      // + -    =>  PPNumber
-      // other  =>  Error
+      // + - . digit identifier-nondigit =>  PPNumber
+      // other     =>  Error
       _toNext();
-      fprintf(stderr,"State::PPNumber_Exponent\n");
+      fprintf(stderr,"State::PPNumber_E\n");
 
-      if (PPCodePointCheck::isSign(currChar32)) {
+      if (PPCodeUnitCheck::isSign(curr)
+          || currChar32 == U'.'
+          || PPCodeUnitCheck::isDigit(curr)
+          || PPCodeUnitCheck::isIdentifierNondigit(curr)) {
         state = State::PPNumber;
         ppnumber_u8str += static_cast<char>(currChar32);
       } else {
         state = State::Error;
-        _setError(R"(Expect a sign, i.e., either + or -, to transition to pp-number.)");
+        _setError(R"(Expect a sign (+ or -), a dot, a digit, or an identifier-nondigit in parsing a pp-number.)");
       }
     }
 
