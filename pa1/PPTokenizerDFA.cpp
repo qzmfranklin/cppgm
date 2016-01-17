@@ -255,7 +255,7 @@ void PPTokenizerDFA::_pushTokens()
         state = State::PPNumber;
       }
 
-      else if (currChar32 == U' ') {
+      else if (curr->getType() == PPCodeUnitType::WhitespaceCharacter) {
         // no-op pass
       }
 
