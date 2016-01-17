@@ -71,9 +71,9 @@ PPToken::createPreprocessingOpOrPunc(const std::string &u8str)
 }
 
 std::shared_ptr<PPTokenNonWhitespaceChar>
-PPToken::createNonWhitespaceChar(const std::u32string &u32str)
+PPToken::createNonWhitespaceChar(const std::string &u8str)
 {
-  return std::make_shared<PPTokenNonWhitespaceChar>(u32str);
+  return std::make_shared<PPTokenNonWhitespaceChar>(u8str);
 }
 
 std::shared_ptr<PPTokenNewLine>
@@ -98,58 +98,3 @@ std::string _u32_to_u8(const std::u32string &u32str)
   return u8str;
 }
 } // namespace
-
-std::string PPTokenHeaderName::getUTF8String() const
-{
-  return _u8string;
-}
-
-std::string PPTokenIdentifier::getUTF8String() const
-{
-  return _u8string;
-}
-
-std::string PPTokenPPNumber::getUTF8String() const
-{
-  return _u8string;
-}
-
-std::string PPTokenCharacterLiteral::getUTF8String() const
-{
-  return _u8string;
-}
-
-std::string PPTokenUserDefinedCharacterLiteral::getUTF8String() const
-{
-  return _u8string;
-}
-
-std::string PPTokenStringLiteral::getUTF8String() const
-{
-  return _u8string;
-}
-
-std::string PPTokenUserDefinedStringLiteral::getUTF8String() const
-{
-  return _u8string;
-}
-
-std::string PPTokenPreprocessingOpOrPunc::getUTF8String() const
-{
-  return _u8string;
-}
-
-std::string PPTokenNonWhitespaceChar::getUTF8String() const
-{
-  return _u32_to_u8(_u32string);
-}
-
-std::string PPTokenNewLine::getUTF8String() const
-{
-  return "\n";
-}
-
-std::string PPTokenWhitespaceSequence::getUTF8String() const
-{
-  return _u8string;
-}

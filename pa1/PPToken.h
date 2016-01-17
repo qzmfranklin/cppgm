@@ -53,13 +53,14 @@ class PPTokenWhitespaceSequence;
 ////////////////////////////////////////////////////////////////////////////////
 class PPToken {
 public:
-  PPToken(const PPTokenType type): _type(type) {}
+  PPToken(const PPTokenType type, const std::string &u8str):
+    _type(type), _u8string(u8str) {}
 
   // Interface
   PPTokenType getType() const { return _type; }
 
   // Get the corresponding raw text
-  virtual std::string getUTF8String() const = 0;
+  virtual std::string getUTF8String() const { return _u8string; }
 
   // Get human friendly UTF8 string for the given token type
   static std::string getTokenTypeUTF8String(const PPTokenType type);
@@ -73,12 +74,13 @@ public:
   static std::shared_ptr<PPTokenStringLiteral> createStringLiteral(const std::string&);
   static std::shared_ptr<PPTokenUserDefinedStringLiteral> createUserDefinedStringLiteral(const std::string&);
   static std::shared_ptr<PPTokenPreprocessingOpOrPunc> createPreprocessingOpOrPunc(const std::string&);
-  static std::shared_ptr<PPTokenNonWhitespaceChar> createNonWhitespaceChar(const std::u32string&);
+  static std::shared_ptr<PPTokenNonWhitespaceChar> createNonWhitespaceChar(const std::string&);
   static std::shared_ptr<PPTokenNewLine> createNewLine();
   static std::shared_ptr<PPTokenWhitespaceSequence> createWhitespaceSequence(const std::string&);
 
 protected:
   const PPTokenType _type;
+  const std::string _u8string;
 
 private:
   static const std::vector<std::string> _typeStringList;
@@ -92,99 +94,67 @@ private:
 class PPTokenHeaderName: public PPToken {
 public:
   PPTokenHeaderName(const std::string& u8str):
-    PPToken(PPTokenType::HeaderName), _u8string(u8str) {}
-  virtual std::string getUTF8String() const override;
-private:
-  const std::string _u8string;
+    PPToken(PPTokenType::HeaderName, u8str) {}
 };
 
 class PPTokenIdentifier: public PPToken {
 public:
   PPTokenIdentifier(const std::string& u8str):
-    PPToken(PPTokenType::Identifier), _u8string(u8str) {}
-  virtual std::string getUTF8String() const override;
-private:
-  const std::string _u8string;
+    PPToken(PPTokenType::Identifier, u8str) {}
 };
 
 class PPTokenPPNumber: public PPToken {
 public:
   PPTokenPPNumber(const std::string& u8str):
-    PPToken(PPTokenType::PPNumber), _u8string(u8str) {}
-  virtual std::string getUTF8String() const override;
-private:
-  const std::string _u8string;
+    PPToken(PPTokenType::PPNumber, u8str) {}
 };
 
 class PPTokenCharacterLiteral: public PPToken {
 public:
   PPTokenCharacterLiteral(const std::string& u8str):
-    PPToken(PPTokenType::CharacterLiteral), _u8string(u8str) {}
-  virtual std::string getUTF8String() const override;
-private:
-  const std::string _u8string;
+    PPToken(PPTokenType::CharacterLiteral, u8str) {}
 };
 
 class PPTokenUserDefinedCharacterLiteral: public PPToken {
 public:
   PPTokenUserDefinedCharacterLiteral(const std::string& u8str):
-    PPToken(PPTokenType::UserDefinedCharacterLiteral), _u8string(u8str) {}
-  virtual std::string getUTF8String() const override;
-private:
-  const std::string _u8string;
+    PPToken(PPTokenType::UserDefinedCharacterLiteral, u8str) {}
 };
 
 class PPTokenStringLiteral: public PPToken {
 public:
   PPTokenStringLiteral(const std::string& u8str):
-    PPToken(PPTokenType::StringLiteral), _u8string(u8str) {}
-  virtual std::string getUTF8String() const override;
-private:
-  const std::string _u8string;
+    PPToken(PPTokenType::StringLiteral, u8str) {}
 };
 
 class PPTokenUserDefinedStringLiteral: public PPToken {
 public:
   PPTokenUserDefinedStringLiteral(const std::string& u8str):
-    PPToken(PPTokenType::UserDefinedStringLiteral), _u8string(u8str) {}
-  virtual std::string getUTF8String() const override;
-private:
-  const std::string _u8string;
+    PPToken(PPTokenType::UserDefinedStringLiteral, u8str) {}
 };
 
 class PPTokenPreprocessingOpOrPunc: public PPToken {
 public:
   PPTokenPreprocessingOpOrPunc(const std::string& u8str):
-    PPToken(PPTokenType::PreprocessingOpOrPunc), _u8string(u8str) {}
-  virtual std::string getUTF8String() const override;
-private:
-  const std::string _u8string;
+    PPToken(PPTokenType::PreprocessingOpOrPunc, u8str) {}
 };
 
 class PPTokenNonWhitespaceChar: public PPToken {
 public:
-  PPTokenNonWhitespaceChar(const std::u32string& u32str):
-    PPToken(PPTokenType::NonWhitespaceChar), _u32string(u32str) {}
-  virtual std::string getUTF8String() const override;
-private:
-  const std::u32string _u32string;
+  PPTokenNonWhitespaceChar(const std::string& u8str):
+    PPToken(PPTokenType::NonWhitespaceChar, u8str) {}
 };
 
 class PPTokenNewLine: public PPToken {
 public:
   PPTokenNewLine():
-    PPToken(PPTokenType::NewLine) {}
-  virtual std::string getUTF8String() const override;
-private:
+    PPToken(PPTokenType::NewLine, "\n") {}
 };
 
 class PPTokenWhitespaceSequence: public PPToken {
 public:
   PPTokenWhitespaceSequence(const std::string& u8str):
-    PPToken(PPTokenType::WhitespaceSequence), _u8string(u8str) {}
-  virtual std::string getUTF8String() const override;
-private:
-  std::string _u8string;
+    PPToken(PPTokenType::WhitespaceSequence, u8str) {}
 };
 
 #endif /* end of include guard */

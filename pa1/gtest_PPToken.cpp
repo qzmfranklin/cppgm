@@ -63,7 +63,7 @@ TEST(PPToken, PreprocessingOpOrPunc)
 
 TEST(PPToken, NonWhitespaceChar)
 {
-  const auto tok = PPToken::createNonWhitespaceChar(U"😈");
+  const auto tok = PPToken::createNonWhitespaceChar("😈");
   ASSERT_EQ(PPTokenType::NonWhitespaceChar, tok->getType());
   ASSERT_EQ("😈", tok->getUTF8String());
 }

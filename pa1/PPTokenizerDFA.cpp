@@ -261,7 +261,7 @@ void PPTokenizerDFA::_pushTokens()
       else if (!PPCodePointCheck::isBasicSourceCharacter(currChar32)) {
         // TODO: Should probably emit some warnings here
         state = State::End;
-        _emitToken(PPToken::createNonWhitespaceChar(std::u32string(1, currChar32)));
+        _emitToken(PPToken::createNonWhitespaceChar(UStringTools::u32_to_u8(std::u32string(1, currChar32))));
       }
 
       else {
