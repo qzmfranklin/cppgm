@@ -173,6 +173,7 @@ void PPTokenizerDFA::_pushTokens()
         state = State::End;
         _emitToken(PPToken::createNewLine());
         _isBeginningOfLine = true;
+        _isPreprocessingDirective = false;
         _isBeginningOfHeaderName = false;
       }
 
@@ -792,14 +793,9 @@ void PPTokenizerDFA::_pushTokens()
         state = State::End;
         _emitToken(PPToken::createPreprocessingOpOrPunc(identifier_u8str));
       } else if (identifier_u8str == "include") {
-        if (_isBeginningOfLine) {
-          state = State::End;
-          _emitToken(PPToken::createIdentifier(identifier_u8str));
-          _isBeginningOfHeaderName = true;
-        } else {
-          state = State::Error;
-          _setError(R"(The identifier "include" can only be used following # at the beginning of a new line)");
-        }
+        state = State::End;
+        _emitToken(PPToken::createIdentifier(identifier_u8str));
+        _isBeginningOfHeaderName = _isPreprocessingDirective;
       } else if (identifier_u8str == "u"  ||  identifier_u8str == "u8"
               || identifier_u8str == "U"  ||  identifier_u8str == "L") {
         state = State::PossibleCharacterOrStringLiteral;
@@ -812,6 +808,8 @@ void PPTokenizerDFA::_pushTokens()
       } else {
         state = State::End;
         _emitToken(PPToken::createIdentifier(identifier_u8str));
+        // The text "something #include <stdlib.h>\n" does not emit header-name.
+        _isBeginningOfLine = false;
       }
 
       fprintf(stderr,"return from State::Identifier\n");
@@ -1083,8 +1081,8 @@ void PPTokenizerDFA::_pushTokens()
     // NOTE:
     //  When "#" or "%:" is emitted at the start of line, i.e.,
     //  _isBeginningOfLine is true, this is indeed a preprocessing directive. In
-    //  this case, we need to set _isBeginningOfHeaderName to true. If an
-    //  identifier "include" is emitted while _isBeginningOfHeaderName is true,
+    //  this case, we need to set _isPreprocessingDirective to true. If an
+    //  identifier "include" is emitted while _isPreprocessingDirective is true,
     //  we start parsing for header-name, i.e., go to State::HeaderName_Start.
     //
     ////////////////////////////////////////////////////////////////////////////////
@@ -1106,7 +1104,7 @@ void PPTokenizerDFA::_pushTokens()
     else if (state == State::PoundSign) {
       // Previous: #
       // #      =>  Emit ##
-      // other  =>  Emit #, set _isBeginningOfHeaderName to true if
+      // other  =>  Emit #, set _isPreprocessingDirective to true if
       //            _isBeginningOfLine is true. The curr PPCodeUnit is not
       //            consumed.
       fprintf(stderr,"State::PoundSign <%02X>\n", currChar32);
@@ -1119,7 +1117,7 @@ void PPTokenizerDFA::_pushTokens()
         state = State::End;
         _emitToken(PPToken::createPreprocessingOpOrPunc("#"));
         if (_isBeginningOfLine)
-          _isBeginningOfHeaderName = true;
+          _isPreprocessingDirective = true;
       }
     }
 
