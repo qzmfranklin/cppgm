@@ -266,6 +266,7 @@ void PPTokenizerDFA::_pushTokens()
       }
 
       else {
+        state = State::Error;
         fprintf(stderr,"Dude, you literally exhausted all cases in the pptokenizer's DFA. The DFA does not know what you want to do here\n");
       }
 
