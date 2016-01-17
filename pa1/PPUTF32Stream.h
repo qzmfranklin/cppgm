@@ -16,7 +16,7 @@ public:
   virtual void toNext() override;
 
   virtual std::u32string getUTF32String() const override;
-  virtual std::string getUTF8String() const override;
+  virtual std::string getRawText() const override;
 
 private:
   icu::UnicodeString _str;

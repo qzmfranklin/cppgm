@@ -17,7 +17,7 @@ public:
   virtual void toNext() = 0;
 
   virtual std::u32string getUTF32String() const = 0;
-  virtual std::string getUTF8String() const = 0;
+  virtual std::string getRawText() const = 0;
 };
 
 #endif /* end of include guard */

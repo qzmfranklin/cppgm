@@ -51,7 +51,7 @@ std::u32string PPUTF32Stream::getUTF32String() const
   return std::u32string(buf, char32length);
 }
 
-std::string PPUTF32Stream::getUTF8String() const
+std::string PPUTF32Stream::getRawText() const
 {
   std::string out;
   _str.toUTF8String<std::string>(out);

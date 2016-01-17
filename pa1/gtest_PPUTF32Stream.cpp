@@ -56,6 +56,6 @@ TEST(PPUTF32Stream, getUTF32String)
 {
 }
 
-TEST(PPUTF32Stream, getUTF8String)
+TEST(PPUTF32Stream, getRawText)
 {
 }
