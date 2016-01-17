@@ -34,22 +34,12 @@ bool PPCodeUnitCheck::isInAnnexE2(const UnitPtr unit)
 
 bool PPCodeUnitCheck::isIdentifierStart(const UnitPtr unit)
 {
-  return isNondigit(unit)
-    || (
-        unit->getType() == PPCodeUnitType::UniversalCharacterName
-        && isInAnnexE1(unit)
-        && !isInAnnexE2(unit)
-       );
+  return isNondigit(unit) || ( isInAnnexE1(unit) && !isInAnnexE2(unit));
 }
 
 bool PPCodeUnitCheck::isIdentifierNonStart(const UnitPtr unit)
 {
-  return isNondigit(unit)
-    || isDigit(unit)
-    || (
-        unit->getType() == PPCodeUnitType::UniversalCharacterName
-        && isInAnnexE1(unit)
-       );
+  return isNondigit(unit) || isDigit(unit) || isInAnnexE1(unit) ;
 }
 
 bool PPCodeUnitCheck::isBinaryDigit(const UnitPtr unit)
