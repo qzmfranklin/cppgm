@@ -12,7 +12,7 @@ const std::vector<std::string> PPToken::_typeStringList = {
   "string-literal",
   "user-defined-string-literal",
   "preprocessing-op-or-punc",
-  "non-whitespace-char",
+  "non-whitespace-character",
   "new-line",
   "whitespace-sequence",
 };
