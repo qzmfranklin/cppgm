@@ -90,6 +90,9 @@ void PPCodeUnitStream::_pushCodeUnits()
       fprintf(stderr,"State::Start\n");
       if (curr32 == U'\\') { // Line splicing, universal-character-name
         state = State::Backslash;
+      } else if (PPCodePointCheck::isWhitespaceCharacter(curr32)) {
+        state = State::End;
+        _emitCodeUnit(PPCodeUnit::createWhitespaceCharacter(std::string(1, static_cast<char>(curr32))));
       } else if (PPCodePointCheck::isBasicSourceCharacter(curr32)) {
         state = State::End;
         _emitCodeUnit(PPCodeUnit::createASCIIChar(static_cast<const char>(curr32)));

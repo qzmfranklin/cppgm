@@ -11,7 +11,7 @@ TEST(PPCodeUnit, CodePoint)
 
 TEST(PPCodeUnit, WhitespaceCharacterSingleChar)
 {
-  const std::vector<std::string> singleList = { "\t", "\n", "\u000B", "\u000C", "\r" };
+  const std::vector<std::string> singleList = { "\t", "\u000B", "\u000C", " " };
   for (const auto &str: singleList) {
     const auto unit = PPCodeUnit::createWhitespaceCharacter(str);
     ASSERT_EQ(PPCodeUnitType::WhitespaceCharacter,  unit->getType());
@@ -25,7 +25,7 @@ TEST(PPCodeUnit, WhitespaceCharacterLineSplice)
   const std::string str = "\\\n";
   const auto unit = PPCodeUnit::createWhitespaceCharacter(str);
   ASSERT_EQ(PPCodeUnitType::WhitespaceCharacter,  unit->getType());
-  ASSERT_EQ(U' ',                                 unit->getChar32());
+  ASSERT_EQ(U'\0',                                unit->getChar32());
   ASSERT_EQ("\\\n",                               unit->getRawText());
 }
 

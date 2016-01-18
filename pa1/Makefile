@@ -27,14 +27,14 @@ gtest_PPToken.exe: $(ROOT)/gtest/gtest_main.a $(D)/gtest_PPToken.o $(D)/PPToken.
 gtest_PPCodePointCheck.exe: $(ROOT)/gtest/gtest_main.a $(D)/gtest_PPCodePointCheck.o $(D)/PPCodePointCheck.o
 
 gtest_PPCodeUnit.exe: $(ROOT)/gtest/gtest_main.a $(ROOT)/utils/UStringTools.o \
-	$(D)/gtest_PPCodeUnit.o $(D)/PPCodeUnit.o
+	$(D)/gtest_PPCodeUnit.o $(D)/PPCodeUnit.o $(D)/PPCodePointCheck.o
 
 gtest_PPUTF32Stream.exe: $(ROOT)/gtest/gtest_main.a $(ROOT)/utils/UStringTools.o \
 	$(D)/gtest_PPUTF32Stream.o $(D)/PPUTF32Stream.o
 
 gtest_PPCodeUnitStream.exe: $(ROOT)/gtest/gtest_main.a $(ROOT)/utils/UStringTools.o \
 	$(D)/gtest_PPCodeUnitStream.o $(D)/PPCodeUnit.o $(D)/PPCodeUnitStream.o \
-	$(D)/PPCodePointCheck.o $(D)/PPUTF32Stream.o
+	$(D)/PPCodePointCheck.o $(D)/PPUTF32Stream.o $(D)/PPCodePointCheck.o
 
 gtest_PPTokenizerDFA.exe: $(ROOT)/gtest/gtest_main.a $(ROOT)/utils/UStringTools.o \
 	$(D)/gtest_PPTokenizerDFA.o $(D)/PPCodeUnit.o $(D)/PPCodeUnitStream.o \

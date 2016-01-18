@@ -1,3 +1,4 @@
+#include "PPCodePointCheck.h"
 #include "PPCodeUnit.h"
 #include "utils/UStringTools.h"
 
@@ -15,23 +16,15 @@ PPCodeUnit::createNonASCIIChar(const char32_t ch32)
 std::shared_ptr<PPCodeUnitWhitespaceCharacter>
 PPCodeUnit::createWhitespaceCharacter(const std::string &u8str)
 {
-  // The whitespace character can only be one of 0x09 - 0x0D, inclusive, or the
-  // line-splicing two-char sequence "\\\n". This factory method has to check
-  // this. If the input string, u8str, is anything else, return a nullptr to
-  // indicate that the method cannot create a valid object with the given input.
   char ch = 0;
   if (u8str.length() == 1) {
-    if (u8str[0] != '\t'
-        &&  u8str[0] != '\n'
-        &&  u8str[0] != static_cast<char>(0x0B)
-        &&  u8str[0] != static_cast<char>(0x0C)
-        &&  u8str[0] != '\r')
-      return nullptr;
-    else
+    if (PPCodePointCheck::isWhitespaceCharacter(u8str[0]))
       ch = u8str[0];
+    else
+      return nullptr;
   } else if (u8str.length() == 2) {
     if (u8str == "\\\n")
-      ch = ' ';
+      ch = 0;
     else
       return nullptr;
   } else {

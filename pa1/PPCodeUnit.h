@@ -10,10 +10,9 @@
 //
 // WhitespaceCharacter is one of the following:
 //   0x09     horizontal tab, \t
-//   0x0A     line feed, \n
 //   0x0B     vertical tab
 //   0x0C     form feed
-//   0x0D     carriage return, \r
+//   0x20     whitespace, ' '
 //   A backslash \ followed by a newline \n
 // The value associated with a WhitespaceCharacter is the same as its ASCII
 // character for single characters, or same as the ASCII space character 0x20

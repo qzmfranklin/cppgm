@@ -1,3 +1,4 @@
+#include "PPCodePointCheck.h"
 #include "PPCodeUnitStream.h"
 #include "PPUTF32Stream.h"
 #include <gtest/gtest.h>
@@ -192,7 +193,8 @@ TEST(PPCodeUnitStream, SimpleMixed)
     for (int i = 0; i < text.length(); i++) {
       ASSERT_FALSE(stream->isEmpty());
       const auto unit = stream->getCodeUnit();
-      ASSERT_EQ(PPCodeUnitType::ASCIIChar, unit->getType());
+      const PPCodeUnitType type = PPCodePointCheck::isWhitespaceCharacter(text[i]) ?  PPCodeUnitType::WhitespaceCharacter : PPCodeUnitType::ASCIIChar;
+      ASSERT_EQ(type, unit->getType());
       ASSERT_EQ(text[i], static_cast<char>(unit->getChar32()));
       stream->toNext();
     }
