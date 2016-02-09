@@ -1,3 +1,46 @@
+# Preprocessing Tokenizer
+A C++11 implementation of a C++14 compliant preprocessing tokenizer as libraries. The `pptok.cpp` implements the wrapper for building command line utility program.
+
+I did not fully comply with the CPPGM course requirement:
+- I used the ICU4C library to handle Unicode strings, instead of writing my own UTF encoders and decoders.
+- The `pptok.exe` program is similar but different from the reference program `pptoken`. The complete list of differences is documented in the `comparre.py` script (used to compare results from `pptok.exe` and `pptoken`):
+
+```
+- pptok does not print EXIT_SUCCESS or EXIT_FAILURE. Instead, it returns 0 for
+  success and 1 for failure.
+
+- Whitespace characters, i.e, space, horizontal tab, vertical tab, form feed, a
+  backslash \ followed by a new-line \\n, are ignored in pptok but emitted as
+  whitespace-sequence in pptoken.
+
+- Comments (single line comment starting with // and multiline comments enclosed
+  in /* ... */) are issued as whitespace-sequence in pptok but ignored in
+  pptoken. Though, for testing purpose, whitespace-sequences are ignored.
+
+- The new-line character \\n issues "new-line\\n" in pptok, instead of the
+  "new-line 0\\n" in pptoken.
+
+For testing purpose, whitespace-characters, whitespace-sequences, and exit
+status are ignored. The new-line token are normalized to "new-line\\n".
+
+```
+
+Two sets of tests are available:
+```
+make test      // My own unit tests
+./run_tests.sh // CPPGM test suite
+```
+
+The CPPGM thinks `<::` is parsed as `<` and `::`. My program parses `<::` as `<:` and `:`. I do not plan to conform to the CPPGM implementation for three reasons:
+- The C++ standard does not define the exact behavior for this particular case.
+- The lexer has been greedy everywhere else. It makes little sense to not be greedy for only one case.
+- This is a rather rare case involving digraphs. The impact of non-conformance to the CPPGM is minimal, if not utterly negligible.
+
+## License
+
+This preprocessing tokenizer is licensed under the MIT license.
+
+
 ## CPPGM Programming Assignment 1 (pptoken)
 
 ### Overview
@@ -187,14 +230,14 @@ For example the source file:
 Produces an output of:
 
     identifier 3 foo
-    whitespace-sequence 0 
+    whitespace-sequence 0
     pp-number 5 1.0e2
-    whitespace-sequence 0 
+    whitespace-sequence 0
     preprocessing-op-or-punc 2 *=
     non-whitespace-character 1 @
     whitespace-sequence 0
     string-literal 5 "baz"
-    new-line 0 
+    new-line 0
     eof
 
 ## Testing
@@ -334,7 +377,7 @@ An identifier may not start with code points from Annex E2.
         `0` `1` `2` `3` `4` `5` `6` `7` `8` `9`
         `a` `b` `c` `d` `e` `f`
         `A` `B` `C` `D` `E` `F`
-        
+
     user-defined-character-literal:
         character-literal ud-suffix
 
@@ -519,4 +562,3 @@ To get into the self-hosting spirit of things, once you have completed this assi
     $ .pptoken < pptoken.cpp > pptoken.my
 
 And compare by hand some of the `pptoken.cpp` file to the output in `pptoken.my` to check it tokenized correctly.
-

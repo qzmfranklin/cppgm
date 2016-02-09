@@ -1,8 +1,8 @@
 #	PROJECT-WIDE COMMON COMPILING FLAGS
-CC		:=gcc
+CC		:=clang
 CFLAGS 		:=-O3 -Wall -Drestrict=__restrict__ -DNDEBUG
 
-CXX		:=g++
+CXX		:=clang++
 CXXFLAGS	:=-O3 -Wall -Drestrict=__restrict__ -DNDEBUG -std=c++11
 
 #       PROJECT-WIDE DEFAULT LINKING LIBRARIES AND INCLUDE DIRECTORIES
@@ -10,19 +10,11 @@ INCS		:=-iquote $(ROOT) \
 	-isystem $(ROOT)/gtest \
 	-isystem $(ROOT)/gtest/include \
 	`pkg-config --cflags icu-io`
-LIBS		:= \
+LIBS		:=-lpthread \
 	`pkg-config --libs icu-io`
 
 #       SUPPRESS LENGTHY COMMANDLINE ECHOS
 QUIET           :=@
-
-#	INTERNAL VARIABLES
-OBJ		:=# .o files
-DEP		:=# .d files
-ASM		:=# .s files
-DEPFLAGS	:=-MMD -MP# preprocessor generates .d files
-ASMFLAGS	:=-S# source code commented assembly code
-.SUFFIXES:
 
 #	INTERNAL VARIABLES
 OBJ		:=# .o files
