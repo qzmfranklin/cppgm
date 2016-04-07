@@ -2,6 +2,7 @@
 #include "PPCodeUnitCheck.h"
 #include "PPTokenizerDFA.h"
 #include <assert.h>
+#include <algorithm>
 
 // TODO: Create a common utility debug logging tool instead of this macro
 // solution.
