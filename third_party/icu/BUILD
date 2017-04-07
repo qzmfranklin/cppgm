@@ -26,7 +26,7 @@ cc_library(
         ],
         copts = [
                 '-fno-exceptions',
-                '-iquote third_party/icu4c/icu/source/common',
+                '-iquote third_party/icu/common',
                 '-DU_IO_IMPLEMENTATION',
         ],
 )
@@ -45,8 +45,8 @@ cc_library(
         ],
         copts = [
                 '-fno-exceptions',
-                '-iquote third_party/icu4c/icu/source/common',
-                '-iquote third_party/icu4c/icu/source/i18n',
+                '-iquote third_party/icu/common',
+                '-iquote third_party/icu/i18n',
                 '-DU_I18N_IMPLEMENTATION',
         ],
 )
@@ -104,7 +104,7 @@ cc_library(
         ]),
         copts = [
                 '-fno-exceptions',
-                '-iquote third_party/icu4c/icu/source/common',
+                '-iquote third_party/icu/common',
                 '-DU_COMMON_IMPLEMENTATION',
         ],
         visibility = ["//visibility:__pkg__"],
