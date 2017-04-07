@@ -32,3 +32,10 @@
 
 # Ctags tag file
 tags
+
+# Bazel symlinks
+bazel-bin
+bazel-cppgm
+bazel-genfiles
+bazel-out
+bazel-testlogs
