@@ -1,6 +1,6 @@
 // Copyright (C) 2016 and later: Unicode, Inc. and others.
 // License & terms of use: http://www.unicode.org/copyright.html
-/*  
+/*
 **********************************************************************
 *   Copyright (C) 2002-2016, International Business Machines
 *   Corporation and others.  All Rights Reserved.
@@ -16,6 +16,11 @@
 
 #ifndef __UCONFIG_H__
 #define __UCONFIG_H__
+
+/* ICU customizations: put these lines at the top of uconfig.h */
+
+ /* -DU_DISABLE_RENAMING=1 */
+#define U_DISABLE_RENAMING 1
 
 
 /*!
@@ -76,7 +81,7 @@
 #endif
 
 /**
- * Determines wheter to enable auto cleanup of libraries. 
+ * Determines wheter to enable auto cleanup of libraries.
  * @internal
  */
 #ifndef UCLN_NO_AUTO_CLEANUP
@@ -256,7 +261,7 @@
 #   define UCONFIG_NO_FILE_IO 0
 #endif
 
-#if UCONFIG_NO_FILE_IO && defined(U_TIMEZONE_FILES_DIR) 
+#if UCONFIG_NO_FILE_IO && defined(U_TIMEZONE_FILES_DIR)
 #   error Contradictory file io switches in uconfig.h.
 #endif
 
