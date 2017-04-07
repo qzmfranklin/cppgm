@@ -1,8 +1,34 @@
 licenses(['notice'])
-package(default_visibility = ['//visibility:__pkg__'])
+package(default_visibility = ['//visibility:public'])
+
 
 cc_library(
-        name = 'libicu',
+        name = 'libtools',
+        srcs = glob([
+                'tools/**/*.c',
+                'tools/**/*.cpp',
+                'tools/**/*.h',
+        ], exclude = [
+                'tools/icu*/*',
+                'tools/gen*/*',
+                'tools/pkgdata/*',
+                'tools/tzcode/*',
+        ]),
+        deps = [
+                ':libicu',
+        ],
+        copts = [
+                '-iquote third_party/icu/common',
+                '-iquote third_party/icu/i18n',
+                '-iquote third_party/icu/tools/toolutil',
+                '-iquote third_party/icu/tools/ctestfw',
+                '-DU_TOOLUTIL_IMPLEMENTATION',
+        ],
+        visibility = ["//visibility:public"],
+)
+
+cc_library(
+        name = 'lib',
         deps = [
                 'io',
                 'i18n',
@@ -11,59 +37,6 @@ cc_library(
                 'uc',
         ],
         visibility = ["//visibility:public"],
-)
-
-cc_library(
-        name = 'io',
-        srcs = glob([
-                'io/**/*.c',
-                'io/**/*.cpp',
-        ]),
-        hdrs = glob([
-                'io/**/*.h',
-        ]),
-        deps = [
-                'common',
-        ],
-        copts = [
-                '-fno-exceptions',
-                '-iquote third_party/icu/common',
-                '-DU_IO_IMPLEMENTATION',
-        ],
-)
-
-cc_library(
-        name = 'i18n',
-        srcs = glob([
-                'i18n/**/*.c',
-                'i18n/**/*.cpp',
-        ]),
-        hdrs = glob([
-                'i18n/**/*.h',
-        ]),
-        deps = [
-                'common',
-        ],
-        copts = [
-                '-fno-exceptions',
-                '-iquote third_party/icu/common',
-                '-iquote third_party/icu/i18n',
-                '-DU_I18N_IMPLEMENTATION',
-        ],
-)
-
-cc_library(
-        name = 'le',
-        srcs = glob([
-                'le/**/*.c',
-                'le/**/*.cpp',
-        ]),
-        hdrs = glob([
-                'le/**/*.h',
-        ]),
-        copts = [
-                '-fno-exceptions',
-        ],
 )
 
 cc_library(
@@ -94,18 +67,3 @@ cc_library(
         ],
 )
 
-cc_library(
-        name = 'common',
-        srcs = glob([
-                'common/**/*.c',
-                'common/**/*.cpp',
-        ]),
-        hdrs = glob([
-                'common/**/*.h',
-        ]),
-        copts = [
-                '-fno-exceptions',
-                '-iquote third_party/icu/common',
-                '-DU_COMMON_IMPLEMENTATION',
-        ],
-)
