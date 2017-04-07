@@ -1,8 +1,8 @@
 licenses(['notice'])
-package(default_visibility = ['//visibility:public'])
+package(default_visibility = ['//visibility:__pkg__'])
 
 cc_library(
-        name = 'icu',
+        name = 'libicu',
         deps = [
                 'io',
                 'i18n',
@@ -10,6 +10,7 @@ cc_library(
                 'lx',
                 'uc',
         ],
+        visibility = ["//visibility:public"],
 )
 
 cc_library(
@@ -107,5 +108,4 @@ cc_library(
                 '-iquote third_party/icu/common',
                 '-DU_COMMON_IMPLEMENTATION',
         ],
-        visibility = ["//visibility:__pkg__"],
 )
