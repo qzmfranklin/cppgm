@@ -9,8 +9,7 @@ cc_binary(
                 '*.h',
         ]),
         deps = [
-                '//third_party/icu/stubdata:data',
-                '//third_party/icu/common:lib',
+                '//third_party/icu/stubdata:lib',
                 '//third_party/icu/i18n:lib',
                 '//third_party/icu/tools/toolutil:lib',
         ],

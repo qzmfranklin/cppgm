@@ -2,7 +2,7 @@ licenses(['notice'])
 package(default_visibility = ['//visibility:public'])
 
 cc_library(
-        name = 'data', # libicudata
+        name = 'lib', # libicudata
         srcs = glob([
                 '*.c',
         ]),
