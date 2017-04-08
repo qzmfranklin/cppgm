@@ -2,13 +2,9 @@ licenses(['notice'])
 package(default_visibility = ['//visibility:public'])
 
 cc_library(
-        name = 'lib',  # libicui18n
+        name = 'lib', # libicudata
         srcs = glob([
-                '**/*.c',
-                '**/*.cpp',
-        ]),
-        hdrs = glob([
-                '**/*.h',
+                '*.c',
         ]),
         deps = [
                 '//third_party/icu/common:lib',
@@ -16,7 +12,5 @@ cc_library(
         copts = [
                 '-fno-exceptions',
                 '-I third_party/icu/common',
-                '-I third_party/icu/i18n',
-                '-DU_I18N_IMPLEMENTATION',
         ],
 )

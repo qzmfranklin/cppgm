@@ -12,7 +12,7 @@ cc_library(
         ]),
         copts = [
                 '-fno-exceptions',
-                '-iquote third_party/icu/common',
+                '-I third_party/icu/common',
                 '-DU_COMMON_IMPLEMENTATION',
         ],
 )

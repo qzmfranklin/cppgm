@@ -16,8 +16,8 @@ cc_library(
         ],
         copts = [
                 '-fno-exceptions',
-                '-iquote third_party/icu/common',
-                '-iquote third_party/icu/tools/ctestfw',
-                '-iquote third_party/icu/tools/toolutil',
+                '-I third_party/icu/common',
+                '-I third_party/icu/tools/ctestfw',
+                '-I third_party/icu/tools/toolutil',
         ],
 )
