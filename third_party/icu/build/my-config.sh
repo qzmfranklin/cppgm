@@ -5,9 +5,11 @@
 
 CFLAGS="-DU_USING_ICU_NAMESPACE=0 \
     -DU_CHARSET_IS_UTF8=1 \
-    -DUNISTR_FROM_CHAR_EXPLICIT=explicit  \
-    -DUNISTR_FROM_STRING_EXPLICIT=explicit \
     -DU_NO_DEFAULT_INCLUDE_UTF_HEADERS=1"
+
+    # These two macros break the test shipped with icu source code.
+    #-DUNISTR_FROM_CHAR_EXPLICIT=explicit  \
+    #-DUNISTR_FROM_STRING_EXPLICIT=explicit \
 
 export CFLAGS
 
@@ -15,4 +17,4 @@ export CFLAGS
     --with-library-bits=64 \
     --enable-static \
     --disable-shared \
-    --with-data-packaging=archive
+    --with-data-packaging=static
