@@ -11,7 +11,7 @@ CFLAGS="-DU_USING_ICU_NAMESPACE=0 \
 
 export CFLAGS
 
-./runConfigureICU Linux/clang \
+../runConfigureICU Linux/clang \
     --with-library-bits=64 \
     --disable-renaming \
     --enable-static \
