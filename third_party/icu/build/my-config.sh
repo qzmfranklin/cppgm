@@ -13,7 +13,6 @@ export CFLAGS
 
 ../runConfigureICU Linux/clang \
     --with-library-bits=64 \
-    --disable-renaming \
     --enable-static \
     --disable-shared \
     --with-data-packaging=archive

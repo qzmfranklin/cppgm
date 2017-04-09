@@ -1,69 +1,41 @@
 licenses(['notice'])
-package(default_visibility = ['//visibility:public'])
+package(default_visibility = ['//visibility:__pkg__'])
 
+_exclude_pattern = [
+        'extra/**',
+        'samples/**',
+        'test/**',
+        'tools/**',
+]
+
+icu_includes = [
+]
 
 cc_library(
-        name = 'libtools',
+        name = 'icu',
         srcs = glob([
-                'tools/**/*.c',
-                'tools/**/*.cpp',
-                'tools/**/*.h',
-        ], exclude = [
-                'tools/icu*/*',
-                'tools/gen*/*',
-                'tools/pkgdata/*',
-                'tools/tzcode/*',
-        ]),
-        deps = [
-                ':libicu',
-        ],
-        copts = [
-                '-I third_party/icu/common',
-                '-I third_party/icu/i18n',
-                '-I third_party/icu/tools/toolutil',
-                '-I third_party/icu/tools/ctestfw',
-                '-DU_TOOLUTIL_IMPLEMENTATION',
-        ],
-        visibility = ["//visibility:public"],
-)
-
-cc_library(
-        name = 'lib',
-        deps = [
-                'io',
-                'i18n',
-                'le',
-                'lx',
-                'uc',
-        ],
-        visibility = ["//visibility:public"],
-)
-
-cc_library(
-        name = 'lx',
-        srcs = glob([
-                'lx/**/*.c',
-                'lx/**/*.cpp',
+                'common/**/*.c',
+                'common/**/*.cpp',
+                'io/**/*.c',
+                'io/**/*.cpp',
+                'i18n/**/*.c',
+                'i18n/**/*.cpp',
+                'stubdata/**/*.c',
+                'stubdata/**/*.cpp',
+                #'layoutex/**/*.c',
+                #'layoutex/**/*.cpp',
         ]),
         hdrs = glob([
-                'lx/**/*.h',
+                'common/**/*.h',
+                'io/**/*.h',
+                'i18n/**/*.h',
+                'stubdata/**/*.h',
+                #'layoutex/**/*.h',
         ]),
         copts = [
                 '-fno-exceptions',
+                '-Ithird_party/icu/common',
+                '-Ithird_party/icu/i18n',
         ],
+        visibility = ["//visibility:public"],
 )
-
-cc_library(
-        name = 'uc',
-        srcs = glob([
-                'uc/**/*.c',
-                'uc/**/*.cpp',
-        ]),
-        hdrs = glob([
-                'uc/**/*.h',
-        ]),
-        copts = [
-                '-fno-exceptions',
-        ],
-)
-
