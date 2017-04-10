@@ -44,9 +44,9 @@ cc_library(
         'U_NO_DEFAULT_INCLUDE_UTF_HEADERS=1',
 
         # Without -DU_HAVE_ELF_H=1, the tools/toolutil/pkg_genc.c will not
-        # export the symbol 'writeObjectCode'.  Discovered via `VERBOSE make`.
+        # export the symbol 'writeObjectCode'.  Discovered via `VERBOSE=1 make`.
         'U_HAVE_ELF_H=1',
-        '_REENRAN=1',
+        '_REENRANT=1',
         'U_HAVE_STRTOD_L=1',
 
         # TODO: The following macros are recommended by the official
@@ -64,7 +64,6 @@ cc_library(
         '-DU_IO_IMPLEMENTATION',
         # required for building the files under i18n/
         '-DU_I18N_IMPLEMENTATION',
-
     ],
 )
 
@@ -114,7 +113,7 @@ cc_binary(
         'tools/icupkg/icupkg.cpp',
     ],
     deps = [
-        'icu-tools',
+        ':icu-tools',
         ':stubdata',
     ],
     copts = icu_copts,
@@ -129,7 +128,7 @@ cc_binary(
         'tools/makeconv/*.h',
     ]),
     deps = [
-        'icu-tools',
+        ':icu-tools',
         ':stubdata',
     ],
     copts = icu_copts,
@@ -144,8 +143,8 @@ cc_binary(
         'tools/pkgdata/pkgtypes.h',
     ],
     deps = [
-        'icu-tools',
-        'stubdata',
+        ':icu-tools',
+        ':stubdata',
     ],
     copts = icu_copts,
     linkopts = icu_linkopts,
@@ -213,8 +212,8 @@ cc_library(
 cc_library(
     name = 'icu',
     deps = [
-        'icu-base',
-        'icu-data',
+        ':icu-base',
+        ':icu-data',
     ],
     copts = icu_copts,
 )
@@ -230,8 +229,8 @@ cc_binary(
         'test/iotest/*.h',
     ]),
     deps = [
-        'icu-tools',
-        'icu-data',
+        ':icu-tools',
+        ':icu-data',
     ],
     copts = icu_copts,
     linkopts = icu_linkopts,
