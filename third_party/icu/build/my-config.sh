@@ -14,7 +14,7 @@ CFLAGS="-DU_USING_ICU_NAMESPACE=0 \
 export CFLAGS
 
 ../runConfigureICU Linux/clang \
-    --with-library-bits=64 \
-    --enable-static \
-    --disable-shared \
-    --with-data-packaging=static
+    --with-library-bits=64
+    #--enable-static \
+    #--disable-shared
+    #--with-data-packaging=static

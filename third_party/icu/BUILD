@@ -138,7 +138,10 @@ genrule(
     name = 'libicudata',
     srcs = [
         'data/in/icudt58l.dat',
-        'data/in/icupkg.inc',
+        # TODO: Unfortunately, the icupkg.inc.x86_64 is not bazelised yet.  Read
+        # the comments at the top of the file to see how to generate this file
+        # from icu source and get an idea about how to bazelise it.
+        'icupkg.inc.x86_64',
     ],
     tools = [
         ':icupkg',
@@ -173,9 +176,9 @@ genrule(
         ' && mkdir -p out/tmp/translit' + \
         ' && mkdir -p out/tmp/brkitr' + \
         ' && $(location :icupkg) -d out/build/icudt58l --list -x \* $(location data/in/icudt58l.dat) -o out/tmp/icudata.lst' + \
-        ' && $(location :pkgdata) -O $(location data/in/icupkg.inc) -q -c -s out/build/icudt58l -d out -e icudt58  -T out/tmp -p icudt58l -m static -r 58.2 -L icudata out/tmp/icudata.lst &> /dev/null' + \
+        ' && $(location :pkgdata) -O $(location icupkg.inc.x86_64) -q -c -s out/build/icudt58l -d out -e icudt58  -T out/tmp -p icudt58l -m static -r 58.2 -L icudata out/tmp/icudata.lst &> /dev/null' + \
         ' && cp out/libicudata.a $(location libicudata.a)' + \
-        ' && $(location :pkgdata) -O $(location data/in/icupkg.inc) -q -c -s out/build/icudt58l -d out -e icudt58  -T out/tmp -p icudt58l -m dll -r 58.2 -L icudata out/tmp/icudata.lst &> /dev/null' + \
+        ' && $(location :pkgdata) -O $(location icupkg.inc.x86_64) -q -c -s out/build/icudt58l -d out -e icudt58  -T out/tmp -p icudt58l -m dll -r 58.2 -L icudata out/tmp/icudata.lst &> /dev/null' + \
         ' && cp -H out/libicudata.so $(location libicudata.so)' + \
         ' && rm -rf out' + \
         '',
@@ -198,6 +201,9 @@ cc_library(
     copts = icu_copts,
 )
 
+# TODO: Running this binary without any arguments would fail the last three
+# tests.  To fix that, need to build the data file used by those last three
+# tests and link against this binary.
 cc_binary(
     name = 'iotest',
     srcs = glob([
@@ -206,7 +212,7 @@ cc_binary(
         'test/iotest/*.h',
     ]),
     deps = [
-        'icu-base',
+        'icu-tools',
         'icu-data',
     ],
     copts = icu_copts,

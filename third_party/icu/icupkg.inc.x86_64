@@ -1,3 +1,12 @@
+# TODO (zhongming): Use a bazel genrule to generate this file.
+# Here is how to generate this file:
+# (From the icu source tree):
+#   $ cd build
+#   $ sh my-config.sh
+#   $ cd data
+#   $ make -f pkgdataMakefile
+# The `make` command generates the icupkg.inc file.
+
 GENCCODE_ASSEMBLY_TYPE=-a gcc
 SO=so
 SOBJ=so
