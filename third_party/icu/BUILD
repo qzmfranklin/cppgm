@@ -23,8 +23,6 @@ cc_library(
         'io/**/*.cpp',
         'i18n/**/*.c',
         'i18n/**/*.cpp',
-        'stubdata/**/*.c',
-        'stubdata/**/*.cpp',
         'layoutex/**/*.c',
         'layoutex/**/*.cpp',
     ]),
@@ -32,7 +30,6 @@ cc_library(
         'common/**/*.h',
         'io/**/*.h',
         'i18n/**/*.h',
-        'stubdata/**/*.h',
         'layoutex/**/*.h',
     ]),
     defines = [
@@ -64,6 +61,19 @@ cc_library(
         '-DU_I18N_IMPLEMENTATION',
 
     ],
+)
+
+cc_library(
+    visibility = ["//visibility:__pkg__"],
+    name = 'icu-stubdata',
+    srcs = glob([
+        'stubdata/**/*.c',
+        'stubdata/**/*.cpp',
+    ]),
+    hdrs = glob([
+        'stubdata/**/*.h',
+    ]),
+    copts = icu_copts,
 )
 
 cc_library(
@@ -102,6 +112,7 @@ cc_binary(
     ],
     deps = [
         'icu-tools',
+        'icu-stubdata',
     ],
     copts = icu_copts,
     linkopts = icu_linkopts,
@@ -116,13 +127,15 @@ cc_binary(
     ],
     deps = [
         'icu-tools',
+        'icu-stubdata',
     ],
     copts = icu_copts,
     linkopts = icu_linkopts,
 )
 
 genrule(
-    name = 'libicudata_a',
+    visibility = ['//visibility:__pkg__'],
+    name = 'libicudata',
     srcs = [
         'data/in/icudt58l.dat',
         'data/in/icupkg.inc',
@@ -133,47 +146,54 @@ genrule(
     ],
     outs = [
         'libicudata.a',
+        'libicudata.so',
     ],
     cmd = 'true' + \
-        ' && mkdir -p @D/out' + \
-        ' && mkdir -p @D/out/build' + \
-        ' && mkdir -p @D/out/build/icudt58l' + \
-        ' && mkdir -p @D/out/build/icudt58l/curr' + \
-        ' && mkdir -p @D/out/build/icudt58l/lang' + \
-        ' && mkdir -p @D/out/build/icudt58l/region' + \
-        ' && mkdir -p @D/out/build/icudt58l/zone' + \
-        ' && mkdir -p @D/out/build/icudt58l/unit' + \
-        ' && mkdir -p @D/out/build/icudt58l/brkitr' + \
-        ' && mkdir -p @D/out/build/icudt58l/coll' + \
-        ' && mkdir -p @D/out/build/icudt58l/rbnf' + \
-        ' && mkdir -p @D/out/build/icudt58l/translit' + \
-        ' && mkdir -p @D/out/tmp' + \
-        ' && mkdir -p @D/out/tmp/curr' + \
-        ' && mkdir -p @D/out/tmp/lang' + \
-        ' && mkdir -p @D/out/tmp/region' + \
-        ' && mkdir -p @D/out/tmp/zone' + \
-        ' && mkdir -p @D/out/tmp/unit' + \
-        ' && mkdir -p @D/out/tmp/coll' + \
-        ' && mkdir -p @D/out/tmp/rbnf' + \
-        ' && mkdir -p @D/out/tmp/translit' + \
-        ' && mkdir -p @D/out/tmp/brkitr' + \
-        #../bin/icupkg -d ./out/build/icudt58l --list -x \* ../../data/in/icudt58l.dat -o out/tmp/icudata.lst
-        ' && $(location :icupkg) -d @D/out/build/icudt58l --list -x \* $(location data/in/icudt58l.dat) -o @D/out/tmp/icudata.lst' + \
-        #../bin/pkgdata -O ../data/icupkg.inc -q -c -s /home/zhongming/git/cppgm/third_party/icu/build/data/out/build/icudt58l -d ../lib -e icudt58  -T ./out/tmp -p icudt58l -m static -r 58.2 -L icudata ./out/tmp/icudata.lst
-        ' && $(location :pkgdata) -O $(location data/in/icupkg.inc) -q -c -s @D/out/build/icudt58l -d @D/out -e icudt58  -T @D/out/tmp -p icudt58l -m static -r 58.2 -L icudata @D/out/tmp/icudata.lst' + \
-        ' && mv @D/out/libicudata.a $@' + \
+        # The 'out' dircectory is a temporary directory.
+        ' && mkdir -p out' + \
+        ' && mkdir -p out/build' + \
+        ' && mkdir -p out/build/icudt58l' + \
+        ' && mkdir -p out/build/icudt58l/curr' + \
+        ' && mkdir -p out/build/icudt58l/lang' + \
+        ' && mkdir -p out/build/icudt58l/region' + \
+        ' && mkdir -p out/build/icudt58l/zone' + \
+        ' && mkdir -p out/build/icudt58l/unit' + \
+        ' && mkdir -p out/build/icudt58l/brkitr' + \
+        ' && mkdir -p out/build/icudt58l/coll' + \
+        ' && mkdir -p out/build/icudt58l/rbnf' + \
+        ' && mkdir -p out/build/icudt58l/translit' + \
+        ' && mkdir -p out/tmp' + \
+        ' && mkdir -p out/tmp/curr' + \
+        ' && mkdir -p out/tmp/lang' + \
+        ' && mkdir -p out/tmp/region' + \
+        ' && mkdir -p out/tmp/zone' + \
+        ' && mkdir -p out/tmp/unit' + \
+        ' && mkdir -p out/tmp/coll' + \
+        ' && mkdir -p out/tmp/rbnf' + \
+        ' && mkdir -p out/tmp/translit' + \
+        ' && mkdir -p out/tmp/brkitr' + \
+        ' && $(location :icupkg) -d out/build/icudt58l --list -x \* $(location data/in/icudt58l.dat) -o out/tmp/icudata.lst' + \
+        ' && $(location :pkgdata) -O $(location data/in/icupkg.inc) -q -c -s out/build/icudt58l -d out -e icudt58  -T out/tmp -p icudt58l -m static -r 58.2 -L icudata out/tmp/icudata.lst &> /dev/null' + \
+        ' && cp out/libicudata.a $(location libicudata.a)' + \
+        ' && $(location :pkgdata) -O $(location data/in/icupkg.inc) -q -c -s out/build/icudt58l -d out -e icudt58  -T out/tmp -p icudt58l -m dll -r 58.2 -L icudata out/tmp/icudata.lst &> /dev/null' + \
+        ' && cp -H out/libicudata.so $(location libicudata.so)' + \
+        ' && rm -rf out' + \
         '',
 )
 
-#cc_library(
-    #name = 'icu-data',
-#)
+cc_library(
+    name = 'icu-data',
+    srcs = [
+        'libicudata.a',
+        'libicudata.so',
+    ],
+)
 
 cc_library(
     name = 'icu',
     deps = [
         'icu-base',
-        #'icu-data',
+        'icu-data',
     ],
     copts = icu_copts,
 )
@@ -186,7 +206,8 @@ cc_binary(
         'test/iotest/*.h',
     ]),
     deps = [
-        'icu',
+        'icu-base',
+        'icu-data',
     ],
     copts = icu_copts,
     linkopts = icu_linkopts,
