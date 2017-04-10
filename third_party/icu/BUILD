@@ -5,6 +5,7 @@ icu_copts = [
     '-fno-exceptions',
     '-I' + PACKAGE_NAME + '/common',
     '-I' + PACKAGE_NAME + '/i18n',
+    '-I' + PACKAGE_NAME + '/io',
     '-I' + PACKAGE_NAME + '/tools/ctestfw',
     '-I' + PACKAGE_NAME + '/tools/toolutil',
 ]
@@ -23,14 +24,18 @@ cc_library(
         'io/**/*.cpp',
         'i18n/**/*.c',
         'i18n/**/*.cpp',
-        'layoutex/**/*.c',
-        'layoutex/**/*.cpp',
+        # Including the layoutex directory leads to the following error:
+        #       third_party/icu/layoutex/LXUtilities.cpp:10:28: \
+        #           fatal error: layout/LETypes.h: No such file or directory
+        #        #include "layout/LETypes.h"
+        #'layoutex/**/*.c',
+        #'layoutex/**/*.cpp',
     ]),
     hdrs = glob([
         'common/**/*.h',
         'io/**/*.h',
         'i18n/**/*.h',
-        'layoutex/**/*.h',
+        #'layoutex/**/*.h',
     ]),
     defines = [
         # Officially recommended settings.
@@ -65,14 +70,13 @@ cc_library(
 
 cc_library(
     visibility = ["//visibility:__pkg__"],
-    name = 'icu-stubdata',
-    srcs = glob([
-        'stubdata/**/*.c',
-        'stubdata/**/*.cpp',
-    ]),
-    hdrs = glob([
-        'stubdata/**/*.h',
-    ]),
+    name = 'stubdata',
+    srcs = [
+        'stubdata/stubdata.c',
+    ],
+    deps = [
+        ':icu-base',
+    ],
     copts = icu_copts,
 )
 
@@ -97,7 +101,6 @@ cc_library(
     ]
 )
 
-
 # The complete list of tools is:
 #
 #     derb     genccode   gencmn     gendict    genrb      icupkg     pkgdata
@@ -112,7 +115,22 @@ cc_binary(
     ],
     deps = [
         'icu-tools',
-        'icu-stubdata',
+        ':stubdata',
+    ],
+    copts = icu_copts,
+    linkopts = icu_linkopts,
+)
+
+cc_binary(
+    name = 'makeconv',
+    srcs = glob([
+        'tools/makeconv/*.c',
+        'tools/makeconv/*.cpp',
+        'tools/makeconv/*.h',
+    ]),
+    deps = [
+        'icu-tools',
+        ':stubdata',
     ],
     copts = icu_copts,
     linkopts = icu_linkopts,
@@ -127,7 +145,7 @@ cc_binary(
     ],
     deps = [
         'icu-tools',
-        'icu-stubdata',
+        'stubdata',
     ],
     copts = icu_copts,
     linkopts = icu_linkopts,
