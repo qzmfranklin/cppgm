@@ -2,13 +2,11 @@ licenses(['notice'])
 package(default_visibility = ['//visibility:public'])
 
 icu_copts = [
-    #'-fno-exceptions',
     '-Ithird_party/icu/svn/common',
     '-Ithird_party/icu/svn/i18n',
     '-Ithird_party/icu/svn/io',
     '-Ithird_party/icu/svn/tools/ctestfw',
     '-Ithird_party/icu/svn/tools/toolutil',
-    '-DU_USING_ICU_NAMESPACE=0',
 ]
 
 icu_linkopts = [
