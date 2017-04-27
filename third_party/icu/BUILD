@@ -106,6 +106,18 @@ cc_library(
 #     genbrk   gencfu     gencnval   gennorm2   gensprep   makeconv   uconv
 #
 # Only build icupkg and pkgdata here as they are needed for building libicudata.
+#
+# TODO: There is a bug in bazel that prevents the above tools to be built.  The
+# problem is that cc_binary treats :stubdata as a separate library.  As a
+# result, at linking time, the object file stubdata.pic.o separated from other
+# object files by pairs of `--start-lib` and `--end-lib`, which prevents other
+# object files from seeing stubdata.pic.o directly, thus leading to the
+# following error:
+#       error: undefined reference to 'icudt58_dat'
+# There is a workaround to the above described problem.  That is, just build the
+# :libicudata target, which depends on :icupkg and :pkgdata.  After `bazel build
+# :libicudata`, you can find the `icupkg` and `pkgdata` binaries in
+# bazel-bin/third_party/icu/.
 
 cc_binary(
     name = 'icupkg',
