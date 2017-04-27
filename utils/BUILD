@@ -3,11 +3,11 @@ package(default_visibility = ['//visibility:public'])
 
 icu_copts = [
     #'-fno-exceptions',
-    '-I' + 'third_party/icu' + '/common',
-    '-I' + 'third_party/icu' + '/i18n',
-    '-I' + 'third_party/icu' + '/io',
-    '-I' + 'third_party/icu' + '/tools/ctestfw',
-    '-I' + 'third_party/icu' + '/tools/toolutil',
+    '-Ithird_party/icu/svn/common',
+    '-Ithird_party/icu/svn/i18n',
+    '-Ithird_party/icu/svn/io',
+    '-Ithird_party/icu/svn/tools/ctestfw',
+    '-Ithird_party/icu/svn/tools/toolutil',
     '-DU_USING_ICU_NAMESPACE=0',
 ]
 

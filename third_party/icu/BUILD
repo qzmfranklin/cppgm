@@ -3,11 +3,11 @@ package(default_visibility = ['//visibility:public'])
 
 icu_copts = [
     '-fno-exceptions',
-    '-I' + PACKAGE_NAME + '/common',
-    '-I' + PACKAGE_NAME + '/i18n',
-    '-I' + PACKAGE_NAME + '/io',
-    '-I' + PACKAGE_NAME + '/tools/ctestfw',
-    '-I' + PACKAGE_NAME + '/tools/toolutil',
+    '-I' + PACKAGE_NAME + '/svn/common',
+    '-I' + PACKAGE_NAME + '/svn/i18n',
+    '-I' + PACKAGE_NAME + '/svn/io',
+    '-I' + PACKAGE_NAME + '/svn/tools/ctestfw',
+    '-I' + PACKAGE_NAME + '/svn/tools/toolutil',
 ]
 
 icu_linkopts = [
@@ -18,12 +18,12 @@ cc_library(
     visibility = ['//visibility:__pkg__'],
     name = 'icu-base',
     srcs = glob([
-        'common/**/*.c',
-        'common/**/*.cpp',
-        'io/**/*.c',
-        'io/**/*.cpp',
-        'i18n/**/*.c',
-        'i18n/**/*.cpp',
+        'svn/common/**/*.c',
+        'svn/common/**/*.cpp',
+        'svn/io/**/*.c',
+        'svn/io/**/*.cpp',
+        'svn/i18n/**/*.c',
+        'svn/i18n/**/*.cpp',
         # Including the layoutex directory leads to the following error:
         #       third_party/icu/layoutex/LXUtilities.cpp:10:28: \
         #           fatal error: layout/LETypes.h: No such file or directory
@@ -32,9 +32,9 @@ cc_library(
         #'layoutex/**/*.cpp',
     ]),
     hdrs = glob([
-        'common/**/*.h',
-        'io/**/*.h',
-        'i18n/**/*.h',
+        'svn/common/**/*.h',
+        'svn/io/**/*.h',
+        'svn/i18n/**/*.h',
         #'layoutex/**/*.h',
     ]),
     defines = [
@@ -71,7 +71,7 @@ cc_library(
     visibility = ["//visibility:__pkg__"],
     name = 'stubdata',
     srcs = [
-        'stubdata/stubdata.c',
+        'svn/stubdata/stubdata.c',
     ],
     deps = [
         ':icu-base',
@@ -83,14 +83,14 @@ cc_library(
     visibility = ["//visibility:__pkg__"],
     name = 'icu-tools',
     srcs = glob([
-        'tools/ctestfw/**/*.c',
-        'tools/ctestfw/**/*.cpp',
-        'tools/toolutil/**/*.c',
-        'tools/toolutil/**/*.cpp',
+        'svn/tools/ctestfw/**/*.c',
+        'svn/tools/ctestfw/**/*.cpp',
+        'svn/tools/toolutil/**/*.c',
+        'svn/tools/toolutil/**/*.cpp',
     ]),
     hdrs = glob([
-        'tools/ctestfw/**/*.h',
-        'tools/toolutil/**/*.h',
+        'svn/tools/ctestfw/**/*.h',
+        'svn/tools/toolutil/**/*.h',
     ]),
     deps = [
         'icu-base',
@@ -122,7 +122,7 @@ cc_library(
 cc_binary(
     name = 'icupkg',
     srcs = [
-        'tools/icupkg/icupkg.cpp',
+        'svn/tools/icupkg/icupkg.cpp',
     ],
     deps = [
         ':icu-tools',
@@ -135,9 +135,9 @@ cc_binary(
 cc_binary(
     name = 'makeconv',
     srcs = glob([
-        'tools/makeconv/*.c',
-        'tools/makeconv/*.cpp',
-        'tools/makeconv/*.h',
+        'svn/tools/makeconv/*.c',
+        'svn/tools/makeconv/*.cpp',
+        'svn/tools/makeconv/*.h',
     ]),
     deps = [
         ':icu-tools',
@@ -150,9 +150,9 @@ cc_binary(
 cc_binary(
     name = 'pkgdata',
     srcs = [
-        'tools/pkgdata/pkgdata.cpp',
-        'tools/pkgdata/pkgtypes.c',
-        'tools/pkgdata/pkgtypes.h',
+        'svn/tools/pkgdata/pkgdata.cpp',
+        'svn/tools/pkgdata/pkgtypes.c',
+        'svn/tools/pkgdata/pkgtypes.h',
     ],
     deps = [
         ':icu-tools',
@@ -166,7 +166,7 @@ genrule(
     visibility = ['//visibility:__pkg__'],
     name = 'libicudata',
     srcs = [
-        'data/in/icudt58l.dat',
+        'svn/data/in/icudt58l.dat',
         # TODO: Unfortunately, the icupkg.inc.x86_64 is not bazelised yet.  Read
         # the comments at the top of the file to see how to generate this file
         # from icu source and get an idea about how to bazelise it.
@@ -204,7 +204,7 @@ genrule(
         ' && mkdir -p out/tmp/rbnf' + \
         ' && mkdir -p out/tmp/translit' + \
         ' && mkdir -p out/tmp/brkitr' + \
-        ' && $(location :icupkg) -d out/build/icudt58l --list -x \* $(location data/in/icudt58l.dat) -o out/tmp/icudata.lst' + \
+        ' && $(location :icupkg) -d out/build/icudt58l --list -x \* $(location svn/data/in/icudt58l.dat) -o out/tmp/icudata.lst' + \
         ' && $(location :pkgdata) -O $(location icupkg.inc.x86_64) -q -c -s out/build/icudt58l -d out -e icudt58  -T out/tmp -p icudt58l -m static -r 58.2 -L icudata out/tmp/icudata.lst &> /dev/null' + \
         ' && cp out/libicudata.a $(location libicudata.a)' + \
         ' && $(location :pkgdata) -O $(location icupkg.inc.x86_64) -q -c -s out/build/icudt58l -d out -e icudt58  -T out/tmp -p icudt58l -m dll -r 58.2 -L icudata out/tmp/icudata.lst &> /dev/null' + \
@@ -236,9 +236,9 @@ cc_library(
 cc_binary(
     name = 'iotest',
     srcs = glob([
-        'test/iotest/*.c',
-        'test/iotest/*.cpp',
-        'test/iotest/*.h',
+        'svn/test/iotest/*.c',
+        'svn/test/iotest/*.cpp',
+        'svn/test/iotest/*.h',
     ]),
     deps = [
         ':icu-tools',
