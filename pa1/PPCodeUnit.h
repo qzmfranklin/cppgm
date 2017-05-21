@@ -1,9 +1,9 @@
 #ifndef PPCodeUnit_h
 #define PPCodeUnit_h
 
+#include "utils/UStringTools.h"
 #include <memory>
 #include <string>
-#include "utils/UStringTools.h"
 
 // ASCIIChar is one of the printable characters in the basic source character
 // set.

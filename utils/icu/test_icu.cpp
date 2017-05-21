@@ -1,11 +1,5 @@
-#include "unicode/utypes.h"
-#include "unicode/uchar.h"
-#include "unicode/locid.h"
-#include "unicode/ustring.h"
-#include "unicode/ucnv.h"
-#include "unicode/unistr.h"
-
 #include <stdio.h>
+#include <unicode/unistr.h>
 
 using icu::UnicodeString;
 

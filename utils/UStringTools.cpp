@@ -1,6 +1,6 @@
 #include "UStringTools.h"
-#include "unicode/ucnv.h"
 #include <assert.h>
+#include <unicode/unistr.h>
 
 char32_t *UStringTools::_ch32buf = nullptr;
 uint32_t UStringTools::_ch32bufCapacity = 0;
