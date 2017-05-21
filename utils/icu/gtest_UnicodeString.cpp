@@ -1,6 +1,6 @@
-#include "unicode/ucnv.h"
 #include <gtest/gtest.h>
 #include <stdio.h>
+#include <unicode/unistr.h>
 
 TEST(UnicodeString, Utf8ToUtf16)
 {
