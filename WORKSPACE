@@ -11,7 +11,7 @@ bind(
 
 git_repository(
     name = 'com_github_qzmfranklin_icu',
-    commit = '0d8e306df4e9c543fbe4a4f44f9404be0723d349',
+    commit = '1d967a3493c78983bcf8563f7f730c502063b816',
     remote = 'https://github.com/qzmfranklin/icu.git',
 )
 
