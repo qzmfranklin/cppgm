@@ -1,0 +1,11 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/qzmfranklin/icu
+	branch = master
+	commit = 4a357e0acfa61de6a57414c6d3e27f98a488f1dc
+	parent = 344f61cbb206f807aeadd760d5821c116cfcd99f
+	cmdver = 0.3.1
