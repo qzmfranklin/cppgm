@@ -1,0 +1,68 @@
+# Build using a custom C++ toolchain.
+build --crosstool_top=//tools/cpp:toolchain --cpu=clang
+
+# Do not strip the color ASCII escape sequences in error messages.
+build --color=yes
+
+# Print error messages if there is a failure.
+build --verbose_failures
+
+# Use many CPU threads in parallel.
+build --jobs=8
+
+
+# Perform static analysis while compiling C++ code.
+# Pre-requisite:
+#       sudo pip3 install protobuf
+# It is hard coded to ignore all source files under third_party/.
+# Turning this one normally has a 20% performance penalty.
+#build --experimental_action_listener=tools/code_style/gen_cpp_db:gen_cxx_cmd_listener
+
+
+# Use python3 in all places.
+build --python_top=tools/python:py-3
+
+
+# Use our own protobuf compiler and toolchains for c++ and java.
+build --proto_compiler=//third_party/protobuf:protoc
+build --proto_toolchain_for_cc=//third_party/protobuf:cc_toolchain
+build --proto_toolchain_for_java=//third_party/protobuf:java_toolchain
+
+
+# The sanitizers rely on the existence of `llvm-symbolizer` in the $PATH.
+# On Ubuntu 17.04, this usually means:
+#       sudo apt install clang
+#       sudo ln -s usr/bin/llvm-symbolizer-4.0 usr/bin/llvm-symbolizer
+
+
+# Build the cpp code using the LLVM Address Sanitizer:
+#       https://clang.llvm.org/docs/AddressSanitizer.html
+build:asan --strip=never
+build:asan --copt -fsanitize=address
+build:asan --copt -fno-omit-frame-pointer
+build:asan --copt -O1
+build:asan --copt -g
+build:asan --linkopt -fsanitize=address
+build:asan --action_env=ASAN_OPTIONS=check_initialization_order=1
+
+
+# Build the cpp code using the LLVM Memory Sanitizer:
+#       https://clang.llvm.org/docs/MemorySanitizer.html
+build:msan --strip=never
+build:msan --copt -fsanitize=memory
+build:msan --copt -fsanitize-memory-track-origins
+build:msan --copt -fsanitize-memory-use-after-dtor
+build:msan --copt -fno-omit-frame-pointer
+build:msan --copt -O2
+build:msan --copt -g
+build:msan --linkopt -fsanitize=memory
+build:msan --action_env=MSAN_OPTIONS=poison_in_dtor=1
+
+
+# Build the cpp code using the LLVM Thread Sanitizer:
+#       https://clang.llvm.org/docs/ThreadSanitizer.html
+build:tsan --strip=never
+build:tsan --copt -fsanitize=thread
+build:tsan --copt -O1
+build:tsan --copt -g
+build:tsan --linkopt -fsanitize=thread
